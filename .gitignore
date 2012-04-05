@@ -24,3 +24,6 @@ wpfApplication1\wpfApplication1.suo
 
 Dependencies\KinectWpfViewers\obj\Debug\*
 Dependencies\KinectWpfViewers\obj\Release\*
+
+Dependencies/KinectWpfViewers/bin
+Dependencies/KinectWpfViewers/obj

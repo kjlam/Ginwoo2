@@ -18,6 +18,7 @@ using System.Windows.Forms;
 using Microsoft.Kinect;
 using Microsoft.Speech.AudioFormat;
 using Microsoft.Speech.Recognition;
+using System.Drawing;
 using System.Threading;
 using Coding4Fun.Kinect.Wpf;
 
