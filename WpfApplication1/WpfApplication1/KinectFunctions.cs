@@ -201,6 +201,9 @@ namespace WpfApplication1
         {
             kinectSensorChooser1.KinectSensorChanged += new DependencyPropertyChangedEventHandler(kinectSensorChooser1_KinectSensorChanged);
 
+            // Jessica's test code for backend Git work
+            CmdReturn output = Terminal.TestModularTerminal();
+            System.Windows.MessageBox.Show(output.ToString());
         }
 
 

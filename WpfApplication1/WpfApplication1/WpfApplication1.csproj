@@ -71,12 +71,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CmdReturn.cs" />
     <Compile Include="LocalRepository.xaml.cs">
       <DependentUpon>LocalRepository.xaml</DependentUpon>
     </Compile>
     <Compile Include="RemoteRepository.xaml.cs">
       <DependentUpon>RemoteRepository.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Terminal.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
