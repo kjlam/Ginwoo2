@@ -19,6 +19,9 @@ namespace CS160_Ginect
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        String benjTest;
+
         public MainWindow()
         {
             InitializeComponent();
