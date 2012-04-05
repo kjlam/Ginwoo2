@@ -21,6 +21,7 @@ using Microsoft.Speech.Recognition;
 using System.Drawing;
 using System.Threading;
 using Coding4Fun.Kinect.Wpf;
+using System.Diagnostics;
 
 
 namespace WpfApplication1
