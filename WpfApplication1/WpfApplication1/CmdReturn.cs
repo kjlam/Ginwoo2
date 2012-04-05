@@ -7,7 +7,6 @@ using System.IO;
 namespace WpfApplication1
 {
     
-    
     class CmdReturn
     {
         internal InputResult inputSuccess;
@@ -21,7 +20,7 @@ namespace WpfApplication1
             inputSuccess = InputResult.UNDEFINED;
         }
 
-        public String ToString()
+        public override string ToString()
         {
             StringWriter strWriter = new StringWriter();
             strWriter.WriteLine();

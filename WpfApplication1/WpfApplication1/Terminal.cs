@@ -9,7 +9,6 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using Microsoft.Win32;
 using Microsoft.VisualBasic;
-//using CS160_Ginect;
 
 
 namespace WpfApplication1
