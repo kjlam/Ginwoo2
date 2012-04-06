@@ -25,8 +25,9 @@ namespace WpfApplication1
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            //CmdReturn output = Terminal.TestModularTerminal();
-            //MessageBox.Show(output.ToString());
+            // Jessica's testing code
+            CmdReturn output = Terminal.TestModularTerminal();
+            MessageBox.Show(output.ToString());
         }
 
         private void image5_ImageFailed(object sender, ExceptionRoutedEventArgs e)

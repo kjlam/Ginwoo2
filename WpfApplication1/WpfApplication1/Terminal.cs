@@ -17,7 +17,7 @@ namespace WpfApplication1
     public class Terminal
     {
         static internal String workingDirectory = @"C:\Users\Jessica\Ginect";
-        static internal String password = "password";
+        static internal String password = "chewie#3";
 
         public Terminal()
         {
@@ -27,7 +27,7 @@ namespace WpfApplication1
         static internal CmdReturn TestModularTerminal()
         {
             // Test GitLog()
-            return GitLog();
+            //return GitLog();
 
             // Test git status
             //return ExecuteProcess(workingDirectory, "git status", false);
@@ -41,14 +41,30 @@ namespace WpfApplication1
             */
 
             // Test GitCommitWithMessage()
-            // return GitCommitWithMessage("Another test commit");
+            //return GitCommitWithMessage("Another test commit");
 
             // Test GitTagLatestCommit()
-            // return GitTagLatestCommit("testTag");
+            //return GitTagLatestCommit("testTag");
 
             // Test GitPush()
-            // return GitPush();
+            //return GitPush();
 
+            // Test GitGetLocalRepoFiles()
+            //return GitGetLocalRepoFiles();
+
+            // Test GitGetRemoteRepoFiles()
+            //return GitGetRemoteRepoFiles();
+        }
+
+        static internal CmdReturn GitGetLocalRepoFiles()
+        {
+            return ExecuteProcess(workingDirectory, "git ls-tree --full-tree -r HEAD", false);
+        }
+
+        static internal CmdReturn GitGetRemoteRepoFiles()
+        {
+            ExecuteProcess(workingDirectory, "git fetch", true);
+            return ExecuteProcess(workingDirectory, "git ls-tree --full-tree -r origin", false);
         }
 
         /*
@@ -92,7 +108,7 @@ namespace WpfApplication1
             char[] delimiterChars = { ' ' };
             String latestCommit = null;
 
-            String unpushedCommits = ExecuteCommand(workingDirectory, "git log origin/master..HEAD");
+            String unpushedCommits = ExecuteProcess(workingDirectory, "git log origin/master..HEAD", false).stdout;
             unpushedCommits = ParseStdOut(unpushedCommits);
 
             using (StringReader reader = new StringReader(unpushedCommits))
@@ -154,7 +170,7 @@ namespace WpfApplication1
         static internal List<String> GitStatus()
         {
             List<String> modifiedFiles = new List<String>();
-            String stdout = ExecuteCommand(workingDirectory, "git status");
+            String stdout = ExecuteProcess(workingDirectory, "git status", false).stdout;
 
             // parse stdout and add files to modifiedFiles
 
@@ -166,13 +182,8 @@ namespace WpfApplication1
             return ExecuteProcess(workingDirectory, "git log", false);
         }
 
+        
         /*
-         * ExecuteCommand()
-         * 
-         * This executes a command in CMD. The CMD terminal is not displayed.
-         * Returns the standard output of the command.
-         * 
-         */
         static private String ExecuteCommand(String directory, String command)
         {
             Process process = new System.Diagnostics.Process();
@@ -200,6 +211,7 @@ namespace WpfApplication1
 
             return stdout;
         }
+         * */
 
         static private CmdReturn ExecuteProcess(String directory, String command, bool needToInputPassword)
         {
@@ -292,6 +304,7 @@ namespace WpfApplication1
             }
         }
 
+        /*
         static private int ExecuteCommandWithPassword(String directory, String command, String password)
         {
             Process process = new System.Diagnostics.Process();
@@ -329,7 +342,7 @@ namespace WpfApplication1
             {
                 Console.WriteLine("{0} Exception caught.", e);
             }
-             * */
+             //  * *
             Process[] processlist = Process.GetProcesses();
 
             foreach (Process theprocess in processlist)
@@ -353,7 +366,7 @@ namespace WpfApplication1
                 process.Refresh();
                 System.Threading.Thread.Sleep(100);
             }
-             * */
+             // * *
 
 
             //System.Console.WriteLine("process handle = " + process.MainWindowHandle);
@@ -392,8 +405,9 @@ namespace WpfApplication1
                 return -10;
             }
             //return stdout;
-             * */
+            // * *
         }
+        */
 
         /*
          * ParseStdOut()
@@ -470,7 +484,8 @@ namespace WpfApplication1
         [DllImport("USER32.DLL")]
         static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
 
-        static internal void SendKeyTestCmdExe(/* IntPtr cmdHandler */)
+        /*
+        static internal void SendKeyTestCmdExe()
         {
             IntPtr windowHandle = IntPtr.Zero;
 
@@ -515,5 +530,6 @@ namespace WpfApplication1
 
             SendKeys.SendWait(password + "{ENTER}");
         }
+         * */
     }
 }
