@@ -23,7 +23,16 @@ namespace WpfApplication1
             InitializeComponent();
         }
 
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+        }
+
         private void image5_ImageFailed(object sender, ExceptionRoutedEventArgs e)
+        {
+
+        }
+        
+        private void image1_ImageFailed(object sender, ExceptionRoutedEventArgs e)
         {
 
         }
