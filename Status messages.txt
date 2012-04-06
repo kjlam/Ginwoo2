@@ -7,3 +7,46 @@ Status messages
   <Bold>You've successfully tagged your commit!</Bold> <LineBreak/> To push your commit and your tag, perform the push motion on the push button. <LineBreak/><LineBreak/><LineBreak/> <Bold>If you need help with any of the motions, or if something confuses you, simply click the question mark on the right for help. </Bold>
   <Bold>You've pushed!</Bold> <LineBreak/> Your remote repository's commit history is below. To return to your local repository, simply pull once on the menu. To return to your working copy, pull once.<LineBreak/><LineBreak/> <Bold>If you need help with any of the motions, or if something confuses you, simply click the question mark on the right for help. </Bold>
   
+  Help
+  
+ 
+ GESTURES
+  
+  Ginect uses four Kinect gestures. One of these is a swipe. 
+  
+  To return to the main page, move your left hand quickly and smoothly across the screen from right to left. This is a swipe.
+  
+  The elements of the main Ginect pages are controlled with the use of three other gestures:
+  
+	1. Push
+	
+	Many of the buttons on the Ginect interface, including the Tag button, the Commit button and the Push button, require the 
+	use of the push gesture in order to activate them, just like a real-life button that you interact with on a daily basis.
+	To push on any of these buttons, make sure that your cursor is over the button and that your hands are at about
+	the same distance from your body. Then move your right hand forward, as if pushing on an object, to push the button. 
+	
+	
+	2. Pull
+	
+	To pull files from your remote repository and to interact with some of the other elements in Ginect, you'll want to use 
+	the pull gesture. The pull gesture is just like the push gesture; the only difference is that instead of moving your right
+	hand forward, you will want to move it backwards towards yourself, as if pulling on an object. 
+	
+	
+	3. Lasso
+	
+	The lasso gesture is what we call the gesture used to select files to add to your commit. It works much like the lasso tool in
+	Photoshop or any other illustrator. To signal that you want to begin to lasso, put your hands together at the point where you
+	want to start lassoing. Then use your right hand to outline the area within which you want to select your files. When your right
+	hand returns to the position of your left hand, the lasso will end and your files will be selected. Once you've lassoed, you can 
+	drag your selection to the Commit Area. 
+	
+THE MODE SWITCHER MENU
+
+	The three-sphere image on the right side of the sphere is the Mode Switcher Menu. It lets you move between the three modes of Ginect:
+	Working Copy, Local Repository and Remote Repository. Each mode lets you perform certain actions relevant to each kind of file system.
+	As is natural for the Git system, your Working Copy is represented by the sphere which is closest to you and your Remote Repository is
+	represented by the sphere which is farthest away. To switch from your current mode (which is glowing) to the mode adjacent to it
+	and closer to you, pull on the menu. To switch from your current mode to the mode adjacent to it but farther away, push on the menu.
+	
+	

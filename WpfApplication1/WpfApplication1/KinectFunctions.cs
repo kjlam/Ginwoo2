@@ -676,7 +676,7 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
                     selectActivated = false;
                     mouseLeftUp();
                     getSelectedFiles();
-                    inkCanvas1.EditingMode = InkCanvasEditingMode.None;
+                    WC_inkCanvas.EditingMode = InkCanvasEditingMode.None;
                     System.Windows.Controls.Image draggingImage = drawCommitBox();
                     System.Windows.Forms.Cursor.Position = new System.Drawing.Point((int)InkCanvas.GetLeft(draggingImage), (int)InkCanvas.GetTop(draggingImage));
                     mouseLeftDown();

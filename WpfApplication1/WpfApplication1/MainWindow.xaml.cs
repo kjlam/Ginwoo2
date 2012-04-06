@@ -83,6 +83,11 @@ namespace WpfApplication1
             CommitButton.Source = logo;
         }
 
+        private void LR_CommitBox_MouseEnter(object sender, MouseEventArgs e)
+        {
+
+        }
+
         private void image6_ImageFailed(object sender, ExceptionRoutedEventArgs e)
         {
 

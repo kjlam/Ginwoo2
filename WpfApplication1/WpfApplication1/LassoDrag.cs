@@ -48,7 +48,7 @@ namespace WpfApplication1
             selectTimer.Interval = new TimeSpan(0, 0, 1);
             dispatcherTimer.Interval = new TimeSpan(0, 0, 2);
             waitTimer.Interval = new TimeSpan(0, 0, 1);
-            DIRECTORY = @"c:\\Users\\LeonDaVinci\\Desktop\\";
+            DIRECTORY = @"c:\\Users\\Roh\\Desktop\\TestFolder";
             MAX_FILE_DISPLAY_COUNT = 16;
 
             // get the files into the arraylist from the directory info
@@ -58,7 +58,7 @@ namespace WpfApplication1
             icons = new Icon[fileCount];
 
             // inkCanvas is initially set to select mode that allows lassoing
-            inkCanvas1.EditingMode = InkCanvasEditingMode.Select;
+            WC_inkCanvas.EditingMode = InkCanvasEditingMode.Select;
 
             // initializethe images and textBlocks arraylist to contain the respective items
             images = new System.Windows.Controls.Image[fileCount];
@@ -89,7 +89,7 @@ namespace WpfApplication1
                 // first start by removing all the previously selected images
                 for (int i = 0; i < selectedImages.Count(); i++)
                 {
-                    inkCanvas1.Children.Remove(selectedImages[i]);
+                    WC_inkCanvas.Children.Remove(selectedImages[i]);
                 }
 
             }
@@ -98,13 +98,13 @@ namespace WpfApplication1
             {
                 for (int i = 0; i < selectedTextBlocks.Count(); i++)
                 {
-                    inkCanvas1.Children.Remove(selectedTextBlocks[i]);
+                    WC_inkCanvas.Children.Remove(selectedTextBlocks[i]);
                 }
 
             }
 
             // get all the selected elements into the arraylist
-            System.Collections.ObjectModel.ReadOnlyCollection<UIElement> selectedElements = inkCanvas1.GetSelectedElements();
+            System.Collections.ObjectModel.ReadOnlyCollection<UIElement> selectedElements = WC_inkCanvas.GetSelectedElements();
             int index = 0;
 
 
@@ -193,8 +193,8 @@ namespace WpfApplication1
                         System.Windows.Controls.InkCanvas.SetTop(selectedTextBlocks[index], top + IMAGE_HEIGHT + 10);
                         System.Windows.Controls.InkCanvas.SetLeft(selectedTextBlocks[index], left - 20);
 
-                        inkCanvas1.Children.Add(selectedImages[index]);
-                        inkCanvas1.Children.Add(selectedTextBlocks[index]);
+                        WC_inkCanvas.Children.Add(selectedImages[index]);
+                        WC_inkCanvas.Children.Add(selectedTextBlocks[index]);
 
 
                         index++;
@@ -211,7 +211,7 @@ namespace WpfApplication1
         {
 
             // First, Clear everything on the inkCanvas
-            inkCanvas1.Children.Clear();
+            WC_inkCanvas.Children.Clear();
 
             // TOGGLE THESE VALUES FOR DISPLAYING:
             int IMAGE_WIDTH = 40;                       // Width of image?
@@ -255,8 +255,8 @@ namespace WpfApplication1
                 System.Windows.Controls.InkCanvas.SetLeft(textBlocks[i], (i % (ROW - 1)) * VERTICAL_SPACING + INITIAL_LEFT_MARGIN - 20);
 
                 // Add IT! AWW YEAAA
-                inkCanvas1.Children.Add(images[i]);
-                inkCanvas1.Children.Add(textBlocks[i]);
+                WC_inkCanvas.Children.Add(images[i]);
+                WC_inkCanvas.Children.Add(textBlocks[i]);
             }
 
         }
@@ -328,8 +328,8 @@ namespace WpfApplication1
                 System.Windows.Controls.InkCanvas.SetLeft(selectedFileTextBlocks[i], (i % (ROW - 1)) * VERTICAL_SPACING + INITIAL_LEFT_MARGIN - 20);
 
                 // Add IT! AWW YEAAA
-                inkCanvas1.Children.Add(selectedFileImages[i]);
-                inkCanvas1.Children.Add(selectedFileTextBlocks[i]);
+                WC_inkCanvas.Children.Add(selectedFileImages[i]);
+                WC_inkCanvas.Children.Add(selectedFileTextBlocks[i]);
             }
             return selectedFileImages[0];
         }
@@ -396,12 +396,12 @@ namespace WpfApplication1
 
         private void button2_Click(object sender, RoutedEventArgs e)
         {
-            inkCanvas1.EditingMode = InkCanvasEditingMode.Select;
+            WC_inkCanvas.EditingMode = InkCanvasEditingMode.Select;
         }
 
         private void button3_Click(object sender, RoutedEventArgs e)
         {
-            inkCanvas1.EditingMode = InkCanvasEditingMode.None;
+            WC_inkCanvas.EditingMode = InkCanvasEditingMode.None;
         }
 
         private void button4_Click(object sender, RoutedEventArgs e)
