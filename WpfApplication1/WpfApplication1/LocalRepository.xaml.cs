@@ -62,5 +62,15 @@ namespace WpfApplication1
         {
 
         }
+
+        private void image2_MouseEnter(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void kinectSensorChooser1_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
