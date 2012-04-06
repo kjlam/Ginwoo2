@@ -82,5 +82,26 @@ namespace WpfApplication1
 
             CommitButton.Source = logo;
         }
+
+        private void image6_ImageFailed(object sender, ExceptionRoutedEventArgs e)
+        {
+
+        }
+
+        private void MenuWorking_ImageFailed(object sender, ExceptionRoutedEventArgs e)
+        {
+
+        }
+
+        private void MenuWorking_MouseEnter(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void MenuWorking_MouseLeave(object sender, MouseEventArgs e)
+        {
+
+        }
+
     }
 }

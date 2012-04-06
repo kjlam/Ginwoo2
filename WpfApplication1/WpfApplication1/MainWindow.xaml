@@ -18,7 +18,7 @@
                " Grid.ColumnSpan="3" />
         <Image Height="150" HorizontalAlignment="Left" Margin="636,30,0,0" Name="image4" Stretch="Fill" VerticalAlignment="Top" Width="596" Source="/WpfApplication1;component/Images/StatusBoxOverlay1.png" Grid.ColumnSpan="3" />
         <Image Height="160" Margin="146,20,39,0" Name="image5" Stretch="UniformToFill" VerticalAlignment="Top" Source="/WpfApplication1;component/Images/HelpIcon.png" ImageFailed="image5_ImageFailed" Grid.Column="2" />
-        <Image Height="242" HorizontalAlignment="Left" Margin="719,191,0,0" Name="image6" Stretch="UniformToFill" VerticalAlignment="Top" Width="506" Source="/WpfApplication1;component/Images/MenuWorking.png" Grid.ColumnSpan="3" />
+        <Image Height="242" HorizontalAlignment="Left" Margin="719,191,0,0" Name="MenuWorking" Stretch="UniformToFill" VerticalAlignment="Top" Width="506" Source="/WpfApplication1;component/Images/MenuWorking.png" Grid.ColumnSpan="3" ImageFailed="MenuWorking_ImageFailed" />
         <Label Content="Files" Height="33" HorizontalAlignment="Left" Margin="34,31,0,0" Name="Files" VerticalAlignment="Top" Width="77" Foreground="White" FontFamily="Calibri" FontSize="20" />
         <Label Content="Current Commit" FontFamily="Calibri" FontSize="20" Foreground="White" Height="33" HorizontalAlignment="Left" Margin="649,446,0,0" Name="Commit" VerticalAlignment="Top" Width="149" />
         <Label Content="Status" FontFamily="Calibri" FontSize="20" Foreground="White" Height="33" HorizontalAlignment="Left" Margin="649,32,0,0" Name="Status" VerticalAlignment="Top" Width="77" />
