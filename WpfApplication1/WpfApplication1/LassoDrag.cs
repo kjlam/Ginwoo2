@@ -48,7 +48,7 @@ namespace WpfApplication1
             selectTimer.Interval = new TimeSpan(0, 0, 1);
             dispatcherTimer.Interval = new TimeSpan(0, 0, 2);
             waitTimer.Interval = new TimeSpan(0, 0, 1);
-            DIRECTORY = @"c:\\Users\\Roh\\Desktop\\TestFolder";
+            DIRECTORY = @"c:\\";
             MAX_FILE_DISPLAY_COUNT = 16;
 
             // get the files into the arraylist from the directory info
