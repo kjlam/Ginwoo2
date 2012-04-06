@@ -30,7 +30,7 @@ namespace WpfApplication1
             //return GitLog();
 
             // Test git status
-            //return ExecuteProcess(workingDirectory, "git status", false);
+            return GitStatus();
 
             // Test GitAddFilesToCommit()
             /*
@@ -53,7 +53,7 @@ namespace WpfApplication1
             //return GitGetLocalRepoFiles();
 
             // Test GitGetRemoteRepoFiles()
-            return GitGetRemoteRepoFiles();
+            //return GitGetRemoteRepoFiles();
         }
 
         static internal CmdReturn GitGetLocalRepoFiles()
@@ -167,14 +167,11 @@ namespace WpfApplication1
 
         // TODO: Complete this method. Return a list of files that have been modified
         // since the last commit
-        static internal List<String> GitStatus()
+        static internal CmdReturn GitStatus()
         {
-            List<String> modifiedFiles = new List<String>();
-            String stdout = ExecuteProcess(workingDirectory, "git status", false).stdout;
-
-            // parse stdout and add files to modifiedFiles
-
-            return modifiedFiles;
+            CmdReturn cmdReturn = ExecuteProcess(workingDirectory, "git status", false);
+            cmdReturn.fileList = ParseGitStatusStdout(cmdReturn.stdout);
+            return cmdReturn;
         }
 
         static internal CmdReturn GitLog()
@@ -315,6 +312,85 @@ namespace WpfApplication1
                 }
             }
             return writer.ToString();
+        }
+
+        /*
+         * C:\Users\Jessica\Ginect>git status
+# On branch master
+# Changes not staged for commit:
+#   (use "git add/rm <file>..." to update what will be committed)
+#   (use "git checkout -- <file>..." to discard changes in working directory)
+#
+#       deleted:    jessica.txt
+#       modified:   jessica2.txt
+#
+# Untracked files:
+#   (use "git add <file>..." to include in what will be committed)
+#
+#       jessica3.txt
+no changes added to commit (use "git add" and/or "git commit -a")
+         * */
+        static private List<String> ParseGitStatusStdout(String stdout)
+        {
+            List<String> fileList = new List<String>();
+
+            // Instantiate the regular expression object.
+            String deleted = @"^.*deleted:\s*(\S*)\s*$";
+            String modified = @"^.*modified:\s*(\S*)\s*$";
+            String added = @"^#\s+(\S*)\s*$";
+            String boundaryUntrackedFiles = @"^#.*Untracked\sfiles:.*$";
+
+            Regex regexDeleted = new Regex(deleted);
+            Regex regexModified = new Regex(modified);
+            Regex regexAdded = new Regex(added);
+
+            bool getUntrackedFiles = false;
+
+            using (StringReader reader = new StringReader(stdout))
+            {
+                string line;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    Match m = regexDeleted.Match(line);
+                    if (m.Success)
+                    {
+                        Group g = m.Groups[1];
+                        if (g.Success)
+                        {
+                            fileList.Add(g.Value);
+                        }
+                    }
+
+                    m = regexModified.Match(line);
+                    if (m.Success)
+                    {
+                        Group g = m.Groups[1];
+                        if (g.Success)
+                        {
+                            fileList.Add(g.Value);
+                        }
+                    }
+
+                    if (getUntrackedFiles)
+                    {
+                        m = regexAdded.Match(line);
+                        if (m.Success)
+                        {
+                            Group g = m.Groups[1];
+                            if (g.Success)
+                            {
+                                fileList.Add(g.Value);
+                            }
+                        }
+                    }
+
+                    if (Regex.IsMatch(line, boundaryUntrackedFiles))
+                    {
+                        getUntrackedFiles = true;
+                    }
+                }
+            }
+            return fileList;
         }
 
         // Activate an application window.

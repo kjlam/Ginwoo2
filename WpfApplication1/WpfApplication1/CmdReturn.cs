@@ -14,10 +14,12 @@ namespace WpfApplication1
 
         internal int exitCode;
         internal String stdout;
+        internal List<String> fileList;
 
         public CmdReturn()
         {
             inputSuccess = InputResult.UNDEFINED;
+            fileList = null;
         }
 
         public override string ToString()
@@ -58,6 +60,13 @@ namespace WpfApplication1
             strWriter.WriteLine("  stdout =");
             strWriter.WriteLine(stdout);
             strWriter.WriteLine();
+
+            strWriter.WriteLine("  fileList =");
+            //strWriter.WriteLine("    fileList.length = {0}", fileList.Count);
+            foreach (String file in fileList)
+            {
+                strWriter.WriteLine(file);
+            }
 
             return strWriter.ToString();
         }
