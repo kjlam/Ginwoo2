@@ -635,7 +635,6 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
                         {
                             //TODO: pull registered
                             textBox.Gesture += "Pull Registered";
-                            KinectPull(RHCounter[0], RHCounter[1]);
                         }
                     }
                     else
@@ -847,13 +846,6 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
             RHPos[0] = scaledJoint.Position.X - element.Width/2;
             RHPos[1] = scaledJoint.Position.Y - element.Height/2;
         }
-
-        void KinectPull(double x, double y)
-        {
-
-
-        }
-
 
     }
 }

@@ -28,12 +28,11 @@ namespace WpfApplication1
         Icon[] icons;                                       // Array to store .ico icon images of files
         System.Windows.Controls.Image[] images;             // Array to store all the WPF image elements for the files icon to be displayed
         System.Windows.Controls.TextBlock[] textBlocks;     // Array to store all the WPF textblock elements for the file name to be displayed
-
         FileInfo[] selectedFiles;                                   // Files that are selected by the lasso
         int fileCount;                                              // Number of files that are displayed.
         System.Windows.Controls.Image[] selectedImages;             // Selected Images
         System.Windows.Controls.TextBlock[] selectedTextBlocks;     // Selected Textblocks
-
+        List<String> selectedFileNames;
         private System.Windows.Point mouseClick;            // x y coordinate for the mouse pointer click, used in dragging files
         double baseLeft;                                    // the base left coordinate for the image
         double baseTop;                                     // the base right coordinate for the iamge
@@ -177,6 +176,8 @@ namespace WpfApplication1
                         selectedImages[index].PreviewMouseDown += new MouseButtonEventHandler(myimg_MouseDown);
                         selectedImages[index].PreviewMouseMove += new MouseEventHandler(myimg_MouseMove);
                         selectedImages[index].PreviewMouseUp += new MouseButtonEventHandler(myimg_MouseUp);
+
+                        selectedFileNames.Add(files[j].Name);
 
                         selectedTextBlocks[index].Text = files[j].Name;
                         selectedTextBlocks[index].Foreground = new SolidColorBrush(Colors.White);
