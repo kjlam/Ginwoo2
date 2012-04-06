@@ -27,10 +27,10 @@ namespace WpfApplication1
         static internal CmdReturn TestModularTerminal()
         {
             // Test GitLog()
-            return GitLog();
+            //return GitLog();
 
             // Test git status
-            //return ExecuteProcess(workingDirectory, "git status", false);
+            //return GitStatus();
 
             // Test GitAddFilesToCommit()
             /*
@@ -41,14 +41,34 @@ namespace WpfApplication1
             */
 
             // Test GitCommitWithMessage()
-            // return GitCommitWithMessage("Another test commit");
+            //return GitCommitWithMessage("Another test commit");
 
             // Test GitTagLatestCommit()
-            // return GitTagLatestCommit("testTag");
+            //return GitTagLatestCommit("testTag");
 
             // Test GitPush()
-            // return GitPush();
+            //return GitPush();
 
+            // Test GitGetLocalRepoFiles()
+            //return GitGetLocalRepoFiles();
+
+            // Test GitGetRemoteRepoFiles()
+            return GitGetRemoteRepoFiles();
+        }
+
+        static internal CmdReturn GitGetLocalRepoFiles()
+        {
+            CmdReturn cmdReturn = ExecuteProcess(workingDirectory, "git ls-tree --full-tree -r HEAD", false);
+            cmdReturn.fileList = ParseGetRepoFilesStdout(cmdReturn.stdout);
+            return cmdReturn;
+        }
+
+        static internal CmdReturn GitGetRemoteRepoFiles()
+        {
+            ExecuteProcess(workingDirectory, "git fetch", true);
+            CmdReturn cmdReturn = ExecuteProcess(workingDirectory, "git ls-tree --full-tree -r origin", false);
+            cmdReturn.fileList = ParseGetRepoFilesStdout(cmdReturn.stdout);
+            return cmdReturn;
         }
 
         /*
@@ -92,7 +112,7 @@ namespace WpfApplication1
             char[] delimiterChars = { ' ' };
             String latestCommit = null;
 
-            String unpushedCommits = ExecuteCommand(workingDirectory, "git log origin/master..HEAD");
+            String unpushedCommits = ExecuteProcess(workingDirectory, "git log origin/master..HEAD", false).stdout;
             unpushedCommits = ParseStdOut(unpushedCommits);
 
             using (StringReader reader = new StringReader(unpushedCommits))
@@ -145,60 +165,18 @@ namespace WpfApplication1
         static internal CmdReturn GitPush()
         {
             return ExecuteProcess(workingDirectory, "git push", true);
-
-            // TODO: Figure out if git push was executed correctly
         }
 
-        // TODO: Complete this method. Return a list of files that have been modified
-        // since the last commit
-        static internal List<String> GitStatus()
+        static internal CmdReturn GitStatus()
         {
-            List<String> modifiedFiles = new List<String>();
-            String stdout = ExecuteCommand(workingDirectory, "git status");
-
-            // parse stdout and add files to modifiedFiles
-
-            return modifiedFiles;
+            CmdReturn cmdReturn = ExecuteProcess(workingDirectory, "git status", false);
+            cmdReturn.fileList = ParseGitStatusStdout(cmdReturn.stdout);
+            return cmdReturn;
         }
 
         static internal CmdReturn GitLog()
         {
             return ExecuteProcess(workingDirectory, "git log", false);
-        }
-
-        /*
-         * ExecuteCommand()
-         * 
-         * This executes a command in CMD. The CMD terminal is not displayed.
-         * Returns the standard output of the command.
-         * 
-         */
-        static private String ExecuteCommand(String directory, String command)
-        {
-            Process process = new System.Diagnostics.Process();
-            ProcessStartInfo startInfo = new ProcessStartInfo();
-
-            // Make it so the terminal isn't displayed on the screen when executing commands
-            startInfo.CreateNoWindow = true;
-
-            // The cmd terminal
-            startInfo.FileName = "cmd.exe";
-
-            Directory.SetCurrentDirectory(directory);
-
-            startInfo.Arguments = "/C " + command;
-            process.StartInfo = startInfo;
-
-            process.StartInfo.UseShellExecute = false;
-            process.StartInfo.RedirectStandardOutput = true;
-
-            process.Start();
-
-            String stdout = ParseStdOut(process.StandardOutput.ReadToEnd());
-            process.WaitForExit();
-            process.Close();
-
-            return stdout;
         }
 
         static private CmdReturn ExecuteProcess(String directory, String command, bool needToInputPassword)
@@ -292,109 +270,6 @@ namespace WpfApplication1
             }
         }
 
-        static private int ExecuteCommandWithPassword(String directory, String command, String password)
-        {
-            Process process = new System.Diagnostics.Process();
-            ProcessStartInfo startInfo = new ProcessStartInfo();
-
-            // Make it so the terminal isn't displayed on the screen when executing commands
-            //startInfo.CreateNoWindow = true;
-            //startInfo.CreateNoWindow = false;
-            //startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Maximized;
-
-            // The cmd terminal
-            startInfo.FileName = "cmd.exe";
-
-            Directory.SetCurrentDirectory(directory);
-
-            startInfo.Arguments = "/C " + command;
-            process.StartInfo = startInfo;
-
-            process.StartInfo.UseShellExecute = false;
-            process.StartInfo.RedirectStandardOutput = true;
-            process.StartInfo.RedirectStandardInput = true;
-
-            //process.EnableRaisingEvents = true;
-
-
-            process.Start();
-            /*
-            try
-            {
-                process.WaitForInputIdle();
-            }
-
-            catch (Exception e)
-            {
-                Console.WriteLine("{0} Exception caught.", e);
-            }
-             * */
-            Process[] processlist = Process.GetProcesses();
-
-            foreach (Process theprocess in processlist)
-            {
-                Console.WriteLine("Process: {0} ID: {1} MainWindowHandle: {2}", process.ProcessName, process.Id, process.MainWindowHandle);
-            }
-
-            //process.WaitForInputIdle();
-            //System.Threading.Thread.Sleep(10000);
-            //System.Console.WriteLine("process handle = " + process.MainWindowHandle);
-            //System.Console.WriteLine("process main window title = " + process.MainWindowTitle);
-            //Console.WriteLine("Try via WIN32: " + Microsoft.Win32.GetMainProcessWindow(process.Id));
-            //process.Refresh();
-            /*
-            while (process.MainWindowHandle == IntPtr.Zero)
-            {
-                System.Console.WriteLine("process handle = " + process.MainWindowHandle);
-                System.Console.WriteLine("process main window title = " + process.MainWindowTitle);
-
-                process = Process.GetProcessById(process.Id);
-                process.Refresh();
-                System.Threading.Thread.Sleep(100);
-            }
-             * */
-
-
-            //System.Console.WriteLine("process handle = " + process.MainWindowHandle);
-            //System.Console.WriteLine("process main window title = " + process.MainWindowTitle);
-
-            //System.Console.WriteLine("process handle = " + process.Handle);
-            //SendKeyTestCmdExe(process.Handle);
-            //SendKeyTestCmdExe(process.MainWindowHandle);
-            SendKeyTestCmdExe();
-
-            //System.Threading.Thread.Sleep(10000);
-            //BinaryWriter stdin = new BinaryWriter(process.StandardInput.BaseStream);
-            //stdin.Write(password);
-            //process.StandardInput.Write(password + "\n");
-            //Console.WriteLine("Done writing to standard input");
-
-            //String stdout = process.StandardOutput.ReadToEnd();
-
-            process.WaitForExit();
-
-            int exitCode = process.ExitCode;
-            //Debug.WriteLine(exitCode.ToString());
-            process.Close();
-            return exitCode;
-
-            /*
-            Debug.WriteLine("before end");
-            if (process.HasExited)
-            {
-                Debug.WriteLine("process has exited");
-            
-            }
-            else
-            {
-                Debug.WriteLine("process has not exited");
-                return -10;
-            }
-            //return stdout;
-             * */
-        }
-
         /*
          * ParseStdOut()
          * 
@@ -439,26 +314,121 @@ namespace WpfApplication1
             return writer.ToString();
         }
 
+        /*
+         * C:\Users\Jessica\Ginect>git status
+# On branch master
+# Changes not staged for commit:
+#   (use "git add/rm <file>..." to update what will be committed)
+#   (use "git checkout -- <file>..." to discard changes in working directory)
+#
+#       deleted:    jessica.txt
+#       modified:   jessica2.txt
+#
+# Untracked files:
+#   (use "git add <file>..." to include in what will be committed)
+#
+#       jessica3.txt
+no changes added to commit (use "git add" and/or "git commit -a")
+         * */
+        static private List<String> ParseGitStatusStdout(String stdout)
+        {
+            List<String> fileList = new List<String>();
 
+            // Instantiate the regular expression object.
+            String deleted = @"^.*deleted:\s*(\S*)\s*$";
+            String modified = @"^.*modified:\s*(\S*)\s*$";
+            String added = @"^#\s+(\S*)\s*$";
+            String boundaryUntrackedFiles = @"^#.*Untracked\sfiles:.*$";
 
+            Regex regexDeleted = new Regex(deleted);
+            Regex regexModified = new Regex(modified);
+            Regex regexAdded = new Regex(added);
 
+            bool getUntrackedFiles = false;
+
+            using (StringReader reader = new StringReader(stdout))
+            {
+                string line;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    Match m = regexDeleted.Match(line);
+                    if (m.Success)
+                    {
+                        Group g = m.Groups[1];
+                        if (g.Success)
+                        {
+                            fileList.Add(g.Value);
+                        }
+                    }
+
+                    m = regexModified.Match(line);
+                    if (m.Success)
+                    {
+                        Group g = m.Groups[1];
+                        if (g.Success)
+                        {
+                            fileList.Add(g.Value);
+                        }
+                    }
+
+                    if (getUntrackedFiles)
+                    {
+                        m = regexAdded.Match(line);
+                        if (m.Success)
+                        {
+                            Group g = m.Groups[1];
+                            if (g.Success)
+                            {
+                                fileList.Add(g.Value);
+                            }
+                        }
+                    }
+
+                    if (Regex.IsMatch(line, boundaryUntrackedFiles))
+                    {
+                        getUntrackedFiles = true;
+                    }
+                }
+            }
+            return fileList;
+        }
 
         /*
-        // Get a handle to an application window.
-        [DllImport("USER32.DLL", CharSet = CharSet.Unicode)]
-        public static extern IntPtr FindWindow(string lpClassName,
-            string lpWindowName);
-
-        [DllImport("USER32.DLL", SetLastError = true, CharSet = CharSet.Auto)]
-        public static extern IntPtr FindWindowEx(IntPtr parentHandle, IntPtr childAfter, string lclassName, string windowTitle);
-
-        // Activate an application window.
-        [DllImport("USER32.DLL")]
-        public static extern bool SetForegroundWindow(IntPtr hWnd);
-
-        [DllImport("USER32.DLL", CharSet = CharSet.Auto, ExactSpelling = true)]
-        public static extern IntPtr GetForegroundWindow();
+         * 160000 commit 21b748f4bf92e961c54d9ed88ea7ad4274ced939  Ginect
+100644 blob e69de29bb2d1d6434b8b29ae775ad8c2e48c5391    README
+100644 blob e69de29bb2d1d6434b8b29ae775ad8c2e48c5391    RJW.txt
+100644 blob 274078a236dedec1236aa71c496883317dab9272    jessica.txt
+100644 blob bd077e1ada14f475ade4f6e1426bb3768295e26b    jessica2.txt
+100644 blob f1f0540097947db8f9864eb310b79b9b8bb39219    jessica3.txt
+100644 blob 2a7efc2606b912cbac3bb9f3f1015acbec5d2658    jessica4.txt
+100644 blob e69de29bb2d1d6434b8b29ae775ad8c2e48c5391    klam.txt
+100644 blob e69de29bb2d1d6434b8b29ae775ad8c2e48c5391    push.txt
          * */
+        static private List<String> ParseGetRepoFilesStdout(String stdout)
+        {
+            List<String> fileList = new List<String>();
+
+            Regex regex = new Regex(@"^\S+\s+(\S+)\s+\S+\s+(\S+)\s*$");
+
+            using (StringReader reader = new StringReader(stdout))
+            {
+                string line;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    Match m = regex.Match(line);
+                    if (m.Success)
+                    {
+                        Group g1 = m.Groups[1];
+                        Group g2 = m.Groups[2];
+                        if (g1.Success && g2.Success && g1.Value != "commit")
+                        {
+                            fileList.Add(g2.Value);
+                        }
+                    }
+                }
+            }
+            return fileList;
+        }
 
         // Activate an application window.
         [DllImport("USER32.DLL")]
@@ -469,51 +439,5 @@ namespace WpfApplication1
 
         [DllImport("USER32.DLL")]
         static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
-
-        static internal void SendKeyTestCmdExe(/* IntPtr cmdHandler */)
-        {
-            IntPtr windowHandle = IntPtr.Zero;
-
-            Process[] processes = Process.GetProcessesByName("cmd");
-            //Debug.WriteLine("all processes = " + processes.ToString());
-            if (processes.Length > 0)
-            {
-                int last = processes.Length - 1;
-                IntPtr mainWindowHandle = processes[last].MainWindowHandle;
-                Debug.WriteLine("processes[last].ProcessName = " + processes[last].ProcessName);
-                Debug.WriteLine("processes[last].Id = " + processes[last].Id);
-                Debug.WriteLine("main window handle = " + mainWindowHandle);
-                windowHandle = mainWindowHandle;
-
-            }
-
-
-
-            if (!SetForegroundWindow(windowHandle))
-            {
-                Debug.WriteLine("SET FOREGROUND WINDOW FAILED");
-                Debug.WriteLine("foreground window handle = " + GetForegroundWindow());
-            }
-            else
-            {
-                Debug.WriteLine("SET FOREGROUND WINDOW SUCCESS");
-                Debug.WriteLine("foreground window handle = " + GetForegroundWindow());
-            }
-
-            //System.Console.WriteLine("cmdHandler = " + cmdHandler);
-            //SetForegroundWindow(cmdHandler);
-
-            //System.Console.WriteLine(SetForegroundWindow(cmdHandler));
-
-            //ShowWindow(cmdHandler, 1);
-            //System.Console.WriteLine(ShowWindow(cmdHandler, 1));
-
-
-            //System.Console.WriteLine("actual foregrounder handler = " + GetForegroundWindow().ToString());
-
-            //Debug.Assert(cmdHandler == GetForegroundWindow());
-
-            SendKeys.SendWait(password + "{ENTER}");
-        }
     }
 }
