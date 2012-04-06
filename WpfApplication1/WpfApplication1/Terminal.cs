@@ -53,7 +53,7 @@ namespace WpfApplication1
             //return GitGetLocalRepoFiles();
 
             // Test GitGetRemoteRepoFiles()
-            //return GitGetRemoteRepoFiles();
+            return GitGetRemoteRepoFiles();
         }
 
         static internal CmdReturn GitGetLocalRepoFiles()
@@ -182,37 +182,6 @@ namespace WpfApplication1
             return ExecuteProcess(workingDirectory, "git log", false);
         }
 
-        
-        /*
-        static private String ExecuteCommand(String directory, String command)
-        {
-            Process process = new System.Diagnostics.Process();
-            ProcessStartInfo startInfo = new ProcessStartInfo();
-
-            // Make it so the terminal isn't displayed on the screen when executing commands
-            startInfo.CreateNoWindow = true;
-
-            // The cmd terminal
-            startInfo.FileName = "cmd.exe";
-
-            Directory.SetCurrentDirectory(directory);
-
-            startInfo.Arguments = "/C " + command;
-            process.StartInfo = startInfo;
-
-            process.StartInfo.UseShellExecute = false;
-            process.StartInfo.RedirectStandardOutput = true;
-
-            process.Start();
-
-            String stdout = ParseStdOut(process.StandardOutput.ReadToEnd());
-            process.WaitForExit();
-            process.Close();
-
-            return stdout;
-        }
-         * */
-
         static private CmdReturn ExecuteProcess(String directory, String command, bool needToInputPassword)
         {
             Process process = new System.Diagnostics.Process();
@@ -305,111 +274,6 @@ namespace WpfApplication1
         }
 
         /*
-        static private int ExecuteCommandWithPassword(String directory, String command, String password)
-        {
-            Process process = new System.Diagnostics.Process();
-            ProcessStartInfo startInfo = new ProcessStartInfo();
-
-            // Make it so the terminal isn't displayed on the screen when executing commands
-            //startInfo.CreateNoWindow = true;
-            //startInfo.CreateNoWindow = false;
-            //startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Maximized;
-
-            // The cmd terminal
-            startInfo.FileName = "cmd.exe";
-
-            Directory.SetCurrentDirectory(directory);
-
-            startInfo.Arguments = "/C " + command;
-            process.StartInfo = startInfo;
-
-            process.StartInfo.UseShellExecute = false;
-            process.StartInfo.RedirectStandardOutput = true;
-            process.StartInfo.RedirectStandardInput = true;
-
-            //process.EnableRaisingEvents = true;
-
-
-            process.Start();
-            /*
-            try
-            {
-                process.WaitForInputIdle();
-            }
-
-            catch (Exception e)
-            {
-                Console.WriteLine("{0} Exception caught.", e);
-            }
-             //  * *
-            Process[] processlist = Process.GetProcesses();
-
-            foreach (Process theprocess in processlist)
-            {
-                Console.WriteLine("Process: {0} ID: {1} MainWindowHandle: {2}", process.ProcessName, process.Id, process.MainWindowHandle);
-            }
-
-            //process.WaitForInputIdle();
-            //System.Threading.Thread.Sleep(10000);
-            //System.Console.WriteLine("process handle = " + process.MainWindowHandle);
-            //System.Console.WriteLine("process main window title = " + process.MainWindowTitle);
-            //Console.WriteLine("Try via WIN32: " + Microsoft.Win32.GetMainProcessWindow(process.Id));
-            //process.Refresh();
-            /*
-            while (process.MainWindowHandle == IntPtr.Zero)
-            {
-                System.Console.WriteLine("process handle = " + process.MainWindowHandle);
-                System.Console.WriteLine("process main window title = " + process.MainWindowTitle);
-
-                process = Process.GetProcessById(process.Id);
-                process.Refresh();
-                System.Threading.Thread.Sleep(100);
-            }
-             // * *
-
-
-            //System.Console.WriteLine("process handle = " + process.MainWindowHandle);
-            //System.Console.WriteLine("process main window title = " + process.MainWindowTitle);
-
-            //System.Console.WriteLine("process handle = " + process.Handle);
-            //SendKeyTestCmdExe(process.Handle);
-            //SendKeyTestCmdExe(process.MainWindowHandle);
-            SendKeyTestCmdExe();
-
-            //System.Threading.Thread.Sleep(10000);
-            //BinaryWriter stdin = new BinaryWriter(process.StandardInput.BaseStream);
-            //stdin.Write(password);
-            //process.StandardInput.Write(password + "\n");
-            //Console.WriteLine("Done writing to standard input");
-
-            //String stdout = process.StandardOutput.ReadToEnd();
-
-            process.WaitForExit();
-
-            int exitCode = process.ExitCode;
-            //Debug.WriteLine(exitCode.ToString());
-            process.Close();
-            return exitCode;
-
-            /*
-            Debug.WriteLine("before end");
-            if (process.HasExited)
-            {
-                Debug.WriteLine("process has exited");
-            
-            }
-            else
-            {
-                Debug.WriteLine("process has not exited");
-                return -10;
-            }
-            //return stdout;
-            // * *
-        }
-        */
-
-        /*
          * ParseStdOut()
          * 
          * Strips out the command prompt lines from stdout. The command prompt
@@ -453,27 +317,6 @@ namespace WpfApplication1
             return writer.ToString();
         }
 
-
-
-
-
-        /*
-        // Get a handle to an application window.
-        [DllImport("USER32.DLL", CharSet = CharSet.Unicode)]
-        public static extern IntPtr FindWindow(string lpClassName,
-            string lpWindowName);
-
-        [DllImport("USER32.DLL", SetLastError = true, CharSet = CharSet.Auto)]
-        public static extern IntPtr FindWindowEx(IntPtr parentHandle, IntPtr childAfter, string lclassName, string windowTitle);
-
-        // Activate an application window.
-        [DllImport("USER32.DLL")]
-        public static extern bool SetForegroundWindow(IntPtr hWnd);
-
-        [DllImport("USER32.DLL", CharSet = CharSet.Auto, ExactSpelling = true)]
-        public static extern IntPtr GetForegroundWindow();
-         * */
-
         // Activate an application window.
         [DllImport("USER32.DLL")]
         public static extern bool SetForegroundWindow(IntPtr hWnd);
@@ -483,53 +326,5 @@ namespace WpfApplication1
 
         [DllImport("USER32.DLL")]
         static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
-
-        /*
-        static internal void SendKeyTestCmdExe()
-        {
-            IntPtr windowHandle = IntPtr.Zero;
-
-            Process[] processes = Process.GetProcessesByName("cmd");
-            //Debug.WriteLine("all processes = " + processes.ToString());
-            if (processes.Length > 0)
-            {
-                int last = processes.Length - 1;
-                IntPtr mainWindowHandle = processes[last].MainWindowHandle;
-                Debug.WriteLine("processes[last].ProcessName = " + processes[last].ProcessName);
-                Debug.WriteLine("processes[last].Id = " + processes[last].Id);
-                Debug.WriteLine("main window handle = " + mainWindowHandle);
-                windowHandle = mainWindowHandle;
-
-            }
-
-
-
-            if (!SetForegroundWindow(windowHandle))
-            {
-                Debug.WriteLine("SET FOREGROUND WINDOW FAILED");
-                Debug.WriteLine("foreground window handle = " + GetForegroundWindow());
-            }
-            else
-            {
-                Debug.WriteLine("SET FOREGROUND WINDOW SUCCESS");
-                Debug.WriteLine("foreground window handle = " + GetForegroundWindow());
-            }
-
-            //System.Console.WriteLine("cmdHandler = " + cmdHandler);
-            //SetForegroundWindow(cmdHandler);
-
-            //System.Console.WriteLine(SetForegroundWindow(cmdHandler));
-
-            //ShowWindow(cmdHandler, 1);
-            //System.Console.WriteLine(ShowWindow(cmdHandler, 1));
-
-
-            //System.Console.WriteLine("actual foregrounder handler = " + GetForegroundWindow().ToString());
-
-            //Debug.Assert(cmdHandler == GetForegroundWindow());
-
-            SendKeys.SendWait(password + "{ENTER}");
-        }
-         * */
     }
 }
