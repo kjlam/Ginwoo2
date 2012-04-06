@@ -3,40 +3,81 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:my="clr-namespace:Microsoft.Samples.Kinect.WpfViewers;assembly=Microsoft.Samples.Kinect.WpfViewers" 
         Title="MainWindow" Height="720" Width="1280"
-        Left="0" Top="0"
-        >
+        Left="0" Top="0">
+    
+    <Canvas Name="Main" Visibility="Visible" Height="720" Width="1280">
         
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="945*" />
-            <ColumnDefinition Width="36*" />
-            <ColumnDefinition Width="277*" />
-        </Grid.ColumnDefinitions>
-        <Image Height="680" HorizontalAlignment="Left" Name="image1" Stretch="Fill" VerticalAlignment="Top" Width="1260" Source="/WpfApplication1;component/Images/bg.png" ImageFailed="image1_ImageFailed" Grid.ColumnSpan="3" />
-        <Image Height="640" HorizontalAlignment="Left" Margin="24,20,0,0" Name="image2" Stretch="Fill" VerticalAlignment="Top" Width="605" Source="/WpfApplication1;component/Images/CommitBox.png" />
-        <Image Height="212" HorizontalAlignment="Left" Margin="635,442,0,0" Name="image3" Source="/WpfApplication1;component/Images/CommitBox.png" Stretch="Fill" VerticalAlignment="Top" Width="605
-               " Grid.ColumnSpan="3" />
-        <Image Height="150" HorizontalAlignment="Left" Margin="636,30,0,0" Name="image4" Stretch="Fill" VerticalAlignment="Top" Width="596" Source="/WpfApplication1;component/Images/StatusBoxOverlay1.png" Grid.ColumnSpan="3" />
-        <Image Height="160" Margin="146,20,39,0" Name="image5" Stretch="UniformToFill" VerticalAlignment="Top" Source="/WpfApplication1;component/Images/HelpIcon.png" ImageFailed="image5_ImageFailed" Grid.Column="2" />
-        <Image Height="242" HorizontalAlignment="Left" Margin="719,191,0,0" Name="MenuWorking" Stretch="UniformToFill" VerticalAlignment="Top" Width="506" Source="/WpfApplication1;component/Images/MenuWorking.png" Grid.ColumnSpan="3" ImageFailed="MenuWorking_ImageFailed" />
-        <Label Content="Files" Height="33" HorizontalAlignment="Left" Margin="34,31,0,0" Name="Files" VerticalAlignment="Top" Width="77" Foreground="White" FontFamily="Calibri" FontSize="20" />
-        <Label Content="Current Commit" FontFamily="Calibri" FontSize="20" Foreground="White" Height="33" HorizontalAlignment="Left" Margin="649,446,0,0" Name="Commit" VerticalAlignment="Top" Width="149" />
-        <Label Content="Status" FontFamily="Calibri" FontSize="20" Foreground="White" Height="33" HorizontalAlignment="Left" Margin="649,32,0,0" Name="Status" VerticalAlignment="Top" Width="77" />
-        <TextBlock Grid.ColumnSpan="3" Height="101" HorizontalAlignment="Left" Margin="657,70,0,0" Name="StatusText" VerticalAlignment="Top" Width="448" Foreground="White" TextWrapping="Wrap"> 
-            <Bold>You haven't added any files to this commit yet.</Bold> <LineBreak/> To add files to a commit, select them in the Files area to the left using the lasso motion and then
-            drag them to your Commit area below. <LineBreak/><LineBreak/> <Bold>If you need help with any of the motions, or if something confuses you, simply click the question mark on the right for help. </Bold></TextBlock>
-        <my:KinectColorViewer Canvas.Left="409" Canvas.Top="236" Width="94" Height="76" Name="kinectColorViewer1" 
-                              Kinect="{Binding ElementName=kinectSensorChooser1, Path=Kinect}" DataContext="{Binding}" Margin="0,605,851,0" />
-        <my:KinectSensorChooser Canvas.Left="60" Canvas.Top="108" Name="kinectSensorChooser1" Width="267" Height="168" Visibility="Hidden" />
-        <TextBox Canvas.Left="0" Canvas.Top="39" Height="23" Name="textBox1" Width="597" Text="{Binding Path=Gesture}" BindingGroup="{Binding}" Margin="288,657,60,1" />
-        <!--<TextBox Canvas.Left="34" Canvas.Top="288" Height="23" Name="textBox2" Width="334" Visibility ="Visible" Text="{Binding Path=RightPos}" Margin="288,20,322,638" /> -->
-        <my:KinectSkeletonViewer Canvas.Left="1062" Canvas.Top="352" Name="kinectSkeletonViewer1" Height="172" Width="209" Kinect="{Binding ElementName=kinectSensorChooser1, Path=Kinect}" Margin="68,261,668,248" />
-        <InkCanvas Name="inkCanvas1" Background="Transparent" EditingMode="Select" Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="0,0,0,0" Height="720" Width="1280" Gesture="inkCanvas_Gesture_1" Panel.ZIndex="-5">
-            <Ellipse Canvas.Left="-172" Canvas.Top="68" Fill="#FF2CACE3" Name="rightEllipse" Width="30" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" Opacity="1" Stroke="White" Margin="10,10,0,0" />
-            <Image Grid.Column="2" Height="62" HorizontalAlignment="Left" Margin="177,446,0,0" Name="imageTrial" Stretch="Fill" VerticalAlignment="Top" Width="66" Source="/WpfApplication1;component/Images/TagButton.png" ImageFailed="image7_ImageFailed" />
-        </InkCanvas>
-        <Image Grid.Column="2" Height="67" HorizontalAlignment="Left" Margin="121,573,0,0" Name="CommitButton" Stretch="Fill" VerticalAlignment="Top" Width="124" Source="/WpfApplication1;component/Images/CommitButton.png" MouseEnter="CommitButton_MouseEnter" MouseLeave="CommitButton_MouseLeave"/>
-        <Label Content="Commit" Grid.Column="2" Height="30" HorizontalAlignment="Left" Margin="145,591,0,0" Name="label1" VerticalAlignment="Top" Width="75" Foreground="White" FontFamily="Calibri"  FontSize="20" IsHitTestVisible="False"/>
-    </Grid>
-
+        <Grid Name="WorkingCopy" Visibility="Collapsed">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="945*" />
+                    <ColumnDefinition Width="36*" />
+                    <ColumnDefinition Width="277*" />
+                </Grid.ColumnDefinitions>
+                <Image Height="680" HorizontalAlignment="Left" Name="WC_Background" Stretch="Fill" VerticalAlignment="Top" Width="1260" Source="/WpfApplication1;component/Images/bg.png" ImageFailed="image1_ImageFailed" Grid.ColumnSpan="3" />
+                <Image Height="640" HorizontalAlignment="Left" Margin="24,20,0,0" Name="WC_CommitBox" Stretch="Fill" VerticalAlignment="Top" Width="605" Source="/WpfApplication1;component/Images/CommitBox.png" />
+                <Image Height="212" HorizontalAlignment="Left" Margin="635,442,0,0" Name="WC_CommitBox2" Source="/WpfApplication1;component/Images/CommitBox.png" Stretch="Fill" VerticalAlignment="Top" Width="605" Grid.ColumnSpan="3" />
+                <Image Height="150" HorizontalAlignment="Left" Margin="636,30,0,0" Name="WC_StatusBoxOverlay" Stretch="Fill" VerticalAlignment="Top" Width="596" Source="/WpfApplication1;component/Images/StatusBoxOverlay1.png" Grid.ColumnSpan="3" />
+                <Image Height="150" Width="60" Margin="140,20,39,0" Name="WC_HelpIcon" Stretch="UniformToFill" VerticalAlignment="Top" Source="/WpfApplication1;component/Images/HelpIcon.png" ImageFailed="image5_ImageFailed" Grid.Column="2" />
+                <Image Height="242" HorizontalAlignment="Left" Margin="719,191,0,0" Name="MenuWorking" Stretch="UniformToFill" VerticalAlignment="Top" Width="506" Source="/WpfApplication1;component/Images/MenuWorking.png" Grid.ColumnSpan="3" ImageFailed="MenuWorking_ImageFailed" />
+                <Label Content="Files" Height="33" HorizontalAlignment="Left" Margin="34,31,0,0" Name="Files" VerticalAlignment="Top" Width="77" Foreground="White" FontFamily="Calibri" FontSize="20" />
+                <Label Content="Current Commit" FontFamily="Calibri" FontSize="20" Foreground="White" Height="33" HorizontalAlignment="Left" Margin="649,446,0,0" Name="Commit" VerticalAlignment="Top" Width="149" />
+                <Label Content="Status" FontFamily="Calibri" FontSize="20" Foreground="White" Height="33" HorizontalAlignment="Left" Margin="649,32,0,0" Name="Status" VerticalAlignment="Top" Width="77" />
+                <TextBlock Grid.ColumnSpan="3" Height="101" HorizontalAlignment="Left" Margin="657,70,0,0" Name="StatusText" VerticalAlignment="Top" Width="448" Foreground="White" TextWrapping="Wrap"> 
+                <Bold>You haven't added any files to this commit yet.</Bold> <LineBreak/> To add files to a commit, select them in the Files area to the left using the lasso motion and then
+                    drag them to your Commit area below. <LineBreak/><LineBreak/> <Bold>If you need help with any of the motions, or if something confuses you, simply click the question mark on the right for help. </Bold></TextBlock>
+                <my:KinectColorViewer Canvas.Left="409" Canvas.Top="236" Width="94" Height="76" Name="kinectColorViewer1" 
+                                      Kinect="{Binding ElementName=kinectSensorChooser1, Path=Kinect}" DataContext="{Binding}" Margin="0,605,851,0" />
+                <my:KinectSensorChooser Canvas.Left="60" Canvas.Top="108" Name="kinectSensorChooser1" Width="267" Height="168" Visibility="Hidden" />
+                <TextBox Canvas.Left="0" Canvas.Top="39" Height="23" Name="textBox1" Width="597" Text="{Binding Path=Gesture}" BindingGroup="{Binding}" Margin="288,657,60,1" />
+                <my:KinectSkeletonViewer Canvas.Left="1062" Canvas.Top="352" Name="kinectSkeletonViewer1" Height="172" Width="209" Kinect="{Binding ElementName=kinectSensorChooser1, Path=Kinect}" Margin="68,261,668,248" />
+                <InkCanvas Name="WC_inkCanvas" Background="Transparent" EditingMode="Select" Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="0,0,0,0" Height="720" Width="1280" Panel.ZIndex="-5">
+                    <Ellipse Canvas.Left="-172" Canvas.Top="68" Fill="#FF2CACE3" Name="rightEllipse" Width="30" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" Opacity="1" Stroke="White" Margin="10,10,0,0" />
+                    <Image Grid.Column="2" Height="62" HorizontalAlignment="Left" Margin="177,446,0,0" Name="imageTrial" Stretch="Fill" VerticalAlignment="Top" Width="66" Source="/WpfApplication1;component/Images/TagButton.png" ImageFailed="image7_ImageFailed" />
+                </InkCanvas>
+                <Image Grid.Column="2" Height="67" HorizontalAlignment="Left" Margin="121,573,0,0" Name="CommitButton" Stretch="Fill" VerticalAlignment="Top" Width="124" Source="/WpfApplication1;component/Images/CommitButton.png" MouseEnter="CommitButton_MouseEnter" MouseLeave="CommitButton_MouseLeave"/>
+                <Label Content="Commit" Grid.Column="2" Height="30" HorizontalAlignment="Left" Margin="145,591,0,0" Name="label1" VerticalAlignment="Top" Width="75" Foreground="White" FontFamily="Calibri"  FontSize="20" IsHitTestVisible="False"/>
+            </Grid>
+        <Grid Name="LocalRepository" Visibility="Collapsed">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="945*" />
+                    <ColumnDefinition Width="36*" />
+                    <ColumnDefinition Width="277*" />
+                </Grid.ColumnDefinitions>
+                <Image Height="680" HorizontalAlignment="Left" Name="LR_Background" Stretch="Fill" VerticalAlignment="Top" Width="1260" Source="/WpfApplication1;component/Images/bg.png" ImageFailed="image1_ImageFailed" Grid.ColumnSpan="3" />
+                <Image Height="640" HorizontalAlignment="Left" Margin="24,20,0,0" Name="LR_CommitBox" Stretch="Fill" VerticalAlignment="Top" Width="605" Source="/WpfApplication1;component/Images/CommitBox.png" MouseEnter="LR_CommitBox_MouseEnter" />
+                <Image Height="285" HorizontalAlignment="Left" Margin="582,406,0,0" Name="LR_PushButton" Source="/WpfApplication1;component/Images/PushButton.png" Stretch="Uniform" VerticalAlignment="Top" Width="640" Grid.ColumnSpan="3" />
+                <Image Height="150" HorizontalAlignment="Left" Margin="636,30,0,0" Name="LR_StatusBoxOverlay" Stretch="Fill" VerticalAlignment="Top" Width="596" Source="/WpfApplication1;component/Images/StatusBoxOverlay1.png" Grid.ColumnSpan="3" />
+                <Image Height="242" HorizontalAlignment="Left" Margin="719,191,0,0" Name="LR_MenuLocal" Stretch="UniformToFill" VerticalAlignment="Top" Width="506" Source="/WpfApplication1;component/Images/MenuLocal.png" Grid.ColumnSpan="3" />
+                <Image Name="LR_TagButton" Source="/WpfApplication1;component/Images/TagButton.png" Margin ="1050,400,0,0" Stretch="Uniform" Width="184" Canvas.Left="1057" Canvas.Top="481" />
+                <Image Height="160" Name="LR_HelpIcon" Margin ="1120,0,0,500" Stretch="UniformToFill" Source="/WpfApplication1;component/Images/HelpIcon.png" ImageFailed="image5_ImageFailed" Width="97" Canvas.Left="1134" Canvas.Top="00" />
+                <Label Content="Files" Height="33" HorizontalAlignment="Left" Margin="34,31,0,0" Name="LR_Files" VerticalAlignment="Top" Width="77" Foreground="White" FontFamily="Calibri" FontSize="20" />
+                <Label Content="Status" FontFamily="Calibri" FontSize="20" Foreground="White" Height="33" HorizontalAlignment="Left" Margin="649,32,0,0" Name="LR_Status" VerticalAlignment="Top" Width="77" />
+                <TextBlock Grid.ColumnSpan="3" Height="101" HorizontalAlignment="Left" Margin="657,70,0,0" Name="LR_StatusText" VerticalAlignment="Top" Width="448" Foreground="White" TextWrapping="Wrap"> 
+                <Bold>You've pushed!</Bold> <LineBreak/> Your remote repository's commit history is below. To return to your local repository, simply pull once on the menu. To return to your working copy, pull once.<LineBreak/><LineBreak/> <Bold>If you need help with any of the motions, or if something confuses you, simply click the question mark on the right for help. </Bold></TextBlock>
+                <InkCanvas Name="LR_inkCanvas" Background="Transparent" EditingMode="Select" Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="0,0,0,0" Height="720" Width="1280" Gesture="inkCanvas_Gesture_1" Panel.ZIndex="-5">
+                    <Image Grid.Column="2" Height="62" HorizontalAlignment="Left" Margin="177,446,0,0" Name="LR_imageTrial" Stretch="Fill" VerticalAlignment="Top" Width="66" Source="/WpfApplication1;component/Images/TagButton.png" ImageFailed="image7_ImageFailed" />
+                </InkCanvas>
+            </Grid>
+        <Grid Name="RemoteRepository" Visibility="Visible">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="945*" />
+                    <ColumnDefinition Width="36*" />
+                    <ColumnDefinition Width="277*" />
+                </Grid.ColumnDefinitions>
+                <Image Height="680" HorizontalAlignment="Left" Name="RR_Background" Stretch="Fill" VerticalAlignment="Top" Width="1260" Source="/WpfApplication1;component/Images/bg.png" ImageFailed="image1_ImageFailed" Grid.ColumnSpan="3" />
+                <Image Height="640" HorizontalAlignment="Left" Margin="24,20,0,0" Name="RR_CommitBox" Stretch="Fill" VerticalAlignment="Top" Width="605" Source="/WpfApplication1;component/Images/CommitBox.png" />
+                <Image Height="150" HorizontalAlignment="Left" Margin="636,30,0,0" Name="RR_StatusBoxOverlay" Stretch="Fill" VerticalAlignment="Top" Width="596" Source="/WpfApplication1;component/Images/StatusBoxOverlay1.png" Grid.ColumnSpan="3" />
+                <Image Height="151" Margin="290,27,0,0" Name="RR_HelpIcon" Stretch="UniformToFill" VerticalAlignment="Top" Source="/WpfApplication1;component/Images/HelpIcon.png" ImageFailed="image5_ImageFailed" Grid.Column="2" Width="84" HorizontalAlignment="Left" />
+                <Image Height="242" HorizontalAlignment="Left" Margin="719,191,0,0" Name="image6" Stretch="UniformToFill" VerticalAlignment="Top" Width="506" Source="/WpfApplication1;component/Images/MenuRemote.png" Grid.ColumnSpan="3" />
+                <Label Content="Files" Height="33" HorizontalAlignment="Left" Margin="34,31,0,0" Name="RR_Files" VerticalAlignment="Top" Width="77" Foreground="White" FontFamily="Calibri" FontSize="20" />
+                <Label Content="Status" FontFamily="Calibri" FontSize="20" Foreground="White" Height="33" HorizontalAlignment="Left" Margin="649,32,0,0" Name="RR_Status" VerticalAlignment="Top" Width="77" />
+                <TextBlock Grid.ColumnSpan="3" Height="101" HorizontalAlignment="Left" Margin="657,70,0,0" Name="RR_StatusText" VerticalAlignment="Top" Width="448" Foreground="White" TextWrapping="Wrap"> 
+                <Bold>You haven't added any files to this commit yet.</Bold> <LineBreak/> To add files to a commit, select them in the Files area to the left using the lasso motion and then
+                drag them to your Commit area below. <LineBreak/><LineBreak/> <Bold>If you need help with any of the motions, or if something confuses you, simply click the question mark on the right for help. </Bold></TextBlock>
+                <InkCanvas Name="RR_inkCanvas" Background="Transparent" EditingMode="Select" Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="0,0,0,0" Height="720" Width="1280" Gesture="inkCanvas_Gesture_1" Panel.ZIndex="-5">
+                   <Image Grid.Column="2" Height="62" HorizontalAlignment="Left" Margin="177,446,0,0" Name="RR_imageTrial" Stretch="Fill" VerticalAlignment="Top" Width="66" Source="/WpfApplication1;component/Images/TagButton.png" ImageFailed="image7_ImageFailed" />
+                </InkCanvas>
+        </Grid>
+        
+    </Canvas>
 </Window>
