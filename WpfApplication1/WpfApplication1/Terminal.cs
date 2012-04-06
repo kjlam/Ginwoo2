@@ -17,7 +17,7 @@ namespace WpfApplication1
     public class Terminal
     {
         static internal String workingDirectory = @"C:\Users\Jessica\Ginect";
-        static internal String password = "chewie#3";
+        static internal String password = "password";
 
         public Terminal()
         {
@@ -30,7 +30,7 @@ namespace WpfApplication1
             //return GitLog();
 
             // Test git status
-            return GitStatus();
+            //return GitStatus();
 
             // Test GitAddFilesToCommit()
             /*
@@ -53,18 +53,22 @@ namespace WpfApplication1
             //return GitGetLocalRepoFiles();
 
             // Test GitGetRemoteRepoFiles()
-            //return GitGetRemoteRepoFiles();
+            return GitGetRemoteRepoFiles();
         }
 
         static internal CmdReturn GitGetLocalRepoFiles()
         {
-            return ExecuteProcess(workingDirectory, "git ls-tree --full-tree -r HEAD", false);
+            CmdReturn cmdReturn = ExecuteProcess(workingDirectory, "git ls-tree --full-tree -r HEAD", false);
+            cmdReturn.fileList = ParseGetRepoFilesStdout(cmdReturn.stdout);
+            return cmdReturn;
         }
 
         static internal CmdReturn GitGetRemoteRepoFiles()
         {
             ExecuteProcess(workingDirectory, "git fetch", true);
-            return ExecuteProcess(workingDirectory, "git ls-tree --full-tree -r origin", false);
+            CmdReturn cmdReturn = ExecuteProcess(workingDirectory, "git ls-tree --full-tree -r origin", false);
+            cmdReturn.fileList = ParseGetRepoFilesStdout(cmdReturn.stdout);
+            return cmdReturn;
         }
 
         /*
@@ -161,12 +165,8 @@ namespace WpfApplication1
         static internal CmdReturn GitPush()
         {
             return ExecuteProcess(workingDirectory, "git push", true);
-
-            // TODO: Figure out if git push was executed correctly
         }
 
-        // TODO: Complete this method. Return a list of files that have been modified
-        // since the last commit
         static internal CmdReturn GitStatus()
         {
             CmdReturn cmdReturn = ExecuteProcess(workingDirectory, "git status", false);
@@ -387,6 +387,43 @@ no changes added to commit (use "git add" and/or "git commit -a")
                     if (Regex.IsMatch(line, boundaryUntrackedFiles))
                     {
                         getUntrackedFiles = true;
+                    }
+                }
+            }
+            return fileList;
+        }
+
+        /*
+         * 160000 commit 21b748f4bf92e961c54d9ed88ea7ad4274ced939  Ginect
+100644 blob e69de29bb2d1d6434b8b29ae775ad8c2e48c5391    README
+100644 blob e69de29bb2d1d6434b8b29ae775ad8c2e48c5391    RJW.txt
+100644 blob 274078a236dedec1236aa71c496883317dab9272    jessica.txt
+100644 blob bd077e1ada14f475ade4f6e1426bb3768295e26b    jessica2.txt
+100644 blob f1f0540097947db8f9864eb310b79b9b8bb39219    jessica3.txt
+100644 blob 2a7efc2606b912cbac3bb9f3f1015acbec5d2658    jessica4.txt
+100644 blob e69de29bb2d1d6434b8b29ae775ad8c2e48c5391    klam.txt
+100644 blob e69de29bb2d1d6434b8b29ae775ad8c2e48c5391    push.txt
+         * */
+        static private List<String> ParseGetRepoFilesStdout(String stdout)
+        {
+            List<String> fileList = new List<String>();
+
+            Regex regex = new Regex(@"^\S+\s+(\S+)\s+\S+\s+(\S+)\s*$");
+
+            using (StringReader reader = new StringReader(stdout))
+            {
+                string line;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    Match m = regex.Match(line);
+                    if (m.Success)
+                    {
+                        Group g1 = m.Groups[1];
+                        Group g2 = m.Groups[2];
+                        if (g1.Success && g2.Success && g1.Value != "commit")
+                        {
+                            fileList.Add(g2.Value);
+                        }
                     }
                 }
             }
