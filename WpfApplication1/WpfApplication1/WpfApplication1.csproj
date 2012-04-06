@@ -75,6 +75,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="CmdReturn.cs" />
+    <Compile Include="LassoDrag.cs" />
     <Compile Include="LocalRepository.xaml.cs">
       <DependentUpon>LocalRepository.xaml</DependentUpon>
     </Compile>
@@ -157,6 +158,13 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\PushButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\CommitButtonHover.png" />
+    <Resource Include="Images\HelpIconHover.png" />
+    <Resource Include="Images\MenuHover.png" />
+    <Resource Include="Images\PushButtonHover.png" />
+    <Resource Include="Images\TagButtonHover.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

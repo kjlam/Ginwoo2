@@ -671,11 +671,19 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
                 }
                 //TODO: Select action (check if hand positions within directory area
                 textBox.Gesture += "SELECTED";
+                //lasso completed when select is activated again (hands touch again for the interval)
                 if (selectActivated)
                 {
                     selectActivated = false;
                     mouseLeftUp();
+                    getSelectedFiles();
+                    inkCanvas1.EditingMode = InkCanvasEditingMode.None;
+                    System.Windows.Controls.Image draggingImage = drawCommitBox();
+                    System.Windows.Forms.Cursor.Position = new System.Drawing.Point((int)InkCanvas.GetLeft(draggingImage), (int)InkCanvas.GetTop(draggingImage));
+                    mouseLeftDown();
+                    //TODO: mouseleftUp() when mouse cursor reaches commit box
                 }
+                //lasso start
                 else if (!selectActivated)
                 {
                     selectActivated = true;

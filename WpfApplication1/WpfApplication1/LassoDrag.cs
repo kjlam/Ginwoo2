@@ -49,7 +49,7 @@ namespace WpfApplication1
             selectTimer.Interval = new TimeSpan(0, 0, 1);
             dispatcherTimer.Interval = new TimeSpan(0, 0, 2);
             waitTimer.Interval = new TimeSpan(0, 0, 1);
-            DIRECTORY = @"c:\\Users\\Roh\\Desktop\\TestFolder";
+            DIRECTORY = @"c:\\Users\\LeonDaVinci\\Desktop\\";
             MAX_FILE_DISPLAY_COUNT = 16;
 
             // get the files into the arraylist from the directory info
@@ -262,7 +262,7 @@ namespace WpfApplication1
 
 
         // METHOD: this method draws the commit box area. It first redraws the file system before drawing
-        private void drawCommitBox()
+        private System.Windows.Controls.Image drawCommitBox()
         {
 
             drawFileSystem();
@@ -330,7 +330,7 @@ namespace WpfApplication1
                 inkCanvas1.Children.Add(selectedFileImages[i]);
                 inkCanvas1.Children.Add(selectedFileTextBlocks[i]);
             }
-
+            return selectedFileImages[0];
         }
 
         // METHOD

@@ -62,5 +62,25 @@ namespace WpfApplication1
         {
 
         }
+
+        private void CommitButton_MouseEnter(object sender, MouseEventArgs e)
+        {
+            BitmapImage logo = new BitmapImage();
+            logo.BeginInit();
+            logo.UriSource = new Uri("pack://application:,,,/WpfApplication1;component/Images/CommitButtonHover.png");
+            logo.EndInit();
+
+            CommitButton.Source = logo;
+        }
+
+        private void CommitButton_MouseLeave(object sender, MouseEventArgs e)
+        {
+            BitmapImage logo = new BitmapImage();
+            logo.BeginInit();
+            logo.UriSource = new Uri("pack://application:,,,/WpfApplication1;component/Images/CommitButton.png");
+            logo.EndInit();
+
+            CommitButton.Source = logo;
+        }
     }
 }

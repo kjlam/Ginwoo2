@@ -31,12 +31,12 @@
         <TextBox Canvas.Left="0" Canvas.Top="39" Height="23" Name="textBox1" Width="597" Text="{Binding Path=Gesture}" BindingGroup="{Binding}" Margin="288,657,60,1" />
         <!--<TextBox Canvas.Left="34" Canvas.Top="288" Height="23" Name="textBox2" Width="334" Visibility ="Visible" Text="{Binding Path=RightPos}" Margin="288,20,322,638" /> -->
         <my:KinectSkeletonViewer Canvas.Left="1062" Canvas.Top="352" Name="kinectSkeletonViewer1" Height="172" Width="209" Kinect="{Binding ElementName=kinectSensorChooser1, Path=Kinect}" Margin="68,261,668,248" />
-        <InkCanvas Name="inkCanvas" Background="Transparent" EditingMode="Select" Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="0,0,0,0" Height="720" Width="1280" Gesture="inkCanvas_Gesture_1" Panel.ZIndex="-5">
+        <InkCanvas Name="inkCanvas1" Background="Transparent" EditingMode="Select" Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="0,0,0,0" Height="720" Width="1280" Gesture="inkCanvas_Gesture_1" Panel.ZIndex="-5">
             <Ellipse Canvas.Left="-172" Canvas.Top="68" Fill="#FF2CACE3" Name="rightEllipse" Width="30" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" Opacity="1" Stroke="White" Margin="10,10,0,0" />
             <Image Grid.Column="2" Height="62" HorizontalAlignment="Left" Margin="177,446,0,0" Name="imageTrial" Stretch="Fill" VerticalAlignment="Top" Width="66" Source="/WpfApplication1;component/Images/TagButton.png" ImageFailed="image7_ImageFailed" />
         </InkCanvas>
-        <Image Grid.Column="2" Height="67" HorizontalAlignment="Left" Margin="121,573,0,0" Name="image8" Stretch="Fill" VerticalAlignment="Top" Width="124" Source="/WpfApplication1;component/Images/CommitButton.png" />
-        <Label Content="Commit" Grid.Column="2" Height="30" HorizontalAlignment="Left" Margin="145,591,0,0" Name="label1" VerticalAlignment="Top" Width="75" Foreground="White" FontFamily="Calibri" FontSize="20" />
+        <Image Grid.Column="2" Height="67" HorizontalAlignment="Left" Margin="121,573,0,0" Name="CommitButton" Stretch="Fill" VerticalAlignment="Top" Width="124" Source="/WpfApplication1;component/Images/CommitButton.png" MouseEnter="CommitButton_MouseEnter" MouseLeave="CommitButton_MouseLeave"/>
+        <Label Content="Commit" Grid.Column="2" Height="30" HorizontalAlignment="Left" Margin="145,591,0,0" Name="label1" VerticalAlignment="Top" Width="75" Foreground="White" FontFamily="Calibri"  FontSize="20" IsHitTestVisible="False"/>
     </Grid>
 
 </Window>
