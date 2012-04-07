@@ -18,6 +18,8 @@ using Microsoft.Speech.AudioFormat;
 using Microsoft.Speech.Recognition;
 using System.Threading;
 using Coding4Fun.Kinect.Wpf;
+using System.Drawing;
+using System.IO;
 
 namespace WpfApplication1
 {
@@ -119,24 +121,30 @@ namespace WpfApplication1
         {
             WorkingCopy.Visibility = Visibility.Collapsed;
             LocalRepository.Visibility = Visibility.Visible;
+            drawLocalRepository();
         }
 
         private void LR_MenuLocal_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             LocalRepository.Visibility = Visibility.Collapsed;
             RemoteRepository.Visibility = Visibility.Visible;
+            drawRemoteRepository();
         }
 
         private void LR_MenuLocal_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
             LocalRepository.Visibility = Visibility.Collapsed;
             WorkingCopy.Visibility = Visibility.Visible;
+            drawFileSystem();
         }
 
         private void image6_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
             RemoteRepository.Visibility = Visibility.Collapsed;
             LocalRepository.Visibility = Visibility.Visible;
+            //todo rename to RR_Menu
+            drawLocalRepository();
+            
         }
 
         private void CommitButton_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -155,6 +163,9 @@ namespace WpfApplication1
             //TODO: tag icon image needed, tag icon pops up, speech recognition starts
             //Terminal.GitTagLatestCommit(tagName);
         }
+
+        //TODO: git pull figure out area of fie system and pull
+
 
 
     }
