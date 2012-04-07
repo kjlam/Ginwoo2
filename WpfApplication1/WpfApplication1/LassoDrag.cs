@@ -57,7 +57,11 @@ namespace WpfApplication1
             fileCount = files.Length;
             icons = new Icon[fileCount];
 
+            /*
             // inkCanvas is initially set to select mode that allows lassoing
+            WC_inkCanvas.EditingMode = InkCanvasEditingMode.Select;
+            */
+
             WC_inkCanvas.EditingMode = InkCanvasEditingMode.Select;
 
             // initializethe images and textBlocks arraylist to contain the respective items

@@ -106,9 +106,12 @@ namespace WpfApplication1
         bool push = false;
         bool pushable = true;
         bool back = false;
+        bool actionWait = false;
         double[] RHPos = new double[2];
         bool selectActivated = false;
+        bool tagIconActivated = false;
         private string tagName = "";
+        private bool lassoFilesDragging = false;
 
     #region mouseEmulation
     [DllImport("user32.dll")]
@@ -325,8 +328,16 @@ namespace WpfApplication1
                 skeletonValues[7] = headDepthPoint.Y;
                 skeletonValues[8] = headDepthPoint.Depth;
                 storedSkeletonValues.Add(skeletonValues);
-                CheckSwipe(e);
-                CheckStatic(e);
+                System.Windows.Forms.Cursor.Position = new System.Drawing.Point((int)RHPos[0], (int)RHPos[1]);
+                if (!actionWait)
+                {
+                    CheckSwipe(e);
+                    CheckStatic(e);
+                    if (lassoFilesDragging)
+                    {
+                        CheckCommitBoxZone();
+                    }
+                }
             }
             GetCameraPoint(first, e);
             if (selectActivated)
@@ -338,10 +349,11 @@ namespace WpfApplication1
         void SelectTimer_Root(object sender, EventArgs e)
         {
             //TODO: Do somethign as user has started lasso
-
+            actionWait = false;
 
             if (selectTimer.Interval == new TimeSpan(0, 0, 1))
             {
+                
                 selectTimer.Stop();
             }
         }
@@ -497,59 +509,63 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
             string[] output = e.Result.Text.Split();
 
             //switch (output[0].ToUpperInvariant())
-            //TODO: actions that will be performed for each grammar
+            //TODO: actions that will be performed for each grammar, need tagbox so i can make it invisible and not hit testvisible when tagicon not activated
             string result = e.Result.Semantics["Words"].Value.ToString().ToUpperInvariant();
-            switch (result)
+            if (tagIconActivated)
             {
-                case "CANCEL":
-                    textBox.Gesture += "";
-                    tagName = "";
-                    //call function to get rid of the tagBox
-                    break;
-                case "RESET":
-                    textBox.Gesture += "";
-                    tagName = "";
-                    break;
-                case "DONE":
-                    //call git tag function with the tagName string
-                    break;
-                case "HELLO WORLD":
-                    textBox.Gesture += "HELLO World";
-                    break;
-                case "a":
-                case "b":
-                case "c":
-                case "d":
-                case "e":
-                case "f":
-                case "g":
-                case "h":
-                case "i":
-                case "j":
-                case "k":
-                case "l":
-                case "m":
-                case "n":
-                case "o":
-                case "p":
-                case "q":
-                case "r":
-                case "s":
-                case "t":
-                case "u":
-                case "v":
-                case "w":
-                case "x":
-                case "y":
-                case "z":
-                    string letter =  result.ToLowerInvariant();
-                    textBox.Gesture += letter;
-                    tagName += letter;
-                    break;
-                default:
-                    break;
+                switch (result)
+                {
+                    case "CANCEL":
+                        textBox.Gesture += "";
+                        tagName = "";
+                        tagIconActivated = false;
+                        //call function to get rid of the tagBox
+                        break;
+                    case "RESET":
+                        textBox.Gesture += "";
+                        tagName = "";
+                        break;
+                    case "DONE":
+                        //call git tag function with the tagName string
+                        tagIconActivated = false;
+                        break;
+                    case "HELLO WORLD":
+                        textBox.Gesture += "HELLO World";
+                        break;
+                    case "a":
+                    case "b":
+                    case "c":
+                    case "d":
+                    case "e":
+                    case "f":
+                    case "g":
+                    case "h":
+                    case "i":
+                    case "j":
+                    case "k":
+                    case "l":
+                    case "m":
+                    case "n":
+                    case "o":
+                    case "p":
+                    case "q":
+                    case "r":
+                    case "s":
+                    case "t":
+                    case "u":
+                    case "v":
+                    case "w":
+                    case "x":
+                    case "y":
+                    case "z":
+                        string letter = result.ToLowerInvariant();
+                        textBox.Gesture += letter;
+                        tagName += letter;
+                        break;
+                    default:
+                        break;
+                }
             }
-
             //switch (output[1].ToUpperInvariant())
 
             var audioSource = this.kinect.AudioSource;
@@ -572,13 +588,13 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
         #endregion
         void CheckSwipe(AllFramesReadyEventArgs e)
         {
-            if (storedSkeletonValues.Count >= 180)
+            if (storedSkeletonValues.Count >= 45)
             {
                 //arrays: index 0 is x values, index 1 is y values, and index 2 is z values
                 float[] LHCounter = new float[3] { 0, 0, 0 };
                 float[] RHCounter = new float[3] { 0, 0, 0 };
-                float[] LHThreshold = new float[3] { 8, 25, 20 };
-                float[] RHThreshold = new float[3] { 8, 25, 200 };
+                float[] LHThreshold = new float[3] { 25, 25, 20 };
+                float[] RHThreshold = new float[3] { 25, 25, 75 };
                 int skeletonListCount = storedSkeletonValues.Count;
                 bool posZChange = true;
 
@@ -626,15 +642,19 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
                     }
                     if (RHCounter[0] < RHThreshold[0] && RHCounter[1] < RHThreshold[1])
                     {
+                        actionWait = true;
+                        selectTimer.Start();
                         if (RHCounter[2] > RHThreshold[2])
                         {
                             //TODO: push registered
                             textBox.Gesture += "Push Registered";
+                            KinectPush();
                         }
                         else if (RHCounter[2] < -RHThreshold[2])
                         {
                             //TODO: pull registered
                             textBox.Gesture += "Pull Registered";
+                            KinectPull();
                         }
                     }
                     else
@@ -650,7 +670,7 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
 
         void CheckStatic(AllFramesReadyEventArgs e)
         {
-            int numFrames = 45;
+            int numFrames = 60;
             if (storedSkeletonValues.Count > numFrames)
             {
                 //selectThreshold: how far the left and right hands can be and still register as a select
@@ -670,27 +690,68 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
                 }
                 //TODO: Select action (check if hand positions within directory area
                 textBox.Gesture += "SELECTED";
+                actionWait = true;
+                selectTimer.Start();
                 //lasso completed when select is activated again (hands touch again for the interval)
                 if (selectActivated)
                 {
                     selectActivated = false;
-                    mouseLeftUp();
+                    mouseLeftClick();
                     getSelectedFiles();
                     WC_inkCanvas.EditingMode = InkCanvasEditingMode.None;
-                    System.Windows.Controls.Image draggingImage = drawCommitBox();
-                    System.Windows.Forms.Cursor.Position = new System.Drawing.Point((int)InkCanvas.GetLeft(draggingImage), (int)InkCanvas.GetTop(draggingImage));
+                    //System.Windows.Controls.Image draggingImage  = getSelectedFiles();
+                    //System.Windows.Controls.Image draggingImage = drawCommitBox();
+                    //System.Windows.Forms.Cursor.Position = new System.Drawing.Point((int)InkCanvas.GetLeft(draggingImage), (int)InkCanvas.GetTop(draggingImage));
                     mouseLeftDown();
-                    //TODO: mouseleftUp() when mouse cursor reaches commit box
+                    //TODO: Fix Dragging
                 }
                 //lasso start
                 else if (!selectActivated)
                 {
+                    WC_inkCanvas.EditingMode = InkCanvasEditingMode.Select;
                     selectActivated = true;
                     mouseLeftDown();
                 }
             }
         }
 
+        private void CheckCommitBoxZone(){
+            if (RHPos[0] >= WC_CommitBox2.Margin.Left && RHPos[0] <= (WC_CommitBox2.Margin.Left + WC_CommitBox2.Width))
+            {
+                if (RHPos[1] <= WC_CommitBox2.Margin.Top && RHPos[1] >= (WC_CommitBox2.Margin.Top - WC_CommitBox2.Height))
+                {
+                    lassoFilesDragging = false;
+                    drawCommitBox();
+                    //TODO: call add to commit;
+                }
+            }
+        }
+
+        static void KinectPush()
+        {
+            mouseLeftClick();
+        }
+
+        static void KinectPull()
+        {
+            mouseRightClick();   
+        }
+
+        static void mouseLeftClick()
+        {
+            INPUT Input = new INPUT();
+            Input.type = SendInputEventType.InputMouse;
+            Input.mi.dwFlags = MouseEventFlags.LEFTDOWN |MouseEventFlags.LEFTUP;
+            SendInput(1, ref Input, Marshal.SizeOf(new INPUT()));
+        }
+
+        static void mouseRightClick()
+        {
+            INPUT Input = new INPUT();
+            Input.type = SendInputEventType.InputMouse;
+            Input.mi.dwFlags = MouseEventFlags.RIGHTDOWN | MouseEventFlags.RIGHTUP;
+            SendInput(1, ref Input, Marshal.SizeOf(new INPUT()));
+        }
         static void mouseLeftDown()
         {
               INPUT    Input= new INPUT();
@@ -699,14 +760,7 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
               SendInput(1,ref Input,Marshal.SizeOf(new INPUT()));
         }
 
-        static void mouseLeftUp()
-        {
-            INPUT Input = new INPUT();
-            Input.type = SendInputEventType.InputMouse;
-            Input.mi.dwFlags = MouseEventFlags.LEFTUP;
-            SendInput(1, ref Input, Marshal.SizeOf(new INPUT()));
-        }
-        
+
         void FollowPointer()
         {
 

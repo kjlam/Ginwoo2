@@ -108,5 +108,54 @@ namespace WpfApplication1
 
         }
 
+        private void WC_CommitBox_ImageFailed(object sender, ExceptionRoutedEventArgs e)
+        {
+
+        }
+
+        //Menu navigation: LeftClick represents push, RightClick represents pull
+
+        private void MenuWorking_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            WorkingCopy.Visibility = Visibility.Collapsed;
+            LocalRepository.Visibility = Visibility.Visible;
+        }
+
+        private void LR_MenuLocal_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            LocalRepository.Visibility = Visibility.Collapsed;
+            RemoteRepository.Visibility = Visibility.Visible;
+        }
+
+        private void LR_MenuLocal_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            LocalRepository.Visibility = Visibility.Collapsed;
+            WorkingCopy.Visibility = Visibility.Visible;
+        }
+
+        private void image6_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            RemoteRepository.Visibility = Visibility.Collapsed;
+            LocalRepository.Visibility = Visibility.Visible;
+        }
+
+        private void CommitButton_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            //TODO: figure out wut message to put in git commit, maybe just number counter
+            Terminal.GitCommitWithMessage("Trial");
+        }
+
+        private void LR_PushButton_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Terminal.GitPush();
+        }
+
+        private void LR_TagButton_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            //TODO: tag icon image needed, tag icon pops up, speech recognition starts
+            //Terminal.GitTagLatestCommit(tagName);
+        }
+
+
     }
 }
