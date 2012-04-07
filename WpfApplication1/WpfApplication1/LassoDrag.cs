@@ -48,7 +48,7 @@ namespace WpfApplication1
             selectTimer.Interval = new TimeSpan(0, 0, 1);
             dispatcherTimer.Interval = new TimeSpan(0, 0, 2);
             waitTimer.Interval = new TimeSpan(0, 0, 1);
-            DIRECTORY = @"c:\\";
+            DIRECTORY = @"c:\\Users\\LeonDaVinci\\Ginect";
             MAX_FILE_DISPLAY_COUNT = 16;
 
             // get the files into the arraylist from the directory info
@@ -391,6 +391,219 @@ namespace WpfApplication1
                 deltaLeft[i] = InkCanvas.GetLeft(selectedImages[i]);
                 deltaTop[i] = InkCanvas.GetTop(selectedImages[i]);
             }
+        }
+
+        //TODO: delete old list of files when calling method again;
+        private void drawLocalRepository()
+        {
+            CmdReturn localRepositoryList = Terminal.GitGetLocalRepoFiles();
+            //TODO: uncomment to enable git file list 
+            List<String> lrList = localRepositoryList.fileList;
+            Console.WriteLine(lrList[0]);
+            LR_inkCanvas.Children.Clear();
+
+            /*
+            List<String> lrList = new List<string>();
+
+            lrList.Add("one.cs");
+            lrList.Add("two.pdf");
+            lrList.Add("three.doc");
+            lrList.Add("four.txt");
+            lrList.Add("five.psp");
+            lrList.Add("six.ppt");
+            lrList.Add("seven.docx");
+            lrList.Add("eight.txt");
+
+            */
+
+            int count = lrList.Count;
+
+            System.Windows.Controls.Image[] images = new System.Windows.Controls.Image[count];
+            System.Windows.Controls.TextBlock[] textBlocks = new TextBlock[count];
+
+            for (int i = 0; i < count; i++)
+            {
+                images[i] = new System.Windows.Controls.Image();
+                textBlocks[i] = new TextBlock();
+            }
+            
+
+
+
+            // TOGGLE THESE VALUES FOR DISPLAYING:
+            int IMAGE_WIDTH = 40;                       // Width of image?
+            int IMAGE_HEIGHT = 40;                      // Height of image?
+            int INITIAL_TOP_MARGIN = 100;               // initial top margin of files displayed
+            int INITIAL_LEFT_MARGIN = 100;               // initial left margin
+            int ROW = 6;                                // How many rows to be displayed?
+            int COLUMN = 5;                             // How many columns to be displayed?
+            int HORIZONTAL_SPACING = 120;               // horizontal spacing between each icon
+            int VERTICAL_SPACING = 100;                 // vertical spacing between each icon
+
+            // for all the files
+            for (int i = 0; i < count; i++)
+            {
+
+                String filename = lrList[i];
+                FileInfo temp = new FileInfo(filename);
+                String extension = temp.Extension.ToString();
+
+                //Console.WriteLine(filename + " " + extension);
+
+                Icon icon = IconReader.GetFileIcon(extension, IconReader.IconSize.Large, false);
+
+                // do complicated shit to get the image into bImag
+                MemoryStream ms = new MemoryStream();
+                System.Drawing.Bitmap dImg = icon.ToBitmap();
+                dImg.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+                System.Windows.Media.Imaging.BitmapImage bImg = new System.Windows.Media.Imaging.BitmapImage();
+                bImg.BeginInit();
+                bImg.StreamSource = new MemoryStream(ms.ToArray());
+                bImg.EndInit();
+
+                // settings for images
+                images[i].Source = bImg;
+                images[i].Height = IMAGE_HEIGHT;
+                images[i].Width = IMAGE_WIDTH;
+
+                // settings for textblocks
+                textBlocks[i].Text = filename;
+                textBlocks[i].Foreground = new SolidColorBrush(Colors.White);
+                textBlocks[i].Background = new SolidColorBrush(Colors.Black);
+                textBlocks[i].Width = IMAGE_WIDTH * 2;
+                textBlocks[i].TextAlignment = TextAlignment.Center;
+
+                // place the image and the textblocks on the inkCanvas
+                System.Windows.Controls.InkCanvas.SetTop(images[i], (i / COLUMN) * HORIZONTAL_SPACING + INITIAL_TOP_MARGIN);
+                System.Windows.Controls.InkCanvas.SetTop(textBlocks[i], (i / COLUMN) * HORIZONTAL_SPACING + INITIAL_TOP_MARGIN + IMAGE_HEIGHT + 10);
+
+                System.Windows.Controls.InkCanvas.SetLeft(images[i], (i % (ROW - 1)) * VERTICAL_SPACING + INITIAL_LEFT_MARGIN);
+                System.Windows.Controls.InkCanvas.SetLeft(textBlocks[i], (i % (ROW - 1)) * VERTICAL_SPACING + INITIAL_LEFT_MARGIN - 20);
+
+                // Add IT! AWW YEAAA
+                LR_inkCanvas.Children.Add(images[i]);
+                LR_inkCanvas.Children.Add(textBlocks[i]);
+            }
+
+        }
+
+        private void drawRemoteRepository()
+        {
+            CmdReturn remoteRepositoryList = Terminal.GitGetRemoteRepoFiles();
+            //List<String> rrList = remoteRepositoryList.fileList;
+            RR_inkCanvas.Children.Clear();
+
+            List<String> rrList = new List<string>();
+
+            rrList.Add("one.cs");
+            rrList.Add("two.pdf");
+            rrList.Add("three.doc");
+            rrList.Add("four.txt");
+            rrList.Add("five.psp");
+            rrList.Add("six.ppt");
+            rrList.Add("seven.docx");
+            rrList.Add("eight.txt");
+
+            int count = rrList.Count;
+
+            System.Windows.Controls.Image[] images = new System.Windows.Controls.Image[count];
+            System.Windows.Controls.TextBlock[] textBlocks = new TextBlock[count];
+
+            for (int i = 0; i < count; i++)
+            {
+                images[i] = new System.Windows.Controls.Image();
+                textBlocks[i] = new TextBlock();
+            }
+
+
+
+
+            // TOGGLE THESE VALUES FOR DISPLAYING:
+            int IMAGE_WIDTH = 40;                       // Width of image?
+            int IMAGE_HEIGHT = 40;                      // Height of image?
+            int INITIAL_TOP_MARGIN = 100;               // initial top margin of files displayed
+            int INITIAL_LEFT_MARGIN = 100;               // initial left margin
+            int ROW = 6;                                // How many rows to be displayed?
+            int COLUMN = 5;                             // How many columns to be displayed?
+            int HORIZONTAL_SPACING = 120;               // horizontal spacing between each icon
+            int VERTICAL_SPACING = 100;                 // vertical spacing between each icon
+
+            // for all the files
+            for (int i = 0; i < count; i++)
+            {
+
+                String filename = rrList[i];
+                FileInfo temp = new FileInfo(filename);
+                String extension = temp.Extension.ToString();
+
+                //Console.WriteLine(filename + " " + extension);
+
+                Icon icon = IconReader.GetFileIcon(extension, IconReader.IconSize.Large, false);
+
+                // do complicated shit to get the image into bImag
+                MemoryStream ms = new MemoryStream();
+                System.Drawing.Bitmap dImg = icon.ToBitmap();
+                dImg.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+                System.Windows.Media.Imaging.BitmapImage bImg = new System.Windows.Media.Imaging.BitmapImage();
+                bImg.BeginInit();
+                bImg.StreamSource = new MemoryStream(ms.ToArray());
+                bImg.EndInit();
+
+                // settings for images
+                images[i].Source = bImg;
+                images[i].Height = IMAGE_HEIGHT;
+                images[i].Width = IMAGE_WIDTH;
+
+                // settings for textblocks
+                textBlocks[i].Text = filename;
+                textBlocks[i].Foreground = new SolidColorBrush(Colors.White);
+                textBlocks[i].Background = new SolidColorBrush(Colors.Black);
+                textBlocks[i].Width = IMAGE_WIDTH * 2;
+                textBlocks[i].TextAlignment = TextAlignment.Center;
+
+                // place the image and the textblocks on the inkCanvas
+                System.Windows.Controls.InkCanvas.SetTop(images[i], (i / COLUMN) * HORIZONTAL_SPACING + INITIAL_TOP_MARGIN);
+                System.Windows.Controls.InkCanvas.SetTop(textBlocks[i], (i / COLUMN) * HORIZONTAL_SPACING + INITIAL_TOP_MARGIN + IMAGE_HEIGHT + 10);
+
+                System.Windows.Controls.InkCanvas.SetLeft(images[i], (i % (ROW - 1)) * VERTICAL_SPACING + INITIAL_LEFT_MARGIN);
+                System.Windows.Controls.InkCanvas.SetLeft(textBlocks[i], (i % (ROW - 1)) * VERTICAL_SPACING + INITIAL_LEFT_MARGIN - 20);
+
+                // Add IT! AWW YEAAA
+                RR_inkCanvas.Children.Add(images[i]);
+                RR_inkCanvas.Children.Add(textBlocks[i]);
+
+            }
+        }
+
+        /* METHOD: Parameters:  x coordinate
+         *                      y coordinate 
+         * 
+         * Returns: The nearest image from the specified coordiate
+         */
+        private System.Windows.Controls.Image findNearestImage(double x, double y)
+        {
+            System.Windows.Controls.Image output = new System.Windows.Controls.Image();
+            double currentBest = -1;
+
+            for (int i = 0; i < selectedImages.Count(); i++)
+            {
+                double left = InkCanvas.GetLeft(selectedImages[i]);
+                double top = InkCanvas.GetTop(selectedImages[i]);
+
+                double distance = Math.Sqrt(Math.Pow(left - x, 2) + Math.Pow(top - y, 2));
+
+                if (currentBest == -1)
+                {
+                    currentBest = distance;
+                    output = selectedImages[i];
+                }
+                else if (distance < currentBest)
+                {
+                    currentBest = distance;
+                    output = selectedImages[i];
+                }
+            }
+            return output;
         }
 
         private void button1_Click(object sender, RoutedEventArgs e)

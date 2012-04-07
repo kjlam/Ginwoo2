@@ -75,6 +75,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="CmdReturn.cs" />
+    <Compile Include="IconHelper.cs" />
     <Compile Include="LassoDrag.cs" />
     <Compile Include="LocalRepository.xaml.cs">
       <DependentUpon>LocalRepository.xaml</DependentUpon>
