@@ -398,11 +398,11 @@ namespace WpfApplication1
         {
             CmdReturn localRepositoryList = Terminal.GitGetLocalRepoFiles();
             //TODO: uncomment to enable git file list 
-            List<String> lrList = localRepositoryList.fileList;
-            Console.WriteLine(lrList[0]);
+           // List<String> lrList = localRepositoryList.fileList;
+           // Console.WriteLine(lrList[0]);
             LR_inkCanvas.Children.Clear();
 
-            /*
+            
             List<String> lrList = new List<string>();
 
             lrList.Add("one.cs");
@@ -414,7 +414,7 @@ namespace WpfApplication1
             lrList.Add("seven.docx");
             lrList.Add("eight.txt");
 
-            */
+            
 
             int count = lrList.Count;
 
