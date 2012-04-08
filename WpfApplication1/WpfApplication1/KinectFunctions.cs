@@ -109,6 +109,7 @@ namespace WpfApplication1
         bool actionWait = false;
         double[] RHPos = new double[2];
         float[] RHSensitivity = new float[2]{0.3f,0.3f};
+        int[] CursorDisplacement = new int[2] {-150, -300 };
         bool selectActivated = false;
         bool tagIconActivated = false;
         private string tagName = "";
@@ -333,10 +334,10 @@ namespace WpfApplication1
                 {
                     CheckSwipe(e);
                     CheckStatic(e);
-                    if (lassoFilesDragging)
-                    {
-                        CursorInCommitBoxZone();
-                    }
+                }
+                if (lassoFilesDragging)
+                {
+                    CursorInCommitBoxZone();
                 }
             }
             GetCameraPoint(first, e);
@@ -688,7 +689,7 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
 
         void CheckStatic(AllFramesReadyEventArgs e)
         {
-            int numFrames = 60;
+            int numFrames = 45;
             if (storedSkeletonValues.Count > numFrames)
             {
                 //selectThreshold: how far the left and right hands can be and still register as a select
@@ -722,7 +723,7 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
                     getSelectedFiles();
                     WC_inkCanvas.EditingMode = InkCanvasEditingMode.None;
                     //System.Windows.Controls.Image draggingImage  = getSelectedFiles();
-                    System.Windows.Controls.Image draggingImage = findNearestImage(RHPos[0], RHPos[1]);
+                    System.Windows.Controls.Image draggingImage = findNearestImage(System.Windows.Forms.Cursor.Position.X, System.Windows.Forms.Cursor.Position.Y);
                     System.Windows.Forms.Cursor.Position = new System.Drawing.Point((int)InkCanvas.GetLeft(draggingImage), (int)InkCanvas.GetTop(draggingImage));
                     mouseLeftDown();
                     //TODO: Fix Dragging
@@ -907,8 +908,8 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
              
             //convert & scale (.3 = means 1/3 of joint distance)
             Joint scaledJoint = joint.ScaleTo(1366, 768, RHSensitivity[0], RHSensitivity[1]);
-            Canvas.SetLeft(element, scaledJoint.Position.X-element.Width/2 - 150);
-            Canvas.SetTop(element, scaledJoint.Position.Y-element.Height/2 - 300);
+            Canvas.SetLeft(element, scaledJoint.Position.X-element.Width/2 + CursorDisplacement[0]);
+            Canvas.SetTop(element, scaledJoint.Position.Y-element.Height/2 + CursorDisplacement[1]);
             textBox.RightPos = (int)scaledJoint.Position.X + " " + (int)scaledJoint.Position.Y + "\n";
             RHPos[0] = scaledJoint.Position.X;
             RHPos[1] = scaledJoint.Position.Y;
