@@ -522,6 +522,7 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
                         textBox.Gesture += "";
                         tagName = "";
                         tagIconActivated = false;
+                        hideTagSection();
                         //call function to get rid of the tagBox
                         break;
                     case "RESET":
@@ -530,6 +531,10 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
                         break;
                     case "DONE":
                         //call git tag function with the tagName string
+                        Terminal.GitTagLatestCommit(tagName);
+                        TaggedText.Visibility = Visibility.Visible;
+                        CommitedText.Visibility = Visibility.Collapsed;
+                        hideTagSection();
                         tagIconActivated = false;
                         break;
                     case "HELLO WORLD":
@@ -564,6 +569,7 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
                         string letter = result.ToLowerInvariant();
                         textBox.Gesture += letter;
                         tagName += letter;
+                        TagNameTextBlock.Text = tagName;
                         break;
                     default:
                         break;

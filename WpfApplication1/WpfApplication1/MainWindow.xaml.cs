@@ -234,13 +234,22 @@ namespace WpfApplication1
 
         private void CommitButton_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            //TODO: figure out wut message to put in git commit, maybe just number counter
+            //TODO: figure out wut message to put in git commit, maybe just number counter, resets status message in working 
             Terminal.GitCommitWithMessage("Default Message");
+            switchToLocalRepository();
+            AddedFilesText.Visibility = Visibility.Collapsed;
+            NoAddedFilesText.Visibility = Visibility.Visible;
+            CommitedText.Visibility = Visibility.Visible;
         }
 
         private void LR_PushButton_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             Terminal.GitPush();
+            switchToRemoteRepository();
+            TaggedText.Visibility = Visibility.Collapsed;
+            CommitedText.Visibility = Visibility.Collapsed;
+            PushedText.Visibility = Visibility.Visible;
+
         }
 
         private void LR_TagButton_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -248,8 +257,7 @@ namespace WpfApplication1
             //TODO: tag icon image needed, tag icon pops up, speech recognition starts
             showTagSection();
             tagIconActivated = true;
-            Terminal.GitTagLatestCommit(tagName);
-            hideTagSection();
+
         }
 
         private void switchToWorkingCopy()
@@ -275,7 +283,7 @@ namespace WpfApplication1
         private void showTagSection()
         {
             TagBlock1.Visibility = Visibility.Visible;
-            TagBlock2.Visibility = Visibility.Visible;
+            TagNameTextBlock.Visibility = Visibility.Visible;
             TagLabel.Visibility = Visibility.Visible;
             TagLabel2.Visibility = Visibility.Visible;
         }
@@ -283,7 +291,7 @@ namespace WpfApplication1
         private void hideTagSection()
         {
             TagBlock1.Visibility = Visibility.Collapsed;
-            TagBlock2.Visibility = Visibility.Collapsed;
+            TagNameTextBlock.Visibility = Visibility.Collapsed;
             TagLabel.Visibility = Visibility.Collapsed;
             TagLabel2.Visibility = Visibility.Collapsed;
             
@@ -321,6 +329,8 @@ namespace WpfApplication1
                     drawCommitBox();
                     //TODO: make sure commit works
                     Terminal.GitAddFilesToCommit(selectedFileNames);
+                    AddedFilesText.Visibility = Visibility.Visible;
+                    NoAddedFilesText.Visibility = Visibility.Visible;
                     mouseLeftClick();
                 }
             }
