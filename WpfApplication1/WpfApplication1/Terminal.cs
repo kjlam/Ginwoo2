@@ -184,17 +184,17 @@ namespace WpfApplication1
             Process process = new System.Diagnostics.Process();
             ProcessStartInfo startInfo = new ProcessStartInfo();
 
-            if (needToInputPassword)
+            /*if (needToInputPassword)
             {
                 // The terminal is displayed, only used for sending the password to the terminal.
                 // As in, can't find a way to hide the window AND send the password successfully.
                 startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Maximized;
             }
             else
-            {
+            {*/
                 // Make it so the terminal isn't displayed on the screen when executing commands
                 startInfo.CreateNoWindow = true;
-            }
+            //}
 
             // The cmd terminal
             startInfo.FileName = "cmd.exe";
@@ -218,10 +218,10 @@ namespace WpfApplication1
                 Console.WriteLine("Process: {0} ID: {1} MainWindowHandle: {2}", process.ProcessName, process.Id, process.MainWindowHandle);
             }
 
-            if (needToInputPassword)
+            /*if (needToInputPassword)
             {
                 cmdReturn.inputSuccess = SendPasswordToStdin();
-            }
+            }*/
 
             cmdReturn.stdout = ParseStdOut(process.StandardOutput.ReadToEnd());
             process.WaitForExit();
