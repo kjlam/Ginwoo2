@@ -83,11 +83,11 @@
                 </InkCanvas>
             
             
-            <Rectangle Fill="Black" Height="240" HorizontalAlignment="Left" Margin="638,178,0,0" Name="TagRectangle" Opacity="0.9" Panel.ZIndex="0" Stroke="Black" VerticalAlignment="Top" Width="594" Grid.ColumnSpan="3" Visibility="Hidden" />
-            <Label FontFamily ="Calibri" Foreground ="White" FontSize="20" Height="37" HorizontalAlignment="Left" Margin="651,188,0,0" Name="TagLabel" VerticalAlignment="Top" Width="75" Content="Tagging" Visibility="Hidden" />
-            <TextBlock Foreground="White" Grid.ColumnSpan="3" Height="78" HorizontalAlignment="Left" Margin="658,227,0,0" Name="TagBlock1" VerticalAlignment="Top" Width="557" Visibility ="hidden" TextWrapping="Wrap"><Bold>To tag your last commit, you will use this speech interface.</Bold><LineBreak/><LineBreak/> Clearly spell out your desired tag name. When you are satisfied with your tag name, say <Bold>"finished."</Bold> To reset your tag name and start over, say <Bold>"reset."</Bold> To cancel your tag, say <Bold>"cancel."</Bold></TextBlock>
-            <TextBox Grid.ColumnSpan="3" Height="30" HorizontalAlignment="Left" Margin="776,324,0,0" Name="TagNameTextBlock" VerticalAlignment="Top" Width="329" Visibility="Hidden" />
-            <Label Foreground="White" FontSize="20" Content="Tag:" Height="47" HorizontalAlignment="Left" Margin="719,321,0,0" Name="TagLabel2" VerticalAlignment="Top" Width="46" Visibility="Hidden"/>
+            <Rectangle Fill="Black" Height="240" HorizontalAlignment="Left" Margin="638,178,0,0" Name="TagRectangle" Opacity="0.9" Panel.ZIndex="3" Stroke="Black" VerticalAlignment="Top" Width="594" Grid.ColumnSpan="3" Visibility="Hidden"/>
+            <Label FontFamily ="Calibri" Foreground ="White" FontSize="20" Height="37" HorizontalAlignment="Left" Margin="651,188,0,0" Name="TagLabel" VerticalAlignment="Top" Width="75" Content="Tagging" Visibility="Hidden" Panel.ZIndex="3"/>
+            <TextBlock Foreground="White" Grid.ColumnSpan="3" Height="78" HorizontalAlignment="Left" Margin="658,227,0,0" Name="TagBlock1" VerticalAlignment="Top" Width="557" Visibility ="hidden" Panel.ZIndex="3" TextWrapping="Wrap"><Bold>To tag your last commit, you will use this speech interface.</Bold><LineBreak/><LineBreak/> Clearly spell out your desired tag name. When you are satisfied with your tag name, say <Bold>"finished."</Bold> To reset your tag name and start over, say <Bold>"reset."</Bold> To cancel your tag, say <Bold>"cancel."</Bold></TextBlock>
+            <TextBox Grid.ColumnSpan="3" Height="30" HorizontalAlignment="Left" Margin="776,324,0,0" Name="TagNameTextBlock" VerticalAlignment="Top" Width="329" Visibility="Hidden" Panel.ZIndex="3"/>
+            <Label Foreground="White" FontSize="20" Content="Tag:" Height="47" HorizontalAlignment="Left" Margin="719,321,0,0" Name="TagLabel2" VerticalAlignment="Top" Width="46" Visibility="Hidden" Panel.ZIndex="3"/>
             
             
         </Grid>

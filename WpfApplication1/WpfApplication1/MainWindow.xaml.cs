@@ -282,6 +282,7 @@ namespace WpfApplication1
 
         private void showTagSection()
         {
+            TagRectangle.Visibility = Visibility.Visible;
             TagBlock1.Visibility = Visibility.Visible;
             TagNameTextBlock.Visibility = Visibility.Visible;
             TagLabel.Visibility = Visibility.Visible;
@@ -290,6 +291,7 @@ namespace WpfApplication1
 
         private void hideTagSection()
         {
+            TagRectangle.Visibility = Visibility.Collapsed;
             TagBlock1.Visibility = Visibility.Collapsed;
             TagNameTextBlock.Visibility = Visibility.Collapsed;
             TagLabel.Visibility = Visibility.Collapsed;
