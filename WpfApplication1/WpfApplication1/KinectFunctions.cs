@@ -108,6 +108,8 @@ namespace WpfApplication1
         bool back = false;
         bool actionWait = false;
         double[] RHPos = new double[2];
+        float[] RHSensitivity = new float[2]{0.3f,0.3f};
+        int[] CursorDisplacement = new int[2] {-150, -300 };
         bool selectActivated = false;
         bool tagIconActivated = false;
         private string tagName = "";
@@ -304,7 +306,7 @@ namespace WpfApplication1
             //set scaled position
             //ScalePosition(headImage, first.Joints[JointType.Head]);
             //ScalePosition(leftEllipse, first.Joints[JointType.HandLeft]);
-            ScalePosition(rightEllipse, first.Joints[JointType.HandRight]);
+            ScalePosition(Cursor, first.Joints[JointType.HandRight]);
             textBox.Gesture = "Gesture: ";
             using (DepthImageFrame depth = e.OpenDepthImageFrame())
             {
@@ -332,17 +334,21 @@ namespace WpfApplication1
                 {
                     CheckSwipe(e);
                     CheckStatic(e);
-                    if (lassoFilesDragging)
-                    {
-                        CheckCommitBoxZone();
-                    }
+                }
+                if (lassoFilesDragging)
+                {
+                    myimg_MouseMove();
+                    CursorInCommitBoxZone();
                 }
             }
             GetCameraPoint(first, e);
-            if (selectActivated)
+            /*if (selectActivated)
             {
                 FollowPointer();
             }
+             * */
+
+            FollowPointer();
         }
 
         void SelectTimer_Root(object sender, EventArgs e)
@@ -518,6 +524,7 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
                         textBox.Gesture += "";
                         tagName = "";
                         tagIconActivated = false;
+                        hideTagSection();
                         //call function to get rid of the tagBox
                         break;
                     case "RESET":
@@ -526,40 +533,46 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
                         break;
                     case "DONE":
                         //call git tag function with the tagName string
+                        Terminal.GitTagLatestCommit(tagName);
+                        TaggedText.Visibility = Visibility.Visible;
+                        CommitedText.Visibility = Visibility.Collapsed;
+                        hideTagSection();
                         tagIconActivated = false;
                         break;
                     case "HELLO WORLD":
                         textBox.Gesture += "HELLO World";
                         break;
-                    case "a":
-                    case "b":
-                    case "c":
-                    case "d":
-                    case "e":
-                    case "f":
-                    case "g":
-                    case "h":
-                    case "i":
-                    case "j":
-                    case "k":
-                    case "l":
-                    case "m":
-                    case "n":
-                    case "o":
-                    case "p":
-                    case "q":
-                    case "r":
-                    case "s":
-                    case "t":
-                    case "u":
-                    case "v":
-                    case "w":
-                    case "x":
-                    case "y":
-                    case "z":
+                    case "A":
+                    case "B":
+                    case "C":
+                    case "D":
+                    case "E":
+                    case "F":
+                    case "G":
+                    case "H":
+                    case "I":
+                    case "J":
+                    case "K":
+                    case "L":
+                    case "M":
+                    case "N":
+                    case "O":
+                    case "P":
+                    case "Q":
+                    case "R":
+                    case "S":
+                    case "T":
+                    case "U":
+                    case "V":
+                    case "W":
+                    case "X":
+                    case "Y":
+                    case "Z":
                         string letter = result.ToLowerInvariant();
                         textBox.Gesture += letter;
                         tagName += letter;
+                        Console.WriteLine(tagName + "\n");
+                        TagNameTextBlock.Text = tagName;
                         break;
                     default:
                         break;
@@ -592,8 +605,8 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
                 //arrays: index 0 is x values, index 1 is y values, and index 2 is z values
                 float[] LHCounter = new float[3] { 0, 0, 0 };
                 float[] RHCounter = new float[3] { 0, 0, 0 };
-                float[] LHThreshold = new float[3] { 25, 25, 20 };
-                float[] RHThreshold = new float[3] { 25, 25, 75 };
+                float[] LHThreshold = new float[3] { 25, 25, 75 };
+                float[] RHThreshold = new float[3] { 25, 25, 20 };
                 int skeletonListCount = storedSkeletonValues.Count;
                 bool posZChange = true;
 
@@ -615,47 +628,48 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
                     {
                         if (k == 2)
                         {
-                            if (posZChange && rightDifference[k] < 0)
+                            if (posZChange && leftDifference[k] < 0)
                             {
                                 posZChange = false;
-                                RHCounter[k] = 0;
+                                LHCounter[k] = 0;
                             }
-                            else if (!posZChange && rightDifference[k] > 0)
+                            else if (!posZChange && leftDifference[k] > 0)
                             {
                                 posZChange = true;
-                                RHCounter[k] = 0;
+                                LHCounter[k] = 0;
                             }
                         }
-                        LHCounter[k] += leftDifference[k];
-                        //if left hand moved too far away, reset possible push recognition; otherwise, increase the right hand counters
-                        if (LHCounter[k] > LHThreshold[k])
+                        RHCounter[k] += rightDifference[k];
+                        //if right hand moved too far away, reset possible push recognition; otherwise, increase the left hand counters
+                        if (RHCounter[k] > RHThreshold[k])
                         {
-                            RHCounter[0] = 0;
-                            RHCounter[1] = 0;
-                            RHCounter[2] = 0;
+                            LHCounter[0] = 0;
+                            LHCounter[1] = 0;
+                            LHCounter[2] = 0;
                         }
                         else
                         {
-                            RHCounter[k] += rightDifference[k];
+                            LHCounter[k] += leftDifference[k];
                         }
                     }
-                    if (RHCounter[0] < RHThreshold[0] && RHCounter[1] < RHThreshold[1])
+                    if (LHCounter[0] < LHThreshold[0] && LHCounter[1] < LHThreshold[1])
                     {
                         actionWait = true;
                         selectTimer.Start();
-                        if (RHCounter[2] > RHThreshold[2])
+                        if (LHCounter[2] > LHThreshold[2])
                         {
                             //TODO: push registered
                             textBox.Gesture += "Push Registered";
                             KinectPush();
                         }
-                        else if (RHCounter[2] < -RHThreshold[2])
+                        else if (LHCounter[2] < -LHThreshold[2])
                         {
                             //TODO: pull registered
                             textBox.Gesture += "Pull Registered";
                             if (CursorInDirectoryArea())
                             {
-                                //TODO: git pull would be caled her, but currently no function
+                                //TODO: git pull would be caled her, but currently no function, and switch to working mode
+                                //switchToWorkingMode();
                             }
                             else
                             {
@@ -665,9 +679,9 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
                     }
                     else
                     {
-                        RHCounter[0] = 0;
-                        RHCounter[1] = 0;
-                        RHCounter[2] = 0;
+                        LHCounter[0] = 0;
+                        LHCounter[1] = 0;
+                        LHCounter[2] = 0;
                     }
 
                 }
@@ -676,7 +690,7 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
 
         void CheckStatic(AllFramesReadyEventArgs e)
         {
-            int numFrames = 60;
+            int numFrames = 45;
             if (storedSkeletonValues.Count > numFrames)
             {
                 //selectThreshold: how far the left and right hands can be and still register as a select
@@ -699,36 +713,32 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
                 actionWait = true;
                 selectTimer.Start();
                 //lasso completed when select is activated again (hands touch again for the interval)
+                //lasso completed, so change cursor senitivity back to original
                 if (selectActivated)
                 {
                     selectActivated = false;
+                    lassoFilesDragging = true;
+                    RHSensitivity[0] = 0.3f;
+                    RHSensitivity[1] = 0.3f;
                     mouseLeftClick();
                     getSelectedFiles();
                     WC_inkCanvas.EditingMode = InkCanvasEditingMode.None;
                     //System.Windows.Controls.Image draggingImage  = getSelectedFiles();
-                    //System.Windows.Controls.Image draggingImage = drawCommitBox();
+                    //System.Windows.Controls.Image draggingImage = findNearestImage(System.Windows.Forms.Cursor.Position.X, System.Windows.Forms.Cursor.Position.Y);
                     //System.Windows.Forms.Cursor.Position = new System.Drawing.Point((int)InkCanvas.GetLeft(draggingImage), (int)InkCanvas.GetTop(draggingImage));
-                    mouseLeftDown();
+                    //mouseLeftDown();
+                    myimg_MouseDown();
                     //TODO: Fix Dragging
                 }
                 //lasso start
+                //Decrease sensitivity to improve accuracy of lassoing, and move the cursor to the closest image of the mouse to move the set of images
                 else if (!selectActivated)
                 {
+                    RHSensitivity[0] = 0.6f;
+                    RHSensitivity[1] = 0.6f;
                     WC_inkCanvas.EditingMode = InkCanvasEditingMode.Select;
                     selectActivated = true;
                     mouseLeftDown();
-                }
-            }
-        }
-
-        private void CheckCommitBoxZone(){
-            if (RHPos[0] >= WC_CommitBox2.Margin.Left && RHPos[0] <= (WC_CommitBox2.Margin.Left + WC_CommitBox2.Width))
-            {
-                if (RHPos[1] <= WC_CommitBox2.Margin.Top && RHPos[1] >= (WC_CommitBox2.Margin.Top - WC_CommitBox2.Height))
-                {
-                    lassoFilesDragging = false;
-                    drawCommitBox();
-                    //TODO: call add to commit;
                 }
             }
         }
@@ -899,12 +909,12 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
             //Joint scaledJoint = joint.ScaleTo(1280, 720); 
              
             //convert & scale (.3 = means 1/3 of joint distance)
-            Joint scaledJoint = joint.ScaleTo(1280, 720, 0.3f, 0.3f);
-            InkCanvas.SetLeft(element, scaledJoint.Position.X-element.Width/2);
-            InkCanvas.SetTop(element, scaledJoint.Position.Y-element.Height/2);
+            Joint scaledJoint = joint.ScaleTo(1366, 768, RHSensitivity[0], RHSensitivity[1]);
+            Canvas.SetLeft(element, scaledJoint.Position.X-element.Width/2 + CursorDisplacement[0]);
+            Canvas.SetTop(element, scaledJoint.Position.Y-element.Height/2 + CursorDisplacement[1]);
             textBox.RightPos = (int)scaledJoint.Position.X + " " + (int)scaledJoint.Position.Y + "\n";
-            RHPos[0] = scaledJoint.Position.X - element.Width/2;
-            RHPos[1] = scaledJoint.Position.Y - element.Height/2;
+            RHPos[0] = scaledJoint.Position.X;
+            RHPos[1] = scaledJoint.Position.Y;
         }
 
     }

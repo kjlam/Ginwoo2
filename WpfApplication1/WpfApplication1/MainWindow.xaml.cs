@@ -107,6 +107,36 @@ namespace WpfApplication1
             LR_TagButton.Source = LoadImage("pack://application:,,,/WpfApplication1;component/Images/TagButton.png");
         }
 
+        private void WC_HelpIcon_MouseEnter(object sender, MouseEventArgs e)
+        {
+            WC_HelpIcon.Source = LoadImage("pack://application:,,,/WpfApplication1;component/Images/HelpIconHover.png");
+        }
+
+        private void WC_HelpIcon_MouseLeave(object sender, MouseEventArgs e)
+        {
+            WC_HelpIcon.Source = LoadImage("pack://application:,,,/WpfApplication1;component/Images/HelpIcon.png");
+        }
+
+        private void LR_HelpIcon_MouseEnter(object sender, MouseEventArgs e)
+        {
+            LR_HelpIcon.Source = LoadImage("pack://application:,,,/WpfApplication1;component/Images/HelpIconHover.png");
+        }
+
+        private void LR_HelpIcon_MouseLeave(object sender, MouseEventArgs e)
+        {
+            LR_HelpIcon.Source = LoadImage("pack://application:,,,/WpfApplication1;component/Images/HelpIcon.png");
+        }
+
+        private void RR_HelpIcon_MouseEnter(object sender, MouseEventArgs e)
+        {
+            RR_HelpIcon.Source = LoadImage("pack://application:,,,/WpfApplication1;component/Images/HelpIconHover.png");
+        }
+
+        private void RR_HelpIcon_MouseLeave(object sender, MouseEventArgs e)
+        {
+            RR_HelpIcon.Source = LoadImage("pack://application:,,,/WpfApplication1;component/Images/HelpIcon.png");
+        }
+
 
         private void MenuWorking_MouseEnter_1(object sender, MouseEventArgs e)
         {
@@ -204,13 +234,22 @@ namespace WpfApplication1
 
         private void CommitButton_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            //TODO: figure out wut message to put in git commit, maybe just number counter
+            //TODO: figure out wut message to put in git commit, maybe just number counter, resets status message in working 
             Terminal.GitCommitWithMessage("Default Message");
+            switchToLocalRepository();
+            AddedFilesText.Visibility = Visibility.Collapsed;
+            NoAddedFilesText.Visibility = Visibility.Visible;
+            CommitedText.Visibility = Visibility.Visible;
         }
 
         private void LR_PushButton_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             Terminal.GitPush();
+            switchToRemoteRepository();
+            TaggedText.Visibility = Visibility.Collapsed;
+            CommitedText.Visibility = Visibility.Collapsed;
+            PushedText.Visibility = Visibility.Visible;
+
         }
 
         private void LR_TagButton_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -218,8 +257,7 @@ namespace WpfApplication1
             //TODO: tag icon image needed, tag icon pops up, speech recognition starts
             showTagSection();
             tagIconActivated = true;
-            Terminal.GitTagLatestCommit(tagName);
-            hideTagSection();
+
         }
 
         private void switchToWorkingCopy()
@@ -244,22 +282,23 @@ namespace WpfApplication1
 
         private void showTagSection()
         {
+            TagRectangle.Visibility = Visibility.Visible;
             TagBlock1.Visibility = Visibility.Visible;
-            TagBlock2.Visibility = Visibility.Visible;
+            TagNameTextBlock.Visibility = Visibility.Visible;
             TagLabel.Visibility = Visibility.Visible;
             TagLabel2.Visibility = Visibility.Visible;
         }
 
         private void hideTagSection()
         {
+            TagRectangle.Visibility = Visibility.Collapsed;
             TagBlock1.Visibility = Visibility.Collapsed;
-            TagBlock2.Visibility = Visibility.Collapsed;
+            TagNameTextBlock.Visibility = Visibility.Collapsed;
             TagLabel.Visibility = Visibility.Collapsed;
             TagLabel2.Visibility = Visibility.Collapsed;
             
         }
 
-        //TODO: git pull figure out areas of directory system, switch to working mode
         /*
          * CursorInDirectoryArea()
          * 
@@ -275,6 +314,30 @@ namespace WpfApplication1
                 return false;
 
         }
+
+
+        /*
+         * CursorInCommitBox()
+         * 
+         * Checks if cursor is in commitbox area, if so then drawcommitbox and add files to commit
+        */
+        private void CursorInCommitBoxZone()
+        {
+            if (RHPos[0] >= WC_CommitBox.Margin.Left && RHPos[0] <= (WC_CommitBox.Margin.Left + WC_CommitBox.Width))
+            {
+                if (RHPos[1] <= WC_CommitBox.Margin.Top && RHPos[1] >= (WC_CommitBox.Margin.Top - WC_CommitBox.Height))
+                {
+                    lassoFilesDragging = false;
+                    drawCommitBox();
+                    //TODO: make sure commit works
+                    Terminal.GitAddFilesToCommit(selectedFileNames);
+                    AddedFilesText.Visibility = Visibility.Visible;
+                    NoAddedFilesText.Visibility = Visibility.Visible;
+                    mouseLeftClick();
+                }
+            }
+        }
+
         
     }
 }

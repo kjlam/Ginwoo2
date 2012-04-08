@@ -50,7 +50,7 @@ namespace WpfApplication1
             waitTimer.Interval = new TimeSpan(0, 0, 1);
             DIRECTORY = @"C:\\Users\\Benj\\Desktop\\CS 160\\Ginect\\";
             MAX_FILE_DISPLAY_COUNT = 16;
-
+            selectedFileNames = new List<string>();
             // get the files into the arraylist from the directory info
             DirectoryInfo directoryInfo = new DirectoryInfo(DIRECTORY);
             files = directoryInfo.GetFiles();
@@ -177,9 +177,9 @@ namespace WpfApplication1
 
                         selectedImages[index].Opacity = IMAGE_OPACITY_VALUE;
 
-                        selectedImages[index].PreviewMouseDown += new MouseButtonEventHandler(myimg_MouseDown);
-                        selectedImages[index].PreviewMouseMove += new MouseEventHandler(myimg_MouseMove);
-                        selectedImages[index].PreviewMouseUp += new MouseButtonEventHandler(myimg_MouseUp);
+                        //selectedImages[index].PreviewMouseDown += new MouseButtonEventHandler(myimg_MouseDown);
+                        //selectedImages[index].PreviewMouseMove += new MouseEventHandler(myimg_MouseMove);
+                        //selectedImages[index].PreviewMouseUp += new MouseButtonEventHandler(myimg_MouseUp);
 
                         selectedFileNames.Add(files[j].Name);
 
@@ -267,7 +267,7 @@ namespace WpfApplication1
 
 
         // METHOD: this method draws the commit box area. It first redraws the file system before drawing
-        private System.Windows.Controls.Image drawCommitBox()
+        private void drawCommitBox()
         {
 
             drawFileSystem();
@@ -335,7 +335,7 @@ namespace WpfApplication1
                 WC_inkCanvas.Children.Add(selectedFileImages[i]);
                 WC_inkCanvas.Children.Add(selectedFileTextBlocks[i]);
             }
-            return selectedFileImages[0];
+
         }
 
         // METHOD
@@ -345,21 +345,23 @@ namespace WpfApplication1
 
         }
 
-
+        //TODO: instead of having mouse drag, just have the images follow the mouse/cursor around , not sure if myImg_MouseUp needed now 
         void myimg_MouseUp(object sender, MouseButtonEventArgs e)
         {
             ((System.Windows.Controls.Image)sender).ReleaseMouseCapture();
 
         }
 
-        void myimg_MouseMove(object sender, MouseEventArgs e)
+        void myimg_MouseMove()
         {
 
-            if (((System.Windows.Controls.Image)sender).IsMouseCaptured)
-            {
-                System.Windows.Point mouseCurrent = e.GetPosition(null);
-                double Left = mouseCurrent.X;
-                double Top = mouseCurrent.Y;
+           // if (((System.Windows.Controls.Image)sender).IsMouseCaptured)
+            //{
+                //System.Windows.Point mouseCurrent = e.GetPosition(null);
+                //double Left = mouseCurrent.X;
+                //double Top = mouseCurrent.Y;
+            double left = System.Windows.Forms.Cursor.Position.X;
+            double tpo = System.Windows.Forms.Cursor.Position.Y;
 
                 for (int i = 0; i < selectedImages.Count(); i++)
                 {
@@ -372,16 +374,20 @@ namespace WpfApplication1
                     selectedTextBlocks[i].SetValue(InkCanvas.LeftProperty, SOFUKCINGCOLD - 20);
                     selectedTextBlocks[i].SetValue(InkCanvas.TopProperty, IHATETHISPROJ + 40 + 10);
                 }
-            }
+           // }
         }
 
-        void myimg_MouseDown(object sender, MouseButtonEventArgs e)
+        void myimg_MouseDown()
         {
-            mouseClick = e.GetPosition(null);
-            ((System.Windows.Controls.Image)sender).CaptureMouse();
+            //mouseClick = e.GetPosition(null);
+            System.Windows.Controls.Image nearestImage = findNearestImage(System.Windows.Forms.Cursor.Position.X, System.Windows.Forms.Cursor.Position.Y);
+            //((System.Windows.Controls.Image)sender).CaptureMouse();
 
-            baseTop = InkCanvas.GetTop(((System.Windows.Controls.Image)sender));
-            baseLeft = InkCanvas.GetLeft(((System.Windows.Controls.Image)sender));
+            //baseTop = InkCanvas.GetTop(((System.Windows.Controls.Image)sender));
+            //baseLeft = InkCanvas.GetLeft(((System.Windows.Controls.Image)sender));
+
+            baseTop = InkCanvas.GetTop(nearestImage);
+            baseLeft = InkCanvas.GetLeft(nearestImage);
 
             deltaLeft = new double[selectedImages.Count()];
             deltaTop = new double[selectedImages.Count()];
@@ -612,14 +618,10 @@ namespace WpfApplication1
             return output;
         }
 
-        private void button1_Click(object sender, RoutedEventArgs e)
-        {
-            drawCommitBox();
-        }
 
-        private void button2_Click(object sender, RoutedEventArgs e)
+        private void button4_Click(object sender, RoutedEventArgs e)
         {
-            WC_inkCanvas.EditingMode = InkCanvasEditingMode.Select;
+            getSelectedFiles();
         }
 
         private void button3_Click(object sender, RoutedEventArgs e)
@@ -627,10 +629,18 @@ namespace WpfApplication1
             WC_inkCanvas.EditingMode = InkCanvasEditingMode.None;
         }
 
-        private void button4_Click(object sender, RoutedEventArgs e)
+        private void button2_Click(object sender, RoutedEventArgs e)
         {
-            getSelectedFiles();
+            WC_inkCanvas.EditingMode = InkCanvasEditingMode.Select;
         }
+
+        private void button1_Click(object sender, RoutedEventArgs e)
+        {
+            drawCommitBox();
+        }
+
+
+ 
 
 
     }
