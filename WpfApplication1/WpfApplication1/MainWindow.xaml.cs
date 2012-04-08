@@ -119,9 +119,9 @@ namespace WpfApplication1
 
         private void MenuWorking_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            drawLocalRepository();
             WorkingCopy.Visibility = Visibility.Collapsed;
             LocalRepository.Visibility = Visibility.Visible;
-            drawLocalRepository();
         }
 
         private void LR_MenuLocal_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -138,7 +138,7 @@ namespace WpfApplication1
             drawFileSystem();
         }
 
-        private void image6_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        private void RR_MenuRemote_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
             RemoteRepository.Visibility = Visibility.Collapsed;
             LocalRepository.Visibility = Visibility.Visible;
@@ -150,7 +150,7 @@ namespace WpfApplication1
         private void CommitButton_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             //TODO: figure out wut message to put in git commit, maybe just number counter
-            Terminal.GitCommitWithMessage("Trial");
+            Terminal.GitCommitWithMessage("Default Message");
         }
 
         private void LR_PushButton_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -161,11 +161,46 @@ namespace WpfApplication1
         private void LR_TagButton_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             //TODO: tag icon image needed, tag icon pops up, speech recognition starts
-            //Terminal.GitTagLatestCommit(tagName);
+            showTagSection();
+            tagIconActivated = true;
+            Terminal.GitTagLatestCommit(tagName);
+            hideTagSection();
         }
 
-        //TODO: git pull figure out area of fie system and pull
 
+        private void showTagSection()
+        {
+            TagBlock1.Visibility = Visibility.Visible;
+            TagBlock2.Visibility = Visibility.Visible;
+            TagLabel.Visibility = Visibility.Visible;
+            TagLabel2.Visibility = Visibility.Visible;
+        }
+
+        private void hideTagSection()
+        {
+            TagBlock1.Visibility = Visibility.Collapsed;
+            TagBlock2.Visibility = Visibility.Collapsed;
+            TagLabel.Visibility = Visibility.Collapsed;
+            TagLabel2.Visibility = Visibility.Collapsed;
+            
+        }
+
+        //TODO: git pull figure out areas of directory system, switch to working mode
+        /*
+         * CursorInDirectoryArea()
+         * 
+         *Checks if cursor is in the directory area, if so return true, else return false
+         */
+        private bool CursorInDirectoryArea()
+        {
+            if (RHPos[0] > WC_Directory.Margin.Left && RHPos[0] < (WC_Directory.Margin.Left + WC_Directory.Width))
+            {
+                if (RHPos[1] < WC_Directory.Margin.Top && RHPos[1] > (WC_Directory.Margin.Top - WC_Directory.Height))
+                    return true;
+            }
+                return false;
+
+        }
 
 
     }
