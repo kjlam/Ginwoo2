@@ -215,7 +215,8 @@ namespace WpfApplication1
             Process[] processlist = Process.GetProcesses();
             foreach (Process theprocess in processlist)
             {
-                Console.WriteLine("Process: {0} ID: {1} MainWindowHandle: {2}", process.ProcessName, process.Id, process.MainWindowHandle);
+                //todo: uncomment this
+                //Console.WriteLine("Process: {0} ID: {1} MainWindowHandle: {2}", process.ProcessName, process.Id, process.MainWindowHandle);
             }
 
             /*if (needToInputPassword)

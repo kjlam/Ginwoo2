@@ -62,7 +62,7 @@ namespace WpfApplication1
             WC_inkCanvas.EditingMode = InkCanvasEditingMode.Select;
             */
 
-            WC_inkCanvas.EditingMode = InkCanvasEditingMode.Select;
+            WC_inkCanvas.EditingMode = InkCanvasEditingMode.None;
 
             // initializethe images and textBlocks arraylist to contain the respective items
             images = new System.Windows.Controls.Image[fileCount];
@@ -177,9 +177,9 @@ namespace WpfApplication1
 
                         selectedImages[index].Opacity = IMAGE_OPACITY_VALUE;
 
-                        //selectedImages[index].PreviewMouseDown += new MouseButtonEventHandler(myimg_MouseDown);
-                        //selectedImages[index].PreviewMouseMove += new MouseEventHandler(myimg_MouseMove);
-                        //selectedImages[index].PreviewMouseUp += new MouseButtonEventHandler(myimg_MouseUp);
+                        selectedImages[index].PreviewMouseDown += new MouseButtonEventHandler(myimg_MouseDown);
+                        selectedImages[index].PreviewMouseMove += new MouseEventHandler(myimg_MouseMove);
+                        selectedImages[index].PreviewMouseUp += new MouseButtonEventHandler(myimg_MouseUp);
 
                         selectedFileNames.Add(files[j].Name);
 
@@ -352,7 +352,7 @@ namespace WpfApplication1
 
         }
 
-        void myimg_MouseMove()
+        void myimg_MouseMove(object sender, MouseEventArgs e)
         {
 
            // if (((System.Windows.Controls.Image)sender).IsMouseCaptured)
@@ -360,13 +360,13 @@ namespace WpfApplication1
                 //System.Windows.Point mouseCurrent = e.GetPosition(null);
                 //double Left = mouseCurrent.X;
                 //double Top = mouseCurrent.Y;
-            double left = System.Windows.Forms.Cursor.Position.X;
-            double tpo = System.Windows.Forms.Cursor.Position.Y;
+            double CursorLeft = System.Windows.Forms.Cursor.Position.X;
+            double CursorTop = System.Windows.Forms.Cursor.Position.Y;
 
                 for (int i = 0; i < selectedImages.Count(); i++)
                 {
-                    selectedImages[i].SetValue(InkCanvas.LeftProperty, (Left - (baseLeft - deltaLeft[i])));
-                    selectedImages[i].SetValue(InkCanvas.TopProperty, (Top - (baseTop - deltaTop[i])));
+                    selectedImages[i].SetValue(InkCanvas.LeftProperty, (CursorLeft - (baseLeft - deltaLeft[i])));
+                    selectedImages[i].SetValue(InkCanvas.TopProperty, (CursorTop - (baseTop - deltaTop[i])));
 
                     double SOFUKCINGCOLD = InkCanvas.GetLeft(selectedImages[i]);
                     double IHATETHISPROJ = InkCanvas.GetTop(selectedImages[i]);
@@ -377,7 +377,9 @@ namespace WpfApplication1
            // }
         }
 
-        void myimg_MouseDown()
+
+        //void myimg_MouseDown()
+        void myimg_MouseDown(object sender, MouseButtonEventArgs e)
         {
             //mouseClick = e.GetPosition(null);
             System.Windows.Controls.Image nearestImage = findNearestImage(System.Windows.Forms.Cursor.Position.X, System.Windows.Forms.Cursor.Position.Y);
@@ -385,7 +387,7 @@ namespace WpfApplication1
 
             //baseTop = InkCanvas.GetTop(((System.Windows.Controls.Image)sender));
             //baseLeft = InkCanvas.GetLeft(((System.Windows.Controls.Image)sender));
-
+            Console.WriteLine(nearestImage.Name);
             baseTop = InkCanvas.GetTop(nearestImage);
             baseLeft = InkCanvas.GetLeft(nearestImage);
 

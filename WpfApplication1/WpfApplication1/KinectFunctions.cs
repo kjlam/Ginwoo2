@@ -337,7 +337,8 @@ namespace WpfApplication1
                 }
                 if (lassoFilesDragging)
                 {
-                    myimg_MouseMove();
+                    //Console.WriteLine("lassofiles dragging");
+                    //myimg_MouseMove();
                     CursorInCommitBoxZone();
                 }
             }
@@ -722,20 +723,20 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
                     RHSensitivity[1] = 0.3f;
                     mouseLeftClick();
                     getSelectedFiles();
-                    WC_inkCanvas.EditingMode = InkCanvasEditingMode.None;
+                    //Console.WriteLine("selectactivated");
                     //System.Windows.Controls.Image draggingImage  = getSelectedFiles();
                     //System.Windows.Controls.Image draggingImage = findNearestImage(System.Windows.Forms.Cursor.Position.X, System.Windows.Forms.Cursor.Position.Y);
                     //System.Windows.Forms.Cursor.Position = new System.Drawing.Point((int)InkCanvas.GetLeft(draggingImage), (int)InkCanvas.GetTop(draggingImage));
                     //mouseLeftDown();
-                    myimg_MouseDown();
+                    //myimg_MouseDown();
                     //TODO: Fix Dragging
                 }
                 //lasso start
                 //Decrease sensitivity to improve accuracy of lassoing, and move the cursor to the closest image of the mouse to move the set of images
                 else if (!selectActivated)
                 {
-                    RHSensitivity[0] = 0.6f;
-                    RHSensitivity[1] = 0.6f;
+                    RHSensitivity[0] = 0.3f;
+                    RHSensitivity[1] = 0.3f;
                     WC_inkCanvas.EditingMode = InkCanvasEditingMode.Select;
                     selectActivated = true;
                     mouseLeftDown();
