@@ -245,6 +245,7 @@ namespace WpfApplication1
         private void LR_PushButton_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             Terminal.GitPush();
+            drawRemoteRepository();
             switchToRemoteRepository();
             TaggedText.Visibility = Visibility.Collapsed;
             CommitedText.Visibility = Visibility.Collapsed;
