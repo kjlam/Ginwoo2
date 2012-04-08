@@ -304,7 +304,7 @@ namespace WpfApplication1
             //set scaled position
             //ScalePosition(headImage, first.Joints[JointType.Head]);
             //ScalePosition(leftEllipse, first.Joints[JointType.HandLeft]);
-            ScalePosition(rightEllipse, first.Joints[JointType.HandRight]);
+            ScalePosition(Cursor, first.Joints[JointType.HandRight]);
             textBox.Gesture = "Gesture: ";
             using (DepthImageFrame depth = e.OpenDepthImageFrame())
             {
@@ -592,8 +592,8 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
                 //arrays: index 0 is x values, index 1 is y values, and index 2 is z values
                 float[] LHCounter = new float[3] { 0, 0, 0 };
                 float[] RHCounter = new float[3] { 0, 0, 0 };
-                float[] LHThreshold = new float[3] { 25, 25, 20 };
-                float[] RHThreshold = new float[3] { 25, 25, 75 };
+                float[] LHThreshold = new float[3] { 25, 25, 75 };
+                float[] RHThreshold = new float[3] { 25, 25, 20 };
                 int skeletonListCount = storedSkeletonValues.Count;
                 bool posZChange = true;
 
@@ -615,41 +615,41 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
                     {
                         if (k == 2)
                         {
-                            if (posZChange && rightDifference[k] < 0)
+                            if (posZChange && leftDifference[k] < 0)
                             {
                                 posZChange = false;
-                                RHCounter[k] = 0;
+                                LHCounter[k] = 0;
                             }
-                            else if (!posZChange && rightDifference[k] > 0)
+                            else if (!posZChange && leftDifference[k] > 0)
                             {
                                 posZChange = true;
-                                RHCounter[k] = 0;
+                                LHCounter[k] = 0;
                             }
                         }
-                        LHCounter[k] += leftDifference[k];
-                        //if left hand moved too far away, reset possible push recognition; otherwise, increase the right hand counters
-                        if (LHCounter[k] > LHThreshold[k])
+                        RHCounter[k] += rightDifference[k];
+                        //if right hand moved too far away, reset possible push recognition; otherwise, increase the left hand counters
+                        if (RHCounter[k] > RHThreshold[k])
                         {
-                            RHCounter[0] = 0;
-                            RHCounter[1] = 0;
-                            RHCounter[2] = 0;
+                            LHCounter[0] = 0;
+                            LHCounter[1] = 0;
+                            LHCounter[2] = 0;
                         }
                         else
                         {
-                            RHCounter[k] += rightDifference[k];
+                            LHCounter[k] += leftDifference[k];
                         }
                     }
-                    if (RHCounter[0] < RHThreshold[0] && RHCounter[1] < RHThreshold[1])
+                    if (LHCounter[0] < LHThreshold[0] && LHCounter[1] < LHThreshold[1])
                     {
                         actionWait = true;
                         selectTimer.Start();
-                        if (RHCounter[2] > RHThreshold[2])
+                        if (LHCounter[2] > LHThreshold[2])
                         {
                             //TODO: push registered
                             textBox.Gesture += "Push Registered";
                             KinectPush();
                         }
-                        else if (RHCounter[2] < -RHThreshold[2])
+                        else if (LHCounter[2] < -LHThreshold[2])
                         {
                             //TODO: pull registered
                             textBox.Gesture += "Pull Registered";
@@ -665,9 +665,9 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
                     }
                     else
                     {
-                        RHCounter[0] = 0;
-                        RHCounter[1] = 0;
-                        RHCounter[2] = 0;
+                        LHCounter[0] = 0;
+                        LHCounter[1] = 0;
+                        LHCounter[2] = 0;
                     }
 
                 }
@@ -706,8 +706,8 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
                     getSelectedFiles();
                     WC_inkCanvas.EditingMode = InkCanvasEditingMode.None;
                     //System.Windows.Controls.Image draggingImage  = getSelectedFiles();
-                    //System.Windows.Controls.Image draggingImage = drawCommitBox();
-                    //System.Windows.Forms.Cursor.Position = new System.Drawing.Point((int)InkCanvas.GetLeft(draggingImage), (int)InkCanvas.GetTop(draggingImage));
+                    System.Windows.Controls.Image draggingImage = findNearestImage(RHPos[0], RHPos[1]);
+                    System.Windows.Forms.Cursor.Position = new System.Drawing.Point((int)InkCanvas.GetLeft(draggingImage), (int)InkCanvas.GetTop(draggingImage));
                     mouseLeftDown();
                     //TODO: Fix Dragging
                 }
@@ -728,7 +728,8 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
                 {
                     lassoFilesDragging = false;
                     drawCommitBox();
-                    //TODO: call add to commit;
+                    //TODO: make sure commit works
+                    Terminal.GitAddFilesToCommit(selectedFileNames);
                 }
             }
         }

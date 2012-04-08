@@ -50,7 +50,7 @@ namespace WpfApplication1
             waitTimer.Interval = new TimeSpan(0, 0, 1);
             DIRECTORY = @"c:\\Ginect";
             MAX_FILE_DISPLAY_COUNT = 16;
-
+            selectedFileNames = new List<string>();
             // get the files into the arraylist from the directory info
             DirectoryInfo directoryInfo = new DirectoryInfo(DIRECTORY);
             files = directoryInfo.GetFiles();
@@ -612,14 +612,10 @@ namespace WpfApplication1
             return output;
         }
 
-        private void button1_Click(object sender, RoutedEventArgs e)
-        {
-            drawCommitBox();
-        }
 
-        private void button2_Click(object sender, RoutedEventArgs e)
+        private void button4_Click(object sender, RoutedEventArgs e)
         {
-            WC_inkCanvas.EditingMode = InkCanvasEditingMode.Select;
+            getSelectedFiles();
         }
 
         private void button3_Click(object sender, RoutedEventArgs e)
@@ -627,10 +623,18 @@ namespace WpfApplication1
             WC_inkCanvas.EditingMode = InkCanvasEditingMode.None;
         }
 
-        private void button4_Click(object sender, RoutedEventArgs e)
+        private void button2_Click(object sender, RoutedEventArgs e)
         {
-            getSelectedFiles();
+            WC_inkCanvas.EditingMode = InkCanvasEditingMode.Select;
         }
+
+        private void button1_Click(object sender, RoutedEventArgs e)
+        {
+            drawCommitBox();
+        }
+
+
+ 
 
 
     }
