@@ -107,6 +107,36 @@ namespace WpfApplication1
             LR_TagButton.Source = LoadImage("pack://application:,,,/WpfApplication1;component/Images/TagButton.png");
         }
 
+        private void WC_HelpIcon_MouseEnter(object sender, MouseEventArgs e)
+        {
+            WC_HelpIcon.Source = LoadImage("pack://application:,,,/WpfApplication1;component/Images/HelpIconHover.png");
+        }
+
+        private void WC_HelpIcon_MouseLeave(object sender, MouseEventArgs e)
+        {
+            WC_HelpIcon.Source = LoadImage("pack://application:,,,/WpfApplication1;component/Images/HelpIcon.png");
+        }
+
+        private void LR_HelpIcon_MouseEnter(object sender, MouseEventArgs e)
+        {
+            LR_HelpIcon.Source = LoadImage("pack://application:,,,/WpfApplication1;component/Images/HelpIconHover.png");
+        }
+
+        private void LR_HelpIcon_MouseLeave(object sender, MouseEventArgs e)
+        {
+            LR_HelpIcon.Source = LoadImage("pack://application:,,,/WpfApplication1;component/Images/HelpIcon.png");
+        }
+
+        private void RR_HelpIcon_MouseEnter(object sender, MouseEventArgs e)
+        {
+            RR_HelpIcon.Source = LoadImage("pack://application:,,,/WpfApplication1;component/Images/HelpIconHover.png");
+        }
+
+        private void RR_HelpIcon_MouseLeave(object sender, MouseEventArgs e)
+        {
+            RR_HelpIcon.Source = LoadImage("pack://application:,,,/WpfApplication1;component/Images/HelpIcon.png");
+        }
+
 
         private void MenuWorking_MouseEnter_1(object sender, MouseEventArgs e)
         {
@@ -275,6 +305,8 @@ namespace WpfApplication1
                 return false;
 
         }
+
+
         
     }
 }
