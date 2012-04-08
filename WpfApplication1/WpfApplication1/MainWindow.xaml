@@ -24,7 +24,7 @@
                 <Image Height="640" HorizontalAlignment="Left" Margin="24,20,0,0" Name="WC_Directory" Stretch="Fill" VerticalAlignment="Top" Width="605" Source="/WpfApplication1;component/Images/CommitBox.png" ImageFailed="WC_CommitBox_ImageFailed" Panel.ZIndex="-2" />
                 <Image Height="212" HorizontalAlignment="Left" Margin="635,442,0,0" Name="WC_CommitBox" Source="/WpfApplication1;component/Images/CommitBox.png" Stretch="Fill" VerticalAlignment="Top" Width="605" Grid.ColumnSpan="3" Panel.ZIndex="-2" />
                 <Rectangle Grid.ColumnSpan="3" Height="146" HorizontalAlignment="Left" Margin="638,32,0,0" Name="rectangle4" Stroke="Black" VerticalAlignment="Top" Width="594" Fill="Black" Opacity="0.9" Panel.ZIndex="0" />
-                <Image Height="150" Width="60" Margin="140,20,39,0" Name="WC_HelpIcon" Stretch="UniformToFill" VerticalAlignment="Top" Source="/WpfApplication1;component/Images/HelpIcon.png" ImageFailed="image5_ImageFailed" Grid.Column="2" Panel.ZIndex="1" MouseEnter="WC_HelpIcon_MouseEnter" MouseLeave="WC_HelpIcon_MouseLeave" />
+                 <Image Height="151" Margin="103,27,0,0" Name="WC_HelpIcon" Stretch="UniformToFill" VerticalAlignment="Top" Source="/WpfApplication1;component/Images/HelpIcon.png" ImageFailed="image5_ImageFailed" Grid.Column="2" Width="84" HorizontalAlignment="Left" MouseEnter="WC_HelpIcon_MouseEnter" MouseLeave="WC_HelpIcon_MouseLeave" />
                 <Image Height="242" HorizontalAlignment="Left" Margin="719,191,0,0" Name="MenuWorking" Stretch="UniformToFill" VerticalAlignment="Top" Width="506" Source="/WpfApplication1;component/Images/MenuWorking.png" Grid.ColumnSpan="3" ImageFailed="MenuWorking_ImageFailed" MouseLeftButtonDown="MenuWorking_MouseLeftButtonDown" Panel.ZIndex="1" MouseLeave="MenuWorking_MouseLeave_1" MouseEnter="MenuWorking_MouseEnter_1" />
                 <Label Content="Files" Height="33" HorizontalAlignment="Left" Margin="34,31,0,0" Name="Files" VerticalAlignment="Top" Width="77" Foreground="White" FontFamily="Calibri" FontSize="20" />
                 <Label Content="Current Commit" FontFamily="Calibri" FontSize="20" Foreground="White" Height="33" HorizontalAlignment="Left" Margin="649,446,0,0" Name="Commit" VerticalAlignment="Top" Width="149" />
@@ -45,8 +45,8 @@
             <InkCanvas Name="WC_inkCanvas" Background="Transparent" EditingMode="Select" Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="0,0,0,0" Height="720" Width="1280" Panel.ZIndex="0" >
                     <Image Grid.Column="2" Height="62" HorizontalAlignment="Left" Margin="177,446,0,0" Name="imageTrial" Stretch="Fill" VerticalAlignment="Top" Width="66" Source="/WpfApplication1;component/Images/TagButton.png" ImageFailed="image7_ImageFailed" />
                 </InkCanvas>
-                <Image Grid.Column="2" Height="67" HorizontalAlignment="Left" Margin="121,573,0,0" Name="CommitButton" Stretch="Fill" VerticalAlignment="Top" Width="124" Source="/WpfApplication1;component/Images/CommitButton.png" MouseEnter="CommitButton_MouseEnter" MouseLeave="CommitButton_MouseLeave" Panel.ZIndex="1" MouseLeftButtonDown="CommitButton_MouseLeftButtonDown" />
-                <Label Content="Commit" Grid.Column="2" Height="30" HorizontalAlignment="Left" Margin="145,591,0,0" Name="label1" VerticalAlignment="Top" Width="75" Foreground="White" FontFamily="Calibri"  FontSize="20" IsHitTestVisible="False" Panel.ZIndex="2" />
+                <Image Grid.Column="2" Height="67" HorizontalAlignment="Left" Margin="70,580,0,0" Name="CommitButton" Stretch="Fill" VerticalAlignment="Top" Width="124" Source="/WpfApplication1;component/Images/CommitButton.png" MouseEnter="CommitButton_MouseEnter" MouseLeave="CommitButton_MouseLeave" Panel.ZIndex="1" MouseLeftButtonDown="CommitButton_MouseLeftButtonDown" />
+                <Label Content="Commit" Grid.Column="2" Height="30" HorizontalAlignment="Left" Margin="95,598,0,0" Name="label1" VerticalAlignment="Top" Width="75" Foreground="White" FontFamily="Calibri"  FontSize="20" IsHitTestVisible="False" Panel.ZIndex="2" />
             </Grid>
 
         <Grid Name="LocalRepository" Visibility="Collapsed">
@@ -61,7 +61,7 @@
             <Rectangle Grid.ColumnSpan="3" Height="146" HorizontalAlignment="Left" Margin="638,32,0,0" Name="rectangle3" Stroke="Black" VerticalAlignment="Top" Width="594" Fill="Black" Opacity="0.9" Panel.ZIndex="0" />
             <Image Height="242" HorizontalAlignment="Left" Margin="719,191,0,0" Name="LR_MenuLocal" Stretch="UniformToFill" VerticalAlignment="Top" Width="506" Source="/WpfApplication1;component/Images/MenuLocal.png" Grid.ColumnSpan="3" MouseLeftButtonDown="LR_MenuLocal_MouseLeftButtonDown" MouseRightButtonDown="LR_MenuLocal_MouseRightButtonDown" Panel.ZIndex="2" MouseEnter="LR_MenuLocal_MouseEnter" MouseLeave="LR_MenuLocal_MouseLeave" />
             <Image Name="LR_TagButton" Source="/WpfApplication1;component/Images/TagButton.png" Margin ="1050,400,0,0" Stretch="Uniform" Width="184" Canvas.Left="1057" Canvas.Top="481" MouseLeftButtonDown="LR_TagButton_MouseLeftButtonDown" Panel.ZIndex="2" MouseEnter="LR_TagButton_MouseEnter" MouseLeave="LR_TagButton_MouseLeave" />
-            <Image Height="160" Name="LR_HelpIcon" Margin ="1120,0,0,500" Stretch="UniformToFill" Source="/WpfApplication1;component/Images/HelpIcon.png" ImageFailed="image5_ImageFailed" Width="97" Canvas.Left="1134" Canvas.Top="00" Panel.ZIndex="2" MouseEnter="LR_HelpIcon_MouseEnter" MouseLeave="LR_HelpIcon_MouseLeave" />
+            <Image Height="151" Margin="287,27,0,0" Name="LR_HelpIcon" Stretch="UniformToFill" VerticalAlignment="Top" Source="/WpfApplication1;component/Images/HelpIcon.png" ImageFailed="image5_ImageFailed" Grid.Column="2" Width="84" HorizontalAlignment="Left" MouseEnter="LR_HelpIcon_MouseEnter" MouseLeave="LR_HelpIcon_MouseLeave" />
             <Label Content="Files" Height="33" HorizontalAlignment="Left" Margin="34,31,0,0" Name="LR_Files" VerticalAlignment="Top" Width="77" Foreground="White" FontFamily="Calibri" FontSize="20" />
             <Label Content="Status" FontFamily="Calibri" FontSize="20" Foreground="White" Height="33" HorizontalAlignment="Left" Margin="649,32,0,0" Name="LR_Status" VerticalAlignment="Top" Width="77" />
 
@@ -111,7 +111,7 @@
                            <Bold>You've pushed!</Bold> <LineBreak/> Your remote repository's commit history is below. To return to your local repository, simply pull once on the menu. To return to your working copy, pull once.
                 <LineBreak/><LineBreak/> <Bold>If you need help with any of the motions, or if something confuses you, simply click the question mark on the right for help. </Bold></TextBlock>
             
-            <Image Height="151" Margin="290,27,0,0" Name="RR_HelpIcon" Stretch="UniformToFill" VerticalAlignment="Top" Source="/WpfApplication1;component/Images/HelpIcon.png" ImageFailed="image5_ImageFailed" Grid.Column="2" Width="84" HorizontalAlignment="Left" MouseEnter="RR_HelpIcon_MouseEnter" MouseLeave="RR_HelpIcon_MouseLeave" />
+            <Image Height="151" Margin="287,27,0,0" Name="RR_HelpIcon" Stretch="UniformToFill" VerticalAlignment="Top" Source="/WpfApplication1;component/Images/HelpIcon.png" ImageFailed="image5_ImageFailed" Grid.Column="2" Width="84" HorizontalAlignment="Left" MouseEnter="RR_HelpIcon_MouseEnter" MouseLeave="RR_HelpIcon_MouseLeave" />
         </Grid>
         
     </Canvas>
