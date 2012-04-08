@@ -3,12 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:my="clr-namespace:Microsoft.Samples.Kinect.WpfViewers;assembly=Microsoft.Samples.Kinect.WpfViewers" 
         Title="MainWindow" Loaded="Window_Loaded"
-        Left="0" Top="0">
+        Left="0" Top="0" Height="720" Width="1280">
     
     <Canvas Name="Main" Visibility="Visible" Height="720" Width="1280">
         <Ellipse Canvas.Left="3" Canvas.Top="0" Fill="#FF2CACE3" Name="rightEllipse" Width="30" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" Opacity="1" Stroke="White" Margin="10,10,0,0" Panel.ZIndex="5" />
         <Image Height="82" HorizontalAlignment="Right" Margin="0,178,434,0" Name="Cursor" Stretch="UniformToFill" VerticalAlignment="Top" Width="71" Source="/WpfApplication1;component/Images/cursor.png" Panel.ZIndex="5" />
-        <Grid Name="WorkingCopy" Visibility="Visible" >
+        <Grid Name="WorkingCopy" Visibility="Visible" Height="720" Width="1280" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="945*" />
                     <ColumnDefinition Width="36*" />
@@ -49,7 +49,7 @@
                 <Label Content="Commit" Grid.Column="2" Height="30" HorizontalAlignment="Left" Margin="95,598,0,0" Name="label1" VerticalAlignment="Top" Width="75" Foreground="White" FontFamily="Calibri"  FontSize="20" IsHitTestVisible="False" Panel.ZIndex="2" />
             </Grid>
 
-        <Grid Name="LocalRepository" Visibility="Collapsed">
+        <Grid Name="LocalRepository" Visibility="Collapsed"  Height="720" Width="1280" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="945*" />
                 <ColumnDefinition Width="36*" />
@@ -60,7 +60,7 @@
             <Image Height="285" HorizontalAlignment="Left" Margin="582,406,0,0" Name="LR_PushButton" Source="/WpfApplication1;component/Images/PushButton.png" Stretch="Uniform" VerticalAlignment="Top" Width="640" Grid.ColumnSpan="3" MouseLeftButtonDown="LR_PushButton_MouseLeftButtonDown" MouseEnter="LR_PushButton_MouseEnter" MouseLeave="LR_PushButton_MouseLeave" />
             <Rectangle Grid.ColumnSpan="3" Height="146" HorizontalAlignment="Left" Margin="638,32,0,0" Name="rectangle3" Stroke="Black" VerticalAlignment="Top" Width="594" Fill="Black" Opacity="0.9" Panel.ZIndex="0" />
             <Image Height="242" HorizontalAlignment="Left" Margin="719,191,0,0" Name="LR_MenuLocal" Stretch="UniformToFill" VerticalAlignment="Top" Width="506" Source="/WpfApplication1;component/Images/MenuLocal.png" Grid.ColumnSpan="3" MouseLeftButtonDown="LR_MenuLocal_MouseLeftButtonDown" MouseRightButtonDown="LR_MenuLocal_MouseRightButtonDown" Panel.ZIndex="2" MouseEnter="LR_MenuLocal_MouseEnter" MouseLeave="LR_MenuLocal_MouseLeave" />
-            <Image Name="LR_TagButton" Source="/WpfApplication1;component/Images/TagButton.png" Margin ="1050,400,0,0" Stretch="Uniform" Width="184" Canvas.Left="1057" Canvas.Top="481" MouseLeftButtonDown="LR_TagButton_MouseLeftButtonDown" Panel.ZIndex="2" MouseEnter="LR_TagButton_MouseEnter" MouseLeave="LR_TagButton_MouseLeave" />
+            <Image Name="LR_TagButton" Source="/WpfApplication1;component/Images/TagButton.png" Margin ="1055,370,0,0" Stretch="Uniform" Width="184" Canvas.Left="1057" Canvas.Top="481" MouseLeftButtonDown="LR_TagButton_MouseLeftButtonDown" Panel.ZIndex="2" MouseEnter="LR_TagButton_MouseEnter" MouseLeave="LR_TagButton_MouseLeave" />
             <Image Height="151" Margin="287,27,0,0" Name="LR_HelpIcon" Stretch="UniformToFill" VerticalAlignment="Top" Source="/WpfApplication1;component/Images/HelpIcon.png" ImageFailed="image5_ImageFailed" Grid.Column="2" Width="84" HorizontalAlignment="Left" MouseEnter="LR_HelpIcon_MouseEnter" MouseLeave="LR_HelpIcon_MouseLeave" />
             <Label Content="Files" Height="33" HorizontalAlignment="Left" Margin="34,31,0,0" Name="LR_Files" VerticalAlignment="Top" Width="77" Foreground="White" FontFamily="Calibri" FontSize="20" />
             <Label Content="Status" FontFamily="Calibri" FontSize="20" Foreground="White" Height="33" HorizontalAlignment="Left" Margin="649,32,0,0" Name="LR_Status" VerticalAlignment="Top" Width="77" />
@@ -91,7 +91,7 @@
             
             
         </Grid>
-        <Grid Name="RemoteRepository" Visibility="Collapsed">
+        <Grid Name="RemoteRepository" Visibility="Collapsed" Height="720" Width="1280">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="945*" />
                     <ColumnDefinition Width="36*" />
