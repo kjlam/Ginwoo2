@@ -399,11 +399,12 @@ namespace WpfApplication1
             CmdReturn localRepositoryList = Terminal.GitGetLocalRepoFiles();
             //TODO: uncomment to enable git file list 
             List<String> lrList = localRepositoryList.fileList;
-            Console.WriteLine(lrList[0]);
+           // Console.WriteLine(lrList[0]);
             LR_inkCanvas.Children.Clear();
 
+            
             /*
-            List<String> lrList = new List<string>();
+             * List<String> lrList = new List<string>();
 
             lrList.Add("one.cs");
             lrList.Add("two.pdf");
@@ -413,8 +414,8 @@ namespace WpfApplication1
             lrList.Add("six.ppt");
             lrList.Add("seven.docx");
             lrList.Add("eight.txt");
-
             */
+            
 
             int count = lrList.Count;
 
@@ -490,11 +491,13 @@ namespace WpfApplication1
         private void drawRemoteRepository()
         {
             CmdReturn remoteRepositoryList = Terminal.GitGetRemoteRepoFiles();
-            //List<String> rrList = remoteRepositoryList.fileList;
+            List<String> rrList = remoteRepositoryList.fileList;
             RR_inkCanvas.Children.Clear();
 
-            List<String> rrList = new List<string>();
+            //List<String> rrList = new List<string>();
 
+
+            /*
             rrList.Add("one.cs");
             rrList.Add("two.pdf");
             rrList.Add("three.doc");
@@ -503,6 +506,9 @@ namespace WpfApplication1
             rrList.Add("six.ppt");
             rrList.Add("seven.docx");
             rrList.Add("eight.txt");
+
+             * 
+             * */
 
             int count = rrList.Count;
 
