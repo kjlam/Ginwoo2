@@ -1,0 +1,226 @@
+[1mdiff --git a/WpfApplication1/WpfApplication1/Images/Hand-icon.png b/WpfApplication1/WpfApplication1/Images/Hand-icon.png[m
+[1mdeleted file mode 100644[m
+[1mindex 8a60f57..0000000[m
+Binary files a/WpfApplication1/WpfApplication1/Images/Hand-icon.png and /dev/null differ
+[1mdiff --git a/WpfApplication1/WpfApplication1/Images/cursor.png b/WpfApplication1/WpfApplication1/Images/cursor.png[m
+[1mdeleted file mode 100644[m
+[1mindex eb5f474..0000000[m
+Binary files a/WpfApplication1/WpfApplication1/Images/cursor.png and /dev/null differ
+[1mdiff --git a/WpfApplication1/WpfApplication1/Images/cursorAction.png b/WpfApplication1/WpfApplication1/Images/cursorAction.png[m
+[1mdeleted file mode 100644[m
+[1mindex ce2b1dc..0000000[m
+Binary files a/WpfApplication1/WpfApplication1/Images/cursorAction.png and /dev/null differ
+[1mdiff --git a/WpfApplication1/WpfApplication1/Images/cursorLasso.png b/WpfApplication1/WpfApplication1/Images/cursorLasso.png[m
+[1mdeleted file mode 100644[m
+[1mindex 9ad1a59..0000000[m
+Binary files a/WpfApplication1/WpfApplication1/Images/cursorLasso.png and /dev/null differ
+[1mdiff --git a/WpfApplication1/WpfApplication1/KinectFunctions.cs b/WpfApplication1/WpfApplication1/KinectFunctions.cs[m
+[1mindex 7c95d68..3989c1b 100644[m
+[1m--- a/WpfApplication1/WpfApplication1/KinectFunctions.cs[m
+[1m+++ b/WpfApplication1/WpfApplication1/KinectFunctions.cs[m
+[36m@@ -204,7 +204,7 @@[m [mnamespace WpfApplication1[m
+         private void Window_Loaded(object sender, RoutedEventArgs e)[m
+         {[m
+             kinectSensorChooser1.KinectSensorChanged += new DependencyPropertyChangedEventHandler(kinectSensorChooser1_KinectSensorChanged);[m
+[31m-[m
+[32m+[m[32m            Terminal.TestModularTerminal();[m
+         }[m
+ [m
+ [m
+[1mdiff --git a/WpfApplication1/WpfApplication1/LassoDrag.cs b/WpfApplication1/WpfApplication1/LassoDrag.cs[m
+[1mindex 3cb7543..f4e65a6 100644[m
+[1m--- a/WpfApplication1/WpfApplication1/LassoDrag.cs[m
+[1m+++ b/WpfApplication1/WpfApplication1/LassoDrag.cs[m
+[36m@@ -399,12 +399,11 @@[m [mnamespace WpfApplication1[m
+             CmdReturn localRepositoryList = Terminal.GitGetLocalRepoFiles();[m
+             //TODO: uncomment to enable git file list [m
+             List<String> lrList = localRepositoryList.fileList;[m
+[31m-           // Console.WriteLine(lrList[0]);[m
+[32m+[m[32m            Console.WriteLine(lrList[0]);[m
+             LR_inkCanvas.Children.Clear();[m
+ [m
+[31m-            [m
+             /*[m
+[31m-             * List<String> lrList = new List<string>();[m
+[32m+[m[32m            List<String> lrList = new List<string>();[m
+ [m
+             lrList.Add("one.cs");[m
+             lrList.Add("two.pdf");[m
+[36m@@ -414,8 +413,8 @@[m [mnamespace WpfApplication1[m
+             lrList.Add("six.ppt");[m
+             lrList.Add("seven.docx");[m
+             lrList.Add("eight.txt");[m
+[32m+[m
+             */[m
+[31m-            [m
+ [m
+             int count = lrList.Count;[m
+ [m
+[36m@@ -491,13 +490,11 @@[m [mnamespace WpfApplication1[m
+         private void drawRemoteRepository()[m
+         {[m
+             CmdReturn remoteRepositoryList = Terminal.GitGetRemoteRepoFiles();[m
+[31m-            List<String> rrList = remoteRepositoryList.fileList;[m
+[32m+[m[32m            //List<String> rrList = remoteRepositoryList.fileList;[m
+             RR_inkCanvas.Children.Clear();[m
+ [m
+[31m-            //List<String> rrList = new List<string>();[m
+[32m+[m[32m            List<String> rrList = new List<string>();[m
+ [m
+[31m-[m
+[31m-            /*[m
+             rrList.Add("one.cs");[m
+             rrList.Add("two.pdf");[m
+             rrList.Add("three.doc");[m
+[36m@@ -507,9 +504,6 @@[m [mnamespace WpfApplication1[m
+             rrList.Add("seven.docx");[m
+             rrList.Add("eight.txt");[m
+ [m
+[31m-             * [m
+[31m-             * */[m
+[31m-[m
+             int count = rrList.Count;[m
+ [m
+             System.Windows.Controls.Image[] images = new System.Windows.Controls.Image[count];[m
+[1mdiff --git a/WpfApplication1/WpfApplication1/MainWindow.xaml b/WpfApplication1/WpfApplication1/MainWindow.xaml[m
+[1mindex f7f65cc..8ceae47 100644[m
+[1m--- a/WpfApplication1/WpfApplication1/MainWindow.xaml[m
+[1m+++ b/WpfApplication1/WpfApplication1/MainWindow.xaml[m
+[36m@@ -7,7 +7,7 @@[m
+     [m
+     <Canvas Name="Main" Visibility="Visible" Height="720" Width="1280">[m
+         <Ellipse Canvas.Left="3" Canvas.Top="0" Fill="#FF2CACE3" Name="rightEllipse" Width="30" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" Opacity="1" Stroke="White" Margin="10,10,0,0" Panel.ZIndex="5" />[m
+[31m-        <Grid Name="WorkingCopy" Visibility="Visible" >[m
+[32m+[m[32m        <Grid Name="WorkingCopy" Visibility="Collapsed" >[m
+                 <Grid.ColumnDefinitions>[m
+                     <ColumnDefinition Width="945*" />[m
+                     <ColumnDefinition Width="36*" />[m
+[36m@@ -36,8 +36,7 @@[m
+                 <Image Grid.Column="2" Height="67" HorizontalAlignment="Left" Margin="121,573,0,0" Name="CommitButton" Stretch="Fill" VerticalAlignment="Top" Width="124" Source="/WpfApplication1;component/Images/CommitButton.png" MouseEnter="CommitButton_MouseEnter" MouseLeave="CommitButton_MouseLeave" Panel.ZIndex="1" MouseLeftButtonDown="CommitButton_MouseLeftButtonDown" />[m
+                 <Label Content="Commit" Grid.Column="2" Height="30" HorizontalAlignment="Left" Margin="145,591,0,0" Name="label1" VerticalAlignment="Top" Width="75" Foreground="White" FontFamily="Calibri"  FontSize="20" IsHitTestVisible="False" Panel.ZIndex="2" />[m
+             </Grid>[m
+[31m-        [m
+[31m-        <Grid Name="LocalRepository" Visibility="Collapsed">[m
+[32m+[m[32m        <Grid Name="LocalRepository" Visibility="Visible">[m
+                 <Grid.ColumnDefinitions>[m
+                     <ColumnDefinition Width="945*" />[m
+                     <ColumnDefinition Width="36*" />[m
+[36m@@ -47,25 +46,22 @@[m
+                 <Image Height="640" HorizontalAlignment="Left" Margin="24,20,0,0" Name="LR_CommitBox" Stretch="Fill" VerticalAlignment="Top" Width="605" Source="/WpfApplication1;component/Images/CommitBox.png" MouseEnter="LR_CommitBox_MouseEnter" Panel.ZIndex="-2" />[m
+                 <Image Height="285" HorizontalAlignment="Left" Margin="582,406,0,0" Name="LR_PushButton" Source="/WpfApplication1;component/Images/PushButton.png" Stretch="Uniform" VerticalAlignment="Top" Width="640" Grid.ColumnSpan="3" MouseLeftButtonDown="LR_PushButton_MouseLeftButtonDown" />[m
+                 <Rectangle Grid.ColumnSpan="3" Height="146" HorizontalAlignment="Left" Margin="638,32,0,0" Name="rectangle3" Stroke="Black" VerticalAlignment="Top" Width="594" Fill="Black" Opacity="0.9" Panel.ZIndex="0" />[m
+[31m-                <Image Height="242" HorizontalAlignment="Left" Margin="719,191,0,0" Name="LR_MenuLocal" Stretch="UniformToFill" VerticalAlignment="Top" Width="506" Source="/WpfApplication1;component/Images/MenuLocal.png" Grid.ColumnSpan="3" MouseLeftButtonDown="LR_MenuLocal_MouseLeftButtonDown" MouseRightButtonDown="LR_MenuLocal_MouseRightButtonDown" Panel.ZIndex="2"/>[m
+[31m-                <Image Name="LR_TagButton" Source="/WpfApplication1;component/Images/TagButton.png" Margin ="1050,400,0,0" Stretch="Uniform" Width="184" Canvas.Left="1057" Canvas.Top="481" MouseLeftButtonDown="LR_TagButton_MouseLeftButtonDown" Panel.ZIndex="2"/>[m
+[31m-                <Image Height="160" Name="LR_HelpIcon" Margin ="1120,0,0,500" Stretch="UniformToFill" Source="/WpfApplication1;component/Images/HelpIcon.png" ImageFailed="image5_ImageFailed" Width="97" Canvas.Left="1134" Canvas.Top="00" Panel.ZIndex="2" />[m
+[32m+[m[32m                <Image Height="242" HorizontalAlignment="Left" Margin="719,191,0,0" Name="LR_MenuLocal" Stretch="UniformToFill" VerticalAlignment="Top" Width="506" Source="/WpfApplication1;component/Images/MenuLocal.png" Grid.ColumnSpan="3" MouseLeftButtonDown="LR_MenuLocal_MouseLeftButtonDown" MouseRightButtonDown="LR_MenuLocal_MouseRightButtonDown" />[m
+[32m+[m[32m                <Image Name="LR_TagButton" Source="/WpfApplication1;component/Images/TagButton.png" Margin ="1050,400,0,0" Stretch="Uniform" Width="184" Canvas.Left="1057" Canvas.Top="481" MouseLeftButtonDown="LR_TagButton_MouseLeftButtonDown" />[m
+[32m+[m[32m                <Image Height="160" Name="LR_HelpIcon" Margin ="1120,0,0,500" Stretch="UniformToFill" Source="/WpfApplication1;component/Images/HelpIcon.png" ImageFailed="image5_ImageFailed" Width="97" Canvas.Left="1134" Canvas.Top="00" />[m
+                 <Label Content="Files" Height="33" HorizontalAlignment="Left" Margin="34,31,0,0" Name="LR_Files" VerticalAlignment="Top" Width="77" Foreground="White" FontFamily="Calibri" FontSize="20" />[m
+                 <Label Content="Status" FontFamily="Calibri" FontSize="20" Foreground="White" Height="33" HorizontalAlignment="Left" Margin="649,32,0,0" Name="LR_Status" VerticalAlignment="Top" Width="77" />[m
+                 <TextBlock Grid.ColumnSpan="3" Height="101" HorizontalAlignment="Left" Margin="657,70,0,0" Name="LR_StatusText" VerticalAlignment="Top" Width="448" Foreground="White" TextWrapping="Wrap"> [m
+                 <Bold>You've pushed!</Bold> <LineBreak/> Your remote repository's commit history is below. To return to your local repository, simply pull once on the menu. To return to your working copy, pull once.<LineBreak/><LineBreak/> <Bold>If you need help with any of the motions, or if something confuses you, simply click the question mark on the right for help. </Bold></TextBlock>[m
+[31m-                <InkCanvas Name="LR_inkCanvas" Background="Transparent" EditingMode="Select" Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="0,0,0,0" Height="720" Width="640" Gesture="inkCanvas_Gesture_1">[m
+[32m+[m[32m                <InkCanvas Name="LR_inkCanvas" Background="Transparent" EditingMode="Select" Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="0,0,0,0" Height="720" Width="1280" Gesture="inkCanvas_Gesture_1" Panel.ZIndex="-5">[m
+                     <Image Grid.Column="2" Height="62" HorizontalAlignment="Left" Margin="177,446,0,0" Name="LR_imageTrial" Stretch="Fill" VerticalAlignment="Top" Width="66" Source="/WpfApplication1;component/Images/TagButton.png" ImageFailed="image7_ImageFailed" />[m
+                 </InkCanvas>[m
+[31m-            [m
+[31m-            [m
+[31m-            <Rectangle Fill="Black" Height="240" HorizontalAlignment="Left" Margin="638,178,0,0" Name="TagRectangle" Opacity="0.9" Panel.ZIndex="0" Stroke="Black" VerticalAlignment="Top" Width="594" Grid.ColumnSpan="3" Visibility="Hidden" />[m
+[31m-            <Label FontFamily ="Calibri" Foreground ="White" FontSize="20" Height="37" HorizontalAlignment="Left" Margin="651,188,0,0" Name="TagLabel" VerticalAlignment="Top" Width="75" Content="Tagging" Visibility="Hidden" />[m
+[31m-            <TextBlock Foreground="White" Grid.ColumnSpan="3" Height="78" HorizontalAlignment="Left" Margin="658,227,0,0" Name="TagBlock1" VerticalAlignment="Top" Width="557" Visibility ="hidden" TextWrapping="Wrap"><Bold>To tag your last commit, you will use this speech interface.</Bold><LineBreak/><LineBreak/> Clearly spell out your desired tag name. When you are satisfied with your tag name, say <Bold>"finished."</Bold> To reset your tag name and start over, say <Bold>"reset."</Bold> To cancel your tag, say <Bold>"cancel."</Bold></TextBlock>[m
+[31m-            <TextBox Grid.ColumnSpan="3" Height="30" HorizontalAlignment="Left" Margin="776,324,0,0" Name="TagBlock2" VerticalAlignment="Top" Width="329" Visibility="Hidden" />[m
+[31m-            <Label Foreground="White" FontSize="20" Content="Tag:" Height="47" HorizontalAlignment="Left" Margin="719,321,0,0" Name="TagLabel2" VerticalAlignment="Top" Width="46" Visibility="Hidden"/>[m
+[31m-            [m
+[31m-            [m
+[32m+[m[32m            <Rectangle Fill="Black" Height="240" HorizontalAlignment="Left" Margin="638,178,0,0" Name="rectangle2" Opacity="0.9" Panel.ZIndex="0" Stroke="Black" VerticalAlignment="Top" Width="594" Grid.ColumnSpan="3" />[m
+[32m+[m
+[32m+[m[32m            <Label FontFamily ="Calibri" Foreground ="White" FontSize="20" Height="37" HorizontalAlignment="Left" Margin="651,188,0,0" Name="textBlock1" VerticalAlignment="Top" Width="75" Content="Tagging" />[m
+[32m+[m[32m            <TextBlock Foreground="White" Grid.ColumnSpan="3" Height="78" HorizontalAlignment="Left" Margin="658,227,0,0" Name="textBlock2" VerticalAlignment="Top" Width="557" TextWrapping="Wrap"><Bold>To tag your last commit, you will use this speech interface.</Bold><LineBreak/><LineBreak/> Clearly spell out your desired tag name. When you are satisfied with your tag name, say <Bold>"finished."</Bold> To reset your tag name and start over, say <Bold>"reset."</Bold> To cancel your tag, say <Bold>"cancel."</Bold></TextBlock>[m
+[32m+[m[32m            <TextBox Grid.ColumnSpan="3" Height="30" HorizontalAlignment="Left" Margin="776,324,0,0" Name="textBox2" VerticalAlignment="Top" Width="329" />[m
+[32m+[m[32m            <Label Foreground="White" FontSize="20" Content="Tag:" Height="47" HorizontalAlignment="Left" Margin="719,321,0,0" Name="label2" VerticalAlignment="Top" Width="46" />[m
+         </Grid>[m
+         <Grid Name="RemoteRepository" Visibility="Collapsed">[m
+                 <Grid.ColumnDefinitions>[m
+[36m@@ -73,23 +69,22 @@[m
+                     <ColumnDefinition Width="36*" />[m
+                     <ColumnDefinition Width="277*" />[m
+                 </Grid.ColumnDefinitions>[m
+[31m-                <Image Height="680" HorizontalAlignment="Left" Name="RR_Background" Stretch="Fill" VerticalAlignment="Top" Width="1260" Source="/WpfApplication1;component/Images/bg.png" ImageFailed="image1_ImageFailed" Grid.ColumnSpan="3" Panel.ZIndex="-5" />[m
+[31m-                <Image Height="640" HorizontalAlignment="Left" Margin="24,20,0,0" Name="RR_CommitBox" Stretch="Fill" VerticalAlignment="Top" Width="605" Source="/WpfApplication1;component/Images/CommitBox.png" Panel.ZIndex="-2" />[m
+[31m-            <Image Height="242" HorizontalAlignment="Left" Margin="719,191,0,0" Name="image6" Stretch="UniformToFill" VerticalAlignment="Top" Width="506" Source="/WpfApplication1;component/Images/MenuRemote.png" Grid.ColumnSpan="3" MouseRightButtonDown="image6_MouseRightButtonDown" Panel.ZIndex="2" />[m
+[32m+[m[32m                <Image Height="680" HorizontalAlignment="Left" Name="RR_Background" Stretch="Fill" VerticalAlignment="Top" Width="1260" Source="/WpfApplication1;component/Images/bg.png" ImageFailed="image1_ImageFailed" Grid.ColumnSpan="3" />[m
+[32m+[m[32m                <Image Height="640" HorizontalAlignment="Left" Margin="24,20,0,0" Name="RR_CommitBox" Stretch="Fill" VerticalAlignment="Top" Width="605" Source="/WpfApplication1;component/Images/CommitBox.png" />[m
+[32m+[m[32m            <Image Height="242" HorizontalAlignment="Left" Margin="719,191,0,0" Name="image6" Stretch="UniformToFill" VerticalAlignment="Top" Width="506" Source="/WpfApplication1;component/Images/MenuRemote.png" Grid.ColumnSpan="3" MouseRightButtonDown="image6_MouseRightButtonDown" />[m
+                 <Label Content="Files" Height="33" HorizontalAlignment="Left" Margin="34,31,0,0" Name="RR_Files" VerticalAlignment="Top" Width="77" Foreground="White" FontFamily="Calibri" FontSize="20" />[m
+[31m-                <InkCanvas Name="RR_inkCanvas" Background="Transparent" EditingMode="Select" Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="0,0,0,0" Height="720" Width="640" Gesture="inkCanvas_Gesture_1">[m
+[32m+[m[32m                <InkCanvas Name="RR_inkCanvas" Background="Transparent" EditingMode="Select" Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="0,0,0,0" Height="720" Width="1280" Gesture="inkCanvas_Gesture_1" Panel.ZIndex="-5">[m
+                    <Image Grid.Column="2" Height="62" HorizontalAlignment="Left" Margin="177,446,0,0" Name="RR_imageTrial" Stretch="Fill" VerticalAlignment="Top" Width="66" Source="/WpfApplication1;component/Images/TagButton.png" ImageFailed="image7_ImageFailed" />[m
+                 </InkCanvas>[m
+             [m
+[31m-            <Rectangle Grid.ColumnSpan="3" Height="146" HorizontalAlignment="Left" Margin="638,32,0,0" Name="rectangle1" Stroke="Black" VerticalAlignment="Top" Width="594" Fill="Black" Opacity="0.9" Panel.ZIndex="-2" />[m
+[32m+[m[32m            <Rectangle Grid.ColumnSpan="3" Height="146" HorizontalAlignment="Left" Margin="638,32,0,0" Name="rectangle1" Stroke="Black" VerticalAlignment="Top" Width="594" Fill="Black" Opacity="0.9" Panel.ZIndex="0" />[m
+             <Label Content="Status" FontFamily="Calibri" FontSize="20" Foreground="White" Height="33" HorizontalAlignment="Left" Margin="649,32,0,0" Name="RR_Status" VerticalAlignment="Top" Width="77" />[m
+             <TextBlock Grid.ColumnSpan="3" Height="101" HorizontalAlignment="Left" Margin="657,70,0,0" Name="RR_StatusText" VerticalAlignment="Top" Width="448" Foreground="White" TextWrapping="Wrap"> [m
+                 <Bold>You haven't added any files to this commit yet.</Bold> <LineBreak/> To add files to a commit, select them in the Files area to the left using the lasso motion and then[m
+                 drag them to your Commit area below. <LineBreak/><LineBreak/> <Bold>If you need help with any of the motions, or if something confuses you, simply click the question mark on the right for help. </Bold></TextBlock>[m
+             [m
+             <Image Height="151" Margin="290,27,0,0" Name="RR_HelpIcon" Stretch="UniformToFill" VerticalAlignment="Top" Source="/WpfApplication1;component/Images/HelpIcon.png" ImageFailed="image5_ImageFailed" Grid.Column="2" Width="84" HorizontalAlignment="Left" />[m
+[31m-            <Image Height="82" HorizontalAlignment="Right" Margin="0,178,434,0" Name="image1" Stretch="UniformToFill" VerticalAlignment="Top" Width="71" Source="/WpfApplication1;component/Images/cursor.png" />[m
+[31m-        </Grid>[m
+[32m+[m[32m            </Grid>[m
+         [m
+     </Canvas>[m
+ </Window>[m
+[1mdiff --git a/WpfApplication1/WpfApplication1/Terminal.cs b/WpfApplication1/WpfApplication1/Terminal.cs[m
+[1mindex d167cdb..9accb0d 100644[m
+[1m--- a/WpfApplication1/WpfApplication1/Terminal.cs[m
+[1m+++ b/WpfApplication1/WpfApplication1/Terminal.cs[m
+[36m@@ -16,8 +16,8 @@[m [mnamespace WpfApplication1[m
+ [m
+     public class Terminal[m
+     {[m
+[31m-        static internal String workingDirectory = @"C:\Ginect";[m
+[31m-        static internal String password = "password";[m
+[32m+[m[32m        static internal String workingDirectory = @"C:\\Users\\LeonDaVinci\\Ginect\\";[m
+[32m+[m[32m        static internal String password = "Dksfpe%+28@";[m
+ [m
+         public Terminal()[m
+         {[m
+[36m@@ -52,7 +52,7 @@[m [mnamespace WpfApplication1[m
+             // Test GitGetLocalRepoFiles()[m
+             //return GitGetLocalRepoFiles();[m
+ [m
+[31m-            // Test GitGetRemoteRepoFiles()[m
+[32m+[m[32m            //Test GitGetRemoteRepoFiles()[m
+             return GitGetRemoteRepoFiles();[m
+         }[m
+ [m
+[36m@@ -241,6 +241,7 @@[m [mnamespace WpfApplication1[m
+                 IntPtr mainWindowHandle = IntPtr.Zero;[m
+                 foreach (Process process in processes)[m
+                 {[m
+[32m+[m[32m                    Debug.WriteLine(process);[m
+                     if (!process.MainWindowHandle.Equals(IntPtr.Zero))[m
+                     {[m
+                         mainWindowHandle = process.MainWindowHandle;[m
+[1mdiff --git a/WpfApplication1/WpfApplication1/WpfApplication1.csproj b/WpfApplication1/WpfApplication1/WpfApplication1.csproj[m
+[1mindex 3aab496..13b42c0 100644[m
+[1m--- a/WpfApplication1/WpfApplication1/WpfApplication1.csproj[m
+[1m+++ b/WpfApplication1/WpfApplication1/WpfApplication1.csproj[m
+[36m@@ -174,16 +174,6 @@[m
+     <Resource Include="Images\PushButtonHover.png" />[m
+     <Resource Include="Images\TagButtonHover.png" />[m
+   </ItemGroup>[m
+[31m-  <ItemGroup>[m
+[31m-    <Resource Include="Images\Hand-icon.png" />[m
+[31m-  </ItemGroup>[m
+[31m-  <ItemGroup>[m
+[31m-    <Resource Include="Images\cursor.png" />[m
+[31m-  </ItemGroup>[m
+[31m-  <ItemGroup>[m
+[31m-    <Resource Include="Images\cursorAction.png" />[m
+[31m-    <Resource Include="Images\cursorLasso.png" />[m
+[31m-  </ItemGroup>[m
+   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />[m
+   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. [m
+        Other similar extension points exist, see Microsoft.Common.targets.[m
