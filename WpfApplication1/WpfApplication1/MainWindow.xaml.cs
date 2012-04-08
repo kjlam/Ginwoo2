@@ -289,7 +289,6 @@ namespace WpfApplication1
             
         }
 
-        //TODO: git pull figure out areas of directory system, switch to working mode
         /*
          * CursorInDirectoryArea()
          * 
@@ -306,6 +305,26 @@ namespace WpfApplication1
 
         }
 
+
+        /*
+         * CursorInCommitBox()
+         * 
+         * Checks if cursor is in commitbox area, if so then drawcommitbox and add files to commit
+        */
+        private void CursorInCommitBoxZone()
+        {
+            if (RHPos[0] >= WC_CommitBox.Margin.Left && RHPos[0] <= (WC_CommitBox.Margin.Left + WC_CommitBox.Width))
+            {
+                if (RHPos[1] <= WC_CommitBox.Margin.Top && RHPos[1] >= (WC_CommitBox.Margin.Top - WC_CommitBox.Height))
+                {
+                    lassoFilesDragging = false;
+                    drawCommitBox();
+                    //TODO: make sure commit works
+                    Terminal.GitAddFilesToCommit(selectedFileNames);
+                    mouseLeftClick();
+                }
+            }
+        }
 
         
     }

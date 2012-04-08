@@ -108,6 +108,7 @@ namespace WpfApplication1
         bool back = false;
         bool actionWait = false;
         double[] RHPos = new double[2];
+        float[] RHSensitivity = new float[2]{0.3f,0.3f};
         bool selectActivated = false;
         bool tagIconActivated = false;
         private string tagName = "";
@@ -334,15 +335,18 @@ namespace WpfApplication1
                     CheckStatic(e);
                     if (lassoFilesDragging)
                     {
-                        CheckCommitBoxZone();
+                        CursorInCommitBoxZone();
                     }
                 }
             }
             GetCameraPoint(first, e);
-            if (selectActivated)
+            /*if (selectActivated)
             {
                 FollowPointer();
             }
+             * */
+
+            FollowPointer();
         }
 
         void SelectTimer_Root(object sender, EventArgs e)
@@ -655,7 +659,8 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
                             textBox.Gesture += "Pull Registered";
                             if (CursorInDirectoryArea())
                             {
-                                //TODO: git pull would be caled her, but currently no function
+                                //TODO: git pull would be caled her, but currently no function, and switch to working mode
+                                //switchToWorkingMode();
                             }
                             else
                             {
@@ -699,9 +704,13 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
                 actionWait = true;
                 selectTimer.Start();
                 //lasso completed when select is activated again (hands touch again for the interval)
+                //lasso completed, so change cursor senitivity back to original
                 if (selectActivated)
                 {
                     selectActivated = false;
+                    lassoFilesDragging = true;
+                    RHSensitivity[0] = 0.3f;
+                    RHSensitivity[1] = 0.3f;
                     mouseLeftClick();
                     getSelectedFiles();
                     WC_inkCanvas.EditingMode = InkCanvasEditingMode.None;
@@ -712,24 +721,14 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
                     //TODO: Fix Dragging
                 }
                 //lasso start
+                //Decrease sensitivity to improve accuracy of lassoing, and move the cursor to the closest image of the mouse to move the set of images
                 else if (!selectActivated)
                 {
+                    RHSensitivity[0] = 0.6f;
+                    RHSensitivity[1] = 0.6f;
                     WC_inkCanvas.EditingMode = InkCanvasEditingMode.Select;
                     selectActivated = true;
                     mouseLeftDown();
-                }
-            }
-        }
-
-        private void CheckCommitBoxZone(){
-            if (RHPos[0] >= WC_CommitBox2.Margin.Left && RHPos[0] <= (WC_CommitBox2.Margin.Left + WC_CommitBox2.Width))
-            {
-                if (RHPos[1] <= WC_CommitBox2.Margin.Top && RHPos[1] >= (WC_CommitBox2.Margin.Top - WC_CommitBox2.Height))
-                {
-                    lassoFilesDragging = false;
-                    drawCommitBox();
-                    //TODO: make sure commit works
-                    Terminal.GitAddFilesToCommit(selectedFileNames);
                 }
             }
         }
@@ -900,7 +899,7 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
             //Joint scaledJoint = joint.ScaleTo(1280, 720); 
              
             //convert & scale (.3 = means 1/3 of joint distance)
-            Joint scaledJoint = joint.ScaleTo(1280, 720, 0.3f, 0.3f);
+            Joint scaledJoint = joint.ScaleTo(1280, 720, RHSensitivity[0], RHSensitivity[1]);
             InkCanvas.SetLeft(element, scaledJoint.Position.X-element.Width/2);
             InkCanvas.SetTop(element, scaledJoint.Position.Y-element.Height/2);
             textBox.RightPos = (int)scaledJoint.Position.X + " " + (int)scaledJoint.Position.Y + "\n";
