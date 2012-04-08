@@ -177,9 +177,9 @@ namespace WpfApplication1
 
                         selectedImages[index].Opacity = IMAGE_OPACITY_VALUE;
 
-                        selectedImages[index].PreviewMouseDown += new MouseButtonEventHandler(myimg_MouseDown);
-                        selectedImages[index].PreviewMouseMove += new MouseEventHandler(myimg_MouseMove);
-                        selectedImages[index].PreviewMouseUp += new MouseButtonEventHandler(myimg_MouseUp);
+                        //selectedImages[index].PreviewMouseDown += new MouseButtonEventHandler(myimg_MouseDown);
+                        //selectedImages[index].PreviewMouseMove += new MouseEventHandler(myimg_MouseMove);
+                        //selectedImages[index].PreviewMouseUp += new MouseButtonEventHandler(myimg_MouseUp);
 
                         selectedFileNames.Add(files[j].Name);
 
@@ -345,21 +345,23 @@ namespace WpfApplication1
 
         }
 
-
+        //TODO: instead of having mouse drag, just have the images follow the mouse/cursor around , not sure if myImg_MouseUp needed now 
         void myimg_MouseUp(object sender, MouseButtonEventArgs e)
         {
             ((System.Windows.Controls.Image)sender).ReleaseMouseCapture();
 
         }
 
-        void myimg_MouseMove(object sender, MouseEventArgs e)
+        void myimg_MouseMove()
         {
 
-            if (((System.Windows.Controls.Image)sender).IsMouseCaptured)
-            {
-                System.Windows.Point mouseCurrent = e.GetPosition(null);
-                double Left = mouseCurrent.X;
-                double Top = mouseCurrent.Y;
+           // if (((System.Windows.Controls.Image)sender).IsMouseCaptured)
+            //{
+                //System.Windows.Point mouseCurrent = e.GetPosition(null);
+                //double Left = mouseCurrent.X;
+                //double Top = mouseCurrent.Y;
+            double left = System.Windows.Forms.Cursor.Position.X;
+            double tpo = System.Windows.Forms.Cursor.Position.Y;
 
                 for (int i = 0; i < selectedImages.Count(); i++)
                 {
@@ -372,16 +374,20 @@ namespace WpfApplication1
                     selectedTextBlocks[i].SetValue(InkCanvas.LeftProperty, SOFUKCINGCOLD - 20);
                     selectedTextBlocks[i].SetValue(InkCanvas.TopProperty, IHATETHISPROJ + 40 + 10);
                 }
-            }
+           // }
         }
 
-        void myimg_MouseDown(object sender, MouseButtonEventArgs e)
+        void myimg_MouseDown()
         {
-            mouseClick = e.GetPosition(null);
-            ((System.Windows.Controls.Image)sender).CaptureMouse();
+            //mouseClick = e.GetPosition(null);
+            System.Windows.Controls.Image nearestImage = findNearestImage(System.Windows.Forms.Cursor.Position.X, System.Windows.Forms.Cursor.Position.Y);
+            //((System.Windows.Controls.Image)sender).CaptureMouse();
 
-            baseTop = InkCanvas.GetTop(((System.Windows.Controls.Image)sender));
-            baseLeft = InkCanvas.GetLeft(((System.Windows.Controls.Image)sender));
+            //baseTop = InkCanvas.GetTop(((System.Windows.Controls.Image)sender));
+            //baseLeft = InkCanvas.GetLeft(((System.Windows.Controls.Image)sender));
+
+            baseTop = InkCanvas.GetTop(nearestImage);
+            baseLeft = InkCanvas.GetLeft(nearestImage);
 
             deltaLeft = new double[selectedImages.Count()];
             deltaTop = new double[selectedImages.Count()];

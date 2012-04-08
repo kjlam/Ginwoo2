@@ -337,6 +337,7 @@ namespace WpfApplication1
                 }
                 if (lassoFilesDragging)
                 {
+                    myimg_MouseMove();
                     CursorInCommitBoxZone();
                 }
             }
@@ -723,9 +724,10 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
                     getSelectedFiles();
                     WC_inkCanvas.EditingMode = InkCanvasEditingMode.None;
                     //System.Windows.Controls.Image draggingImage  = getSelectedFiles();
-                    System.Windows.Controls.Image draggingImage = findNearestImage(System.Windows.Forms.Cursor.Position.X, System.Windows.Forms.Cursor.Position.Y);
-                    System.Windows.Forms.Cursor.Position = new System.Drawing.Point((int)InkCanvas.GetLeft(draggingImage), (int)InkCanvas.GetTop(draggingImage));
-                    mouseLeftDown();
+                    //System.Windows.Controls.Image draggingImage = findNearestImage(System.Windows.Forms.Cursor.Position.X, System.Windows.Forms.Cursor.Position.Y);
+                    //System.Windows.Forms.Cursor.Position = new System.Drawing.Point((int)InkCanvas.GetLeft(draggingImage), (int)InkCanvas.GetTop(draggingImage));
+                    //mouseLeftDown();
+                    myimg_MouseDown();
                     //TODO: Fix Dragging
                 }
                 //lasso start
