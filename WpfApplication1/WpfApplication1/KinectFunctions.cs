@@ -540,35 +540,36 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
                     case "HELLO WORLD":
                         textBox.Gesture += "HELLO World";
                         break;
-                    case "a":
-                    case "b":
-                    case "c":
-                    case "d":
-                    case "e":
-                    case "f":
-                    case "g":
-                    case "h":
-                    case "i":
-                    case "j":
-                    case "k":
-                    case "l":
-                    case "m":
-                    case "n":
-                    case "o":
-                    case "p":
-                    case "q":
-                    case "r":
-                    case "s":
-                    case "t":
-                    case "u":
-                    case "v":
-                    case "w":
-                    case "x":
-                    case "y":
-                    case "z":
+                    case "A":
+                    case "B":
+                    case "C":
+                    case "D":
+                    case "E":
+                    case "F":
+                    case "G":
+                    case "H":
+                    case "I":
+                    case "J":
+                    case "K":
+                    case "L":
+                    case "M":
+                    case "N":
+                    case "O":
+                    case "P":
+                    case "Q":
+                    case "R":
+                    case "S":
+                    case "T":
+                    case "U":
+                    case "V":
+                    case "W":
+                    case "X":
+                    case "Y":
+                    case "Z":
                         string letter = result.ToLowerInvariant();
                         textBox.Gesture += letter;
                         tagName += letter;
+                        Console.WriteLine(tagName + "\n");
                         TagNameTextBlock.Text = tagName;
                         break;
                     default:
@@ -905,12 +906,12 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
             //Joint scaledJoint = joint.ScaleTo(1280, 720); 
              
             //convert & scale (.3 = means 1/3 of joint distance)
-            Joint scaledJoint = joint.ScaleTo(1280, 720, RHSensitivity[0], RHSensitivity[1]);
-            InkCanvas.SetLeft(element, scaledJoint.Position.X-element.Width/2);
-            InkCanvas.SetTop(element, scaledJoint.Position.Y-element.Height/2);
+            Joint scaledJoint = joint.ScaleTo(1366, 768, RHSensitivity[0], RHSensitivity[1]);
+            Canvas.SetLeft(element, scaledJoint.Position.X-element.Width/2 - 150);
+            Canvas.SetTop(element, scaledJoint.Position.Y-element.Height/2 - 300);
             textBox.RightPos = (int)scaledJoint.Position.X + " " + (int)scaledJoint.Position.Y + "\n";
-            RHPos[0] = scaledJoint.Position.X - element.Width/2;
-            RHPos[1] = scaledJoint.Position.Y - element.Height/2;
+            RHPos[0] = scaledJoint.Position.X;
+            RHPos[1] = scaledJoint.Position.Y;
         }
 
     }

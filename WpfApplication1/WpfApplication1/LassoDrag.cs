@@ -267,7 +267,7 @@ namespace WpfApplication1
 
 
         // METHOD: this method draws the commit box area. It first redraws the file system before drawing
-        private System.Windows.Controls.Image drawCommitBox()
+        private void drawCommitBox()
         {
 
             drawFileSystem();
@@ -335,7 +335,7 @@ namespace WpfApplication1
                 WC_inkCanvas.Children.Add(selectedFileImages[i]);
                 WC_inkCanvas.Children.Add(selectedFileTextBlocks[i]);
             }
-            return selectedFileImages[0];
+
         }
 
         // METHOD
