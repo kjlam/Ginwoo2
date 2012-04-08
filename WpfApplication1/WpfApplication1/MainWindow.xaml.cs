@@ -323,17 +323,19 @@ namespace WpfApplication1
         */
         private void CursorInCommitBoxZone()
         {
-            if (RHPos[0] >= WC_CommitBox.Margin.Left && RHPos[0] <= (WC_CommitBox.Margin.Left + WC_CommitBox.Width))
+            if (System.Windows.Forms.Cursor.Position.X >= WC_CommitBox.Margin.Left && System.Windows.Forms.Cursor.Position.X <= (WC_CommitBox.Margin.Left + WC_CommitBox.Width))
             {
-                if (RHPos[1] <= WC_CommitBox.Margin.Top && RHPos[1] >= (WC_CommitBox.Margin.Top - WC_CommitBox.Height))
+                if (System.Windows.Forms.Cursor.Position.Y <= WC_CommitBox.Margin.Top && System.Windows.Forms.Cursor.Position.Y >= (WC_CommitBox.Margin.Top - WC_CommitBox.Height))
                 {
-                    lassoFilesDragging = false;
+                    Console.WriteLine("cursor in commitbox zone X: " + System.Windows.Forms.Cursor.Position.X + " Y: " + System.Windows.Forms.Cursor.Position.Y);
                     drawCommitBox();
                     //TODO: make sure commit works
                     Terminal.GitAddFilesToCommit(selectedFileNames);
                     AddedFilesText.Visibility = Visibility.Visible;
                     NoAddedFilesText.Visibility = Visibility.Visible;
                     mouseLeftClick();
+                    WC_inkCanvas.EditingMode = InkCanvasEditingMode.None;
+                    lassoFilesDragging = false;
                 }
             }
         }
