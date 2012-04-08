@@ -653,7 +653,14 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
                         {
                             //TODO: pull registered
                             textBox.Gesture += "Pull Registered";
-                            KinectPull();
+                            if (CursorInDirectoryArea())
+                            {
+                                //TODO: git pull would be caled her, but currently no function
+                            }
+                            else
+                            {
+                                KinectPull();
+                            }
                         }
                     }
                     else

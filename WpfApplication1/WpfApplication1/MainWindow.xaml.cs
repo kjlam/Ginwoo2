@@ -65,31 +65,90 @@ namespace WpfApplication1
 
         }
 
-        private void CommitButton_MouseEnter(object sender, MouseEventArgs e)
+        #region HoverImages
+        private BitmapImage LoadImage(String s)
         {
             BitmapImage logo = new BitmapImage();
             logo.BeginInit();
-            logo.UriSource = new Uri("pack://application:,,,/WpfApplication1;component/Images/CommitButtonHover.png");
+            logo.UriSource = new Uri(s);
             logo.EndInit();
 
-            CommitButton.Source = logo;
+            return logo;
+        }
+
+        private void CommitButton_MouseEnter(object sender, MouseEventArgs e)
+        {
+            CommitButton.Source = LoadImage("pack://application:,,,/WpfApplication1;component/Images/CommitButtonHover.png");
         }
 
         private void CommitButton_MouseLeave(object sender, MouseEventArgs e)
         {
-            BitmapImage logo = new BitmapImage();
-            logo.BeginInit();
-            logo.UriSource = new Uri("pack://application:,,,/WpfApplication1;component/Images/CommitButton.png");
-            logo.EndInit();
-
-            CommitButton.Source = logo;
+            CommitButton.Source = LoadImage("pack://application:,,,/WpfApplication1;component/Images/CommitButton.png");
         }
+
+        private void LR_PushButton_MouseEnter(object sender, MouseEventArgs e)
+        {
+            LR_PushButton.Source = LoadImage("pack://application:,,,/WpfApplication1;component/Images/PushButtonHover.png");
+        }
+
+        private void LR_PushButton_MouseLeave(object sender, MouseEventArgs e)
+        {
+            LR_PushButton.Source = LoadImage("pack://application:,,,/WpfApplication1;component/Images/PushButton.png");
+        }
+
+
+        private void LR_TagButton_MouseEnter(object sender, MouseEventArgs e)
+        {
+            LR_TagButton.Source = LoadImage("pack://application:,,,/WpfApplication1;component/Images/TagButtonHover.png");
+        }
+
+        private void LR_TagButton_MouseLeave(object sender, MouseEventArgs e)
+        {
+            LR_TagButton.Source = LoadImage("pack://application:,,,/WpfApplication1;component/Images/TagButton.png");
+        }
+
+
+        private void MenuWorking_MouseEnter_1(object sender, MouseEventArgs e)
+        {
+            MenuWorking.Source = LoadImage("pack://application:,,,/WpfApplication1;component/Images/MenuHover.png");
+        }
+
+
+        private void MenuWorking_MouseLeave_1(object sender, MouseEventArgs e)
+        {
+            MenuWorking.Source = LoadImage("pack://application:,,,/WpfApplication1;component/Images/MenuWorking.png");
+        }
+
+
+
+        private void RR_MenuRemote_MouseEnter(object sender, MouseEventArgs e)
+        {
+            RR_MenuRemote.Source = LoadImage("pack://application:,,,/WpfApplication1;component/Images/MenuHover.png");
+        }
+
+        private void RR_MenuRemote_MouseLeave(object sender, MouseEventArgs e)
+        {
+            RR_MenuRemote.Source = LoadImage("pack://application:,,,/WpfApplication1;component/Images/MenuRemote.png");
+        }
+
+        private void LR_MenuLocal_MouseEnter(object sender, MouseEventArgs e)
+        {
+            LR_MenuLocal.Source = LoadImage("pack://application:,,,/WpfApplication1;component/Images/MenuHover.png");
+        }
+
+        private void LR_MenuLocal_MouseLeave(object sender, MouseEventArgs e)
+        {
+            LR_MenuLocal.Source = LoadImage("pack://application:,,,/WpfApplication1;component/Images/MenuLocal.png");
+        }
+
+
 
         private void LR_CommitBox_MouseEnter(object sender, MouseEventArgs e)
         {
 
         }
 
+        #endregion
         private void image6_ImageFailed(object sender, ExceptionRoutedEventArgs e)
         {
 
@@ -119,29 +178,25 @@ namespace WpfApplication1
 
         private void MenuWorking_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            switchToLocalRepository();
             drawLocalRepository();
-            WorkingCopy.Visibility = Visibility.Collapsed;
-            LocalRepository.Visibility = Visibility.Visible;
         }
 
         private void LR_MenuLocal_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            LocalRepository.Visibility = Visibility.Collapsed;
-            RemoteRepository.Visibility = Visibility.Visible;
+            switchToRemoteRepository();
             drawRemoteRepository();
         }
 
         private void LR_MenuLocal_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
-            LocalRepository.Visibility = Visibility.Collapsed;
-            WorkingCopy.Visibility = Visibility.Visible;
+            switchToWorkingCopy();
             drawFileSystem();
         }
 
         private void RR_MenuRemote_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
-            RemoteRepository.Visibility = Visibility.Collapsed;
-            LocalRepository.Visibility = Visibility.Visible;
+            switchToLocalRepository();
             //todo rename to RR_Menu
             drawLocalRepository();
             
@@ -167,6 +222,25 @@ namespace WpfApplication1
             hideTagSection();
         }
 
+        private void switchToWorkingCopy()
+        {
+            WorkingCopy.Visibility = Visibility.Visible;
+            LocalRepository.Visibility = Visibility.Collapsed;
+            RemoteRepository.Visibility = Visibility.Collapsed;
+        }
+        private void switchToLocalRepository()
+        {
+            WorkingCopy.Visibility = Visibility.Collapsed;
+            LocalRepository.Visibility = Visibility.Visible;
+            RemoteRepository.Visibility = Visibility.Collapsed;
+        }
+
+        private void switchToRemoteRepository()
+        {
+            WorkingCopy.Visibility = Visibility.Collapsed;
+            LocalRepository.Visibility = Visibility.Collapsed;
+            RemoteRepository.Visibility = Visibility.Visible;
+        }
 
         private void showTagSection()
         {
@@ -201,7 +275,6 @@ namespace WpfApplication1
                 return false;
 
         }
-
-
+        
     }
 }
