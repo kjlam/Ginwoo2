@@ -16,7 +16,7 @@ namespace WpfApplication1
 
     public class Terminal
     {
-        static internal String workingDirectory = @"C:\\Users\\Benj\\Desktop\\CS 160\\Ginect";
+        static internal String workingDirectory = @"C:\\Ginect";
         static internal String password = "password";
 
         public Terminal()
@@ -251,7 +251,7 @@ namespace WpfApplication1
 
                 // Actual code + debugging, do not delete
                 if (!SetForegroundWindow(mainWindowHandle))
-                {
+                {   
                     Debug.WriteLine("SET FOREGROUND WINDOW FAILED");
                     Debug.WriteLine("foreground window handle = " + GetForegroundWindow());
                 }

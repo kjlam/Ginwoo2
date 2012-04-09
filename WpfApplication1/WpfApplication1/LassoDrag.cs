@@ -47,11 +47,12 @@ namespace WpfApplication1
         {
             InitializeComponent();
             this.DataContext = textBox;
+            Mouse.OverrideCursor = Cursors.None;
             selectTimer.Tick += new EventHandler(SelectTimer_Root);
             selectTimer.Interval = new TimeSpan(0, 0, 1);
             dispatcherTimer.Interval = new TimeSpan(0, 0, 2);
             waitTimer.Interval = new TimeSpan(0, 0, 1);
-            DIRECTORY = @"C:\\Users\\Benj\\Desktop\\CS 160\\Ginect";
+            DIRECTORY = @"C:\\Ginect";
             MAX_FILE_DISPLAY_COUNT = 16;
             selectedFileNames = new List<string>();
             // get the files into the arraylist from the directory info
@@ -389,7 +390,7 @@ namespace WpfApplication1
                 Console.WriteLine(selectedFiles[i].Name);
 
                 selectedFileTextBlocks[i].Text = selectedFiles[i].Name;
-                selectedFileTextBlocks[i].Foreground = new SolidColorBrush(Colors.White);
+                selectedFileTextBlocks[i].Foreground = new SolidColorBrush(Colors.Blue);
                 selectedFileTextBlocks[i].Background = new SolidColorBrush(Colors.Black);
                 selectedFileTextBlocks[i].Width = IMAGE_WIDTH * 2;
                 selectedFileTextBlocks[i].TextAlignment = TextAlignment.Center;

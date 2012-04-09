@@ -109,7 +109,7 @@ namespace WpfApplication1
         bool actionWait = false;
         double[] RHPos = new double[2];
         float[] RHSensitivity = new float[2]{0.3f,0.3f};
-        int[] CursorDisplacement = new int[2] {-150, -300 };
+        int[] CursorDisplacement = new int[2] {0, -200 };
         bool selectActivated = false;
         bool tagIconActivated = false;
         private string tagName = "";
@@ -342,6 +342,7 @@ namespace WpfApplication1
                 skeletonValues[8] = headDepthPoint.Depth;
                 storedSkeletonValues.Add(skeletonValues);
                 System.Windows.Forms.Cursor.Position = new System.Drawing.Point((int)RHPos[0], (int)RHPos[1]);
+      
                 if (!actionWait)
                 {
                     CheckSwipe(e);
@@ -352,6 +353,10 @@ namespace WpfApplication1
                     //Console.WriteLine("lassofiles dragging");
                     //myimg_MouseMove();
                     CursorInCommitBoxZone();
+                }
+                if (selectActivated)
+                {
+                    mouseLeftDown();
                 }
             }
             GetCameraPoint(first, e);
@@ -549,7 +554,11 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
                         //call git tag function with the tagName string
                         Terminal.GitTagLatestCommit(tagName);
                         TaggedText.Visibility = Visibility.Visible;
+                        PushedText.Visibility = Visibility.Collapsed;
+                        AddedFilesText.Visibility = Visibility.Collapsed;
+                        NoAddedFilesText.Visibility = Visibility.Collapsed;
                         CommitedText.Visibility = Visibility.Collapsed;
+
                         hideTagSection();
                         tagIconActivated = false;
                         break;
@@ -614,17 +623,18 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
         #endregion
         void CheckSwipe(AllFramesReadyEventArgs e)
         {
-            if (storedSkeletonValues.Count >= 30)
+            int numFrames = 30;
+            if (storedSkeletonValues.Count >= numFrames)
             {
                 //arrays: index 0 is x values, index 1 is y values, and index 2 is z values
                 float[] LHCounter = new float[3] { 0, 0, 0 };
                 float[] RHCounter = new float[3] { 0, 0, 0 };
-                float[] LHThreshold = new float[3] { 25, 25, 50 };
-                float[] RHThreshold = new float[3] { 25, 25, 20 };
+                float[] LHThreshold = new float[3] { 30, 30, 50 };
+                float[] RHThreshold = new float[3] { 25, 25, 25 };
                 int skeletonListCount = storedSkeletonValues.Count;
                 bool posZChange = true;
 
-                for (int i = 30; i > 1; i--)
+                for (int i = numFrames; i > 1; i--)
                 {
                     float[] firstSkeleton = storedSkeletonValues[skeletonListCount - i];
                     float[] secondSkeleton = storedSkeletonValues[skeletonListCount - i + 1];
@@ -680,12 +690,12 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
                         {
                             //TODO: pull registered
                             textBox.Gesture += "Pull Registered";
-                            if (CursorInDirectoryArea())
+                            /*if (CursorInDirectoryArea())
                             {
                                 //TODO: git pull would be caled her, but currently no function, and switch to working mode
                                 //switchToWorkingMode();
                             }
-                            else
+                            else*/
                             {
                                 KinectPull();
                             }
@@ -743,7 +753,7 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
                 {
                     mouseLeftClick();
                     testnumber = 1;
-
+                    Cursor.Source = LoadImage("pack://application:,,,/WpfApplication1;component/Images/cursor.png");
                     //mouseLeftUp();
                     selectActivated = false;
                     lassoFilesDragging = true;
@@ -765,11 +775,23 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
                 //Decrease sensitivity to improve accuracy of lassoing, and move the cursor to the closest image of the mouse to move the set of images
                 else if (!selectActivated)
                 {
+                    Cursor.Source = LoadImage("pack://application:,,,/WpfApplication1;component/Images/cursorLasso.png");
                     RHSensitivity[0] = 0.3f;
                     RHSensitivity[1] = 0.3f;
                     WC_inkCanvas.EditingMode = InkCanvasEditingMode.Select;
                     selectActivated = true;
+                    //mouseLeftUp();
+                    Console.WriteLine("a");
                     mouseLeftDown();
+                    Console.WriteLine("a");
+                    //mouseLeftDown();
+                    //Console.WriteLine("a");
+                    //mouseLeftDown();
+                    //Console.WriteLine("a");
+                    //mouseLeftDown();
+                    //Console.WriteLine("a");
+
+
                 }
             }
         }
