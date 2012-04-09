@@ -10,10 +10,11 @@
         <Image Height="82" HorizontalAlignment="Right" Margin="0,178,434,0" Name="Cursor" Stretch="UniformToFill" VerticalAlignment="Top" Width="71" Source="/WpfApplication1;component/Images/cursor.png" Panel.ZIndex="5" />
         <Canvas Name="WorkingCopy" Visibility="Visible" Height="720" Width="1280" >
             <InkCanvas Name="WC_inkCanvas" Background="Transparent" EditingMode="None" Height="720" Width="545" Panel.ZIndex="0" Grid.ColumnSpan="3" Margin="0,0,0,0"></InkCanvas>
-            <Button Content="DisplayCommit" Height="30" HorizontalAlignment="Left" Margin="650,400,0,0" Name="button1" VerticalAlignment="Top" Width="89" Click="button1_Click" Panel.ZIndex="1"/>
-            <Button Content="Lasso" Height="30" HorizontalAlignment="Left" Margin="650,350,0,0" Name="button2" VerticalAlignment="Top" Width="89" Click="button2_Click" Panel.ZIndex="1"/>
-            <Button Content="Select" Height="30" HorizontalAlignment="Left" Margin="650,300,0,0" Name="button3" VerticalAlignment="Top" Width="89" Click="button3_Click" Panel.ZIndex="1"/>
-            <Button Content="GetSelectShit" Height="30" HorizontalAlignment="Left" Margin="650,250,0,0" Name="button4" VerticalAlignment="Top" Width="89" Click="button4_Click" Panel.ZIndex="1"/>
+            
+            <Button Content="DisplayCommit" Height="30" HorizontalAlignment="Left" Margin="650,400,0,0" Name="button1" VerticalAlignment="Top" Width="89" Click="button1_Click" Panel.ZIndex="5"/>
+            <Button Content="Lasso" Height="30" HorizontalAlignment="Left" Margin="650,350,0,0" Name="button2" VerticalAlignment="Top" Width="89" Click="button2_Click" Panel.ZIndex="5"/>
+            <Button Content="Select" Height="30" HorizontalAlignment="Left" Margin="650,300,0,0" Name="button3" VerticalAlignment="Top" Width="89" Click="button3_Click" Panel.ZIndex="5"/>
+            <Button Content="GetSelectShit" Height="30" HorizontalAlignment="Left" Margin="650,250,0,0" Name="button4" VerticalAlignment="Top" Width="89" Click="button4_Click" Panel.ZIndex="5"/>
 
             <Image Height="680" HorizontalAlignment="Left" Name="WC_Background" Stretch="Fill" VerticalAlignment="Top" Width="1260" Source="/WpfApplication1;component/Images/bg.png" ImageFailed="image1_ImageFailed" Grid.ColumnSpan="3" Panel.ZIndex="-5" />
             <Image Height="640" HorizontalAlignment="Left" Margin="24,20,0,0" Name="WC_Directory" Stretch="Fill" VerticalAlignment="Top" Width="605" Source="/WpfApplication1;component/Images/CommitBox.png" ImageFailed="WC_CommitBox_ImageFailed" Panel.ZIndex="-2" />
