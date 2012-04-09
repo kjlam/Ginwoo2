@@ -360,6 +360,20 @@ namespace WpfApplication1
             }
         }
 
+        private void HelpIcon_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+
+            HelpMePleaseHelpHelp.Visibility = Visibility.Visible;
+        }
+
+        private void HelpMePleaseHelpHelp_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            HelpMePleaseHelpHelp.Visibility = Visibility.Collapsed;
+        }
+
+
+
+
         
     }
 }
