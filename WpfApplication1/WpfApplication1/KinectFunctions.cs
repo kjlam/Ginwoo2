@@ -342,7 +342,7 @@ namespace WpfApplication1
                 skeletonValues[8] = headDepthPoint.Depth;
                 storedSkeletonValues.Add(skeletonValues);
                 System.Windows.Forms.Cursor.Position = new System.Drawing.Point((int)RHPos[0], (int)RHPos[1]);
-                actionWait = false;
+      
                 if (!actionWait)
                 {
                     CheckSwipe(e);
@@ -615,13 +615,13 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
         #endregion
         void CheckSwipe(AllFramesReadyEventArgs e)
         {
-            int numFrames = 15;
+            int numFrames = 30;
             if (storedSkeletonValues.Count >= numFrames)
             {
                 //arrays: index 0 is x values, index 1 is y values, and index 2 is z values
                 float[] LHCounter = new float[3] { 0, 0, 0 };
                 float[] RHCounter = new float[3] { 0, 0, 0 };
-                float[] LHThreshold = new float[3] { 30, 30, 40 };
+                float[] LHThreshold = new float[3] { 30, 30, 50 };
                 float[] RHThreshold = new float[3] { 25, 25, 25 };
                 int skeletonListCount = storedSkeletonValues.Count;
                 bool posZChange = true;
@@ -671,14 +671,14 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
                     if (LHCounter[0] < LHThreshold[0] && LHCounter[1] < LHThreshold[1])
                     {
                         actionWait = true;
-                        //selectTimer.Start();
+                        selectTimer.Start();
                         if (LHCounter[2] > LHThreshold[2])
                         {
                             //TODO: push registered
                             textBox.Gesture += "Push Registered";
                             KinectPush();
                         }
-                        else if (LHCounter[2] < -LHThreshold[2]/1.5)
+                        else if (LHCounter[2] < -LHThreshold[2])
                         {
                             //TODO: pull registered
                             textBox.Gesture += "Pull Registered";
@@ -738,7 +738,7 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
                 //TODO: Select action (check if hand positions within directory area
                 textBox.Gesture += "SELECTED";
                 actionWait = true;
-                //selectTimer.Start();
+                selectTimer.Start();
                 //lasso completed when select is activated again (hands touch again for the interval)
                 //lasso completed, so change cursor senitivity back to original
                 if (selectActivated)

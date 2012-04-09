@@ -7,7 +7,7 @@
     
     <Canvas Name="Main" Visibility="Visible" Height="720" Width="1280">
 
-        <my:KinectSkeletonViewer Canvas.Left="136" Canvas.Top="195" Name="kinectSkeletonViewer1" Height="172" Width="209" Kinect="{Binding ElementName=kinectSensorChooser1, Path=Kinect}" Margin="68,261,668,248" Panel.ZIndex="5"/>
+        <my:KinectSkeletonViewer Canvas.Left="136" Canvas.Top="195" Name="kinectSkeletonViewer1" Height="172" Width="209" Visibility ="Collapsed" Kinect="{Binding ElementName=kinectSensorChooser1, Path=Kinect}" Margin="68,261,668,248" Panel.ZIndex="5"/>
         
         <TextBlock Grid.ColumnSpan="3" Height="101" HorizontalAlignment="Left" Margin="657,70,0,0" Name="NoAddedFilesText" VerticalAlignment="Top" Width="448" Foreground="White" TextWrapping="Wrap" Panel.ZIndex="1" Visibility="visible"> 
              <Bold>You haven't added any files to this commit yet.</Bold> <LineBreak/> To add files to a commit, select your files in the Files area (in Working Copy mode) using the lasso motion and
@@ -29,9 +29,6 @@
         <TextBlock Grid.ColumnSpan="3" Height="101" HorizontalAlignment="Left" Margin="657,70,0,0" Name="PushedText" VerticalAlignment="Top" Width="448" Foreground="White" TextWrapping="Wrap" Panel.ZIndex="1" Visibility="Collapsed"> 
              <Bold>You've pushed!</Bold> <LineBreak/> To return to your local repository, simply pull once on the mode menu. To return to your working copy, pull twice.<LineBreak/><LineBreak/> <Bold>If you need help with any of the motions, or if something confuses you, simply click the question mark on the right for help. </Bold>
         </TextBlock>
-
-
-        <Ellipse Canvas.Left="3" Canvas.Top="0" Fill="#FF2CACE3" Name="rightEllipse" Width="30" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" Opacity="1" Stroke="White" Margin="10,10,0,0" Panel.ZIndex="5" />
 
         <Image Height="82" HorizontalAlignment="Right" Margin="0,178,434,0" Name="Cursor" Stretch="UniformToFill" IsHitTestVisible="False" VerticalAlignment="Top" Width="71" Source="/WpfApplication1;component/Images/cursor.png" Panel.ZIndex="5" />
         

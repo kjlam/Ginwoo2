@@ -251,7 +251,7 @@ namespace WpfApplication1
 
                 // Actual code + debugging, do not delete
                 if (!SetForegroundWindow(mainWindowHandle))
-                {
+                {   
                     Debug.WriteLine("SET FOREGROUND WINDOW FAILED");
                     Debug.WriteLine("foreground window handle = " + GetForegroundWindow());
                 }
