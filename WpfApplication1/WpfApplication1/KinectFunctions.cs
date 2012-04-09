@@ -369,7 +369,7 @@ namespace WpfApplication1
             //TODO: Do somethign as user has started lasso
             actionWait = false;
 
-            if (selectTimer.Interval == new TimeSpan(0, 0, 3))
+            if (selectTimer.Interval == new TimeSpan(0, 0, 1))
             {
                 
                 selectTimer.Stop();

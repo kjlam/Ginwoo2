@@ -118,7 +118,7 @@
         </Canvas>
 
 
-        <Canvas Name="HelpMePleaseHelpHelp" Visibility="Visible" Height="720" Width="1280">
+        <Canvas Name="HelpMePleaseHelpHelp" Visibility="Collapsed" Height="720" Width="1280">
             <Image Height="680" HorizontalAlignment="Left" Name="Help_Background" Stretch="Fill" VerticalAlignment="Top" Width="1260" Source="/WpfApplication1;component/Images/bg.png" ImageFailed="image1_ImageFailed" Grid.ColumnSpan="3" Panel.ZIndex="-5" />
             <TextBlock Height="680" Width="1200" Foreground="White" Name="HelpHelpHelpTextBlock" FontSize="15" TextAlignment="Center">
                 <LineBreak/>
