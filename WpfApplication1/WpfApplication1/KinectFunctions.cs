@@ -115,6 +115,8 @@ namespace WpfApplication1
         private string tagName = "";
         private bool lassoFilesDragging = false;
 
+        int testnumber = 0;
+
     #region mouseEmulation
     [DllImport("user32.dll")]
     static extern IntPtr GetMessageExtraInfo();
@@ -290,6 +292,16 @@ namespace WpfApplication1
 
         void sensor_AllFramesReady(object sender, AllFramesReadyEventArgs e)
         {
+            
+            if (testnumber == 1)
+            {
+                getSelectedFiles();
+                startDrag();
+                testnumber = 0;
+            }
+            
+            drag();
+
             if (closing)
             {
                 return;
@@ -357,7 +369,7 @@ namespace WpfApplication1
             //TODO: Do somethign as user has started lasso
             actionWait = false;
 
-            if (selectTimer.Interval == new TimeSpan(0, 0, 1))
+            if (selectTimer.Interval == new TimeSpan(0, 0, 3))
             {
                 
                 selectTimer.Stop();
@@ -695,6 +707,7 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
             if (storedSkeletonValues.Count > numFrames)
             {
                 //selectThreshold: how far the left and right hands can be and still register as a select
+               /*
                 float[] selectThreshold = new float[3]{50,50,50};
                 for (int i = numFrames-1; i > 0; i--)
                 {
@@ -709,6 +722,16 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
                         }
                     }
                 }
+                */
+
+                for (int i = numFrames-1; i > 0; i--)
+                {
+                    if (storedSkeletonValues[storedSkeletonValues.Count - i][7] < storedSkeletonValues[storedSkeletonValues.Count-i][1])
+                    {
+                        return;
+                    }
+                }
+                 
                 //TODO: Select action (check if hand positions within directory area
                 textBox.Gesture += "SELECTED";
                 actionWait = true;
@@ -717,12 +740,18 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
                 //lasso completed, so change cursor senitivity back to original
                 if (selectActivated)
                 {
+                    mouseLeftClick();
+                    testnumber = 1;
+
+                    //mouseLeftUp();
                     selectActivated = false;
                     lassoFilesDragging = true;
                     RHSensitivity[0] = 0.3f;
                     RHSensitivity[1] = 0.3f;
-                    mouseLeftClick();
+                    //WC_inkCanvas.EditingMode = InkCanvasEditingMode.Select;
                     getSelectedFiles();
+                    //WC_inkCanvas.EditingMode = InkCanvasEditingMode.None;
+                    //startDrag();
                     //Console.WriteLine("selectactivated");
                     //System.Windows.Controls.Image draggingImage  = getSelectedFiles();
                     //System.Windows.Controls.Image draggingImage = findNearestImage(System.Windows.Forms.Cursor.Position.X, System.Windows.Forms.Cursor.Position.Y);
@@ -744,14 +773,20 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
             }
         }
 
-        static void KinectPush()
+         void KinectPush()
         {
-            mouseLeftClick();
+            if (!selectActivated)
+            {
+                mouseLeftClick();
+            }
         }
 
-        static void KinectPull()
+        void KinectPull()
         {
-            mouseRightClick();   
+            if (!selectActivated)
+            {
+                mouseRightClick();
+            }
         }
 
         static void mouseLeftClick()
@@ -777,6 +812,13 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
               SendInput(1,ref Input,Marshal.SizeOf(new INPUT()));
         }
 
+        static void mouseLeftUp()
+        {
+            INPUT Input = new INPUT();
+            Input.type = SendInputEventType.InputMouse;
+            Input.mi.dwFlags = MouseEventFlags.LEFTUP;
+            SendInput(1, ref Input, Marshal.SizeOf(new INPUT()));
+        }
 
         void FollowPointer()
         {

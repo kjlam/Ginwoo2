@@ -335,8 +335,8 @@ namespace WpfApplication1
                     AddedFilesText.Visibility = Visibility.Visible;
                     NoAddedFilesText.Visibility = Visibility.Visible;
                     mouseLeftClick();
-                    WC_inkCanvas.EditingMode = InkCanvasEditingMode.None;
                     lassoFilesDragging = false;
+                    finishDrag();
                 }
             }
         }
