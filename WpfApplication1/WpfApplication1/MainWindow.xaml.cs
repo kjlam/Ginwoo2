@@ -28,7 +28,7 @@ namespace WpfApplication1
     /// </summary>
     public partial class MainWindow : Window
     {
-
+        bool JustPushed = true;
 
         private void image5_ImageFailed(object sender, ExceptionRoutedEventArgs e)
         {
@@ -227,8 +227,15 @@ namespace WpfApplication1
         private void RR_MenuRemote_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
             switchToLocalRepository();
+            if (JustPushed)
+            {
+                PushedText.Visibility = Visibility.Visible;
+                NoAddedFilesText.Visibility = Visibility.Collapsed;
+                JustPushed = false;
+            }
             //todo rename to RR_Menu
             drawLocalRepository();
+
             
         }
 
@@ -237,8 +244,9 @@ namespace WpfApplication1
             //TODO: figure out wut message to put in git commit, maybe just number counter, resets status message in working 
             Terminal.GitCommitWithMessage("Default Message");
             switchToLocalRepository();
+            drawLocalRepository();
             AddedFilesText.Visibility = Visibility.Collapsed;
-            NoAddedFilesText.Visibility = Visibility.Visible;
+            NoAddedFilesText.Visibility = Visibility.Collapsed;
             CommitedText.Visibility = Visibility.Visible;
         }
 
@@ -250,6 +258,7 @@ namespace WpfApplication1
             TaggedText.Visibility = Visibility.Collapsed;
             CommitedText.Visibility = Visibility.Collapsed;
             PushedText.Visibility = Visibility.Visible;
+            JustPushed = true;
 
         }
 
