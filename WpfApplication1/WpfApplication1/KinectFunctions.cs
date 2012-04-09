@@ -342,6 +342,7 @@ namespace WpfApplication1
                 skeletonValues[8] = headDepthPoint.Depth;
                 storedSkeletonValues.Add(skeletonValues);
                 System.Windows.Forms.Cursor.Position = new System.Drawing.Point((int)RHPos[0], (int)RHPos[1]);
+                actionWait = false;
                 if (!actionWait)
                 {
                     CheckSwipe(e);
@@ -670,7 +671,7 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
                     if (LHCounter[0] < LHThreshold[0] && LHCounter[1] < LHThreshold[1])
                     {
                         actionWait = true;
-                        selectTimer.Start();
+                        //selectTimer.Start();
                         if (LHCounter[2] > LHThreshold[2])
                         {
                             //TODO: push registered
@@ -737,7 +738,7 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
                 //TODO: Select action (check if hand positions within directory area
                 textBox.Gesture += "SELECTED";
                 actionWait = true;
-                selectTimer.Start();
+                //selectTimer.Start();
                 //lasso completed when select is activated again (hands touch again for the interval)
                 //lasso completed, so change cursor senitivity back to original
                 if (selectActivated)

@@ -47,6 +47,7 @@ namespace WpfApplication1
         {
             InitializeComponent();
             this.DataContext = textBox;
+            Mouse.OverrideCursor = Cursors.None;
             selectTimer.Tick += new EventHandler(SelectTimer_Root);
             selectTimer.Interval = new TimeSpan(0, 0, 1);
             dispatcherTimer.Interval = new TimeSpan(0, 0, 2);
