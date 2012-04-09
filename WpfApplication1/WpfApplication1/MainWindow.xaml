@@ -4,16 +4,17 @@
         xmlns:my="clr-namespace:Microsoft.Samples.Kinect.WpfViewers;assembly=Microsoft.Samples.Kinect.WpfViewers" 
         Title="MainWindow" Loaded="Window_Loaded" Height="720" Width="1280"
         Left="0" Top="0">
-    
+
     <Canvas Name="Main" Visibility="Visible" Height="720" Width="1280">
+        <Image Height="680" HorizontalAlignment="Left" Name="Background" Stretch="Fill" VerticalAlignment="Top" Width="1260" Source="/WpfApplication1;component/Images/bg.png" ImageFailed="image1_ImageFailed" Grid.ColumnSpan="3" Panel.ZIndex="-5" />
         <TextBlock Grid.ColumnSpan="3" Height="101" HorizontalAlignment="Left" Margin="657,70,0,0" Name="NoAddedFilesText" VerticalAlignment="Top" Width="448" Foreground="White" TextWrapping="Wrap" Panel.ZIndex="1" Visibility="visible"> 
              <Bold>You haven't added any files to this commit yet.</Bold> <LineBreak/> To add files to a commit, select your files in the Files area (in Working Copy mode) using the lasso motion and
             drag them to the Current Commit area. <LineBreak/><LineBreak/> <Bold>If you need help with any of the motions, or if something confuses you, simply click the question mark on the right for help. </Bold>
         </TextBlock>
-        
+
         <TextBlock Grid.ColumnSpan="3" Height="101" HorizontalAlignment="Left" Margin="657,70,0,0" Name="AddedFilesText" VerticalAlignment="Top" Width="448" Foreground="White" TextWrapping="Wrap" Panel.ZIndex="1" Visibility="Collapsed"> 
                 <Bold>You've added files to this commit.</Bold> <LineBreak/> To commit your files, perform the push motion on the Commit button (in Working Copy mode). <LineBreak/><LineBreak/> <Bold>If you need help with any of the motions, or if something confuses you, simply click the question mark on the right for help. </Bold>
-                </TextBlock>
+        </TextBlock>
 
         <TextBlock Grid.ColumnSpan="3" Height="101" HorizontalAlignment="Left" Margin="657,70,0,0" Name="CommitedText" VerticalAlignment="Top" Width="448" Foreground="White" TextWrapping="Wrap" Panel.ZIndex="1" Visibility="Collapsed"> 
             <Bold>You've made a commit!</Bold> <LineBreak/> To tag your commit with the name of your choice, perform the push motion on the tag icon (in Local Repository mode). To push your commit (and your tag), push the push button. <LineBreak/><LineBreak/> <Bold>If you need help with any of the motions, or if something confuses you, simply click the question mark on the right for help. </Bold>
@@ -33,13 +34,11 @@
         <Image Height="82" HorizontalAlignment="Right" Margin="0,178,434,0" Name="Cursor" Stretch="UniformToFill" VerticalAlignment="Top" Width="71" Source="/WpfApplication1;component/Images/cursor.png" Panel.ZIndex="5" />
         <Canvas Name="WorkingCopy" Visibility="Visible" Height="720" Width="1280" >
             <InkCanvas Name="WC_inkCanvas" Background="Transparent" EditingMode="None" Height="720" Width="1280" Panel.ZIndex="0" Grid.ColumnSpan="3" Margin="0,0,0,0"></InkCanvas>
-            
+
             <Button Content="DisplayCommit" Height="30" HorizontalAlignment="Left" Margin="650,400,0,0" Name="button1" VerticalAlignment="Top" Width="89" Click="button1_Click" Panel.ZIndex="5"/>
             <Button Content="Lasso" Height="30" HorizontalAlignment="Left" Margin="650,350,0,0" Name="button2" VerticalAlignment="Top" Width="89" Click="button2_Click" Panel.ZIndex="5"/>
             <Button Content="Select" Height="30" HorizontalAlignment="Left" Margin="650,300,0,0" Name="button3" VerticalAlignment="Top" Width="89" Click="button3_Click" Panel.ZIndex="5"/>
             <Button Content="GetSelectShit" Height="30" HorizontalAlignment="Left" Margin="650,250,0,0" Name="button4" VerticalAlignment="Top" Width="89" Click="button4_Click" Panel.ZIndex="5"/>
-
-            <Image Height="680" HorizontalAlignment="Left" Name="WC_Background" Stretch="Fill" VerticalAlignment="Top" Width="1260" Source="/WpfApplication1;component/Images/bg.png" ImageFailed="image1_ImageFailed" Grid.ColumnSpan="3" Panel.ZIndex="-5" />
             <Image Height="640" HorizontalAlignment="Left" Margin="24,20,0,0" Name="WC_Directory" Stretch="Fill" VerticalAlignment="Top" Width="605" Source="/WpfApplication1;component/Images/CommitBox.png" ImageFailed="WC_CommitBox_ImageFailed" Panel.ZIndex="-2" />
             <Image Height="212" HorizontalAlignment="Left" Margin="635,442,0,0" Name="WC_CommitBox" Source="/WpfApplication1;component/Images/CommitBox.png" Stretch="Fill" VerticalAlignment="Top" Width="605" Grid.ColumnSpan="3" Panel.ZIndex="-2" />
             <Rectangle Grid.ColumnSpan="3" Height="146" HorizontalAlignment="Left" Margin="638,32,0,0" Name="rectangle4" Stroke="Black" VerticalAlignment="Top" Width="594" Fill="Black" Opacity="0.9" Panel.ZIndex="0" />
@@ -65,7 +64,6 @@
             <Image Height="14" HorizontalAlignment="Right" Margin="0,412,57,0" Name="negative73" Panel.ZIndex="2" Stretch="Fill" VerticalAlignment="Top" Width="175" Source="/WpfApplication1;component/Images/CommitBox.png" Opacity="0" Canvas.Left="744" Canvas.Top="4" />
         </Canvas>
         <Canvas Name="LocalRepository" Visibility="Collapsed"  Height="720" Width="1280" >
-            <Image Height="680" HorizontalAlignment="Left" Name="LR_Background" Stretch="Fill" VerticalAlignment="Top" Width="1260" Source="/WpfApplication1;component/Images/bg.png" ImageFailed="image1_ImageFailed" Grid.ColumnSpan="3" Panel.ZIndex="-5" />
             <Image Height="640" HorizontalAlignment="Left" Margin="24,20,0,0" Name="LR_Directory" Stretch="Fill" VerticalAlignment="Top" Width="605" Source="/WpfApplication1;component/Images/CommitBox.png" MouseEnter="LR_CommitBox_MouseEnter" Panel.ZIndex="-2" />
             <Image Height="285" HorizontalAlignment="Left" Margin="582,406,0,0" Name="LR_PushButton" Source="/WpfApplication1;component/Images/PushButton.png" Stretch="Uniform" VerticalAlignment="Top" Width="640" Grid.ColumnSpan="3" MouseLeftButtonDown="LR_PushButton_MouseLeftButtonDown" MouseEnter="LR_PushButton_MouseEnter" MouseLeave="LR_PushButton_MouseLeave" />
             <Rectangle Grid.ColumnSpan="3" Height="146" HorizontalAlignment="Left" Margin="638,32,0,0" Name="rectangle3" Stroke="Black" VerticalAlignment="Top" Width="594" Fill="Black" Opacity="0.9" Panel.ZIndex="0" />
@@ -94,14 +92,13 @@
 
         </Canvas>
         <Canvas Name="RemoteRepository" Visibility="Collapsed" Height="720" Width="1280">
-          
-                <Image Height="680" HorizontalAlignment="Left" Name="RR_Background" Stretch="Fill" VerticalAlignment="Top" Width="1260" Source="/WpfApplication1;component/Images/bg.png" ImageFailed="image1_ImageFailed" Grid.ColumnSpan="3" Panel.ZIndex="-5" />
-                <Image Height="640" HorizontalAlignment="Left" Margin="24,20,0,0" Name="RR_Directory" Stretch="Fill" VerticalAlignment="Top" Width="605" Source="/WpfApplication1;component/Images/CommitBox.png" Panel.ZIndex="-2" />
+
+            <Image Height="640" HorizontalAlignment="Left" Margin="24,20,0,0" Name="RR_Directory" Stretch="Fill" VerticalAlignment="Top" Width="605" Source="/WpfApplication1;component/Images/CommitBox.png" Panel.ZIndex="-2" />
             <Image HorizontalAlignment="Left" Margin="719,192,0,287" Name="RR_MenuRemote" Stretch="UniformToFill" Width="506" Source="/WpfApplication1;component/Images/MenuRemote.png" Grid.ColumnSpan="3" MouseRightButtonDown="RR_MenuRemote_MouseRightButtonDown" Panel.ZIndex="1" MouseEnter="RR_MenuRemote_MouseEnter" MouseLeave="RR_MenuRemote_MouseLeave" />
-                <Label Content="Files" Height="33" HorizontalAlignment="Left" Margin="34,31,0,0" Name="RR_Files" VerticalAlignment="Top" Width="77" Foreground="White" FontFamily="Calibri" FontSize="20" />
+            <Label Content="Files" Height="33" HorizontalAlignment="Left" Margin="34,31,0,0" Name="RR_Files" VerticalAlignment="Top" Width="77" Foreground="White" FontFamily="Calibri" FontSize="20" />
             <Rectangle Grid.ColumnSpan="3" Height="146" HorizontalAlignment="Left" Margin="638,32,0,0" Name="rectangle1" Stroke="Black" VerticalAlignment="Top" Width="594" Fill="Black" Opacity="0.9" Panel.ZIndex="-2" />
             <Label Content="Status" FontFamily="Calibri" FontSize="20" Foreground="White" Height="33" HorizontalAlignment="Left" Margin="649,32,0,0" Name="RR_Status" VerticalAlignment="Top" Width="77" />
-           
+
             <Image Height="151" Margin="103,27,0,0" Name="RR_HelpIcon" Stretch="UniformToFill" VerticalAlignment="Top" Source="/WpfApplication1;component/Images/HelpIcon.png" ImageFailed="image5_ImageFailed" Grid.Column="2" Width="84" HorizontalAlignment="Left" MouseEnter="RR_HelpIcon_MouseEnter" MouseLeave="RR_HelpIcon_MouseLeave" Canvas.Left="1022" Canvas.Top="5" />
 
             <Image Height="69" HorizontalAlignment="Left" Margin="730,168,0,0" Name="negative1" Stretch="Fill" VerticalAlignment="Top" Width="178" Panel.ZIndex="2"  Source="/WpfApplication1;component/Images/CommitBox.png" Opacity="0" Canvas.Left="-25" />
@@ -113,63 +110,50 @@
             <Image Height="36" HorizontalAlignment="Right" Margin="0,412,57,0" Name="negative7" Panel.ZIndex="2" Stretch="Fill" VerticalAlignment="Top" Width="175" Source="/WpfApplication1;component/Images/CommitBox.png" Opacity="0" Canvas.Left="740" Canvas.Top="-4" />
             <InkCanvas Name="RR_inkCanvas" Background="Transparent" EditingMode="Select" Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="0,0,0,0" Height="720" Width="640" Gesture="inkCanvas_Gesture_1">
             </InkCanvas>
-            
-            
+
+
         </Canvas>
 
-
-        <Canvas Name="HelpMePleaseHelpHelp" Visibility="Collapsed" Height="720" Width="1280">
-            <Image Height="680" HorizontalAlignment="Left" Name="Help_Background" Stretch="Fill" VerticalAlignment="Top" Width="1260" Source="/WpfApplication1;component/Images/bg.png" ImageFailed="image1_ImageFailed" Grid.ColumnSpan="3" Panel.ZIndex="-5" />
-         
-            <TextBlock Height="641" Width="738" Foreground="White" Name="HelpHelpHelpTextBlock" FontSize="15" TextAlignment="Left" Canvas.Left="147" Canvas.Top="20">
+        <Canvas Name="HelpMePleaseHelpHelp" Visibility="Visible" Height="720" Width="1280" Panel.ZIndex="1">
+            <Image Height="680" HorizontalAlignment="Left" Name="Help_Background" Stretch="Fill" VerticalAlignment="Top" Width="1260" Source="/WpfApplication1;component/Images/bg.png" ImageFailed="image1_ImageFailed" Grid.ColumnSpan="3" Panel.ZIndex="-5" Canvas.Left="-8" Canvas.Top="15" />
+            <Label Foreground="White" FontWeight="Bold" Canvas.Top="20" Canvas.Left="20" FontSize="35" Content="Help" />
+            <Label Foreground="White" FontWeight="Bold" FontSize="20" Content="GESTURES" Canvas.Top="120" Canvas.Left="115"/>
+            <TextBlock Height="298" Width="528"  Canvas.Top="168" Canvas.Left="168" TextWrapping="Wrap" Foreground="White">
+                Ginect recognizes <Bold>three types of gestures:</Bold> <LineBreak/>
                 <LineBreak/>
-                Help <LineBreak/><LineBreak/>
- 
-                GESTURES<LineBreak/><LineBreak/>
-                
-                Ginect recognizes three gestures:<LineBreak/><LineBreak/>
-  
-	            1. Push<LineBreak/>
-	
-	            Many buttons, such as the Tag and Commit button, require a push to activate. <LineBreak/>
-	            To push on any of these buttons, make sure that your cursor is over the button <LineBreak/>
-                and that your hands are at about the same distance from your body. Then move your right hand <LineBreak/>
-                forward, as if pushing on an object, to push the button. <LineBreak/><LineBreak/>
-	
-	
-	            2. Pull<LineBreak/>
-	
-	            The pull gesture is just like the push gesture; the only <LineBreak/>
-                difference is that instead of moving your right hand forward, you will want to <LineBreak/>
-                move it backwards towards yourself, as if pulling on an object. <LineBreak/><LineBreak/>
-	
-	
-	        3. Lasso<LineBreak/>
-	
-	        The lasso gesture is used to select files to add to commit. <LineBreak/>
-	        To signal that you want to begin to lasso, put your left hand up above your head for 3 seconds.<LineBreak/>
-	        The pointer will change to the lasso pointer. Then use your right hand to outline the area within <LineBreak/>
-            to select your files. To end lasso and select the files, put your left hand above your head again.<LineBreak/>
-            You can then drag the files to the Commit Box<LineBreak/><LineBreak/>
-	
-            THE MODE SWITCHER MENU<LineBreak/>
-
-	        The three-sphere image on the right side of the application is the Mode Switcher Menu. <LineBreak/>
-            It lets you move between the three modes of Ginect: Working Copy, Local Repository and Remote Repository.<LineBreak/>
-	        Your Working Copy is represented by the sphere which is closest to you and your Remote Repository by<LineBreak/>
-	        the farthest. To switch from your current mode (which is glowing) to the mode adjacent to it<LineBreak/>
-	        and closer to you, pull on the menu. To switch from your current mode to the mode adjacent to it but <LineBreak/>farther away, push on the menu.<LineBreak/>
-                
+	            <Bold>Push</Bold>
+	            <LineBreak/>
+	            Many buttons, such as the Tag and Commit button, require a push to activate. To push on any of
+                these buttons, make sure that your cursor is over the button
+                and that your hands are at about the same distance from your body. Then move your right hand 
+                forward, as if pushing on an object, to push the button.<LineBreak/>
+	            <LineBreak/>
+	            <Bold>Pull</Bold><LineBreak/>
+	            The pull gesture is just like the push gesture; the only
+                difference is that instead of moving your right hand forward, you will want to
+                move it backwards towards yourself, as if pulling on an object.<LineBreak/>
+	            <LineBreak/>
+	            <Bold>Lasso</Bold><LineBreak/>
+	            The lasso gesture is used to select files to add to commit.
+	            To signal that you want to begin to lasso, put your left hand up above your head for 2 seconds.
+	            The pointer will change to the lasso pointer. Then use your right hand to outline the area within 
+                to select your files (an outline will appear in orange). To end the lasso and select the files,
+                put your left hand above your head once more. You can then drag your files to the Current Commit box.
             </TextBlock>
-            
-            <TextBlock Canvas.Left="1058" Canvas.Top="85" Height="511" Foreground="White" FontSize="60" TextAlignment="Center">
-                PULL<LineBreak/> TO<LineBreak/> GO <LineBreak/>BACK<LineBreak/>
+            <Label Foreground="White" FontWeight="Bold" Content="THE MODE SWITCHER MENU" Canvas.Top="470" Canvas.Left="115" FontSize="20"/>
+            <TextBlock Canvas.Top="520" Canvas.Left="168" TextWrapping="Wrap" Foreground="White" Width="528" Height="102">
+        The <Bold>three-sphere </Bold> on the right side of the application (displayed again on the right) is the Mode Switcher Menu.
+            It lets you move between the three modes of Ginect: <Bold>Working Copy</Bold>, <Bold>Local Repository</Bold> and <Bold>Remote Repository</Bold>.
+	        Your Working Copy is represented by the sphere which is closest to you and your Remote Repository by
+	        the farthest. To switch from your current mode (which is glowing) to the mode adjacent to it
+	        and closer to you, pull on the menu. To switch from your current mode to the mode adjacent to it but
+            farther away, push on the menu.
             </TextBlock>
-
-            <Image Source="/WpfApplication1;component/Images/SMILE.png" Height="150" Width="156" Canvas.Left="1066" Canvas.Top="446">
-                
-            </Image>
+            <Image Canvas.Left="782" Canvas.Top="478" Height="158" Name="image1" Stretch="UniformToFill" Width="312" Source="/WpfApplication1;component/Images/MenuWorking.png" />
+            <Image Canvas.Left="782" Canvas.Top="322" Height="138" Name="image2" Stretch="UniformToFill" Width="310" Source="/WpfApplication1;component/Images/lasso.PNG" />
+            <Image Canvas.Left="782" Canvas.Top="198" Height="105" Name="image3" Stretch="UniformToFill" Width="102" Source="/WpfApplication1;component/Images/TagButton.png" />
+            <Image Canvas.Left="892" Canvas.Top="198" Height="105" Name="image4" Stretch="UniformToFill" Width="200" Source="/WpfApplication1;component/Images/PushButton.png" />
         </Canvas>
-        
+
     </Canvas>
 </Window>
