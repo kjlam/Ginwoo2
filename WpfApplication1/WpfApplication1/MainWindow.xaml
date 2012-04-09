@@ -6,7 +6,30 @@
         Left="0" Top="0">
     
     <Canvas Name="Main" Visibility="Visible" Height="720" Width="1280">
+        <TextBlock Grid.ColumnSpan="3" Height="101" HorizontalAlignment="Left" Margin="657,70,0,0" Name="NoAddedFilesText" VerticalAlignment="Top" Width="448" Foreground="White" TextWrapping="Wrap" Panel.ZIndex="1" Visibility="visible"> 
+             <Bold>You haven't added any files to this commit yet.</Bold> <LineBreak/> To add files to a commit, make sure you are in Working Copy mode. Then select your files in the Files area to the left using the lasso motion and
+            drag them to the Current Commit area. <LineBreak/><LineBreak/> <Bold>If you need help with any of the motions, or if something confuses you, simply click the question mark on the right for help. </Bold>
+        </TextBlock>
+        
+        <TextBlock Grid.ColumnSpan="3" Height="101" HorizontalAlignment="Left" Margin="657,70,0,0" Name="AddedFilesText" VerticalAlignment="Top" Width="448" Foreground="White" TextWrapping="Wrap" Panel.ZIndex="1" Visibility="Collapsed"> 
+                <Bold>You've added files to this commit.</Bold> <LineBreak/> To commit your files, make sure that you are in Working Copy mode. Then perform the push motion on the Commit button. <LineBreak/><LineBreak/> <Bold>If you need help with any of the motions, or if something confuses you, simply click the question mark on the right for help. </Bold>
+                </TextBlock>
+
+        <TextBlock Grid.ColumnSpan="3" Height="101" HorizontalAlignment="Left" Margin="657,70,0,0" Name="CommitedText" VerticalAlignment="Top" Width="448" Foreground="White" TextWrapping="Wrap" Panel.ZIndex="1" Visibility="Collapsed"> 
+            <Bold>You've made a commit!</Bold> <LineBreak/> To tag your commit with the name of your choice, make sure you are in Local Repository mode. Then perform the push motion on the tag icon. To push your commit (and your tag), push the push button. <LineBreak/><LineBreak/> <Bold>If you need help with any of the motions, or if something confuses you, simply click the question mark on the right for help. </Bold>
+        </TextBlock>
+
+        <TextBlock Grid.ColumnSpan="3" Height="101" HorizontalAlignment="Left" Margin="657,70,0,0" Name="TaggedText" VerticalAlignment="Top" Width="448" Foreground="White" TextWrapping="Wrap" Visibility="Collapsed" Panel.ZIndex="1"> 
+           <Bold>You've successfully tagged your commit!</Bold> <LineBreak/> To push your commit and your tag, make sure you are in Local Repository mode. Then perform the push motion on the push button. <LineBreak/><LineBreak/><LineBreak/> <Bold>If you need help with any of the motions, or if something confuses you, simply click the question mark on the right for help. </Bold>
+        </TextBlock>
+
+        <TextBlock Grid.ColumnSpan="3" Height="101" HorizontalAlignment="Left" Margin="657,70,0,0" Name="PushedText" VerticalAlignment="Top" Width="448" Foreground="White" TextWrapping="Wrap" Panel.ZIndex="1" Visibility="Collapsed"> 
+             <Bold>You've pushed!</Bold> <LineBreak/> To return to your local repository, simply pull once on the menu. To return to your working copy, pull twice.<LineBreak/><LineBreak/> <Bold>If you need help with any of the motions, or if something confuses you, simply click the question mark on the right for help. </Bold>
+        </TextBlock>
+
+
         <Ellipse Canvas.Left="3" Canvas.Top="0" Fill="#FF2CACE3" Name="rightEllipse" Width="30" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" Opacity="1" Stroke="White" Margin="10,10,0,0" Panel.ZIndex="5" />
+
         <Image Height="82" HorizontalAlignment="Right" Margin="0,178,434,0" Name="Cursor" Stretch="UniformToFill" VerticalAlignment="Top" Width="71" Source="/WpfApplication1;component/Images/cursor.png" Panel.ZIndex="5" />
         <Canvas Name="WorkingCopy" Visibility="Visible" Height="720" Width="1280" >
             <InkCanvas Name="WC_inkCanvas" Background="Transparent" EditingMode="None" Height="720" Width="1280" Panel.ZIndex="0" Grid.ColumnSpan="3" Margin="0,0,0,0"></InkCanvas>
@@ -25,13 +48,6 @@
             <Label Content="Files" Height="33" HorizontalAlignment="Left" Margin="34,31,0,0" Name="Files" VerticalAlignment="Top" Width="77" Foreground="White" FontFamily="Calibri" FontSize="20" />
             <Label Content="Current Commit" FontFamily="Calibri" FontSize="20" Foreground="White" Height="33" HorizontalAlignment="Left" Margin="649,446,0,0" Name="Commit" VerticalAlignment="Top" Width="149" />
             <Label Content="Status" FontFamily="Calibri" FontSize="20" Foreground="White" Height="33" HorizontalAlignment="Left" Margin="649,32,0,0" Name="Status" VerticalAlignment="Top" Width="77" Panel.ZIndex="1" />
-
-            <TextBlock Grid.ColumnSpan="3" Height="101" HorizontalAlignment="Left" Margin="657,70,0,0" Name="NoAddedFilesText" VerticalAlignment="Top" Width="448" Foreground="White" TextWrapping="Wrap" Panel.ZIndex="1"> 
-                <Bold>You haven't added any files to this commit yet.</Bold> <LineBreak/> To add files to a commit, select them in the Files area to the left using the lasso motion and then
-                    drag them to your Commit area below. <LineBreak/><LineBreak/> <Bold>If you need help with any of the motions, or if something confuses you, simply click the question marrrmenuk on the right for help. </Bold></TextBlock>
-
-            <TextBlock Grid.ColumnSpan="3" Height="101" HorizontalAlignment="Left" Margin="657,70,0,0" Name="AddedFilesText" VerticalAlignment="Top" Width="448" Foreground="White" TextWrapping="Wrap" Panel.ZIndex="1" Visibility="Collapsed"> 
-                <Bold>You've added files to this commit.</Bold> <LineBreak/> To commit your files, perform the push motion on the Commit button in the Current Commit area below. <LineBreak/><LineBreak/> <Bold>If you need help with any of the motions, or if something confuses you, simply click the question mark on the right for help. </Bold></TextBlock>
 
             <my:KinectColorViewer Canvas.Left="409" Canvas.Top="236" Width="94" Height="76" Name="kinectColorViewer1" 
                                       Kinect="{Binding ElementName=kinectSensorChooser1, Path=Kinect}" DataContext="{Binding}" Margin="0,605,851,0" />
@@ -59,17 +75,7 @@
             <Label Content="Files" Height="33" HorizontalAlignment="Left" Margin="34,31,0,0" Name="LR_Files" VerticalAlignment="Top" Width="77" Foreground="White" FontFamily="Calibri" FontSize="20" />
             <Label Content="Status" FontFamily="Calibri" FontSize="20" Foreground="White" Height="33" HorizontalAlignment="Left" Margin="649,32,0,0" Name="LR_Status" VerticalAlignment="Top" Width="77" />
 
-            <TextBlock Grid.ColumnSpan="3" Height="101" HorizontalAlignment="Left" Margin="657,70,0,0" Name="CommitedText" VerticalAlignment="Top" Width="448" Foreground="White" TextWrapping="Wrap" Panel.ZIndex="1"> 
-                    <Bold>You've made a commit!</Bold> <LineBreak/> To tag your commit with the name of your choice, perform the push motion on the tag button below. To push your commit (and your tag), push the push button. <LineBreak/><LineBreak/> <Bold>If you need help with any of the motions, or if something confuses you, simply click the question mark on the right for help. </Bold></TextBlock>
 
-            <TextBlock Grid.ColumnSpan="3" Height="101" HorizontalAlignment="Left" Margin="657,70,0,0" Name="TaggedText" VerticalAlignment="Top" Width="448" Foreground="White" TextWrapping="Wrap" Visibility="Collapsed" Panel.ZIndex="1"> 
-            <Bold>You've successfully tagged your commit!</Bold>
-            <LineBreak/> To push your commit and your tag, perform the push motion on the push button.
-            <LineBreak/>
-            <LineBreak/>
-            <LineBreak/>
-            <Bold>If you need help with any of the motions, or if something confuses you, simply click the question mark on the right for help.</Bold>
-            </TextBlock>
             <InkCanvas Name="LR_inkCanvas" Background="Transparent" EditingMode="Select" Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="0,0,0,0" Height="720" Width="640" Gesture="inkCanvas_Gesture_1">
             </InkCanvas>
             <Rectangle Fill="Black" Height="240" HorizontalAlignment="Left" Margin="638,180,0,0" Name="TagRectangle" Opacity="0.9" Panel.ZIndex="3" Stroke="Black" VerticalAlignment="Top" Width="594" Grid.ColumnSpan="3" Visibility="Hidden" Canvas.Top="-2" />
@@ -95,10 +101,7 @@
                 <Label Content="Files" Height="33" HorizontalAlignment="Left" Margin="34,31,0,0" Name="RR_Files" VerticalAlignment="Top" Width="77" Foreground="White" FontFamily="Calibri" FontSize="20" />
             <Rectangle Grid.ColumnSpan="3" Height="146" HorizontalAlignment="Left" Margin="638,32,0,0" Name="rectangle1" Stroke="Black" VerticalAlignment="Top" Width="594" Fill="Black" Opacity="0.9" Panel.ZIndex="-2" />
             <Label Content="Status" FontFamily="Calibri" FontSize="20" Foreground="White" Height="33" HorizontalAlignment="Left" Margin="649,32,0,0" Name="RR_Status" VerticalAlignment="Top" Width="77" />
-            <TextBlock Grid.ColumnSpan="3" Height="101" HorizontalAlignment="Left" Margin="657,70,0,0" Name="PushedText" VerticalAlignment="Top" Width="448" Foreground="White" TextWrapping="Wrap" Panel.ZIndex="1"> 
-                           <Bold>You've pushed!</Bold> <LineBreak/> Your remote repository's commit history is below. To return to your local repository, simply pull once on the menu. To return to your working copy, pull once.
-                <LineBreak/><LineBreak/> <Bold>If you need help with any of the motions, or if something confuses you, simply click the question mark on the right for help. </Bold></TextBlock>
-            
+           
             <Image Height="151" Margin="103,27,0,0" Name="RR_HelpIcon" Stretch="UniformToFill" VerticalAlignment="Top" Source="/WpfApplication1;component/Images/HelpIcon.png" ImageFailed="image5_ImageFailed" Grid.Column="2" Width="84" HorizontalAlignment="Left" MouseEnter="RR_HelpIcon_MouseEnter" MouseLeave="RR_HelpIcon_MouseLeave" Canvas.Left="1022" Canvas.Top="5" />
 
             <Image Height="69" HorizontalAlignment="Left" Margin="730,168,0,0" Name="negative1" Stretch="Fill" VerticalAlignment="Top" Width="178" Panel.ZIndex="2"  Source="/WpfApplication1;component/Images/CommitBox.png" Opacity="0" Canvas.Left="-25" />
@@ -110,6 +113,66 @@
             <Image Height="36" HorizontalAlignment="Right" Margin="0,412,57,0" Name="negative7" Panel.ZIndex="2" Stretch="Fill" VerticalAlignment="Top" Width="175" Source="/WpfApplication1;component/Images/CommitBox.png" Opacity="0" Canvas.Left="740" Canvas.Top="-4" />
             <InkCanvas Name="RR_inkCanvas" Background="Transparent" EditingMode="Select" Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="0,0,0,0" Height="720" Width="640" Gesture="inkCanvas_Gesture_1">
             </InkCanvas>
+            
+            
         </Canvas>
+
+
+        <Canvas Name="HelpMePleaseHelpHelp" Visibility="Visible" Height="720" Width="1280">
+            <Image Height="680" HorizontalAlignment="Left" Name="Help_Background" Stretch="Fill" VerticalAlignment="Top" Width="1260" Source="/WpfApplication1;component/Images/bg.png" ImageFailed="image1_ImageFailed" Grid.ColumnSpan="3" Panel.ZIndex="-5" />
+            <TextBlock Height="680" Width="1200" Foreground="White" Name="HelpHelpHelpTextBlock" FontSize="15" TextAlignment="Center">
+                <LineBreak/>
+                Help <LineBreak/><LineBreak/>
+ 
+ GESTURES<LineBreak/><LineBreak/>
+  
+  Ginect uses four Kinect gestures. One of these is a swipe. <LineBreak/>
+  
+  To return to the main page, move your left hand quickly and smoothly across the screen from right to left. This is a swipe.<LineBreak/>
+  
+  The elements of the main Ginect pages are controlled with the use of three other gestures:<LineBreak/><LineBreak/>
+  
+	1. Push<LineBreak/>
+	
+	Many of the buttons on the Ginect interface, including the Tag button, the Commit button and the Push button, require the <LineBreak/>
+	use of the push gesture in order to activate them, just like a real-life button that you interact with on a daily basis.<LineBreak/>
+	To push on any of these buttons, make sure that your cursor is over the button and that your hands are at about<LineBreak/>
+	the same distance from your body. Then move your right hand forward, as if pushing on an object, to push the button. <LineBreak/><LineBreak/>
+	
+	
+	2. Pull<LineBreak/>
+	
+	To pull files from your remote repository and to interact with some of the other elements in Ginect, you'll want to use <LineBreak/>
+	the pull gesture. The pull gesture is just like the push gesture; the only difference is that instead of moving your right<LineBreak/>
+	hand forward, you will want to move it backwards towards yourself, as if pulling on an object. <LineBreak/><LineBreak/>
+	
+	
+	3. Lasso<LineBreak/>
+	
+	The lasso gesture is what we call the gesture used to select files to add to your commit. It works much like the lasso tool in<LineBreak/>
+	Photoshop or any other illustrator. To signal that you want to begin to lasso, put your hands together at the point where you<LineBreak/>
+	want to start lassoing. Then use your right hand to outline the area within which you want to select your files. When your right<LineBreak/>
+	hand returns to the position of your left hand, the lasso will end and your files will be selected. Once you've lassoed, you can <LineBreak/>
+	drag your selection to the Commit Area. <LineBreak/><LineBreak/>
+	
+THE MODE SWITCHER MENU<LineBreak/>
+
+	The three-sphere image on the right side of the sphere is the Mode Switcher Menu. It lets you move between the three modes of Ginect:<LineBreak/>
+	Working Copy, Local Repository and Remote Repository. Each mode lets you perform certain actions relevant to each kind of file system.<LineBreak/>
+	As is natural for the Git system, your Working Copy is represented by the sphere which is closest to you and your Remote Repository is<LineBreak/>
+	represented by the sphere which is farthest away. To switch from your current mode (which is glowing) to the mode adjacent to it<LineBreak/>
+	and closer to you, pull on the menu. To switch from your current mode to the mode adjacent to it but farther away, push on the menu.<LineBreak/>
+                
+            </TextBlock>
+            
+            <TextBlock Canvas.Left="1077" Canvas.Top="106" Height="511" Foreground="White" FontSize="60" TextAlignment="Center">
+                PULL<LineBreak/> TO<LineBreak/> GO <LineBreak/>BACK<LineBreak/>
+            </TextBlock>
+
+            <Image Source="/WpfApplication1;component/Images/SMILE.png" Height="150" Width="156" Canvas.Left="1066" Canvas.Top="446">
+                
+            </Image>
+        </Canvas>
+        
     </Canvas>
 </Window>
