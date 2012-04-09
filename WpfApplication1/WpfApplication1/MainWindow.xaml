@@ -6,10 +6,33 @@
         Left="0" Top="0">
     
     <Canvas Name="Main" Visibility="Visible" Height="720" Width="1280">
-        <Ellipse Canvas.Left="3" Canvas.Top="0" Fill="#FF2CACE3" Name="rightEllipse" Width="30" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" Opacity="1" Stroke="White" Margin="10,10,0,0" Panel.ZIndex="-5" />
+        <TextBlock Grid.ColumnSpan="3" Height="101" HorizontalAlignment="Left" Margin="657,70,0,0" Name="NoAddedFilesText" VerticalAlignment="Top" Width="448" Foreground="White" TextWrapping="Wrap" Panel.ZIndex="1" Visibility="visible"> 
+             <Bold>You haven't added any files to this commit yet.</Bold> <LineBreak/> To add files to a commit, make sure you are in Working Copy mode. Then select your files in the Files area to the left using the lasso motion and
+            drag them to the Current Commit area. <LineBreak/><LineBreak/> <Bold>If you need help with any of the motions, or if something confuses you, simply click the question mark on the right for help. </Bold>
+        </TextBlock>
+        
+        <TextBlock Grid.ColumnSpan="3" Height="101" HorizontalAlignment="Left" Margin="657,70,0,0" Name="AddedFilesText" VerticalAlignment="Top" Width="448" Foreground="White" TextWrapping="Wrap" Panel.ZIndex="1" Visibility="Collapsed"> 
+                <Bold>You've added files to this commit.</Bold> <LineBreak/> To commit your files, make sure that you are in Working Copy mode. Then perform the push motion on the Commit button. <LineBreak/><LineBreak/> <Bold>If you need help with any of the motions, or if something confuses you, simply click the question mark on the right for help. </Bold>
+                </TextBlock>
+
+        <TextBlock Grid.ColumnSpan="3" Height="101" HorizontalAlignment="Left" Margin="657,70,0,0" Name="CommitedText" VerticalAlignment="Top" Width="448" Foreground="White" TextWrapping="Wrap" Panel.ZIndex="1" Visibility="Collapsed"> 
+            <Bold>You've made a commit!</Bold> <LineBreak/> To tag your commit with the name of your choice, make sure you are in Local Repository mode. Then perform the push motion on the tag icon. To push your commit (and your tag), push the push button. <LineBreak/><LineBreak/> <Bold>If you need help with any of the motions, or if something confuses you, simply click the question mark on the right for help. </Bold>
+        </TextBlock>
+
+        <TextBlock Grid.ColumnSpan="3" Height="101" HorizontalAlignment="Left" Margin="657,70,0,0" Name="TaggedText" VerticalAlignment="Top" Width="448" Foreground="White" TextWrapping="Wrap" Visibility="Collapsed" Panel.ZIndex="1"> 
+           <Bold>You've successfully tagged your commit!</Bold> <LineBreak/> To push your commit and your tag, make sure you are in Local Repository mode. Then perform the push motion on the push button. <LineBreak/><LineBreak/><LineBreak/> <Bold>If you need help with any of the motions, or if something confuses you, simply click the question mark on the right for help. </Bold>
+        </TextBlock>
+
+        <TextBlock Grid.ColumnSpan="3" Height="101" HorizontalAlignment="Left" Margin="657,70,0,0" Name="PushedText" VerticalAlignment="Top" Width="448" Foreground="White" TextWrapping="Wrap" Panel.ZIndex="1" Visibility="Collapsed"> 
+             <Bold>You've pushed!</Bold> <LineBreak/> To return to your local repository, simply pull once on the menu. To return to your working copy, pull twice.<LineBreak/><LineBreak/> <Bold>If you need help with any of the motions, or if something confuses you, simply click the question mark on the right for help. </Bold>
+        </TextBlock>
+
+
+        <Ellipse Canvas.Left="3" Canvas.Top="0" Fill="#FF2CACE3" Name="rightEllipse" Width="30" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" Opacity="1" Stroke="White" Margin="10,10,0,0" Panel.ZIndex="5" />
+
         <Image Height="82" HorizontalAlignment="Right" Margin="0,178,434,0" Name="Cursor" Stretch="UniformToFill" VerticalAlignment="Top" Width="71" Source="/WpfApplication1;component/Images/cursor.png" Panel.ZIndex="5" />
         <Canvas Name="WorkingCopy" Visibility="Visible" Height="720" Width="1280" >
-            <InkCanvas Name="WC_inkCanvas" Background="Transparent" EditingMode="None" Height="720" Width="545" Panel.ZIndex="0" Grid.ColumnSpan="3" Margin="0,0,0,0"></InkCanvas>
+            <InkCanvas Name="WC_inkCanvas" Background="Transparent" EditingMode="None" Height="720" Width="1280" Panel.ZIndex="0" Grid.ColumnSpan="3" Margin="0,0,0,0"></InkCanvas>
             
             <Button Content="DisplayCommit" Height="30" HorizontalAlignment="Left" Margin="650,400,0,0" Name="button1" VerticalAlignment="Top" Width="89" Click="button1_Click" Panel.ZIndex="5"/>
             <Button Content="Lasso" Height="30" HorizontalAlignment="Left" Margin="650,350,0,0" Name="button2" VerticalAlignment="Top" Width="89" Click="button2_Click" Panel.ZIndex="5"/>
@@ -25,13 +48,6 @@
             <Label Content="Files" Height="33" HorizontalAlignment="Left" Margin="34,31,0,0" Name="Files" VerticalAlignment="Top" Width="77" Foreground="White" FontFamily="Calibri" FontSize="20" />
             <Label Content="Current Commit" FontFamily="Calibri" FontSize="20" Foreground="White" Height="33" HorizontalAlignment="Left" Margin="649,446,0,0" Name="Commit" VerticalAlignment="Top" Width="149" />
             <Label Content="Status" FontFamily="Calibri" FontSize="20" Foreground="White" Height="33" HorizontalAlignment="Left" Margin="649,32,0,0" Name="Status" VerticalAlignment="Top" Width="77" Panel.ZIndex="1" />
-
-            <TextBlock Grid.ColumnSpan="3" Height="101" HorizontalAlignment="Left" Margin="657,70,0,0" Name="NoAddedFilesText" VerticalAlignment="Top" Width="448" Foreground="White" TextWrapping="Wrap" Panel.ZIndex="1"> 
-                <Bold>You haven't added any files to this commit yet.</Bold> <LineBreak/> To add files to a commit, select them in the Files area to the left using the lasso motion and then
-                    drag them to your Commit area below. <LineBreak/><LineBreak/> <Bold>If you need help with any of the motions, or if something confuses you, simply click the question marrrmenuk on the right for help. </Bold></TextBlock>
-
-            <TextBlock Grid.ColumnSpan="3" Height="101" HorizontalAlignment="Left" Margin="657,70,0,0" Name="AddedFilesText" VerticalAlignment="Top" Width="448" Foreground="White" TextWrapping="Wrap" Panel.ZIndex="1" Visibility="Collapsed"> 
-                <Bold>You've added files to this commit.</Bold> <LineBreak/> To commit your files, perform the push motion on the Commit button in the Current Commit area below. <LineBreak/><LineBreak/> <Bold>If you need help with any of the motions, or if something confuses you, simply click the question mark on the right for help. </Bold></TextBlock>
 
             <my:KinectColorViewer Canvas.Left="409" Canvas.Top="236" Width="94" Height="76" Name="kinectColorViewer1" 
                                       Kinect="{Binding ElementName=kinectSensorChooser1, Path=Kinect}" DataContext="{Binding}" Margin="0,605,851,0" />
@@ -59,17 +75,7 @@
             <Label Content="Files" Height="33" HorizontalAlignment="Left" Margin="34,31,0,0" Name="LR_Files" VerticalAlignment="Top" Width="77" Foreground="White" FontFamily="Calibri" FontSize="20" />
             <Label Content="Status" FontFamily="Calibri" FontSize="20" Foreground="White" Height="33" HorizontalAlignment="Left" Margin="649,32,0,0" Name="LR_Status" VerticalAlignment="Top" Width="77" />
 
-            <TextBlock Grid.ColumnSpan="3" Height="101" HorizontalAlignment="Left" Margin="657,70,0,0" Name="CommitedText" VerticalAlignment="Top" Width="448" Foreground="White" TextWrapping="Wrap" Panel.ZIndex="1"> 
-                    <Bold>You've made a commit!</Bold> <LineBreak/> To tag your commit with the name of your choice, perform the push motion on the tag button below. To push your commit (and your tag), push the push button. <LineBreak/><LineBreak/> <Bold>If you need help with any of the motions, or if something confuses you, simply click the question mark on the right for help. </Bold></TextBlock>
 
-            <TextBlock Grid.ColumnSpan="3" Height="101" HorizontalAlignment="Left" Margin="657,70,0,0" Name="TaggedText" VerticalAlignment="Top" Width="448" Foreground="White" TextWrapping="Wrap" Visibility="Collapsed" Panel.ZIndex="1"> 
-            <Bold>You've successfully tagged your commit!</Bold>
-            <LineBreak/> To push your commit and your tag, perform the push motion on the push button.
-            <LineBreak/>
-            <LineBreak/>
-            <LineBreak/>
-            <Bold>If you need help with any of the motions, or if something confuses you, simply click the question mark on the right for help.</Bold>
-            </TextBlock>
             <InkCanvas Name="LR_inkCanvas" Background="Transparent" EditingMode="Select" Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="0,0,0,0" Height="720" Width="640" Gesture="inkCanvas_Gesture_1">
             </InkCanvas>
             <Rectangle Fill="Black" Height="240" HorizontalAlignment="Left" Margin="638,180,0,0" Name="TagRectangle" Opacity="0.9" Panel.ZIndex="3" Stroke="Black" VerticalAlignment="Top" Width="594" Grid.ColumnSpan="3" Visibility="Hidden" Canvas.Top="-2" />
@@ -95,10 +101,7 @@
                 <Label Content="Files" Height="33" HorizontalAlignment="Left" Margin="34,31,0,0" Name="RR_Files" VerticalAlignment="Top" Width="77" Foreground="White" FontFamily="Calibri" FontSize="20" />
             <Rectangle Grid.ColumnSpan="3" Height="146" HorizontalAlignment="Left" Margin="638,32,0,0" Name="rectangle1" Stroke="Black" VerticalAlignment="Top" Width="594" Fill="Black" Opacity="0.9" Panel.ZIndex="-2" />
             <Label Content="Status" FontFamily="Calibri" FontSize="20" Foreground="White" Height="33" HorizontalAlignment="Left" Margin="649,32,0,0" Name="RR_Status" VerticalAlignment="Top" Width="77" />
-            <TextBlock Grid.ColumnSpan="3" Height="101" HorizontalAlignment="Left" Margin="657,70,0,0" Name="PushedText" VerticalAlignment="Top" Width="448" Foreground="White" TextWrapping="Wrap" Panel.ZIndex="1"> 
-                           <Bold>You've pushed!</Bold> <LineBreak/> Your remote repository's commit history is below. To return to your local repository, simply pull once on the menu. To return to your working copy, pull once.
-                <LineBreak/><LineBreak/> <Bold>If you need help with any of the motions, or if something confuses you, simply click the question mark on the right for help. </Bold></TextBlock>
-            
+           
             <Image Height="151" Margin="103,27,0,0" Name="RR_HelpIcon" Stretch="UniformToFill" VerticalAlignment="Top" Source="/WpfApplication1;component/Images/HelpIcon.png" ImageFailed="image5_ImageFailed" Grid.Column="2" Width="84" HorizontalAlignment="Left" MouseEnter="RR_HelpIcon_MouseEnter" MouseLeave="RR_HelpIcon_MouseLeave" Canvas.Left="1022" Canvas.Top="5" />
 
             <Image Height="69" HorizontalAlignment="Left" Margin="730,168,0,0" Name="negative1" Stretch="Fill" VerticalAlignment="Top" Width="178" Panel.ZIndex="2"  Source="/WpfApplication1;component/Images/CommitBox.png" Opacity="0" Canvas.Left="-25" />
@@ -115,7 +118,7 @@
         </Canvas>
 
 
-        <Canvas Name="HelpMePleaseHelpHelp" Visibility="Visible" Height="720" Width="1280">
+        <Canvas Name="HelpMePleaseHelpHelp" Visibility="Collapsed" Height="720" Width="1280">
             <Image Height="680" HorizontalAlignment="Left" Name="Help_Background" Stretch="Fill" VerticalAlignment="Top" Width="1260" Source="/WpfApplication1;component/Images/bg.png" ImageFailed="image1_ImageFailed" Grid.ColumnSpan="3" Panel.ZIndex="-5" />
          
             <TextBlock Height="641" Width="738" Foreground="White" Name="HelpHelpHelpTextBlock" FontSize="15" TextAlignment="Left" Canvas.Left="147" Canvas.Top="20">

@@ -369,7 +369,7 @@ namespace WpfApplication1
             //TODO: Do somethign as user has started lasso
             actionWait = false;
 
-            if (selectTimer.Interval == new TimeSpan(0, 0, 3))
+            if (selectTimer.Interval == new TimeSpan(0, 0, 1))
             {
                 
                 selectTimer.Stop();
@@ -543,6 +543,7 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
                     case "RESET":
                         textBox.Gesture += "";
                         tagName = "";
+                        TagNameTextBlock.Text = tagName;
                         break;
                     case "DONE":
                         //call git tag function with the tagName string
@@ -613,12 +614,12 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
         #endregion
         void CheckSwipe(AllFramesReadyEventArgs e)
         {
-            if (storedSkeletonValues.Count >= 45)
+            if (storedSkeletonValues.Count >= 30)
             {
                 //arrays: index 0 is x values, index 1 is y values, and index 2 is z values
                 float[] LHCounter = new float[3] { 0, 0, 0 };
                 float[] RHCounter = new float[3] { 0, 0, 0 };
-                float[] LHThreshold = new float[3] { 25, 25, 75 };
+                float[] LHThreshold = new float[3] { 25, 25, 50 };
                 float[] RHThreshold = new float[3] { 25, 25, 20 };
                 int skeletonListCount = storedSkeletonValues.Count;
                 bool posZChange = true;

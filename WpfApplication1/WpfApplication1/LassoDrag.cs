@@ -48,10 +48,10 @@ namespace WpfApplication1
             InitializeComponent();
             this.DataContext = textBox;
             selectTimer.Tick += new EventHandler(SelectTimer_Root);
-            selectTimer.Interval = new TimeSpan(0, 0, 3);
+            selectTimer.Interval = new TimeSpan(0, 0, 1);
             dispatcherTimer.Interval = new TimeSpan(0, 0, 2);
             waitTimer.Interval = new TimeSpan(0, 0, 1);
-            DIRECTORY = @"C:\\Users\\Roh\\Desktop\\TestFolder";
+            DIRECTORY = @"C:\\Ginect";
             MAX_FILE_DISPLAY_COUNT = 16;
             selectedFileNames = new List<string>();
             // get the files into the arraylist from the directory info
