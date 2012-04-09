@@ -229,8 +229,11 @@ namespace WpfApplication1
             switchToLocalRepository();
             if (JustPushed)
             {
-                PushedText.Visibility = Visibility.Visible;
-                NoAddedFilesText.Visibility = Visibility.Collapsed;
+                PushedText.Visibility = Visibility.Collapsed;
+                NoAddedFilesText.Visibility = Visibility.Visible;
+                TaggedText.Visibility = Visibility.Collapsed;
+                CommitedText.Visibility = Visibility.Collapsed;
+                AddedFilesText.Visibility = Visibility.Collapsed;
                 JustPushed = false;
             }
             //todo rename to RR_Menu
@@ -247,7 +250,9 @@ namespace WpfApplication1
             drawLocalRepository();
             AddedFilesText.Visibility = Visibility.Collapsed;
             NoAddedFilesText.Visibility = Visibility.Collapsed;
+            PushedText.Visibility = Visibility.Collapsed;
             CommitedText.Visibility = Visibility.Visible;
+
         }
 
         private void LR_PushButton_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -257,6 +262,8 @@ namespace WpfApplication1
             switchToRemoteRepository();
             TaggedText.Visibility = Visibility.Collapsed;
             CommitedText.Visibility = Visibility.Collapsed;
+            AddedFilesText.Visibility = Visibility.Collapsed;
+            NoAddedFilesText.Visibility = Visibility.Collapsed;
             PushedText.Visibility = Visibility.Visible;
             JustPushed = true;
 
