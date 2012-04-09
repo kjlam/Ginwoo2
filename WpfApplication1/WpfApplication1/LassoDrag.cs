@@ -48,7 +48,7 @@ namespace WpfApplication1
             InitializeComponent();
             this.DataContext = textBox;
             selectTimer.Tick += new EventHandler(SelectTimer_Root);
-            selectTimer.Interval = new TimeSpan(0, 0, 3);
+            selectTimer.Interval = new TimeSpan(0, 0, 1);
             dispatcherTimer.Interval = new TimeSpan(0, 0, 2);
             waitTimer.Interval = new TimeSpan(0, 0, 1);
             DIRECTORY = @"C:\\Users\\Benj\\Desktop\\CS 160\\Ginect";

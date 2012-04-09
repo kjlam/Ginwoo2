@@ -120,52 +120,49 @@
 
         <Canvas Name="HelpMePleaseHelpHelp" Visibility="Collapsed" Height="720" Width="1280">
             <Image Height="680" HorizontalAlignment="Left" Name="Help_Background" Stretch="Fill" VerticalAlignment="Top" Width="1260" Source="/WpfApplication1;component/Images/bg.png" ImageFailed="image1_ImageFailed" Grid.ColumnSpan="3" Panel.ZIndex="-5" />
-            <TextBlock Height="680" Width="1200" Foreground="White" Name="HelpHelpHelpTextBlock" FontSize="15" TextAlignment="Center">
+         
+            <TextBlock Height="641" Width="738" Foreground="White" Name="HelpHelpHelpTextBlock" FontSize="15" TextAlignment="Left" Canvas.Left="147" Canvas.Top="20">
                 <LineBreak/>
                 Help <LineBreak/><LineBreak/>
  
- GESTURES<LineBreak/><LineBreak/>
+                GESTURES<LineBreak/><LineBreak/>
+                
+                Ginect recognizes three gestures:<LineBreak/><LineBreak/>
   
-  Ginect uses four Kinect gestures. One of these is a swipe. <LineBreak/>
-  
-  To return to the main page, move your left hand quickly and smoothly across the screen from right to left. This is a swipe.<LineBreak/>
-  
-  The elements of the main Ginect pages are controlled with the use of three other gestures:<LineBreak/><LineBreak/>
-  
-	1. Push<LineBreak/>
+	            1. Push<LineBreak/>
 	
-	Many of the buttons on the Ginect interface, including the Tag button, the Commit button and the Push button, require the <LineBreak/>
-	use of the push gesture in order to activate them, just like a real-life button that you interact with on a daily basis.<LineBreak/>
-	To push on any of these buttons, make sure that your cursor is over the button and that your hands are at about<LineBreak/>
-	the same distance from your body. Then move your right hand forward, as if pushing on an object, to push the button. <LineBreak/><LineBreak/>
+	            Many buttons, such as the Tag and Commit button, require a push to activate. <LineBreak/>
+	            To push on any of these buttons, make sure that your cursor is over the button <LineBreak/>
+                and that your hands are at about the same distance from your body. Then move your right hand <LineBreak/>
+                forward, as if pushing on an object, to push the button. <LineBreak/><LineBreak/>
 	
 	
-	2. Pull<LineBreak/>
+	            2. Pull<LineBreak/>
 	
-	To pull files from your remote repository and to interact with some of the other elements in Ginect, you'll want to use <LineBreak/>
-	the pull gesture. The pull gesture is just like the push gesture; the only difference is that instead of moving your right<LineBreak/>
-	hand forward, you will want to move it backwards towards yourself, as if pulling on an object. <LineBreak/><LineBreak/>
+	            The pull gesture is just like the push gesture; the only <LineBreak/>
+                difference is that instead of moving your right hand forward, you will want to <LineBreak/>
+                move it backwards towards yourself, as if pulling on an object. <LineBreak/><LineBreak/>
 	
 	
-	3. Lasso<LineBreak/>
+	        3. Lasso<LineBreak/>
 	
-	The lasso gesture is what we call the gesture used to select files to add to your commit. It works much like the lasso tool in<LineBreak/>
-	Photoshop or any other illustrator. To signal that you want to begin to lasso, put your hands together at the point where you<LineBreak/>
-	want to start lassoing. Then use your right hand to outline the area within which you want to select your files. When your right<LineBreak/>
-	hand returns to the position of your left hand, the lasso will end and your files will be selected. Once you've lassoed, you can <LineBreak/>
-	drag your selection to the Commit Area. <LineBreak/><LineBreak/>
+	        The lasso gesture is used to select files to add to commit. <LineBreak/>
+	        To signal that you want to begin to lasso, put your left hand up above your head for 3 seconds.<LineBreak/>
+	        The pointer will change to the lasso pointer. Then use your right hand to outline the area within <LineBreak/>
+            to select your files. To end lasso and select the files, put your left hand above your head again.<LineBreak/>
+            You can then drag the files to the Commit Box<LineBreak/><LineBreak/>
 	
-THE MODE SWITCHER MENU<LineBreak/>
+            THE MODE SWITCHER MENU<LineBreak/>
 
-	The three-sphere image on the right side of the sphere is the Mode Switcher Menu. It lets you move between the three modes of Ginect:<LineBreak/>
-	Working Copy, Local Repository and Remote Repository. Each mode lets you perform certain actions relevant to each kind of file system.<LineBreak/>
-	As is natural for the Git system, your Working Copy is represented by the sphere which is closest to you and your Remote Repository is<LineBreak/>
-	represented by the sphere which is farthest away. To switch from your current mode (which is glowing) to the mode adjacent to it<LineBreak/>
-	and closer to you, pull on the menu. To switch from your current mode to the mode adjacent to it but farther away, push on the menu.<LineBreak/>
+	        The three-sphere image on the right side of the application is the Mode Switcher Menu. <LineBreak/>
+            It lets you move between the three modes of Ginect: Working Copy, Local Repository and Remote Repository.<LineBreak/>
+	        Your Working Copy is represented by the sphere which is closest to you and your Remote Repository by<LineBreak/>
+	        the farthest. To switch from your current mode (which is glowing) to the mode adjacent to it<LineBreak/>
+	        and closer to you, pull on the menu. To switch from your current mode to the mode adjacent to it but <LineBreak/>farther away, push on the menu.<LineBreak/>
                 
             </TextBlock>
             
-            <TextBlock Canvas.Left="1077" Canvas.Top="106" Height="511" Foreground="White" FontSize="60" TextAlignment="Center">
+            <TextBlock Canvas.Left="1058" Canvas.Top="85" Height="511" Foreground="White" FontSize="60" TextAlignment="Center">
                 PULL<LineBreak/> TO<LineBreak/> GO <LineBreak/>BACK<LineBreak/>
             </TextBlock>
 
