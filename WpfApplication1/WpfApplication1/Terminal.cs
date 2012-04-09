@@ -167,6 +167,20 @@ namespace WpfApplication1
             return ExecuteProcess(workingDirectory, "git push", true);
         }
 
+        /*
+        * GitPull()
+        * 
+        * This executes a 'git pull' command. A 'git commit' must be made
+        * before calling this method.
+        * 
+        */
+        static internal CmdReturn GitPull()
+        {
+            return ExecuteProcess(workingDirectory, "git pull", true);
+        }
+
+        
+
         static internal CmdReturn GitStatus()
         {
             CmdReturn cmdReturn = ExecuteProcess(workingDirectory, "git status", false);
