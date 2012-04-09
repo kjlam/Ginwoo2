@@ -354,6 +354,10 @@ namespace WpfApplication1
                     //myimg_MouseMove();
                     CursorInCommitBoxZone();
                 }
+                if (selectActivated)
+                {
+                    mouseLeftDown();
+                }
             }
             GetCameraPoint(first, e);
             /*if (selectActivated)
@@ -550,7 +554,11 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
                         //call git tag function with the tagName string
                         Terminal.GitTagLatestCommit(tagName);
                         TaggedText.Visibility = Visibility.Visible;
+                        PushedText.Visibility = Visibility.Collapsed;
+                        AddedFilesText.Visibility = Visibility.Collapsed;
+                        NoAddedFilesText.Visibility = Visibility.Collapsed;
                         CommitedText.Visibility = Visibility.Collapsed;
+
                         hideTagSection();
                         tagIconActivated = false;
                         break;
@@ -772,7 +780,18 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
                     RHSensitivity[1] = 0.3f;
                     WC_inkCanvas.EditingMode = InkCanvasEditingMode.Select;
                     selectActivated = true;
+                    //mouseLeftUp();
+                    Console.WriteLine("a");
                     mouseLeftDown();
+                    Console.WriteLine("a");
+                    //mouseLeftDown();
+                    //Console.WriteLine("a");
+                    //mouseLeftDown();
+                    //Console.WriteLine("a");
+                    //mouseLeftDown();
+                    //Console.WriteLine("a");
+
+
                 }
             }
         }

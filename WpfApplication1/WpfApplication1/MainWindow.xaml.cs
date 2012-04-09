@@ -352,7 +352,7 @@ namespace WpfApplication1
                     NoAddedFilesText.Visibility = Visibility.Collapsed;
                     TaggedText.Visibility = Visibility.Collapsed;
                     CommitedText.Visibility = Visibility.Collapsed;
-                    PushedText.Visibility = Visibility.Visible;
+                    PushedText.Visibility = Visibility.Collapsed;
                     mouseLeftClick();
                     lassoFilesDragging = false;
                     finishDrag();

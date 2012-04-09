@@ -23,7 +23,7 @@
         </TextBlock>
 
         <TextBlock Grid.ColumnSpan="3" Height="101" HorizontalAlignment="Left" Margin="657,70,0,0" Name="TaggedText" VerticalAlignment="Top" Width="448" Foreground="White" TextWrapping="Wrap" Visibility="Collapsed" Panel.ZIndex="1"> 
-           <Bold>You've successfully tagged your commit!</Bold> <LineBreak/> To push your commit and your tag, perform the push motion on the push button (in Local Repository mode). <LineBreak/><LineBreak/><LineBreak/> <Bold>If you need help with any of the motions, or if something confuses you, simply click the question mark on the right for help. </Bold>
+           <Bold>You've successfully tagged your commit!</Bold> <LineBreak/> To push your commit and your tag, perform the push motion on the push button (in Local Repository mode).<LineBreak/><LineBreak/> <Bold>If you need help with any of the motions, or if something confuses you, simply click the question mark on the right for help. </Bold>
         </TextBlock>
 
         <TextBlock Grid.ColumnSpan="3" Height="101" HorizontalAlignment="Left" Margin="657,70,0,0" Name="PushedText" VerticalAlignment="Top" Width="448" Foreground="White" TextWrapping="Wrap" Panel.ZIndex="1" Visibility="Collapsed"> 
