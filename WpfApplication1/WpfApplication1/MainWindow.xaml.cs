@@ -349,7 +349,10 @@ namespace WpfApplication1
                     //TODO: make sure commit works
                     Terminal.GitAddFilesToCommit(selectedFileNames);
                     AddedFilesText.Visibility = Visibility.Visible;
-                    NoAddedFilesText.Visibility = Visibility.Visible;
+                    NoAddedFilesText.Visibility = Visibility.Collapsed;
+                    TaggedText.Visibility = Visibility.Collapsed;
+                    CommitedText.Visibility = Visibility.Collapsed;
+                    PushedText.Visibility = Visibility.Visible;
                     mouseLeftClick();
                     lassoFilesDragging = false;
                     finishDrag();

@@ -10,24 +10,24 @@
         <my:KinectSkeletonViewer Canvas.Left="136" Canvas.Top="195" Name="kinectSkeletonViewer1" Height="172" Width="209" Kinect="{Binding ElementName=kinectSensorChooser1, Path=Kinect}" Margin="68,261,668,248" Panel.ZIndex="5"/>
         
         <TextBlock Grid.ColumnSpan="3" Height="101" HorizontalAlignment="Left" Margin="657,70,0,0" Name="NoAddedFilesText" VerticalAlignment="Top" Width="448" Foreground="White" TextWrapping="Wrap" Panel.ZIndex="1" Visibility="visible"> 
-             <Bold>You haven't added any files to this commit yet.</Bold> <LineBreak/> To add files to a commit, make sure you are in Working Copy mode. Then select your files in the Files area to the left using the lasso motion and
+             <Bold>You haven't added any files to this commit yet.</Bold> <LineBreak/> To add files to a commit, select your files in the Files area (in Working Copy mode) using the lasso motion and
             drag them to the Current Commit area. <LineBreak/><LineBreak/> <Bold>If you need help with any of the motions, or if something confuses you, simply click the question mark on the right for help. </Bold>
         </TextBlock>
         
         <TextBlock Grid.ColumnSpan="3" Height="101" HorizontalAlignment="Left" Margin="657,70,0,0" Name="AddedFilesText" VerticalAlignment="Top" Width="448" Foreground="White" TextWrapping="Wrap" Panel.ZIndex="1" Visibility="Collapsed"> 
-                <Bold>You've added files to this commit.</Bold> <LineBreak/> To commit your files, make sure that you are in Working Copy mode. Then perform the push motion on the Commit button. <LineBreak/><LineBreak/> <Bold>If you need help with any of the motions, or if something confuses you, simply click the question mark on the right for help. </Bold>
+                <Bold>You've added files to this commit.</Bold> <LineBreak/> To commit your files, perform the push motion on the Commit button (in Working Copy mode). <LineBreak/><LineBreak/> <Bold>If you need help with any of the motions, or if something confuses you, simply click the question mark on the right for help. </Bold>
                 </TextBlock>
 
         <TextBlock Grid.ColumnSpan="3" Height="101" HorizontalAlignment="Left" Margin="657,70,0,0" Name="CommitedText" VerticalAlignment="Top" Width="448" Foreground="White" TextWrapping="Wrap" Panel.ZIndex="1" Visibility="Collapsed"> 
-            <Bold>You've made a commit!</Bold> <LineBreak/> To tag your commit with the name of your choice, make sure you are in Local Repository mode. Then perform the push motion on the tag icon. To push your commit (and your tag), push the push button. <LineBreak/><LineBreak/> <Bold>If you need help with any of the motions, or if something confuses you, simply click the question mark on the right for help. </Bold>
+            <Bold>You've made a commit!</Bold> <LineBreak/> To tag your commit with the name of your choice, perform the push motion on the tag icon (in Local Repository mode). To push your commit (and your tag), push the push button. <LineBreak/><LineBreak/> <Bold>If you need help with any of the motions, or if something confuses you, simply click the question mark on the right for help. </Bold>
         </TextBlock>
 
         <TextBlock Grid.ColumnSpan="3" Height="101" HorizontalAlignment="Left" Margin="657,70,0,0" Name="TaggedText" VerticalAlignment="Top" Width="448" Foreground="White" TextWrapping="Wrap" Visibility="Collapsed" Panel.ZIndex="1"> 
-           <Bold>You've successfully tagged your commit!</Bold> <LineBreak/> To push your commit and your tag, make sure you are in Local Repository mode. Then perform the push motion on the push button. <LineBreak/><LineBreak/><LineBreak/> <Bold>If you need help with any of the motions, or if something confuses you, simply click the question mark on the right for help. </Bold>
+           <Bold>You've successfully tagged your commit!</Bold> <LineBreak/> To push your commit and your tag, perform the push motion on the push button (in Local Repository mode). <LineBreak/><LineBreak/><LineBreak/> <Bold>If you need help with any of the motions, or if something confuses you, simply click the question mark on the right for help. </Bold>
         </TextBlock>
 
         <TextBlock Grid.ColumnSpan="3" Height="101" HorizontalAlignment="Left" Margin="657,70,0,0" Name="PushedText" VerticalAlignment="Top" Width="448" Foreground="White" TextWrapping="Wrap" Panel.ZIndex="1" Visibility="Collapsed"> 
-             <Bold>You've pushed!</Bold> <LineBreak/> To return to your local repository, simply pull once on the menu. To return to your working copy, pull twice.<LineBreak/><LineBreak/> <Bold>If you need help with any of the motions, or if something confuses you, simply click the question mark on the right for help. </Bold>
+             <Bold>You've pushed!</Bold> <LineBreak/> To return to your local repository, simply pull once on the mode menu. To return to your working copy, pull twice.<LineBreak/><LineBreak/> <Bold>If you need help with any of the motions, or if something confuses you, simply click the question mark on the right for help. </Bold>
         </TextBlock>
 
 
