@@ -33,6 +33,8 @@ namespace WpfApplication1
         System.Windows.Controls.Image[] selectedImages;             // Selected Images
         System.Windows.Controls.TextBlock[] selectedTextBlocks;     // Selected Textblocks
         List<String> selectedFileNames;
+        List<String> committedFileNames;
+        List<String> removedFileNames;
         private System.Windows.Point mouseClick;            // x y coordinate for the mouse pointer click, used in dragging files
         double baseLeft;                                    // the base left coordinate for the image
         double baseTop;                                     // the base right coordinate for the iamge
@@ -54,7 +56,7 @@ namespace WpfApplication1
             waitTimer.Interval = new TimeSpan(0, 0, 1);
             waitTimer.Tick += new EventHandler(WaitTimer_Root);
 
-            DIRECTORY = @"C:\\Ginect";
+            DIRECTORY = @"C:\\Users\\Roh\\Desktop\\TestFolder";
             MAX_FILE_DISPLAY_COUNT = 16;
             selectedFileNames = new List<string>();
             // get the files into the arraylist from the directory info
@@ -294,11 +296,15 @@ namespace WpfApplication1
             int IMAGE_WIDTH = 40;                       // Width of image?
             int IMAGE_HEIGHT = 40;                      // Height of image?
             int INITIAL_TOP_MARGIN = 100;               // initial top margin of files displayed
-            int INITIAL_LEFT_MARGIN = 100;               // initial left margin
-            int ROW = 6;                                // How many rows to be displayed?
-            int COLUMN = 5;                             // How many columns to be displayed?
-            int HORIZONTAL_SPACING = 120;               // horizontal spacing between each icon
+            int INITIAL_LEFT_MARGIN = 80;               // initial left margin
+            int ROW = 7;                                // How many rows to be displayed?
+            int COLUMN = 9;                             // How many columns to be displayed?
+            int HORIZONTAL_SPACING = 100;               // horizontal spacing between each icon
             int VERTICAL_SPACING = 100;                 // vertical spacing between each icon
+
+            //ADDED
+            int columnCounter = 0;
+            int rowCounter = 0;
 
             // for all the files
             for (int i = 0; i < fileCount; i++)
@@ -319,17 +325,59 @@ namespace WpfApplication1
 
                 // settings for textblocks
                 textBlocks[i].Text = files[i].Name;
+
+                // Initially set it to White
                 textBlocks[i].Foreground = new SolidColorBrush(Colors.White);
+
+                //NEWLY ADDED: GREEN FOR ADD
+                for (int k = 0; k < committedFileNames.Count; k++)
+                {
+                    if (committedFileNames[k].Equals(textBlocks[i].Text))
+                    {
+                        textBlocks[i].Foreground = new SolidColorBrush(Colors.Green);
+                        break;
+                    }
+                }
+
                 textBlocks[i].Background = new SolidColorBrush(Colors.Black);
                 textBlocks[i].Width = IMAGE_WIDTH * 2;
                 textBlocks[i].TextAlignment = TextAlignment.Center;
 
                 // place the image and the textblocks on the inkCanvas
+
+                /*
+                System.Windows.Controls.InkCanvas.SetTop(images[i], columnCounter * HORIZONTAL_SPACING + INITIAL_TOP_MARGIN);
+                System.Windows.Controls.InkCanvas.SetTop(textBlocks[i], columnCounter * HORIZONTAL_SPACING + INITIAL_TOP_MARGIN + IMAGE_HEIGHT + 10);
+
+                System.Windows.Controls.InkCanvas.SetLeft(images[i], rowCounter * VERTICAL_SPACING + INITIAL_LEFT_MARGIN);
+                System.Windows.Controls.InkCanvas.SetLeft(textBlocks[i], rowCounter * VERTICAL_SPACING + INITIAL_LEFT_MARGIN - 20);
+                
+                rowCounter++;
+
+                if (rowCounter == ROW)
+                {
+                    rowCounter = 0;
+                    columnCounter++;
+                }
+                */
+
+                // Corrected display
+                System.Windows.Controls.InkCanvas.SetLeft(images[i], (i % COLUMN) * HORIZONTAL_SPACING + INITIAL_LEFT_MARGIN);
+                System.Windows.Controls.InkCanvas.SetLeft(textBlocks[i], (i % COLUMN) * HORIZONTAL_SPACING + INITIAL_LEFT_MARGIN - 20);
+
+                System.Windows.Controls.InkCanvas.SetTop(images[i], (i / (COLUMN)) * VERTICAL_SPACING + INITIAL_TOP_MARGIN);
+                System.Windows.Controls.InkCanvas.SetTop(textBlocks[i], (i / (COLUMN)) * VERTICAL_SPACING + INITIAL_TOP_MARGIN + IMAGE_HEIGHT + 10);
+                
+
+
+                /*
                 System.Windows.Controls.InkCanvas.SetTop(images[i], (i / COLUMN) * HORIZONTAL_SPACING + INITIAL_TOP_MARGIN);
                 System.Windows.Controls.InkCanvas.SetTop(textBlocks[i], (i / COLUMN) * HORIZONTAL_SPACING + INITIAL_TOP_MARGIN + IMAGE_HEIGHT + 10);
 
                 System.Windows.Controls.InkCanvas.SetLeft(images[i], (i % (ROW - 1)) * VERTICAL_SPACING + INITIAL_LEFT_MARGIN);
                 System.Windows.Controls.InkCanvas.SetLeft(textBlocks[i], (i % (ROW - 1)) * VERTICAL_SPACING + INITIAL_LEFT_MARGIN - 20);
+                */
+
 
                 // Add IT! AWW YEAAA
                 WC_inkCanvas.Children.Add(images[i]);
@@ -339,11 +387,12 @@ namespace WpfApplication1
         }
 
 
+
         // METHOD: this method draws the commit box area. It first redraws the file system before drawing
         private void drawCommitBox()
         {
 
-            drawFileSystem();
+            
 
             // TOGGLE THESE VALUES FOR DISPLAYING:
             int IMAGE_WIDTH = 40;                       // Width of image?
@@ -357,6 +406,13 @@ namespace WpfApplication1
 
             int count = selectedFiles.Count();
 
+            for (int i = 0; i < count; i++)
+            {
+                committedFileNames[i] = selectedFileNames[i];
+            }
+
+            drawFileSystem();
+
             Icon[] selectedFilesIcons = new Icon[count];
             System.Windows.Controls.Image[] selectedFileImages = new System.Windows.Controls.Image[count];
             System.Windows.Controls.TextBlock[] selectedFileTextBlocks = new System.Windows.Controls.TextBlock[count];
@@ -368,7 +424,6 @@ namespace WpfApplication1
                 selectedFileTextBlocks[i] = new TextBlock();
                 selectedFilesIcons[i] = System.Drawing.Icon.ExtractAssociatedIcon(selectedFiles[i].FullName);
             }
-
 
             // for all the files
             for (int i = 0; i < count; i++)
