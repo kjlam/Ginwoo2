@@ -16,7 +16,7 @@ namespace WpfApplication1
 
     public class Terminal
     {
-        static internal String workingDirectory = @"C:\\Ginect";
+        static internal String workingDirectory = @"C:\\Users\\Benj\\Desktop\\CS 160\\Ginect";
         static internal String password = "password";
 
         public Terminal()

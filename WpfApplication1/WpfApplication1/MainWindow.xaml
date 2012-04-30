@@ -20,7 +20,7 @@
         </TextBlock>
 
         <TextBlock Grid.ColumnSpan="3" Height="101" HorizontalAlignment="Left" Margin="657,70,0,0" Name="CommitedText" VerticalAlignment="Top" Width="448" Foreground="White" TextWrapping="Wrap" Panel.ZIndex="1" Visibility="Collapsed"> 
-            <Bold>You've made a commit!</Bold> <LineBreak/> To tag your commit with the name of your choice, perform the push motion on the tag icon (in Local Repository mode). To push your commit (and your tag), push the push button. <LineBreak/><LineBreak/> <Bold>If you need help with any of the motions, or if something confuses you, simply click the question mark on the right for help. </Bold>
+            <Bold>You've made a commit!</Bold> <LineBreak/> To tag your commit, perform the push motion on the tag icon (in Local Repository mode). To push your commit (and your tag), push the push button. <LineBreak/><LineBreak/> <Bold>If you need help with any of the motions, or if something confuses you, simply click the question mark on the right for help. </Bold>
         </TextBlock>
 
         <TextBlock Grid.ColumnSpan="3" Height="101" HorizontalAlignment="Left" Margin="657,70,0,0" Name="TaggedText" VerticalAlignment="Top" Width="448" Foreground="White" TextWrapping="Wrap" Visibility="Collapsed" Panel.ZIndex="1"> 
@@ -30,9 +30,7 @@
         <TextBlock Grid.ColumnSpan="3" Height="101" HorizontalAlignment="Left" Margin="657,70,0,0" Name="PushedText" VerticalAlignment="Top" Width="448" Foreground="White" TextWrapping="Wrap" Panel.ZIndex="1" Visibility="Collapsed"> 
              <Bold>You've pushed!</Bold> <LineBreak/> To return to your local repository, simply pull once on the mode menu. To return to your working copy, pull twice.<LineBreak/><LineBreak/> <Bold>If you need help with any of the motions, or if something confuses you, simply click the question mark on the right for help. </Bold>
         </TextBlock>
-
-        <Image Height="82" HorizontalAlignment="Right" Margin="0,178,434,0" Name="Cursor" Stretch="UniformToFill" IsHitTestVisible="False" VerticalAlignment="Top" Width="71" Source="/WpfApplication1;component/Images/cursor.png" Panel.ZIndex="5" />
-        
+        <Image Height="82" Name="Cursor" Stretch="UniformToFill" IsHitTestVisible="False" Width="71" Source="/WpfApplication1;component/Images/cursor.png" Panel.ZIndex="10" Canvas.Left="1109" Canvas.Top="492"/>
         <Canvas Name="WorkingCopy" Visibility="Visible" Height="720" Width="1280" >
             <InkCanvas Name="WC_inkCanvas" Background="Transparent" EditingMode="None" Height="720" Width="1280" Panel.ZIndex="0" Grid.ColumnSpan="3" Margin="0,0,0,0"></InkCanvas>
 
@@ -112,9 +110,8 @@
 
         </Canvas>
 
-        <Canvas Name="HelpMePleaseHelpHelp" Visibility="Visible" Height="720" Width="1280" Panel.ZIndex="1">
-            <Image Height="680" HorizontalAlignment="Left" Name="Help_Background" Stretch="Fill" VerticalAlignment="Top" Width="1260" Source="/WpfApplication1;component/Images/bg.png" ImageFailed="image1_ImageFailed" Grid.ColumnSpan="3" Panel.ZIndex="-5" Canvas.Left="-8" Canvas.Top="15" />
-            <Label Foreground="White" FontWeight="Bold" Canvas.Top="20" Canvas.Left="20" FontSize="35" Content="Help" />
+        <Canvas Name="HelpMePleaseHelpHelp" Visibility="Collapsed" Height="720" Width="1280" Panel.ZIndex="1">
+         <Label Foreground="White" FontWeight="Bold" Canvas.Top="20" Canvas.Left="20" FontSize="35" Content="Help" />
             <Label Foreground="White" FontWeight="Bold" FontSize="20" Content="GESTURES" Canvas.Top="120" Canvas.Left="115"/>
             <TextBlock Height="298" Width="528"  Canvas.Top="168" Canvas.Left="168" TextWrapping="Wrap" Foreground="White">
                 Ginect recognizes <Bold>three types of gestures:</Bold> <LineBreak/>
