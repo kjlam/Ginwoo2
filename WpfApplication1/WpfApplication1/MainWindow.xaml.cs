@@ -110,6 +110,8 @@ namespace WpfApplication1
         private void WC_HelpIcon_MouseEnter(object sender, MouseEventArgs e)
         {
             WC_HelpIcon.Source = LoadImage("pack://application:,,,/WpfApplication1;component/Images/HelpIconHover.png");
+            HelpMePleaseHelpHelp.Visibility = Visibility.Visible;
+            WC_HelpIcon.Source = LoadImage("pack://application:,,,/WpfApplication1;component/Images/HelpIcon.png");
         }
 
         private void WC_HelpIcon_MouseLeave(object sender, MouseEventArgs e)
@@ -214,8 +216,9 @@ namespace WpfApplication1
 
         private void LR_MenuLocal_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            switchToRemoteRepository();
-            drawRemoteRepository();
+            LoadingScreen.Visibility = Visibility.Visible;
+            waitTimer.Start();
+            
         }
 
         private void LR_MenuLocal_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
@@ -364,11 +367,17 @@ namespace WpfApplication1
         {
 
             HelpMePleaseHelpHelp.Visibility = Visibility.Visible;
+
         }
 
         private void HelpMePleaseHelpHelp_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
             HelpMePleaseHelpHelp.Visibility = Visibility.Collapsed;
+        }
+
+        private void Cursor_ImageFailed(object sender, ExceptionRoutedEventArgs e)
+        {
+
         }
 
 
