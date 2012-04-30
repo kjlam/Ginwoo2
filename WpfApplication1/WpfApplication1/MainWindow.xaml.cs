@@ -363,6 +363,36 @@ namespace WpfApplication1
             }
         }
 
+        /*
+         * CursorInTrashZone()
+         * 
+         * Checks if cursor is in trash area, if so then remove files from commit and remove files from directory
+        */
+        private void CursorInTrashZone()
+        {
+            if (System.Windows.Forms.Cursor.Position.X >= TrashCan.Margin.Left && System.Windows.Forms.Cursor.Position.X <= (TrashCan.Margin.Left + TrashCan.Width))
+            {
+                if (System.Windows.Forms.Cursor.Position.Y <= TrashCan.Margin.Top && System.Windows.Forms.Cursor.Position.Y >= (TrashCan.Margin.Top - TrashCan.Height))
+                {
+                    Console.WriteLine("cursor in Trash zone X: " + System.Windows.Forms.Cursor.Position.X + " Y: " + System.Windows.Forms.Cursor.Position.Y);
+      
+                    //TODO: make sure remove works
+                    Terminal.GitRemoveFiles(selectedFileNames);
+
+                    // TODO: git remove status message
+
+                    //AddedFilesText.Visibility = Visibility.Visible;
+                    //NoAddedFilesText.Visibility = Visibility.Collapsed;
+                    //TaggedText.Visibility = Visibility.Collapsed;
+                    //CommitedText.Visibility = Visibility.Collapsed;
+                    //PushedText.Visibility = Visibility.Collapsed;
+                    mouseLeftClick();
+                    lassoFilesDragging = false;
+                    finishDrag();
+                }
+            }
+        }
+
         private void HelpIcon_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
 

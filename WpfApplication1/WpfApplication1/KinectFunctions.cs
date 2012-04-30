@@ -353,6 +353,7 @@ namespace WpfApplication1
                     //Console.WriteLine("lassofiles dragging");
                     //myimg_MouseMove();
                     CursorInCommitBoxZone();
+                    CursorInTrashZone();
                 }
                 if (selectActivated)
                 {

@@ -33,7 +33,7 @@
         <Image Height="82" Name="Cursor" Stretch="UniformToFill" IsHitTestVisible="False" Width="71" Source="/WpfApplication1;component/Images/cursor.png" Panel.ZIndex="10" Canvas.Left="1109" Canvas.Top="492" ImageFailed="Cursor_ImageFailed" />
         <Canvas Name="WorkingCopy" Visibility="Visible" Height="720" Width="1280" >
             <InkCanvas Name="WC_inkCanvas" Background="Transparent" EditingMode="None" Height="720" Width="1280" Panel.ZIndex="0" Grid.ColumnSpan="3" Margin="0,0,0,0"></InkCanvas>
-            <Image Canvas.Left="32" Canvas.Top="533" Height="115" Name="image5" Stretch="Uniform" Width="95" Source="/WpfApplication1;component/Images/trash.png" />
+            <Image Height="115" Name="TrashCan" Margin="32,533,100,100" Stretch="Uniform" VerticalAlignment="Top" HorizontalAlignment="Left" Width="95" Source="/WpfApplication1;component/Images/trash.png" />
     
             <Image Height="640" HorizontalAlignment="Left" Margin="24,20,0,0" Name="WC_Directory" Stretch="Fill" VerticalAlignment="Top" Width="605" Source="/WpfApplication1;component/Images/CommitBox.png" ImageFailed="WC_CommitBox_ImageFailed" Panel.ZIndex="-2" />
             <Image Height="212" HorizontalAlignment="Left" Margin="635,442,0,0" Name="WC_CommitBox" Source="/WpfApplication1;component/Images/CommitBox.png" Stretch="Fill" VerticalAlignment="Top" Width="605" Grid.ColumnSpan="3" Panel.ZIndex="-2" />
