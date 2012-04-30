@@ -6,6 +6,8 @@ using System.Text.RegularExpressions;
 
 
 using System.Runtime.InteropServices;
+using Microsoft.CSharp;
+using System.CodeDom;
 
 
 namespace WpfApplication1
@@ -17,11 +19,23 @@ namespace WpfApplication1
 
         public Terminal()
         {
-            System.IO.StreamReader file = new System.IO.StreamReader(@"temp.txt");
-            workingDirectory = @file.ReadLine();
+            string filename = System.IO.Path.GetFullPath("temp.txt");
+            filename = filename.Replace(@"\", @"\\");
+            System.IO.StreamReader file = new System.IO.StreamReader(filename);
+            workingDirectory = file.ReadLine();
+            workingDirectory = workingDirectory.Replace(@"\", @"\\");
         }
 
         // Just for light testing
+
+        static string ToLiteral(string input)
+        {
+            var writer = new StringWriter();
+            CSharpCodeProvider provider = new CSharpCodeProvider();
+            provider.GenerateCodeFromExpression(new CodePrimitiveExpression(input), writer, null);
+            return writer.GetStringBuilder().ToString();
+        }
+
         static internal CmdReturn TestModularTerminal()
         {
             // Test GitLog()

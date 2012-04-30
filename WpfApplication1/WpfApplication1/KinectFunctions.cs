@@ -205,7 +205,9 @@ namespace WpfApplication1
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             kinectSensorChooser1.KinectSensorChanged += new DependencyPropertyChangedEventHandler(kinectSensorChooser1_KinectSensorChanged);
-            System.IO.StreamReader file = new System.IO.StreamReader(@"temp.txt");
+            string filename = System.IO.Path.GetFullPath("temp.txt");
+            filename = filename.Replace(@"\", @"\\");
+            System.IO.StreamReader file = new System.IO.StreamReader(filename);
             for (int i = 0; i < 3; i++)
             {
                 String line = file.ReadLine();
@@ -219,7 +221,7 @@ namespace WpfApplication1
                 }
                 else if (i == 2)
                 {
-                    inputPassword.Text = line;
+                    inputPassword.Password = line;
                 }
             }
             file.Close();
