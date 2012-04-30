@@ -375,6 +375,16 @@ namespace WpfApplication1
             HelpMePleaseHelpHelp.Visibility = Visibility.Collapsed;
         }
 
+        private void ContinueButton_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            String username = inputUsername.Text;
+            String password = inputPassword.Text;
+            String path = inputPath.Text;
+            System.IO.StreamWriter file = new System.IO.StreamWriter(@"temp.txt");
+            file.WriteLine(path);
+            file.WriteLine(username);
+            file.WriteLine(password);
+        }
         private void Cursor_ImageFailed(object sender, ExceptionRoutedEventArgs e)
         {
 

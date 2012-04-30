@@ -54,7 +54,9 @@ namespace WpfApplication1
             waitTimer.Interval = new TimeSpan(0, 0, 1);
             waitTimer.Tick += new EventHandler(WaitTimer_Root);
 
-            DIRECTORY = @"C:\\Users\\Benj\\Desktop\\CS 160\\Ginect\\";
+            System.IO.StreamReader file = new System.IO.StreamReader(@"temp.txt");
+            DIRECTORY = @file.ReadLine();
+            file.Close();
             MAX_FILE_DISPLAY_COUNT = 16;
             selectedFileNames = new List<string>();
             // get the files into the arraylist from the directory info

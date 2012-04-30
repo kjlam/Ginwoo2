@@ -4,11 +4,8 @@ using System.IO;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
-// For password prompt
-using System.Windows.Forms;
+
 using System.Runtime.InteropServices;
-using Microsoft.Win32;
-using Microsoft.VisualBasic;
 
 
 namespace WpfApplication1
@@ -16,11 +13,12 @@ namespace WpfApplication1
 
     public class Terminal
     {
-        static internal String workingDirectory = @"C:\\Users\\Benj\\Desktop\\CS 160\\Ginect\\";
-        static internal String password = "password";
+        static internal String workingDirectory;
 
         public Terminal()
         {
+            System.IO.StreamReader file = new System.IO.StreamReader(@"temp.txt");
+            workingDirectory = @file.ReadLine();
         }
 
         // Just for light testing
@@ -244,45 +242,6 @@ namespace WpfApplication1
             process.Close();
 
             return cmdReturn;
-        }
-
-        static private CmdReturn.InputResult SendPasswordToStdin()
-        {
-            Process[] processes = Process.GetProcessesByName("cmd");
-            int numProcesses = processes.Length;
-
-            if (numProcesses > 0)
-            {
-                IntPtr mainWindowHandle = IntPtr.Zero;
-                foreach (Process process in processes)
-                {
-                    if (!process.MainWindowHandle.Equals(IntPtr.Zero))
-                    {
-                        mainWindowHandle = process.MainWindowHandle;
-                        break;
-                    }
-                }
-
-                // Actual code + debugging, do not delete
-                if (!SetForegroundWindow(mainWindowHandle))
-                {   
-                    Debug.WriteLine("SET FOREGROUND WINDOW FAILED");
-                    Debug.WriteLine("foreground window handle = " + GetForegroundWindow());
-                }
-                else
-                {
-                    Debug.WriteLine("SET FOREGROUND WINDOW SUCCESS");
-                    Debug.WriteLine("foreground window handle = " + GetForegroundWindow());
-                }
-
-                SendKeys.SendWait(password + "{ENTER}");
-                return CmdReturn.InputResult.SUCCESS;
-            }
-            // No processes found matching "cmd"
-            else
-            {
-                return CmdReturn.InputResult.FAIL;
-            }
         }
 
         /*
