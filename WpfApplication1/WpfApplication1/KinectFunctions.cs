@@ -103,6 +103,9 @@ namespace WpfApplication1
         const int skeletonCount = 6;
         Skeleton[] allSkeletons = new Skeleton[skeletonCount];
         List<float[]> storedSkeletonValues = new List<float[]>();
+        bool push = false;
+        bool pushable = true;
+        bool back = false;
         bool actionWait = false;
         double[] RHPos = new double[2];
         float[] RHSensitivity = new float[2]{0.3f,0.3f};
@@ -205,24 +208,6 @@ namespace WpfApplication1
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             kinectSensorChooser1.KinectSensorChanged += new DependencyPropertyChangedEventHandler(kinectSensorChooser1_KinectSensorChanged);
-            System.IO.StreamReader file = new System.IO.StreamReader(@"temp.txt");
-            for (int i = 0; i < 3; i++)
-            {
-                String line = file.ReadLine();
-                if (i == 0)
-                {
-                    inputPath.Text = line;
-                }
-                else if (i == 1)
-                {
-                    inputUsername.Text = line;
-                }
-                else if (i == 2)
-                {
-                    inputPassword.Text = line;
-                }
-            }
-            file.Close();
         }
 
 
@@ -368,6 +353,7 @@ namespace WpfApplication1
                     //Console.WriteLine("lassofiles dragging");
                     //myimg_MouseMove();
                     CursorInCommitBoxZone();
+
                 }
                 if (selectActivated)
                 {
