@@ -30,7 +30,7 @@
         <TextBlock Grid.ColumnSpan="3" Height="101" HorizontalAlignment="Left" Margin="657,70,0,0" Name="PushedText" VerticalAlignment="Top" Width="448" Foreground="White" TextWrapping="Wrap" Panel.ZIndex="1" Visibility="Collapsed"> 
              <Bold>You've pushed!</Bold> <LineBreak/> To return to your local repository, simply pull once on the mode menu. To return to your working copy, pull twice.<LineBreak/><LineBreak/> <Bold>If you need help with any of the motions, or if something confuses you, simply click the question mark on the right for help. </Bold>
         </TextBlock>
-        <Image Height="82" Name="Cursor" Stretch="UniformToFill" IsHitTestVisible="False" Width="71" Source="/WpfApplication1;component/Images/cursor.png" Panel.ZIndex="10" Canvas.Left="1109" Canvas.Top="492"/>
+        <Image Height="82" Name="Cursor" Stretch="UniformToFill" IsHitTestVisible="False" Width="71" Source="/WpfApplication1;component/Images/cursor.png" Panel.ZIndex="10" Canvas.Left="1109" Canvas.Top="492" ImageFailed="Cursor_ImageFailed" />
         <Canvas Name="WorkingCopy" Visibility="Visible" Height="720" Width="1280" >
             <InkCanvas Name="WC_inkCanvas" Background="Transparent" EditingMode="None" Height="720" Width="1280" Panel.ZIndex="0" Grid.ColumnSpan="3" Margin="0,0,0,0"></InkCanvas>
 
@@ -106,9 +106,14 @@
             <Image Height="36" HorizontalAlignment="Right" Margin="0,412,57,0" Name="negative7" Panel.ZIndex="2" Stretch="Fill" VerticalAlignment="Top" Width="175" Source="/WpfApplication1;component/Images/CommitBox.png" Opacity="0" Canvas.Left="740" Canvas.Top="-4" />
             <InkCanvas Name="RR_inkCanvas" Background="Transparent" EditingMode="Select" Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="0,0,0,0" Height="720" Width="640" Gesture="inkCanvas_Gesture_1">
             </InkCanvas>
-
-
         </Canvas>
+        
+        <Canvas Name="LoadingScreen" Visibility="Collapsed" Height="720" Width="1280" Panel.ZIndex="1">
+            <TextBlock Canvas.Left="565" Canvas.Top="331" Height="54" Width="222" Foreground="White">
+                <Bold>Loading Remote Repository...</Bold>
+            </TextBlock>
+        </Canvas>
+        
         <Canvas Name="HelpMePleaseHelpHelp" Visibility="Collapsed" Height="720" Width="1280" Panel.ZIndex="1">
          <Label Foreground="White" FontWeight="Bold" Canvas.Top="20" Canvas.Left="20" FontSize="35" Content="Help" />
             <Label Foreground="White" FontWeight="Bold" FontSize="20" Content="GESTURES" Canvas.Top="120" Canvas.Left="115"/>

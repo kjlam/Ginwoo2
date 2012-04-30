@@ -49,10 +49,12 @@ namespace WpfApplication1
             this.DataContext = textBox;
             Mouse.OverrideCursor = Cursors.None;
             selectTimer.Tick += new EventHandler(SelectTimer_Root);
-            selectTimer.Interval = new TimeSpan(0, 0, 1);
+            selectTimer.Interval = new TimeSpan(0, 0, 5);
             dispatcherTimer.Interval = new TimeSpan(0, 0, 2);
             waitTimer.Interval = new TimeSpan(0, 0, 1);
-            DIRECTORY = @"C:\\Users\\Benj\\Desktop\\CS 160\\Ginect";
+            waitTimer.Tick += new EventHandler(WaitTimer_Root);
+
+            DIRECTORY = @"C:\\Ginect";
             MAX_FILE_DISPLAY_COUNT = 16;
             selectedFileNames = new List<string>();
             // get the files into the arraylist from the directory info
@@ -727,7 +729,18 @@ namespace WpfApplication1
         }
 
 
- 
+        void WaitTimer_Root(object sender, EventArgs e)
+        {
+            //TODO: Do somethign as user has started lasso
+            drawRemoteRepository();
+            switchToRemoteRepository();
+            LoadingScreen.Visibility = Visibility.Collapsed;
+            if (waitTimer.Interval == new TimeSpan(0, 0, 1))
+            {
+
+                waitTimer.Stop();
+            }
+        }
 
 
     }
