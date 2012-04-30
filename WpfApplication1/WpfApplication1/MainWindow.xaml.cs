@@ -75,6 +75,15 @@ namespace WpfApplication1
 
             return logo;
         }
+        private void ContinueButton_MouseEnter(object sender, MouseEventArgs e) 
+        {
+            ContinueButton.Source = LoadImage("pack://application:,,,/WpfApplication1;component/Images/CommitButtonHover.png");
+        }
+
+        private void ContinueButton_MouseLeave(object sender, MouseEventArgs e)
+        {
+            ContinueButton.Source = LoadImage("pack://application:,,,/WpfApplication1;component/Images/CommitButton.png");
+        }
 
         private void CommitButton_MouseEnter(object sender, MouseEventArgs e)
         {
@@ -378,12 +387,20 @@ namespace WpfApplication1
         private void ContinueButton_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             String username = inputUsername.Text;
-            String password = inputPassword.Text;
+            String password = inputPassword.Password;
             String path = inputPath.Text;
             System.IO.StreamWriter file = new System.IO.StreamWriter(@"temp.txt");
             file.WriteLine(path);
             file.WriteLine(username);
             file.WriteLine(password);
+            file.Close();
+            path = path.Replace(@"\", @"\\");
+            System.IO.StreamReader file2 = new System.IO.StreamReader(path + "\\.git\\config");
+            string text = file2.ReadToEnd();
+            text = text.Replace("git@github.com", "https://" + username + ":" + password + "@github.com");
+            file = new System.IO.StreamWriter(path + "\\.git\\config");
+            file.Write(text);
+            switchToWorkingCopy();
         }
         private void Cursor_ImageFailed(object sender, ExceptionRoutedEventArgs e)
         {

@@ -15,6 +15,8 @@ using System.Diagnostics;
 using System.IO;
 using System.Drawing;
 using System.Deployment;
+using Microsoft.CSharp;
+using System.CodeDom;
 
 
 namespace WpfApplication1
@@ -56,9 +58,11 @@ namespace WpfApplication1
             waitTimer.Interval = new TimeSpan(0, 0, 1);
             waitTimer.Tick += new EventHandler(WaitTimer_Root);
 
-
-            System.IO.StreamReader file = new System.IO.StreamReader(@"temp.txt");
-            DIRECTORY = @file.ReadLine();
+            string filename = System.IO.Path.GetFullPath("temp.txt");
+            filename = filename.Replace(@"\", @"\\");
+            System.IO.StreamReader file = new System.IO.StreamReader(filename);
+            DIRECTORY = file.ReadLine();
+            DIRECTORY = DIRECTORY.Replace(@"\", @"\\");
             file.Close();
 
             MAX_FILE_DISPLAY_COUNT = 16;
@@ -79,7 +83,8 @@ namespace WpfApplication1
 
             /*
             // inkCanvas is initially set to select mode that allows lassoing
-            WC_inkCanvas.EditingMode = InkCanvasEditingMode.Select;
+            WC_inkCanvas.EditingMode = 
+             * InkCanvasEditingMode.Select;
             */
 
             WC_inkCanvas.EditingMode = InkCanvasEditingMode.None;
@@ -250,6 +255,13 @@ namespace WpfApplication1
                     selectedTextBlocks[i].SetValue(InkCanvas.TopProperty, IHATETHISPROJ + 40 + 10);
                 }
             }
+        }
+        static string ToLiteral(string input)
+        {
+            var writer = new StringWriter();
+            CSharpCodeProvider provider = new CSharpCodeProvider();
+            provider.GenerateCodeFromExpression(new CodePrimitiveExpression(input), writer, null);
+            return writer.GetStringBuilder().ToString();
         }
 
         private void startDrag()
