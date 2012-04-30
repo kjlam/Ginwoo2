@@ -10,7 +10,7 @@
 
         <my:KinectSkeletonViewer Canvas.Left="136" Canvas.Top="195" Name="kinectSkeletonViewer1" Height="172" Width="209" Visibility ="Collapsed" Kinect="{Binding ElementName=kinectSensorChooser1, Path=Kinect}" Margin="68,261,668,248" Panel.ZIndex="5"/>
         
-        <TextBlock Grid.ColumnSpan="3" Height="101" HorizontalAlignment="Left" Margin="657,70,0,0" Name="NoAddedFilesText" VerticalAlignment="Top" Width="448" Foreground="White" TextWrapping="Wrap" Panel.ZIndex="1" Visibility="visible"> 
+        <TextBlock Grid.ColumnSpan="3" Height="101" HorizontalAlignment="Left" Margin="657,70,0,0" Name="NoAddedFilesText" VerticalAlignment="Top" Width="448" Foreground="White" TextWrapping="Wrap" Panel.ZIndex="1" Visibility="Collapsed"> 
              <Bold>You haven't added any files to this commit yet.</Bold> <LineBreak/> To add files to a commit, select your files in the Files area (in Working Copy mode) using the lasso motion and
             drag them to the Current Commit area. <LineBreak/><LineBreak/> <Bold>If you need help with any of the motions, or if something confuses you, simply click the question mark on the right for help. </Bold>
         </TextBlock>
@@ -31,9 +31,9 @@
              <Bold>You've pushed!</Bold> <LineBreak/> To return to your local repository, simply pull once on the mode menu. To return to your working copy, pull twice.<LineBreak/><LineBreak/> <Bold>If you need help with any of the motions, or if something confuses you, simply click the question mark on the right for help. </Bold>
         </TextBlock>
         <Image Height="82" Name="Cursor" Stretch="UniformToFill" IsHitTestVisible="False" Width="71" Source="/WpfApplication1;component/Images/cursor.png" Panel.ZIndex="10" Canvas.Left="1109" Canvas.Top="492" ImageFailed="Cursor_ImageFailed" />
-        <Canvas Name="WorkingCopy" Visibility="Visible" Height="720" Width="1280" >
+        <Canvas Name="WorkingCopy" Visibility="Collapsed" Height="720" Width="1280" >
             <InkCanvas Name="WC_inkCanvas" Background="Transparent" EditingMode="None" Height="720" Width="1280" Panel.ZIndex="0" Grid.ColumnSpan="3" Margin="0,0,0,0"></InkCanvas>
-
+            <Image Canvas.Left="32" Canvas.Top="533" Height="115" Name="image5" Stretch="Uniform" Width="95" Source="/WpfApplication1;component/Images/trash.png" />
     
             <Image Height="640" HorizontalAlignment="Left" Margin="24,20,0,0" Name="WC_Directory" Stretch="Fill" VerticalAlignment="Top" Width="605" Source="/WpfApplication1;component/Images/CommitBox.png" ImageFailed="WC_CommitBox_ImageFailed" Panel.ZIndex="-2" />
             <Image Height="212" HorizontalAlignment="Left" Margin="635,442,0,0" Name="WC_CommitBox" Source="/WpfApplication1;component/Images/CommitBox.png" Stretch="Fill" VerticalAlignment="Top" Width="605" Grid.ColumnSpan="3" Panel.ZIndex="-2" />
@@ -153,6 +153,18 @@
             <Image Canvas.Left="782" Canvas.Top="322" Height="138" Name="image2" Stretch="UniformToFill" Width="310" Source="/WpfApplication1;component/Images/lasso.PNG" />
             <Image Canvas.Left="782" Canvas.Top="198" Height="105" Name="image3" Stretch="UniformToFill" Width="102" Source="/WpfApplication1;component/Images/TagButton.png" />
             <Image Canvas.Left="892" Canvas.Top="198" Height="105" Name="image4" Stretch="UniformToFill" Width="200" Source="/WpfApplication1;component/Images/PushButton.png" />
+        </Canvas>
+        <Canvas Name="Config" Visibility="Visible" Height="720" Width="1280" >
+            <Label Foreground="White" FontWeight="Bold" Canvas.Top="168" Canvas.Left="507" FontSize="35" Content="Configuration" />
+            <Label Foreground="White" FontWeight="Bold" FontSize="20" Content="Git repository location:" Canvas.Top="248" Canvas.Left="367"/>
+            <Label Canvas.Left="417" Canvas.Top="293" Content="Github username:" FontSize="20" FontWeight="Bold" Foreground="White" />
+            <Label Canvas.Left="410" Canvas.Top="340" Content="Github password*:" FontSize="20" FontWeight="Bold" Foreground="White" />
+            <TextBox Canvas.Left="615" Canvas.Top="250" Height="37" Name="inputPath" Width="263" />
+            <TextBox Canvas.Left="615" Canvas.Top="295" Height="37" Name="inputUsername" Width="263" />
+            <TextBox Canvas.Left="615" Canvas.Top="340" Height="37" Name="inputPassword" Width="263" />
+            <TextBlock Canvas.Left="378" Canvas.Top="564" FontSize="16" Width="500" FontWeight="Bold" Foreground="White" TextWrapping="Wrap" TextAlignment="Center">*We will not view your password or store it anywhere but on your personal computer for your own personal use. This is purely for functional purposes; we require your password in order to push and pull from your account.</TextBlock>
+            <Image Canvas.Left="465" Canvas.Top="408" Height="127" Name="ContinueButton" Stretch="Fill" Width="348" Source="/WpfApplication1;component/Images/CommitButton.png" />
+            <Label Canvas.Left="553" Foreground="White" FontSize="35" FontWeight="Bold" Canvas.Top="442" Content="Continue" Height="53" Name="Continue" Width="165" />
         </Canvas>
 
     </Canvas>

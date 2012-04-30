@@ -56,7 +56,11 @@ namespace WpfApplication1
             waitTimer.Interval = new TimeSpan(0, 0, 1);
             waitTimer.Tick += new EventHandler(WaitTimer_Root);
 
-            DIRECTORY = @"C:\\Users\\Roh\\Desktop\\TestFolder";
+
+            System.IO.StreamReader file = new System.IO.StreamReader(@"temp.txt");
+            DIRECTORY = @file.ReadLine();
+            file.Close();
+
             MAX_FILE_DISPLAY_COUNT = 16;
             selectedFileNames = new List<string>();
             // get the files into the arraylist from the directory info
@@ -301,6 +305,7 @@ namespace WpfApplication1
             int COLUMN = 9;                             // How many columns to be displayed?
             int HORIZONTAL_SPACING = 100;               // horizontal spacing between each icon
             int VERTICAL_SPACING = 100;                 // vertical spacing between each icon
+
 
             //ADDED
             int columnCounter = 0;
