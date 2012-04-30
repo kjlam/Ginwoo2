@@ -54,7 +54,7 @@ namespace WpfApplication1
             waitTimer.Interval = new TimeSpan(0, 0, 1);
             waitTimer.Tick += new EventHandler(WaitTimer_Root);
 
-            DIRECTORY = @"C:\\Ginect";
+            DIRECTORY = @"C:\\Users\\Benj\\Desktop\\CS 160\\Ginect\\";
             MAX_FILE_DISPLAY_COUNT = 16;
             selectedFileNames = new List<string>();
             // get the files into the arraylist from the directory info
@@ -293,12 +293,12 @@ namespace WpfApplication1
             // TOGGLE THESE VALUES FOR DISPLAYING:
             int IMAGE_WIDTH = 40;                       // Width of image?
             int IMAGE_HEIGHT = 40;                      // Height of image?
-            int INITIAL_TOP_MARGIN = 100;               // initial top margin of files displayed
-            int INITIAL_LEFT_MARGIN = 100;               // initial left margin
+            int INITIAL_TOP_MARGIN = 75;               // initial top margin of files displayed
+            int INITIAL_LEFT_MARGIN = 75;               // initial left margin
             int ROW = 6;                                // How many rows to be displayed?
             int COLUMN = 5;                             // How many columns to be displayed?
-            int HORIZONTAL_SPACING = 120;               // horizontal spacing between each icon
-            int VERTICAL_SPACING = 100;                 // vertical spacing between each icon
+            int HORIZONTAL_SPACING = 80;               // horizontal spacing between each icon
+            int VERTICAL_SPACING = 90;                 // vertical spacing between each icon
 
             // for all the files
             for (int i = 0; i < fileCount; i++)
