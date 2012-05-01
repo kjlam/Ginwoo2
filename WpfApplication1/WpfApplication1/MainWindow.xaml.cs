@@ -507,6 +507,36 @@ namespace WpfApplication1
             waitTimer.Start();
         }
 
+        private void RR_Refresh_MouseEnter(object sender, MouseEventArgs e)
+        {
+            RR_Refresh.Source = LoadImage("pack://application:,,,/WpfApplication1;component/Images/refresh_blue-hover.png");
+        }
+
+         private void RR_Refresh_MouseLeave(object sender, MouseEventArgs e)
+        {
+            RR_Refresh.Source = LoadImage("pack://application:,,,/WpfApplication1;component/Images/refresh_blue.png");
+        }
+
+        private void LR_Refresh_MouseEnter(object sender, MouseEventArgs e)
+        {
+            LR_Refresh.Source = LoadImage("pack://application:,,,/WpfApplication1;component/Images/refresh_blue-hover.png");
+        }
+
+         private void LR_Refresh_MouseLeave(object sender, MouseEventArgs e)
+        {
+            LR_Refresh.Source = LoadImage("pack://application:,,,/WpfApplication1;component/Images/refresh_blue.png");
+        }
+
+         private void WC_Refresh_MouseEnter(object sender, MouseEventArgs e)
+        {
+            WC_Refresh.Source = LoadImage("pack://application:,,,/WpfApplication1;component/Images/refresh_blue-hover.png");
+        }
+
+         private void WC_Refresh_MouseLeave(object sender, MouseEventArgs e)
+        {
+            WC_Refresh.Source = LoadImage("pack://application:,,,/WpfApplication1;component/Images/refresh_blue.png");
+        }
+
 
 
 
