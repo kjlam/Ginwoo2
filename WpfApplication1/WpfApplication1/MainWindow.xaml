@@ -76,7 +76,7 @@
             <Label Content="Files" Height="33" HorizontalAlignment="Left" Margin="34,31,0,0" Name="LR_Files" VerticalAlignment="Top" Width="77" Foreground="White" FontFamily="Calibri" FontSize="20" />
             <Label Content="Status" FontFamily="Calibri" FontSize="20" Foreground="White" Height="33" HorizontalAlignment="Left" Margin="649,32,0,0" Name="LR_Status" VerticalAlignment="Top" Width="77" />
 
-            <Image Name="LR_Refresh" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="560, 35, 0, 0" Height="50" Width="50" Stretch="Uniform" Source="/WpfApplication1;component/Images/refresh_blue.png" MouseLeftButtonDown="LR_Refresh_MouseLeftButtonDown" MouseLeave="LR_Refresh_MouseLeave" MouseEnter="LR_Refresh_MouseEnter"></Image>
+            <Image Name="LR_Refresh" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="560, 35, 0, 0" Height="50" Width="50" Stretch="Uniform" Source="/WpfApplication1;component/Images/refresh_blue.png" MouseLeftButtonDown="LR_Refresh_MouseLeftButtonDown" MouseLeave="LR_Refresh_MouseLeave" MouseEnter="LR_Refresh_MouseEnter" Panel.ZIndex="3"></Image>
 
 
             <InkCanvas Name="LR_inkCanvas" Background="Transparent" EditingMode="Select" Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="0,0,0,0" Height="720" Width="640" Gesture="inkCanvas_Gesture_1">
