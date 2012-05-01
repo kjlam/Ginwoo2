@@ -93,6 +93,7 @@ namespace WpfApplication1
         private DispatcherTimer readyTimer;
         DispatcherTimer selectTimer = new System.Windows.Threading.DispatcherTimer();
         DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+        DispatcherTimer pullStatusTimer = new System.Windows.Threading.DispatcherTimer();
         private const double AngleChangeSmoothingFactor = 0.35;
         private const string AcceptedSpeechPrefix = "Accepted_";
         private const string RejectedSpeechPrefix = "Rejected_";
@@ -402,6 +403,14 @@ namespace WpfApplication1
             }
         }
 
+        void PullStatusTimer_Root(object sender, EventArgs e)
+        {
+            PulledText.Visibility = Visibility.Collapsed;
+
+            if(pullStatusTimer.Interval = new TimeSpan(0,0,2){
+                pullStatusTimer.Stop();
+            }
+        }
         #region Speech recognizer setup
         private static RecognizerInfo GetKinectRecognizer()
         {

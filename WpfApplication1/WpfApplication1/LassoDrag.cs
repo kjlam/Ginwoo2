@@ -54,6 +54,8 @@ namespace WpfApplication1
             Mouse.OverrideCursor = Cursors.None;
             selectTimer.Tick += new EventHandler(SelectTimer_Root);
             selectTimer.Interval = new TimeSpan(0, 0, 5);
+            pullStatusTimer.Tick += new EventHandler(PullStatusTimer_Root);
+            pullStatusTimer.Interval = new TimeSpan(0, 0, 2);
             dispatcherTimer.Interval = new TimeSpan(0, 0, 2);
             waitTimer.Interval = new TimeSpan(0, 0, 1);
             waitTimer.Tick += new EventHandler(WaitTimer_Root);
