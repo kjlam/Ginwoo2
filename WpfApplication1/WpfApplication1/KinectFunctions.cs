@@ -103,6 +103,9 @@ namespace WpfApplication1
         const int skeletonCount = 6;
         Skeleton[] allSkeletons = new Skeleton[skeletonCount];
         List<float[]> storedSkeletonValues = new List<float[]>();
+        bool push = false;
+        bool pushable = true;
+        bool back = false;
         bool actionWait = false;
         double[] RHPos = new double[2];
         float[] RHSensitivity = new float[2]{0.3f,0.3f};
@@ -570,7 +573,8 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
                         break;
                     case "DONE":
                         //call git tag function with the tagName string
-                        Terminal.GitTagLatestCommit(tagName);
+                        Terminal myTerminal = new Terminal();
+                        myTerminal.GitTagLatestCommit(tagName);
                         TaggedText.Visibility = Visibility.Visible;
                         PushedText.Visibility = Visibility.Collapsed;
                         AddedFilesText.Visibility = Visibility.Collapsed;
@@ -712,7 +716,8 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
                             {
                                 drawFileSystem();
                                 switchToWorkingCopy();
-                                Terminal.GitPull();
+                                Terminal myTerminal = new Terminal();
+                                myTerminal.GitPull();
                             }
                             else
                             {
@@ -731,6 +736,10 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
             }
         }
 
+
+        /*
+         * ChecktStatic checks for select gesture activation
+         */
         void CheckStatic(AllFramesReadyEventArgs e)
         {
             int numFrames = 45;
@@ -753,7 +762,7 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
                     }
                 }
                 */
-
+                /*
                 for (int i = numFrames-1; i > 0; i--)
                 {
                     if (storedSkeletonValues[storedSkeletonValues.Count - i][7] < storedSkeletonValues[storedSkeletonValues.Count-i][1])
@@ -761,14 +770,16 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
                         return;
                     }
                 }
-                 
+                 */
+                if(storedSkeletonValues[storedSkeletonValues.Count][7] > storedSkeletonValues[storedSkeletonValues.Count][1]){
+                    selectActivated = true;
+                }
                 //TODO: Select action (check if hand positions within directory area
                 textBox.Gesture += "SELECTED";
                 actionWait = true;
                 selectTimer.Start();
-                //lasso completed when select is activated again (hands touch again for the interval)
                 //lasso completed, so change cursor senitivity back to original
-                if (selectActivated)
+                if (storedSkeletonValues[storedSkeletonValues.Count][7] < storedSkeletonValues[storedSkeletonValues.Count][1] && selectActivated)
                 {
                     mouseLeftClick();
                     testnumber = 1;
@@ -792,17 +803,17 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
                 }
                 //lasso start
                 //Decrease sensitivity to improve accuracy of lassoing, and move the cursor to the closest image of the mouse to move the set of images
-                else if (!selectActivated)
+                else if (selectActivated)
                 {
                     Cursor.Source = LoadImage("pack://application:,,,/WpfApplication1;component/Images/cursorLasso.png");
                     RHSensitivity[0] = 0.3f;
                     RHSensitivity[1] = 0.3f;
                     WC_inkCanvas.EditingMode = InkCanvasEditingMode.Select;
-                    selectActivated = true;
+                   // selectActivated = true;
                     //mouseLeftUp();
-                    Console.WriteLine("a");
+                   // Console.WriteLine("a");
                     mouseLeftDown();
-                    Console.WriteLine("a");
+                   // Console.WriteLine("a");
                     //mouseLeftDown();
                     //Console.WriteLine("a");
                     //mouseLeftDown();

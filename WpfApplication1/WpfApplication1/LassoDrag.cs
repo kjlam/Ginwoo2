@@ -57,6 +57,57 @@ namespace WpfApplication1
             dispatcherTimer.Interval = new TimeSpan(0, 0, 2);
             waitTimer.Interval = new TimeSpan(0, 0, 1);
             waitTimer.Tick += new EventHandler(WaitTimer_Root);
+
+            string filename = System.IO.Path.GetFullPath("temp.txt");
+            filename = filename.Replace(@"\", @"\\");
+            System.IO.StreamReader file = new System.IO.StreamReader(filename);
+            DIRECTORY = file.ReadLine();
+            DIRECTORY = DIRECTORY.Replace(@"\", @"\\");
+            file.Close();
+
+            MAX_FILE_DISPLAY_COUNT = 16;
+            selectedFileNames = new List<string>();
+            committedFileNames = new List<string>();
+            // get the files into the arraylist from the directory info
+            DirectoryInfo directoryInfo = new DirectoryInfo(DIRECTORY);
+            files = directoryInfo.GetFiles();
+            fileCount = files.Length;
+            icons = new Icon[fileCount];
+
+            //deltaLeft = new double[1];
+            //deltaTop = new double[1];
+
+            //deltaLeft[0] = -1.0;
+            //deltaTop[0] = -1.0;
+
+            imagesFollowMouse = false;
+
+            /*
+            // inkCanvas is initially set to select mode that allows lassoing
+            WC_inkCanvas.EditingMode = 
+             * InkCanvasEditingMode.Select;
+            */
+
+            WC_inkCanvas.EditingMode = InkCanvasEditingMode.None;
+
+            // initializethe images and textBlocks arraylist to contain the respective items
+            images = new System.Windows.Controls.Image[fileCount];
+            textBlocks = new System.Windows.Controls.TextBlock[fileCount];
+            for (int i = 0; i < fileCount; i++)
+            {
+                images[i] = new System.Windows.Controls.Image();
+                textBlocks[i] = new TextBlock();
+            }
+
+            // extract the icons from the files arraylist
+            for (int i = 0; i < fileCount; i++)
+            {
+                icons[i] = System.Drawing.Icon.ExtractAssociatedIcon(files[i].FullName);
+            }
+
+            // draw the file system
+            drawFileSystem();
+
         }
 
         // METHOD: this method obtains all the selected files by the lasso, and places it in the selectedFiles array
@@ -514,7 +565,8 @@ namespace WpfApplication1
         //TODO: delete old list of files when calling method again;
         private void drawLocalRepository()
         {
-            CmdReturn localRepositoryList = Terminal.GitGetLocalRepoFiles();
+            Terminal myTerminal = new Terminal();
+            CmdReturn localRepositoryList = myTerminal.GitGetLocalRepoFiles();
             //TODO: uncomment to enable git file list 
             List<String> lrList = localRepositoryList.fileList;
            // Console.WriteLine(lrList[0]);
@@ -608,7 +660,8 @@ namespace WpfApplication1
 
         private void drawRemoteRepository()
         {
-            CmdReturn remoteRepositoryList = Terminal.GitGetRemoteRepoFiles();
+            Terminal myTerminal = new Terminal();
+            CmdReturn remoteRepositoryList = myTerminal.GitGetRemoteRepoFiles();
             List<String> rrList = remoteRepositoryList.fileList;
             RR_inkCanvas.Children.Clear();
 

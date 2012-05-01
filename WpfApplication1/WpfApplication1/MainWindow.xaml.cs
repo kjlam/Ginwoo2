@@ -227,7 +227,6 @@ namespace WpfApplication1
         {
             LoadingScreen.Visibility = Visibility.Visible;
             waitTimer.Start();
-            
         }
 
         private void LR_MenuLocal_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
@@ -257,7 +256,8 @@ namespace WpfApplication1
         private void CommitButton_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             //TODO: figure out wut message to put in git commit, maybe just number counter, resets status message in working 
-            Terminal.GitCommitWithMessage("Default Message");
+            Terminal myTerminal = new Terminal();
+            myTerminal.GitCommitWithMessage("Default Message");
             switchToLocalRepository();
             drawLocalRepository();
             AddedFilesText.Visibility = Visibility.Collapsed;
@@ -268,7 +268,8 @@ namespace WpfApplication1
 
         private void LR_PushButton_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            Terminal.GitPush();
+            Terminal myTerminal = new Terminal();
+            myTerminal.GitPush();
             drawRemoteRepository();
             switchToRemoteRepository();
             TaggedText.Visibility = Visibility.Collapsed;
@@ -359,7 +360,8 @@ namespace WpfApplication1
                     Console.WriteLine("cursor in commitbox zone X: " + System.Windows.Forms.Cursor.Position.X + " Y: " + System.Windows.Forms.Cursor.Position.Y);
                     drawCommitBox();
                     //TODO: make sure commit works
-                    Terminal.GitAddFilesToCommit(selectedFileNames);
+                    Terminal myTerminal = new Terminal();
+                    myTerminal.GitAddFilesToCommit(selectedFileNames);
                     AddedFilesText.Visibility = Visibility.Visible;
                     NoAddedFilesText.Visibility = Visibility.Collapsed;
                     TaggedText.Visibility = Visibility.Collapsed;
@@ -426,7 +428,6 @@ namespace WpfApplication1
             file.Close();
             path = path.Replace("/", @"\\");
             string configpath = path + @"\\.git\\config";
-            MessageBox.Show(configpath);
             System.IO.StreamReader file2 = new System.IO.StreamReader(configpath);
             string text = file2.ReadToEnd();
             text = text.Replace("git@github.com", "https://" + username + ":" + password + "@github.com");
@@ -487,6 +488,22 @@ namespace WpfApplication1
         private void Cursor_ImageFailed(object sender, ExceptionRoutedEventArgs e)
         {
 
+        }
+
+        private void WC_Refresh_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            drawFileSystem();
+        }
+
+        private void LR_Refresh_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            drawLocalRepository();
+        }
+
+        private void RR_Refresh_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            LoadingScreen.Visibility = Visibility.Visible;
+            waitTimer.Start();
         }
 
 
