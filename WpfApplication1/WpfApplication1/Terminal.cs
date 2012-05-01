@@ -97,6 +97,24 @@ namespace WpfApplication1
             return ExecuteProcess(workingDirectory, "git add" + filesStr, false);
         }
 
+        /*
+         * GitRemoveFiles()
+         * 
+         * This executes a 'git rm <file1> <file2> .. <fileN>' command.
+         * 
+         */
+        static internal CmdReturn GitRemoveFiles(List<String> filesList)
+        {
+            String filesStr = "";
+
+            filesList.ForEach(delegate(String file)
+            {
+                filesStr += " ";
+                filesStr += file;
+            });
+
+            return ExecuteProcess(workingDirectory, "git rm" + filesStr, false);
+        }
 
         internal CmdReturn GitTagLatestCommit(String tagName)
         {
