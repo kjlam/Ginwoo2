@@ -4,11 +4,11 @@ using System.IO;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
-// For password prompt
-using System.Windows.Forms;
+
 using System.Runtime.InteropServices;
-using Microsoft.Win32;
-using Microsoft.VisualBasic;
+using Microsoft.CSharp;
+using System.CodeDom;
+using System.Windows.Forms;
 
 
 namespace WpfApplication1
@@ -16,14 +16,27 @@ namespace WpfApplication1
 
     public class Terminal
     {
-        static internal String workingDirectory = @"C:\\Users\\Benj\\Desktop\\CS 160\\Ginect\\";
-        static internal String password = "password";
+        static internal String workingDirectory;
 
         public Terminal()
         {
+            string filename = System.IO.Path.GetFullPath("temp.txt");
+            filename = filename.Replace(@"\", @"\\");
+            System.IO.StreamReader file = new System.IO.StreamReader(filename);
+            workingDirectory = file.ReadLine();
+            workingDirectory = workingDirectory.Replace(@"\", @"\\");
         }
 
         // Just for light testing
+
+        static string ToLiteral(string input)
+        {
+            var writer = new StringWriter();
+            CSharpCodeProvider provider = new CSharpCodeProvider();
+            provider.GenerateCodeFromExpression(new CodePrimitiveExpression(input), writer, null);
+            return writer.GetStringBuilder().ToString();
+        }
+
         static internal CmdReturn TestModularTerminal()
         {
             // Test GitLog()
@@ -230,7 +243,7 @@ namespace WpfApplication1
 
             // The cmd terminal
             startInfo.FileName = "cmd.exe";
-
+            MessageBox.Show(directory);
             Directory.SetCurrentDirectory(directory);
 
             startInfo.Arguments = "/C " + command;
@@ -262,45 +275,6 @@ namespace WpfApplication1
             process.Close();
 
             return cmdReturn;
-        }
-
-        static private CmdReturn.InputResult SendPasswordToStdin()
-        {
-            Process[] processes = Process.GetProcessesByName("cmd");
-            int numProcesses = processes.Length;
-
-            if (numProcesses > 0)
-            {
-                IntPtr mainWindowHandle = IntPtr.Zero;
-                foreach (Process process in processes)
-                {
-                    if (!process.MainWindowHandle.Equals(IntPtr.Zero))
-                    {
-                        mainWindowHandle = process.MainWindowHandle;
-                        break;
-                    }
-                }
-
-                // Actual code + debugging, do not delete
-                if (!SetForegroundWindow(mainWindowHandle))
-                {   
-                    Debug.WriteLine("SET FOREGROUND WINDOW FAILED");
-                    Debug.WriteLine("foreground window handle = " + GetForegroundWindow());
-                }
-                else
-                {
-                    Debug.WriteLine("SET FOREGROUND WINDOW SUCCESS");
-                    Debug.WriteLine("foreground window handle = " + GetForegroundWindow());
-                }
-
-                SendKeys.SendWait(password + "{ENTER}");
-                return CmdReturn.InputResult.SUCCESS;
-            }
-            // No processes found matching "cmd"
-            else
-            {
-                return CmdReturn.InputResult.FAIL;
-            }
         }
 
         /*

@@ -103,9 +103,6 @@ namespace WpfApplication1
         const int skeletonCount = 6;
         Skeleton[] allSkeletons = new Skeleton[skeletonCount];
         List<float[]> storedSkeletonValues = new List<float[]>();
-        bool push = false;
-        bool pushable = true;
-        bool back = false;
         bool actionWait = false;
         double[] RHPos = new double[2];
         float[] RHSensitivity = new float[2]{0.3f,0.3f};
@@ -208,6 +205,26 @@ namespace WpfApplication1
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             kinectSensorChooser1.KinectSensorChanged += new DependencyPropertyChangedEventHandler(kinectSensorChooser1_KinectSensorChanged);
+            string filename = System.IO.Path.GetFullPath("temp.txt");
+            filename = filename.Replace(@"\", @"\\");
+            System.IO.StreamReader file = new System.IO.StreamReader(filename);
+            for (int i = 0; i < 3; i++)
+            {
+                String line = file.ReadLine();
+                if (i == 0)
+                {
+                    inputPath.Text = line;
+                }
+                else if (i == 1)
+                {
+                    inputUsername.Text = line;
+                }
+                else if (i == 2)
+                {
+                    inputPassword.Password = line;
+                }
+            }
+            file.Close();
         }
 
 
