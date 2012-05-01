@@ -31,7 +31,7 @@
              <Bold>You've pushed!</Bold> <LineBreak/> To return to your local repository, simply pull once on the mode menu. To return to your working copy, pull twice.<LineBreak/><LineBreak/> <Bold>If you need help with any of the motions, or if something confuses you, simply click the question mark on the right for help. </Bold>
         </TextBlock>
 
-        <TextBlock Grid.ColumnSpan="3" FontSize="25" Name ="PulledText" Height="50" Width ="200" HorizontalAlignment="Left" Foreground= "#3399FF" VerticalAlignment="Top" Margin="200, 30, 0, 0" Panel.ZIndex="3" Visibility="Visible">
+        <TextBlock Grid.ColumnSpan="3" FontSize="25" Name ="PulledText" Height="50" Width ="200" HorizontalAlignment="Left" Foreground= "#3399FF" VerticalAlignment="Top" Margin="200, 30, 0, 0" Panel.ZIndex="3" Visibility="Collapsed">
             <Bold>You've pulled!</Bold>
         </TextBlock>
 

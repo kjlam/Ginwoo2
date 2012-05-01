@@ -407,7 +407,7 @@ namespace WpfApplication1
         {
             PulledText.Visibility = Visibility.Collapsed;
 
-            if(pullStatusTimer.Interval = new TimeSpan(0,0,2){
+            if(pullStatusTimer.Interval == new TimeSpan(0,0,2)){
                 pullStatusTimer.Stop();
             }
         }
@@ -793,7 +793,7 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
 
 
         /*
-         * ChecktStatic checks for select gesture activation
+         * ChecktStatic checks for select gesture activation and the help hover
          */
         void CheckStatic(AllFramesReadyEventArgs e)
         {
@@ -801,7 +801,7 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
             if (storedSkeletonValues.Count > numFrames)
             {
                 //selectThreshold: how far the left and right hands can be and still register as a select
-               /*
+               
                 float[] selectThreshold = new float[3]{50,50,50};
                 for (int i = numFrames-1; i > 0; i--)
                 {
@@ -816,7 +816,7 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
                         }
                     }
                 }
-                */
+                
                 /*
                 for (int i = numFrames-1; i > 0; i--)
                 {
