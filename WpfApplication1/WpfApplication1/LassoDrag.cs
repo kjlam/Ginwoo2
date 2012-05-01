@@ -514,7 +514,8 @@ namespace WpfApplication1
         //TODO: delete old list of files when calling method again;
         private void drawLocalRepository()
         {
-            CmdReturn localRepositoryList = Terminal.GitGetLocalRepoFiles();
+            Terminal myTerminal = new Terminal();
+            CmdReturn localRepositoryList = myTerminal.GitGetLocalRepoFiles();
             //TODO: uncomment to enable git file list 
             List<String> lrList = localRepositoryList.fileList;
            // Console.WriteLine(lrList[0]);
@@ -608,7 +609,8 @@ namespace WpfApplication1
 
         private void drawRemoteRepository()
         {
-            CmdReturn remoteRepositoryList = Terminal.GitGetRemoteRepoFiles();
+            Terminal myTerminal = new Terminal();
+            CmdReturn remoteRepositoryList = myTerminal.GitGetRemoteRepoFiles();
             List<String> rrList = remoteRepositoryList.fileList;
             RR_inkCanvas.Children.Clear();
 

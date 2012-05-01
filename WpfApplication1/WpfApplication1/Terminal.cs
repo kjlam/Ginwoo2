@@ -9,35 +9,28 @@ using System.Runtime.InteropServices;
 using Microsoft.CSharp;
 using System.CodeDom;
 using System.Windows.Forms;
+using System.Reflection;
 
 
 namespace WpfApplication1
 {
 
-    public class Terminal
+    internal class Terminal
     {
         static internal String workingDirectory;
 
-        public Terminal()
+        internal Terminal()
         {
-            string filename = System.IO.Path.GetFullPath("temp.txt");
+            Uri assemblyUri = new Uri(Assembly.GetExecutingAssembly().CodeBase);
+            string path = Path.GetDirectoryName(assemblyUri.LocalPath); 
+            string filename = path +  @"\temp.txt";
             filename = filename.Replace(@"\", @"\\");
             System.IO.StreamReader file = new System.IO.StreamReader(filename);
             workingDirectory = file.ReadLine();
             workingDirectory = workingDirectory.Replace(@"\", @"\\");
         }
 
-        // Just for light testing
-
-        static string ToLiteral(string input)
-        {
-            var writer = new StringWriter();
-            CSharpCodeProvider provider = new CSharpCodeProvider();
-            provider.GenerateCodeFromExpression(new CodePrimitiveExpression(input), writer, null);
-            return writer.GetStringBuilder().ToString();
-        }
-
-        static internal CmdReturn TestModularTerminal()
+        internal CmdReturn TestModularTerminal()
         {
             // Test GitLog()
             //return GitLog();
@@ -69,14 +62,15 @@ namespace WpfApplication1
             return GitGetRemoteRepoFiles();
         }
 
-        static internal CmdReturn GitGetLocalRepoFiles()
+        internal CmdReturn GitGetLocalRepoFiles()
         {
+
             CmdReturn cmdReturn = ExecuteProcess(workingDirectory, "git ls-tree --full-tree -r HEAD", false);
             cmdReturn.fileList = ParseGetRepoFilesStdout(cmdReturn.stdout);
             return cmdReturn;
         }
 
-        static internal CmdReturn GitGetRemoteRepoFiles()
+        internal CmdReturn GitGetRemoteRepoFiles()
         {
             ExecuteProcess(workingDirectory, "git fetch", true);
             CmdReturn cmdReturn = ExecuteProcess(workingDirectory, "git ls-tree --full-tree -r origin", false);
@@ -90,7 +84,7 @@ namespace WpfApplication1
          * This executes a 'git add <file1> <file2> .. <fileN>' command.
          * 
          */
-        static internal CmdReturn GitAddFilesToCommit(List<String> filesList)
+        internal CmdReturn GitAddFilesToCommit(List<String> filesList)
         {
             String filesStr = "";
 
@@ -104,7 +98,7 @@ namespace WpfApplication1
         }
 
 
-        static internal CmdReturn GitTagLatestCommit(String tagName)
+        internal CmdReturn GitTagLatestCommit(String tagName)
         {
             String latestCommitID = GetLatestCommitID();
             return GitTag(tagName, latestCommitID);
@@ -120,7 +114,7 @@ namespace WpfApplication1
          * Returns a string of the latest commit ID.
          * 
          */
-        static private String GetLatestCommitID()
+        internal String GetLatestCommitID()
         {
             char[] delimiterChars = { ' ' };
             String latestCommit = null;
@@ -152,7 +146,7 @@ namespace WpfApplication1
          * A 'git commit' must be made before this method.
          * 
          */
-        static private CmdReturn GitTag(String tagName, String commitID)
+       internal CmdReturn GitTag(String tagName, String commitID)
         {
             return ExecuteProcess(workingDirectory, "git tag -f " + tagName + " " + commitID, false);
         }
@@ -163,19 +157,19 @@ namespace WpfApplication1
          * This executes a 'git commit -m "My message"' command.
          * 
          */
-        static internal CmdReturn GitCommitWithMessage(String message)
+        internal CmdReturn GitCommitWithMessage(String message)
         {
             return ExecuteProcess(workingDirectory, "git commit -m \"" + message + "\"", false);
         }
 
-        /*
+        /* 
          * GitPush()
          * 
          * This executes a 'git push' command. A 'git commit' must be made
          * before calling this method.
          * 
          */
-        static internal CmdReturn GitPush()
+        internal CmdReturn GitPush()
         {
             return ExecuteProcess(workingDirectory, "git push", true);
         }
@@ -187,26 +181,26 @@ namespace WpfApplication1
         * before calling this method.
         * 
         */
-        static internal CmdReturn GitPull()
+        internal CmdReturn GitPull()
         {
             return ExecuteProcess(workingDirectory, "git pull", true);
         }
 
         
 
-        static internal CmdReturn GitStatus()
+       internal CmdReturn GitStatus()
         {
             CmdReturn cmdReturn = ExecuteProcess(workingDirectory, "git status", false);
             cmdReturn.fileList = ParseGitStatusStdout(cmdReturn.stdout);
             return cmdReturn;
         }
 
-        static internal CmdReturn GitLog()
+        internal CmdReturn GitLog()
         {
             return ExecuteProcess(workingDirectory, "git log", false);
         }
 
-        static private CmdReturn ExecuteProcess(String directory, String command, bool needToInputPassword)
+        internal CmdReturn ExecuteProcess(String directory, String command, bool needToInputPassword)
         {
             Process process = new System.Diagnostics.Process();
             ProcessStartInfo startInfo = new ProcessStartInfo();
@@ -225,7 +219,6 @@ namespace WpfApplication1
 
             // The cmd terminal
             startInfo.FileName = "cmd.exe";
-            MessageBox.Show(directory);
             Directory.SetCurrentDirectory(directory);
 
             startInfo.Arguments = "/C " + command;
@@ -280,7 +273,7 @@ namespace WpfApplication1
          *      stdout line 2
          *      
          */
-        static private String ParseStdOut(String stdout)
+        internal String ParseStdOut(String stdout)
         {
             String boundary = "^C:.*$";
             StringWriter writer = new StringWriter();
@@ -319,7 +312,7 @@ namespace WpfApplication1
 #       jessica3.txt
 no changes added to commit (use "git add" and/or "git commit -a")
          * */
-        static private List<String> ParseGitStatusStdout(String stdout)
+        internal List<String> ParseGitStatusStdout(String stdout)
         {
             List<String> fileList = new List<String>();
 
@@ -393,7 +386,7 @@ no changes added to commit (use "git add" and/or "git commit -a")
 100644 blob e69de29bb2d1d6434b8b29ae775ad8c2e48c5391    klam.txt
 100644 blob e69de29bb2d1d6434b8b29ae775ad8c2e48c5391    push.txt
          * */
-        static private List<String> ParseGetRepoFilesStdout(String stdout)
+        internal List<String> ParseGetRepoFilesStdout(String stdout)
         {
             List<String> fileList = new List<String>();
 
@@ -421,10 +414,10 @@ no changes added to commit (use "git add" and/or "git commit -a")
 
         // Activate an application window.
         [DllImport("USER32.DLL")]
-        public static extern bool SetForegroundWindow(IntPtr hWnd);
+        internal static extern bool SetForegroundWindow(IntPtr hWnd);
 
         [DllImport("USER32.DLL", CharSet = CharSet.Auto, ExactSpelling = true)]
-        public static extern IntPtr GetForegroundWindow();
+        internal static extern IntPtr GetForegroundWindow();
 
         [DllImport("USER32.DLL")]
         static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);

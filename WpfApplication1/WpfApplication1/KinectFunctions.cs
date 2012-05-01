@@ -569,7 +569,8 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
                         break;
                     case "DONE":
                         //call git tag function with the tagName string
-                        Terminal.GitTagLatestCommit(tagName);
+                        Terminal myTerminal = new Terminal();
+                        myTerminal.GitTagLatestCommit(tagName);
                         TaggedText.Visibility = Visibility.Visible;
                         PushedText.Visibility = Visibility.Collapsed;
                         AddedFilesText.Visibility = Visibility.Collapsed;
@@ -711,7 +712,8 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
                             {
                                 drawFileSystem();
                                 switchToWorkingCopy();
-                                Terminal.GitPull();
+                                Terminal myTerminal = new Terminal();
+                                myTerminal.GitPull();
                             }
                             else
                             {
