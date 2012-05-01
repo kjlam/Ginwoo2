@@ -20,6 +20,7 @@ using System.Threading;
 using Coding4Fun.Kinect.Wpf;
 using System.Drawing;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace WpfApplication1
 {
@@ -431,6 +432,7 @@ namespace WpfApplication1
             System.IO.StreamReader file2 = new System.IO.StreamReader(configpath);
             string text = file2.ReadToEnd();
             text = text.Replace("git@github.com", "https://" + username + ":" + password + "@github.com");
+            text = Regex.Replace(text, "//.*:.*@github.com", "//" + username + ":" + password + "@github.com", RegexOptions.Singleline);
             file2.Close();
             file = new System.IO.StreamWriter(configpath);
             file.Write(text);
