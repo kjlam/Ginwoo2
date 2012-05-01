@@ -264,7 +264,6 @@ namespace WpfApplication1
             NoAddedFilesText.Visibility = Visibility.Collapsed;
             PushedText.Visibility = Visibility.Collapsed;
             CommitedText.Visibility = Visibility.Visible;
-
         }
 
         private void LR_PushButton_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
