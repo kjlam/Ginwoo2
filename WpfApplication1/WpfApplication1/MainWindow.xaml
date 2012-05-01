@@ -121,7 +121,7 @@
             </TextBlock>
         </Canvas>
         
-        <Canvas Name="HelpMePleaseHelpHelp" Visibility="Collapsed" Height="720" Width="1280" Panel.ZIndex="1">
+        <Canvas Name="HelpMePleaseHelpHelp" Visibility="Collapsed" Height="720" Width="1280" Panel.ZIndex="1" MouseRightButtonDown="HelpMePleaseHelpHelp_MouseRightButtonDown">
             <Image Height="680" HorizontalAlignment="Left" Name="Help_Background" Stretch="Fill" VerticalAlignment="Top" Width="1260" Source="/WpfApplication1;component/Images/bg.png" ImageFailed="image1_ImageFailed" Grid.ColumnSpan="3" Panel.ZIndex="-5" Canvas.Left="-8" Canvas.Top="15" />
             <Label Foreground="White" FontWeight="Bold" Canvas.Top="20" Canvas.Left="20" FontSize="35" Content="Help" />
             <TextBlock Foreground="White " Height="30"  FontSize="20" Text="To exit the help menu, perform the pull gesture." Canvas.Top="76" Canvas.Left="115"></TextBlock>
