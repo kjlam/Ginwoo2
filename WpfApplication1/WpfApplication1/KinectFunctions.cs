@@ -802,21 +802,30 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
             {
                 //selectThreshold: how far the left and right hands can be and still register as a select
                
-                float[] selectThreshold = new float[3]{50,50,50};
+               // float[] selectThreshold = new float[3]{50,50,50};
+                Boolean helpOpen = true;
                 for (int i = numFrames-1; i > 0; i--)
                 {
-                    for (int j = 0; j < 3; j++)
+                    float rightXValue = storedSkeletonValues[storedSkeletonValues.Count - i][3];
+                    float rightYValue = storedSkeletonValues[storedSkeletonValues.Count - i][4];
+
+                    if (rightXValue <= WC_CommitBox.Margin.Left && rightXValue >= (WC_CommitBox.Margin.Left + WC_CommitBox.Width))
                     {
-                        float leftValue = storedSkeletonValues[storedSkeletonValues.Count - i][j];
-                        float rightValue = storedSkeletonValues[storedSkeletonValues.Count - i][j+3];
-                        float difference = Math.Abs(leftValue - rightValue);
-                        if (difference > selectThreshold[j])
+                        if (rightYValue >= WC_CommitBox.Margin.Top && rightYValue <= (WC_CommitBox.Margin.Top - WC_CommitBox.Height))
                         {
-                            return;
+                            helpOpen = false;
+                            break;
                         }
                     }
+
+                }
+
+                if (helpOpen)
+                {
+                    HelpMePleaseHelpHelp.Visibility = Visibility.Visible;
                 }
                 
+
                 /*
                 for (int i = numFrames-1; i > 0; i--)
                 {

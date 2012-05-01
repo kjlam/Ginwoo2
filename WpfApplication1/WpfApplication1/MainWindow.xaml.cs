@@ -270,8 +270,7 @@ namespace WpfApplication1
         {
             Terminal myTerminal = new Terminal();
             myTerminal.GitPush();
-            drawRemoteRepository();
-            switchToRemoteRepository();
+            waitTimer.Start();
             TaggedText.Visibility = Visibility.Collapsed;
             CommitedText.Visibility = Visibility.Collapsed;
             AddedFilesText.Visibility = Visibility.Collapsed;
@@ -408,7 +407,7 @@ namespace WpfApplication1
         private void HelpIcon_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
 
-            HelpMePleaseHelpHelp.Visibility = Visibility.Visible;
+            //HelpMePleaseHelpHelp.Visibility = Visibility.Visible;
 
         }
 
