@@ -123,10 +123,10 @@
         
         <Canvas Name="HelpMePleaseHelpHelp" Visibility="Collapsed" Height="720" Width="1280" Panel.ZIndex="1" MouseRightButtonDown="HelpMePleaseHelpHelp_MouseRightButtonDown">
             <Image Height="680" HorizontalAlignment="Left" Name="Help_Background" Stretch="Fill" VerticalAlignment="Top" Width="1260" Source="/WpfApplication1;component/Images/bg.png" ImageFailed="image1_ImageFailed" Grid.ColumnSpan="3" Panel.ZIndex="-5" Canvas.Left="-8" Canvas.Top="15" />
-            <Label Foreground="White" FontWeight="Bold" Canvas.Top="20" Canvas.Left="20" FontSize="35" Content="Help" />
+            <Label Foreground="White" FontWeight="Bold" Canvas.Top="20" Canvas.Left="30" FontSize="35" Content="Help" />
             <TextBlock Foreground="White " Height="30"  FontSize="20" Text="To exit the help menu, perform the pull gesture." Canvas.Top="76" Canvas.Left="115"></TextBlock>
             <Label Foreground="White" FontWeight="Bold" FontSize="20" Content="GESTURES" Canvas.Top="120" Canvas.Left="115"/>
-            <TextBlock Height="298" Width="528"  Canvas.Top="168" Canvas.Left="168" TextWrapping="Wrap" Foreground="White">
+            <TextBlock Height="320" Width="528"  Canvas.Top="168" Canvas.Left="168" TextWrapping="Wrap" Foreground="White">
                 Ginect recognizes <Bold>three types of gestures:</Bold> <LineBreak/>
                 <LineBreak/>
 	            <Bold>Push</Bold>
@@ -139,7 +139,8 @@
 	            <Bold>Pull</Bold><LineBreak/>
 	            The pull gesture is just like the push gesture; the only
                 difference is that instead of moving your right hand forward, you will want to
-                move it backwards towards yourself, as if pulling on an object.<LineBreak/>
+                move it backwards towards yourself, as if pulling on an object. To perform a Git pull, 
+                perform the pull motion on top of the Files area.<LineBreak/>
 	            <LineBreak/>
 	            <Bold>Lasso</Bold><LineBreak/>
 	            The lasso gesture is used to select files to add to commit.
@@ -148,8 +149,8 @@
                 to select your files (an outline will appear in orange). To end the lasso and select the files,
                 put your left hand above your head once more. You can then drag your files to the Current Commit box.
             </TextBlock>
-            <Label Foreground="White" FontWeight="Bold" Content="THE MODE SWITCHER MENU" Canvas.Top="470" Canvas.Left="115" FontSize="20"/>
-            <TextBlock Canvas.Top="520" Canvas.Left="168" TextWrapping="Wrap" Foreground="White" Width="528" Height="102">
+            <Label Foreground="White" FontWeight="Bold" Content="THE MODE SWITCHER MENU" Canvas.Top="480" Canvas.Left="115" FontSize="20"/>
+            <TextBlock Canvas.Top="530" Canvas.Left="168" TextWrapping="Wrap" Foreground="White" Width="528" Height="102">
         The <Bold>three-sphere </Bold> on the right side of the application (displayed again on the right) is the Mode Switcher Menu.
             It lets you move between the three modes of Ginect: <Bold>Working Copy</Bold>, <Bold>Local Repository</Bold> and <Bold>Remote Repository</Bold>.
 	        Your Working Copy is represented by the sphere which is closest to you and your Remote Repository by
