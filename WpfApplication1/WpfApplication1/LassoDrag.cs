@@ -604,13 +604,12 @@ namespace WpfApplication1
             // TOGGLE THESE VALUES FOR DISPLAYING:
             int IMAGE_WIDTH = 40;                       // Width of image?
             int IMAGE_HEIGHT = 40;                      // Height of image?
-            int INITIAL_TOP_MARGIN = 100;               // initial top margin of files displayed
-            int INITIAL_LEFT_MARGIN = 100;               // initial left margin
+            int INITIAL_TOP_MARGIN = 80;               // initial top margin of files displayed
+            int INITIAL_LEFT_MARGIN = 80;               // initial left margin
             int ROW = 6;                                // How many rows to be displayed?
-            int COLUMN = 5;                             // How many columns to be displayed?
-            int HORIZONTAL_SPACING = 120;               // horizontal spacing between each icon
-            int VERTICAL_SPACING = 100;                 // vertical spacing between each icon
-
+            int COLUMN = 6;                             // How many columns to be displayed?
+            int HORIZONTAL_SPACING = 90;               // horizontal spacing between each icon
+            int VERTICAL_SPACING = 80;                 // vertical spacing between each icon
             // for all the files
             for (int i = 0; i < count; i++)
             {
@@ -645,12 +644,21 @@ namespace WpfApplication1
                 textBlocks[i].TextAlignment = TextAlignment.Center;
 
                 // place the image and the textblocks on the inkCanvas
+
+                /*
                 System.Windows.Controls.InkCanvas.SetTop(images[i], (i / COLUMN) * HORIZONTAL_SPACING + INITIAL_TOP_MARGIN);
                 System.Windows.Controls.InkCanvas.SetTop(textBlocks[i], (i / COLUMN) * HORIZONTAL_SPACING + INITIAL_TOP_MARGIN + IMAGE_HEIGHT + 10);
 
                 System.Windows.Controls.InkCanvas.SetLeft(images[i], (i % (ROW - 1)) * VERTICAL_SPACING + INITIAL_LEFT_MARGIN);
                 System.Windows.Controls.InkCanvas.SetLeft(textBlocks[i], (i % (ROW - 1)) * VERTICAL_SPACING + INITIAL_LEFT_MARGIN - 20);
+                */
 
+                System.Windows.Controls.InkCanvas.SetLeft(images[i], (i % COLUMN) * HORIZONTAL_SPACING + INITIAL_LEFT_MARGIN);
+                System.Windows.Controls.InkCanvas.SetLeft(textBlocks[i], (i % COLUMN) * HORIZONTAL_SPACING + INITIAL_LEFT_MARGIN - 20);
+
+                System.Windows.Controls.InkCanvas.SetTop(images[i], (i / (COLUMN)) * VERTICAL_SPACING + INITIAL_TOP_MARGIN);
+                System.Windows.Controls.InkCanvas.SetTop(textBlocks[i], (i / (COLUMN)) * VERTICAL_SPACING + INITIAL_TOP_MARGIN + IMAGE_HEIGHT + 10);
+                
                 // Add IT! AWW YEAAA
                 LR_inkCanvas.Children.Add(images[i]);
                 LR_inkCanvas.Children.Add(textBlocks[i]);
@@ -698,13 +706,12 @@ namespace WpfApplication1
             // TOGGLE THESE VALUES FOR DISPLAYING:
             int IMAGE_WIDTH = 40;                       // Width of image?
             int IMAGE_HEIGHT = 40;                      // Height of image?
-            int INITIAL_TOP_MARGIN = 100;               // initial top margin of files displayed
-            int INITIAL_LEFT_MARGIN = 100;               // initial left margin
+            int INITIAL_TOP_MARGIN = 80;               // initial top margin of files displayed
+            int INITIAL_LEFT_MARGIN = 80;               // initial left margin
             int ROW = 6;                                // How many rows to be displayed?
-            int COLUMN = 5;                             // How many columns to be displayed?
-            int HORIZONTAL_SPACING = 120;               // horizontal spacing between each icon
-            int VERTICAL_SPACING = 100;                 // vertical spacing between each icon
-
+            int COLUMN = 6;                             // How many columns to be displayed?
+            int HORIZONTAL_SPACING = 90;               // horizontal spacing between each icon
+            int VERTICAL_SPACING = 80;                 // vertical spacing between each icon
             // for all the files
             for (int i = 0; i < count; i++)
             {
@@ -739,12 +746,20 @@ namespace WpfApplication1
                 textBlocks[i].TextAlignment = TextAlignment.Center;
 
                 // place the image and the textblocks on the inkCanvas
+                /*
                 System.Windows.Controls.InkCanvas.SetTop(images[i], (i / COLUMN) * HORIZONTAL_SPACING + INITIAL_TOP_MARGIN);
                 System.Windows.Controls.InkCanvas.SetTop(textBlocks[i], (i / COLUMN) * HORIZONTAL_SPACING + INITIAL_TOP_MARGIN + IMAGE_HEIGHT + 10);
 
                 System.Windows.Controls.InkCanvas.SetLeft(images[i], (i % (ROW - 1)) * VERTICAL_SPACING + INITIAL_LEFT_MARGIN);
                 System.Windows.Controls.InkCanvas.SetLeft(textBlocks[i], (i % (ROW - 1)) * VERTICAL_SPACING + INITIAL_LEFT_MARGIN - 20);
+                */
 
+                System.Windows.Controls.InkCanvas.SetLeft(images[i], (i % COLUMN) * HORIZONTAL_SPACING + INITIAL_LEFT_MARGIN);
+                System.Windows.Controls.InkCanvas.SetLeft(textBlocks[i], (i % COLUMN) * HORIZONTAL_SPACING + INITIAL_LEFT_MARGIN - 20);
+
+                System.Windows.Controls.InkCanvas.SetTop(images[i], (i / (COLUMN)) * VERTICAL_SPACING + INITIAL_TOP_MARGIN);
+                System.Windows.Controls.InkCanvas.SetTop(textBlocks[i], (i / (COLUMN)) * VERTICAL_SPACING + INITIAL_TOP_MARGIN + IMAGE_HEIGHT + 10);
+                
                 // Add IT! AWW YEAAA
                 RR_inkCanvas.Children.Add(images[i]);
                 RR_inkCanvas.Children.Add(textBlocks[i]);
