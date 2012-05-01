@@ -555,8 +555,10 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
             //switch (output[0].ToUpperInvariant())
             //TODO: actions that will be performed for each grammar, need tagbox so i can make it invisible and not hit testvisible when tagicon not activated
             string result = e.Result.Semantics["Words"].Value.ToString().ToUpperInvariant();
+            
             if (tagIconActivated)
             {
+                string letter = "";
                 switch (result)
                 {
                     case "CANCEL":
@@ -587,37 +589,73 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
                     case "HELLO WORLD":
                         textBox.Gesture += "HELLO World";
                         break;
+                    case "BEE":
+                        letter = "b";
+                        addLetterToTagName(letter);
+                        break;
+                    case "SEA":
+                        letter = "c";
+                        addLetterToTagName(letter);
+                        break;
+                    case "GEE":
+                        letter = "g";
+                        addLetterToTagName(letter);
+                        break;
+                    case "EYE":
+                        letter = "i";
+                        addLetterToTagName(letter);
+                        break;
+                    case "JAY":
+                        letter = "j";
+                        addLetterToTagName(letter);
+                        break;
+                    case "QUAY":
+                        letter = "k";
+                        addLetterToTagName(letter);
+                        break;
+                    case "OH":
+                        letter = "o";
+                        addLetterToTagName(letter);
+                        break;
+                    case "PEA":
+                        letter = "p";
+                        addLetterToTagName(letter);
+                        break;
+                    case "QUEUE":
+                        letter = "q";
+                        addLetterToTagName(letter);
+                        break;
+                    case "ARE":
+                        letter = "r";
+                        addLetterToTagName(letter);
+                        break;
+                    case "TEA":
+                        letter = "t";
+                        addLetterToTagName(letter);
+                        break;
+                    case "YOU": 
+                        letter = "u";
+                        addLetterToTagName(letter);
+                        break;
+                    case "WHY":
+                        letter = "y";
+                        addLetterToTagName(letter);
+                        break;
                     case "A":
-                    case "B":
-                    case "C":
                     case "D":
                     case "E":
                     case "F":
-                    case "G":
                     case "H":
-                    case "I":
-                    case "J":
-                    case "K":
                     case "L":
                     case "M":
                     case "N":
-                    case "O":
-                    case "P":
-                    case "Q":
-                    case "R":
                     case "S":
-                    case "T":
-                    case "U":
                     case "V":
                     case "W":
                     case "X":
-                    case "Y":
                     case "Z":
-                        string letter = result.ToLowerInvariant();
-                        textBox.Gesture += letter;
-                        tagName += letter;
-                        Console.WriteLine(tagName + "\n");
-                        TagNameTextBlock.Text = tagName;
+                        letter = result.ToLowerInvariant();
+                        addLetterToTagName(letter);
                         break;
                     default:
                         break;
@@ -633,6 +671,14 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
             //   Dispatcher.BeginInvoke(new Action(() => { shapeFunc(brush, this.angle); }), DispatcherPriority.Normal);
         }
 
+
+        private void addLetterToTagName(string letter)
+        {
+            textBox.Gesture += letter;
+            tagName += letter;
+            Console.WriteLine(tagName + "\n");
+            TagNameTextBlock.Text = tagName;
+        }
         private void RejectSpeech(RecognitionResult result)
         {
             string status = "Rejected: " + (result == null ? string.Empty : result.Text + " " + result.Confidence);
