@@ -388,7 +388,8 @@ namespace WpfApplication1
                     Console.WriteLine("cursor in Trash zone X: " + System.Windows.Forms.Cursor.Position.X + " Y: " + System.Windows.Forms.Cursor.Position.Y);
       
                     //TODO: make sure remove works
-                    Terminal.GitRemoveFiles(selectedFileNames);
+                    Terminal myTerminal = new Terminal(); 
+                    myTerminal.GitRemoveFiles(selectedFileNames);
 
                     // TODO: git remove status message
 

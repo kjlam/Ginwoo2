@@ -103,7 +103,7 @@ namespace WpfApplication1
          * This executes a 'git rm <file1> <file2> .. <fileN>' command.
          * 
          */
-        static internal CmdReturn GitRemoveFiles(List<String> filesList)
+        internal CmdReturn GitRemoveFiles(List<String> filesList)
         {
             String filesStr = "";
 
