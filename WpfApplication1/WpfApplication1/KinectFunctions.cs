@@ -110,7 +110,7 @@ namespace WpfApplication1
         bool actionWait = false;
         double[] RHPos = new double[2];
         float[] RHSensitivity = new float[2]{0.3f,0.3f};
-        int[] CursorDisplacement = new int[2] {0, -200 };
+        int[] CursorDisplacement = new int[2] {0, 0 };
         bool selectActivated = false;
         bool tagIconActivated = false;
         private string tagName = "";
@@ -822,7 +822,7 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
 
                 if (helpOpen)
                 {
-                    HelpMePleaseHelpHelp.Visibility = Visibility.Visible;
+                   // HelpMePleaseHelpHelp.Visibility = Visibility.Visible;
                 }
                 
 
@@ -835,7 +835,7 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
                     }
                 }
                  */
-                if(storedSkeletonValues[storedSkeletonValues.Count][7] > storedSkeletonValues[storedSkeletonValues.Count][1]){
+                if(storedSkeletonValues[storedSkeletonValues.Count - 1][7] > storedSkeletonValues[storedSkeletonValues.Count - 1][1]){
                     selectActivated = true;
                 }
                 //TODO: Select action (check if hand positions within directory area
@@ -843,7 +843,7 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
                 actionWait = true;
                 selectTimer.Start();
                 //lasso completed, so change cursor senitivity back to original
-                if (storedSkeletonValues[storedSkeletonValues.Count][7] < storedSkeletonValues[storedSkeletonValues.Count][1] && selectActivated)
+                if (storedSkeletonValues[storedSkeletonValues.Count - 1][7] < storedSkeletonValues[storedSkeletonValues.Count - 1][1] && selectActivated)
                 {
                     mouseLeftClick();
                     testnumber = 1;
