@@ -34,7 +34,7 @@
         <Canvas Name="WorkingCopy" Visibility="Collapsed" Height="720" Width="1280" >
             <InkCanvas Name="WC_inkCanvas" Background="Transparent" EditingMode="None" Height="720" Width="1280" Panel.ZIndex="0" Grid.ColumnSpan="3" Margin="0,0,0,0"></InkCanvas>
             <Image Canvas.Left="32" Canvas.Top="533" Height="115" Name="image5" Stretch="Uniform" Width="95" Source="/WpfApplication1;component/Images/trash.png" />
-            <Image Name="WC_Refresh" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="560, 35, 0, 0" Height="50" Width="50" Stretch="Uniform" Source="/WpfApplication1;component/Images/refresh_blue.png"></Image>
+            <Image Name="WC_Refresh" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="560, 35, 0, 0" Height="50" Width="50" Stretch="Uniform" Source="/WpfApplication1;component/Images/refresh_blue.png" MouseLeftButtonDown="WC_Refresh_MouseLeftButtonDown"></Image>
             
             <Image Height="640" HorizontalAlignment="Left" Margin="24,20,0,0" Name="WC_Directory" Stretch="Fill" VerticalAlignment="Top" Width="605" Source="/WpfApplication1;component/Images/CommitBox.png" ImageFailed="WC_CommitBox_ImageFailed" Panel.ZIndex="-2" />
             <Image Height="212" HorizontalAlignment="Left" Margin="635,442,0,0" Name="WC_CommitBox" Source="/WpfApplication1;component/Images/CommitBox.png" Stretch="Fill" VerticalAlignment="Top" Width="605" Grid.ColumnSpan="3" Panel.ZIndex="-2" />
@@ -70,7 +70,7 @@
             <Label Content="Files" Height="33" HorizontalAlignment="Left" Margin="34,31,0,0" Name="LR_Files" VerticalAlignment="Top" Width="77" Foreground="White" FontFamily="Calibri" FontSize="20" />
             <Label Content="Status" FontFamily="Calibri" FontSize="20" Foreground="White" Height="33" HorizontalAlignment="Left" Margin="649,32,0,0" Name="LR_Status" VerticalAlignment="Top" Width="77" />
 
-            <Image Name="LR_Refresh" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="560, 35, 0, 0" Height="50" Width="50" Stretch="Uniform" Source="/WpfApplication1;component/Images/refresh_blue.png"></Image>
+            <Image Name="LR_Refresh" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="560, 35, 0, 0" Height="50" Width="50" Stretch="Uniform" Source="/WpfApplication1;component/Images/refresh_blue.png" MouseLeftButtonDown="LR_Refresh_MouseLeftButtonDown"></Image>
 
 
             <InkCanvas Name="LR_inkCanvas" Background="Transparent" EditingMode="Select" Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="0,0,0,0" Height="720" Width="640" Gesture="inkCanvas_Gesture_1">
@@ -98,7 +98,7 @@
             <Rectangle Grid.ColumnSpan="3" Height="146" HorizontalAlignment="Left" Margin="638,32,0,0" Name="rectangle1" Stroke="Black" VerticalAlignment="Top" Width="594" Fill="Black" Opacity="0.9" Panel.ZIndex="-2" />
             <Label Content="Status" FontFamily="Calibri" FontSize="20" Foreground="White" Height="33" HorizontalAlignment="Left" Margin="649,32,0,0" Name="RR_Status" VerticalAlignment="Top" Width="77" />
 
-            <Image Name="RR_Refresh" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="560, 35, 0, 0" Height="50" Width="50" Stretch="Uniform" Source="/WpfApplication1;component/Images/refresh_blue.png"></Image>
+            <Image Name="RR_Refresh" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="560, 35, 0, 0" Height="50" Width="50" Stretch="Uniform" Source="/WpfApplication1;component/Images/refresh_blue.png" MouseLeftButtonDown="RR_Refresh_MouseLeftButtonDown"></Image>
 
 
             <Image Height="151" Margin="103,27,0,0" Name="RR_HelpIcon" Stretch="UniformToFill" VerticalAlignment="Top" Source="/WpfApplication1;component/Images/HelpIcon.png" ImageFailed="image5_ImageFailed" Grid.Column="2" Width="84" HorizontalAlignment="Left" MouseEnter="RR_HelpIcon_MouseEnter" MouseLeave="RR_HelpIcon_MouseLeave" Canvas.Left="1022" Canvas.Top="5" MouseLeftButtonDown="HelpIcon_MouseLeftButtonDown" />
@@ -115,13 +115,15 @@
         </Canvas>
         
         <Canvas Name="LoadingScreen" Visibility="Collapsed" Height="720" Width="1280" Panel.ZIndex="1">
+            <Image Height="680" HorizontalAlignment="Left" Name="Loading_Background" Stretch="Fill" VerticalAlignment="Top" Width="1260" Source="/WpfApplication1;component/Images/bg.png" ImageFailed="image1_ImageFailed" Grid.ColumnSpan="3" Panel.ZIndex="-5" Canvas.Left="-8" Canvas.Top="15" />
             <TextBlock Canvas.Left="565" Canvas.Top="331" Height="54" Width="222" Foreground="White">
                 <Bold>Loading Remote Repository...</Bold>
             </TextBlock>
         </Canvas>
         
         <Canvas Name="HelpMePleaseHelpHelp" Visibility="Collapsed" Height="720" Width="1280" Panel.ZIndex="1">
-         <Label Foreground="White" FontWeight="Bold" Canvas.Top="20" Canvas.Left="20" FontSize="35" Content="Help" />
+            <Image Height="680" HorizontalAlignment="Left" Name="Help_Background" Stretch="Fill" VerticalAlignment="Top" Width="1260" Source="/WpfApplication1;component/Images/bg.png" ImageFailed="image1_ImageFailed" Grid.ColumnSpan="3" Panel.ZIndex="-5" Canvas.Left="-8" Canvas.Top="15" />
+            <Label Foreground="White" FontWeight="Bold" Canvas.Top="20" Canvas.Left="20" FontSize="35" Content="Help" />
             <TextBlock Foreground="White " Height="30"  FontSize="20" Text="To exit the help menu, perform the pull gesture." Canvas.Top="76" Canvas.Left="115"></TextBlock>
             <Label Foreground="White" FontWeight="Bold" FontSize="20" Content="GESTURES" Canvas.Top="120" Canvas.Left="115"/>
             <TextBlock Height="298" Width="528"  Canvas.Top="168" Canvas.Left="168" TextWrapping="Wrap" Foreground="White">
