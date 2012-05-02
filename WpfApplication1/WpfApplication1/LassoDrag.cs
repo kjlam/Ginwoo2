@@ -309,6 +309,27 @@ namespace WpfApplication1
         private void drawFileSystem()
         {
 
+            DirectoryInfo directoryInfo = new DirectoryInfo(DIRECTORY);
+            files = directoryInfo.GetFiles();
+            fileCount = files.Length;
+            icons = new Icon[fileCount];
+
+            // initializethe images and textBlocks arraylist to contain the respective items
+            images = new System.Windows.Controls.Image[fileCount];
+            textBlocks = new System.Windows.Controls.TextBlock[fileCount];
+            for (int i = 0; i < fileCount; i++)
+            {
+                images[i] = new System.Windows.Controls.Image();
+                textBlocks[i] = new TextBlock();
+            }
+
+            // extract the icons from the files arraylist
+            for (int i = 0; i < fileCount; i++)
+            {
+                icons[i] = System.Drawing.Icon.ExtractAssociatedIcon(files[i].FullName);
+            }
+
+
             // First, Clear everything on the inkCanvas
             WC_inkCanvas.Children.Clear();
 
