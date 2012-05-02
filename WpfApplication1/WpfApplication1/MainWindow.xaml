@@ -34,7 +34,8 @@
         <Canvas Name="WorkingCopy" Visibility="Collapsed" Height="720" Width="1280" >
             <InkCanvas Name="WC_inkCanvas" Background="Transparent" EditingMode="None" Height="720" Width="1280" Panel.ZIndex="0" Grid.ColumnSpan="3" Margin="0,0,0,0"></InkCanvas>
             <Image Canvas.Left="32" Canvas.Top="533" Height="115" Name="image5" Stretch="Uniform" Width="95" Source="/WpfApplication1;component/Images/trash.png" />
-    
+            <Image Name="WC_Refresh" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="560, 35, 0, 0" Height="50" Width="50" Stretch="Uniform" Source="/WpfApplication1;component/Images/refresh_blue.png"></Image>
+            
             <Image Height="640" HorizontalAlignment="Left" Margin="24,20,0,0" Name="WC_Directory" Stretch="Fill" VerticalAlignment="Top" Width="605" Source="/WpfApplication1;component/Images/CommitBox.png" ImageFailed="WC_CommitBox_ImageFailed" Panel.ZIndex="-2" />
             <Image Height="212" HorizontalAlignment="Left" Margin="635,442,0,0" Name="WC_CommitBox" Source="/WpfApplication1;component/Images/CommitBox.png" Stretch="Fill" VerticalAlignment="Top" Width="605" Grid.ColumnSpan="3" Panel.ZIndex="-2" />
             <Rectangle Grid.ColumnSpan="3" Height="146" HorizontalAlignment="Left" Margin="638,32,0,0" Name="rectangle4" Stroke="Black" VerticalAlignment="Top" Width="594" Fill="Black" Opacity="0.9" Panel.ZIndex="0" />
@@ -43,7 +44,7 @@
             <Label Content="Files" Height="33" HorizontalAlignment="Left" Margin="34,31,0,0" Name="Files" VerticalAlignment="Top" Width="77" Foreground="White" FontFamily="Calibri" FontSize="20" />
             <Label Content="Current Commit" FontFamily="Calibri" FontSize="20" Foreground="White" Height="33" HorizontalAlignment="Left" Margin="649,446,0,0" Name="Commit" VerticalAlignment="Top" Width="149" />
             <Label Content="Status" FontFamily="Calibri" FontSize="20" Foreground="White" Height="33" HorizontalAlignment="Left" Margin="649,32,0,0" Name="Status" VerticalAlignment="Top" Width="77" Panel.ZIndex="1" />
-
+            
             <my:KinectColorViewer Canvas.Left="409" Canvas.Top="236" Width="94" Height="76" Name="kinectColorViewer1" 
                                       Kinect="{Binding ElementName=kinectSensorChooser1, Path=Kinect}" DataContext="{Binding}" Margin="0,605,851,0" />
             <my:KinectSensorChooser Canvas.Left="180" Canvas.Top="266" Name="kinectSensorChooser1" Width="267" Height="168" Visibility="Visible" />
@@ -68,6 +69,8 @@
             <Image Height="151" Margin="103,27,0,0" Name="LR_HelpIcon" Stretch="UniformToFill" VerticalAlignment="Top" Source="/WpfApplication1;component/Images/HelpIcon.png" ImageFailed="image5_ImageFailed" Grid.Column="2" Width="84" HorizontalAlignment="Left" MouseEnter="LR_HelpIcon_MouseEnter" MouseLeave="LR_HelpIcon_MouseLeave" Canvas.Left="1022" Canvas.Top="5" MouseLeftButtonDown="HelpIcon_MouseLeftButtonDown" />
             <Label Content="Files" Height="33" HorizontalAlignment="Left" Margin="34,31,0,0" Name="LR_Files" VerticalAlignment="Top" Width="77" Foreground="White" FontFamily="Calibri" FontSize="20" />
             <Label Content="Status" FontFamily="Calibri" FontSize="20" Foreground="White" Height="33" HorizontalAlignment="Left" Margin="649,32,0,0" Name="LR_Status" VerticalAlignment="Top" Width="77" />
+
+            <Image Name="LR_Refresh" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="560, 35, 0, 0" Height="50" Width="50" Stretch="Uniform" Source="/WpfApplication1;component/Images/refresh_blue.png"></Image>
 
 
             <InkCanvas Name="LR_inkCanvas" Background="Transparent" EditingMode="Select" Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="0,0,0,0" Height="720" Width="640" Gesture="inkCanvas_Gesture_1">
@@ -94,6 +97,9 @@
             <Label Content="Files" Height="33" HorizontalAlignment="Left" Margin="34,31,0,0" Name="RR_Files" VerticalAlignment="Top" Width="77" Foreground="White" FontFamily="Calibri" FontSize="20" />
             <Rectangle Grid.ColumnSpan="3" Height="146" HorizontalAlignment="Left" Margin="638,32,0,0" Name="rectangle1" Stroke="Black" VerticalAlignment="Top" Width="594" Fill="Black" Opacity="0.9" Panel.ZIndex="-2" />
             <Label Content="Status" FontFamily="Calibri" FontSize="20" Foreground="White" Height="33" HorizontalAlignment="Left" Margin="649,32,0,0" Name="RR_Status" VerticalAlignment="Top" Width="77" />
+
+            <Image Name="RR_Refresh" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="560, 35, 0, 0" Height="50" Width="50" Stretch="Uniform" Source="/WpfApplication1;component/Images/refresh_blue.png"></Image>
+
 
             <Image Height="151" Margin="103,27,0,0" Name="RR_HelpIcon" Stretch="UniformToFill" VerticalAlignment="Top" Source="/WpfApplication1;component/Images/HelpIcon.png" ImageFailed="image5_ImageFailed" Grid.Column="2" Width="84" HorizontalAlignment="Left" MouseEnter="RR_HelpIcon_MouseEnter" MouseLeave="RR_HelpIcon_MouseLeave" Canvas.Left="1022" Canvas.Top="5" MouseLeftButtonDown="HelpIcon_MouseLeftButtonDown" />
 

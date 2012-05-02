@@ -227,7 +227,6 @@ namespace WpfApplication1
         {
             LoadingScreen.Visibility = Visibility.Visible;
             waitTimer.Start();
-            
         }
 
         private void LR_MenuLocal_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
@@ -458,6 +457,22 @@ namespace WpfApplication1
         private void Cursor_ImageFailed(object sender, ExceptionRoutedEventArgs e)
         {
 
+        }
+
+        private void WC_Refresh_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            drawFileSystem();
+        }
+
+        private void LR_Refresh_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            drawLocalRepository();
+        }
+
+        private void RR_Refresh_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            LoadingScreen.Visibility = Visibility.Visible;
+            waitTimer.Start();
         }
 
 
