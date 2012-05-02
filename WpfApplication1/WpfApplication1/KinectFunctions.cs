@@ -762,7 +762,7 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
                             selectTimer.Start();
                             //TODO: pull registered
                             textBox.Gesture += "Pull Registered";
-                            if (CursorInDirectoryArea())
+                            if (CursorInDirectoryArea() && HelpMePleaseHelpHelp.Visibility != Visibility.Visible && Config.Visibility != Visibility.Visible)
                             {
                                 drawFileSystem();
                                 switchToWorkingCopy();
@@ -814,7 +814,11 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
                 {
                     float rightXValue = storedSkeletonValues[storedSkeletonValues.Count - i][3];
                     float rightYValue = storedSkeletonValues[storedSkeletonValues.Count - i][4];
-                  
+                    if (Config.Visibility == Visibility.Visible)
+                    {
+                        helpOpen = false;
+                        break;
+                    }
                     if (rightXValue < WC_HelpIcon.Margin.Left || rightXValue > (WC_HelpIcon.Margin.Left + WC_HelpIcon.Width))
                     {
                         if (rightYValue < WC_HelpIcon.Margin.Top || rightYValue > (WC_HelpIcon.Margin.Top + WC_HelpIcon.Height))
