@@ -429,7 +429,7 @@ namespace WpfApplication1
 
             for (int i = 0; i < count; i++)
             {
-                committedFileNames[i] = selectedFileNames[i];
+                committedFileNames.Add( selectedFileNames[i]);
             }
 
             drawFileSystem();
