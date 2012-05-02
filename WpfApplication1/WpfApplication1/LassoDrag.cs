@@ -489,7 +489,7 @@ namespace WpfApplication1
                 Console.WriteLine(selectedFiles[i].Name);
 
                 selectedFileTextBlocks[i].Text = selectedFiles[i].Name;
-                selectedFileTextBlocks[i].Foreground = new SolidColorBrush(Colors.Blue);
+                selectedFileTextBlocks[i].Foreground = new SolidColorBrush(Colors.White);
                 selectedFileTextBlocks[i].Background = new SolidColorBrush(Colors.Black);
                 selectedFileTextBlocks[i].Width = IMAGE_WIDTH * 2;
                 selectedFileTextBlocks[i].TextAlignment = TextAlignment.Center;

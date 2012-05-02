@@ -363,7 +363,7 @@ namespace WpfApplication1
                 storedSkeletonValues.Add(skeletonValues);
                 System.Windows.Forms.Cursor.Position = new System.Drawing.Point((int)RHPos[0], (int)RHPos[1]);
       
-                if (!actionWait)
+               if (!actionWait)
                 {
                     CheckSwipe(e);
                     CheckStatic(e);
@@ -705,8 +705,8 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
                 //arrays: index 0 is x values, index 1 is y values, and index 2 is z values
                 float[] LHCounter = new float[3] { 0, 0, 0 };
                 float[] RHCounter = new float[3] { 0, 0, 0 };
-                float[] LHThreshold = new float[3] { 100, 100, 40 };
-                float[] RHThreshold = new float[3] { 40, 40, 40 };
+                float[] LHThreshold = new float[3] { 300, 300, 100 };
+                float[] RHThreshold = new float[3] { 200, 200, 300 };
                 int skeletonListCount = storedSkeletonValues.Count;
                 bool posZChange = true;
 
@@ -752,7 +752,7 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
                             LHCounter[k] += leftDifference[k];
                         }
                     }
-                    if (true)//LHCounter[0] < LHThreshold[0] && LHCounter[1] < LHThreshold[1])
+                    if (LHCounter[0] < LHThreshold[0] && LHCounter[1] < LHThreshold[1])
                     {
                         float LHDepth = storedSkeletonValues[skeletonCount - 1][2];
                         float RHDepth = storedSkeletonValues[skeletonCount -1][5];
@@ -777,7 +777,7 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
                                 KinectPull();
                             }
                         }
-                        if (LHCounter[2] > LHThreshold[2] / 1.5 )
+                        if (LHCounter[2] > LHThreshold[2] )
                         {
                             actionWait = true;
                             selectTimer.Start();
@@ -803,7 +803,7 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
          */
         void CheckStatic(AllFramesReadyEventArgs e)
         {
-            int numFrames = 45;
+            int numFrames = 30;
             if (storedSkeletonValues.Count > numFrames)
             {
                 //selectThreshold: how far the left and right hands can be and still register as a select
@@ -814,7 +814,7 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
                 {
                     float rightXValue = storedSkeletonValues[storedSkeletonValues.Count - i][3];
                     float rightYValue = storedSkeletonValues[storedSkeletonValues.Count - i][4];
-
+                  
                     if (rightXValue < WC_HelpIcon.Margin.Left || rightXValue > (WC_HelpIcon.Margin.Left + WC_HelpIcon.Width))
                     {
                         if (rightYValue < WC_HelpIcon.Margin.Top || rightYValue > (WC_HelpIcon.Margin.Top + WC_HelpIcon.Height))
@@ -823,7 +823,8 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
                             break;
                         }
                     }
-
+                    actionWait = true;
+                    selectTimer.Start();
                 }
 
                 if (helpOpen)
@@ -845,12 +846,12 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
                     selectActivated = true;
                 }
                 //TODO: Select action (check if hand positions within directory area
-                textBox.Gesture += "SELECTED";
-                actionWait = true;
-                selectTimer.Start();
+                //textBox.Gesture += "SELECTED";
+                
                 //lasso completed, so change cursor senitivity back to original
                 if (storedSkeletonValues[storedSkeletonValues.Count - 1][7] < storedSkeletonValues[storedSkeletonValues.Count - 1][1] && selectActivated)
                 {
+
                     mouseLeftClick();
                     testnumber = 1;
                     Cursor.Source = LoadImage("pack://application:,,,/WpfApplication1;component/Images/cursor.png");
@@ -875,6 +876,8 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
                 //Decrease sensitivity to improve accuracy of lassoing, and move the cursor to the closest image of the mouse to move the set of images
                 else if (selectActivated)
                 {
+                    actionWait = true;
+                    selectTimer.Start();
                     Cursor.Source = LoadImage("pack://application:,,,/WpfApplication1;component/Images/cursorLasso.png");
                     RHSensitivity[0] = 0.3f;
                     RHSensitivity[1] = 0.3f;
