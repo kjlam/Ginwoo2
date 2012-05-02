@@ -67,6 +67,7 @@ namespace WpfApplication1
 
             MAX_FILE_DISPLAY_COUNT = 16;
             selectedFileNames = new List<string>();
+            committedFileNames = new List<string>();
             // get the files into the arraylist from the directory info
             DirectoryInfo directoryInfo = new DirectoryInfo(DIRECTORY);
             files = directoryInfo.GetFiles();
