@@ -35,7 +35,7 @@ namespace WpfApplication1
         System.Windows.Controls.Image[] selectedImages;             // Selected Images
         System.Windows.Controls.TextBlock[] selectedTextBlocks;     // Selected Textblocks
         List<String> selectedFileNames;
-        List<String> committedFileNames;
+        List<String> committedFileNames = new List<String>();
         List<String> removedFileNames;
         private System.Windows.Point mouseClick;            // x y coordinate for the mouse pointer click, used in dragging files
         double baseLeft;                                    // the base left coordinate for the image
@@ -107,6 +107,7 @@ namespace WpfApplication1
 
             // draw the file system
             drawFileSystem();
+
         }
 
         // METHOD: this method obtains all the selected files by the lasso, and places it in the selectedFiles array

@@ -294,6 +294,7 @@ namespace WpfApplication1
             WorkingCopy.Visibility = Visibility.Visible;
             LocalRepository.Visibility = Visibility.Collapsed;
             RemoteRepository.Visibility = Visibility.Collapsed;
+ 
         }
         private void switchToLocalRepository()
         {
@@ -386,21 +387,73 @@ namespace WpfApplication1
 
         private void ContinueButton_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            String username = inputUsername.Text;
-            String password = inputPassword.Password;
-            String path = inputPath.Text;
+            string username = inputUsername.Text;
+            string password = inputPassword.Password;
+            string path = inputPath.Text;
             System.IO.StreamWriter file = new System.IO.StreamWriter(@"temp.txt");
             file.WriteLine(path);
             file.WriteLine(username);
             file.WriteLine(password);
             file.Close();
-            path = path.Replace(@"\", @"\\");
-            System.IO.StreamReader file2 = new System.IO.StreamReader(path + "\\.git\\config");
+            path = path.Replace("/", @"\\");
+            string configpath = path + @"\\.git\\config";
+            MessageBox.Show(configpath);
+            System.IO.StreamReader file2 = new System.IO.StreamReader(configpath);
             string text = file2.ReadToEnd();
             text = text.Replace("git@github.com", "https://" + username + ":" + password + "@github.com");
-            file = new System.IO.StreamWriter(path + "\\.git\\config");
+            file2.Close();
+            file = new System.IO.StreamWriter(configpath);
             file.Write(text);
+            file.Close();
+            Config.Visibility = Visibility.Collapsed;
+            NoAddedFilesText.Visibility = Visibility.Visible;
             switchToWorkingCopy();
+
+            DIRECTORY = path;
+            file.Close();
+
+            MAX_FILE_DISPLAY_COUNT = 16;
+            selectedFileNames = new List<string>();
+            // get the files into the arraylist from the directory info
+            DirectoryInfo directoryInfo = new DirectoryInfo(DIRECTORY);
+            files = directoryInfo.GetFiles();
+            fileCount = files.Length;
+            icons = new Icon[fileCount];
+
+            //deltaLeft = new double[1];
+            //deltaTop = new double[1];
+
+            //deltaLeft[0] = -1.0;
+            //deltaTop[0] = -1.0;
+
+            imagesFollowMouse = false;
+
+            /*
+            // inkCanvas is initially set to select mode that allows lassoing
+            WC_inkCanvas.EditingMode = 
+             * InkCanvasEditingMode.Select;
+            */
+
+            WC_inkCanvas.EditingMode = InkCanvasEditingMode.None;
+
+            // initializethe images and textBlocks arraylist to contain the respective items
+            images = new System.Windows.Controls.Image[fileCount];
+            textBlocks = new System.Windows.Controls.TextBlock[fileCount];
+            for (int i = 0; i < fileCount; i++)
+            {
+                images[i] = new System.Windows.Controls.Image();
+                textBlocks[i] = new TextBlock();
+            }
+
+            // extract the icons from the files arraylist
+            for (int i = 0; i < fileCount; i++)
+            {
+                icons[i] = System.Drawing.Icon.ExtractAssociatedIcon(files[i].FullName);
+            }
+
+            // draw the file system
+            drawFileSystem();
+
         }
         private void Cursor_ImageFailed(object sender, ExceptionRoutedEventArgs e)
         {
