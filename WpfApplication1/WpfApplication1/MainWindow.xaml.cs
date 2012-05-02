@@ -291,21 +291,21 @@ namespace WpfApplication1
         private void switchToWorkingCopy()
         {
             WorkingCopy.Visibility = Visibility.Visible;
-            LocalRepository.Visibility = Visibility.Collapsed;
-            RemoteRepository.Visibility = Visibility.Collapsed;
+            LocalRepository.Visibility = Visibility.Hidden;
+            RemoteRepository.Visibility = Visibility.Hidden;
  
         }
         private void switchToLocalRepository()
         {
-            WorkingCopy.Visibility = Visibility.Collapsed;
+            WorkingCopy.Visibility = Visibility.Hidden;
             LocalRepository.Visibility = Visibility.Visible;
-            RemoteRepository.Visibility = Visibility.Collapsed;
+            RemoteRepository.Visibility = Visibility.Hidden;
         }
 
         private void switchToRemoteRepository()
         {
-            WorkingCopy.Visibility = Visibility.Collapsed;
-            LocalRepository.Visibility = Visibility.Collapsed;
+            WorkingCopy.Visibility = Visibility.Hidden;
+            LocalRepository.Visibility = Visibility.Hidden;
             RemoteRepository.Visibility = Visibility.Visible;
         }
 
@@ -337,7 +337,8 @@ namespace WpfApplication1
         {
             if (RHPos[0] > WC_Directory.Margin.Left && RHPos[0] < (WC_Directory.Margin.Left + WC_Directory.Width))
             {
-                if (RHPos[1] < WC_Directory.Margin.Top && RHPos[1] > (WC_Directory.Margin.Top - WC_Directory.Height))
+                if (RHPos[1] > WC_Directory.Margin.Top && RHPos[1] < (WC_Directory.Margin.Top + WC_Directory.Height))
+                    textBox.Gesture += "CursorInDirectoryArea";
                     return true;
             }
                 return false;

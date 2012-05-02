@@ -59,7 +59,7 @@ namespace WpfApplication1
             dispatcherTimer.Interval = new TimeSpan(0, 0, 2);
             waitTimer.Interval = new TimeSpan(0, 0, 1);
             waitTimer.Tick += new EventHandler(WaitTimer_Root);
-
+            textBox.Gesture = "Gesture: ";
             string filename = System.IO.Path.GetFullPath("temp.txt");
             filename = filename.Replace(@"\", @"\\");
             System.IO.StreamReader file = new System.IO.StreamReader(filename);

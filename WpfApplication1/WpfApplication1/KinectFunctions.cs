@@ -340,7 +340,6 @@ namespace WpfApplication1
             //ScalePosition(headImage, first.Joints[JointType.Head]);
             //ScalePosition(leftEllipse, first.Joints[JointType.HandLeft]);
             ScalePosition(Cursor, first.Joints[JointType.HandRight]);
-            textBox.Gesture = "Gesture: ";
             using (DepthImageFrame depth = e.OpenDepthImageFrame())
             {
                 if (depth == null ||
@@ -769,6 +768,9 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
                                 switchToWorkingCopy();
                                 Terminal myTerminal = new Terminal();
                                 myTerminal.GitPull();
+                                PulledText.Visibility = Visibility.Visible;
+                                pullStatusTimer.Start();
+
                             }
                             else
                             {
