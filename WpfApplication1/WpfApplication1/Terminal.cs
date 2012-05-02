@@ -8,6 +8,7 @@ using System.Text.RegularExpressions;
 using System.Runtime.InteropServices;
 using Microsoft.CSharp;
 using System.CodeDom;
+using System.Windows.Forms;
 
 
 namespace WpfApplication1
@@ -224,7 +225,7 @@ namespace WpfApplication1
 
             // The cmd terminal
             startInfo.FileName = "cmd.exe";
-
+            MessageBox.Show(directory);
             Directory.SetCurrentDirectory(directory);
 
             startInfo.Arguments = "/C " + command;
