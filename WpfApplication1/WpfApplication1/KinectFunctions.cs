@@ -462,30 +462,30 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
             var wordChoices = new Choices();
             wordChoices.Add("hello world");
             wordChoices.Add("a");
-            wordChoices.Add("b");
-            wordChoices.Add("c");
+            wordChoices.Add("bee");
+            wordChoices.Add("sea");
             wordChoices.Add("d");
             wordChoices.Add("e");
             wordChoices.Add("f");
-            wordChoices.Add("g");
+            wordChoices.Add("gee");
             wordChoices.Add("h");
-            wordChoices.Add("i");
-            wordChoices.Add("j");
+            wordChoices.Add("eye");
+            wordChoices.Add("jay");
             wordChoices.Add("k");
             wordChoices.Add("l");
             wordChoices.Add("m");
             wordChoices.Add("n");
-            wordChoices.Add("o");
-            wordChoices.Add("p");
-            wordChoices.Add("q");
-            wordChoices.Add("r");
+            wordChoices.Add("oh");
+            wordChoices.Add("pea");
+            wordChoices.Add("queue");
+            wordChoices.Add("are");
             wordChoices.Add("s");
-            wordChoices.Add("t");
-            wordChoices.Add("u");
+            wordChoices.Add("tea");
+            wordChoices.Add("you");
             wordChoices.Add("V");
             wordChoices.Add("W");
             wordChoices.Add("X");
-            wordChoices.Add("Y");
+            wordChoices.Add("why");
             wordChoices.Add("Z");
             wordChoices.Add("cancel");
             wordChoices.Add("reset");
@@ -618,7 +618,7 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
                         letter = "j";
                         addLetterToTagName(letter);
                         break;
-                    case "QUAY":
+                    case "K":
                         letter = "k";
                         addLetterToTagName(letter);
                         break;
@@ -706,8 +706,8 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
                 //arrays: index 0 is x values, index 1 is y values, and index 2 is z values
                 float[] LHCounter = new float[3] { 0, 0, 0 };
                 float[] RHCounter = new float[3] { 0, 0, 0 };
-                float[] LHThreshold = new float[3] { 30, 30, 50 };
-                float[] RHThreshold = new float[3] { 25, 25, 25 };
+                float[] LHThreshold = new float[3] { 100, 100, 40 };
+                float[] RHThreshold = new float[3] { 40, 40, 40 };
                 int skeletonListCount = storedSkeletonValues.Count;
                 bool posZChange = true;
 
@@ -753,18 +753,14 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
                             LHCounter[k] += leftDifference[k];
                         }
                     }
-                    if (LHCounter[0] < LHThreshold[0] && LHCounter[1] < LHThreshold[1])
+                    if (true)//LHCounter[0] < LHThreshold[0] && LHCounter[1] < LHThreshold[1])
                     {
-                        actionWait = true;
-                        selectTimer.Start();
-                        if (LHCounter[2] > LHThreshold[2])
+                        float LHDepth = storedSkeletonValues[skeletonCount - 1][2];
+                        float RHDepth = storedSkeletonValues[skeletonCount -1][5];
+                        if (LHCounter[2] < -LHThreshold[2]/1.5 && LHDepth >= RHDepth)
                         {
-                            //TODO: push registered
-                            textBox.Gesture += "Push Registered";
-                            KinectPush();
-                        }
-                        else if (LHCounter[2] < -LHThreshold[2])
-                        {
+                            actionWait = true;
+                            selectTimer.Start();
                             //TODO: pull registered
                             textBox.Gesture += "Pull Registered";
                             if (CursorInDirectoryArea())
@@ -778,6 +774,14 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
                             {
                                 KinectPull();
                             }
+                        }
+                        if (LHCounter[2] > LHThreshold[2] / 1.5 )
+                        {
+                            actionWait = true;
+                            selectTimer.Start();
+                            //TODO: push registered
+                            textBox.Gesture += "Push Registered";
+                            KinectPush();
                         }
                     }
                     else
@@ -809,9 +813,9 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
                     float rightXValue = storedSkeletonValues[storedSkeletonValues.Count - i][3];
                     float rightYValue = storedSkeletonValues[storedSkeletonValues.Count - i][4];
 
-                    if (rightXValue <= WC_CommitBox.Margin.Left && rightXValue >= (WC_CommitBox.Margin.Left + WC_CommitBox.Width))
+                    if (rightXValue < WC_HelpIcon.Margin.Left || rightXValue > (WC_HelpIcon.Margin.Left + WC_HelpIcon.Width))
                     {
-                        if (rightYValue >= WC_CommitBox.Margin.Top && rightYValue <= (WC_CommitBox.Margin.Top - WC_CommitBox.Height))
+                        if (rightYValue < WC_HelpIcon.Margin.Top || rightYValue > (WC_HelpIcon.Margin.Top + WC_HelpIcon.Height))
                         {
                             helpOpen = false;
                             break;
@@ -822,7 +826,7 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
 
                 if (helpOpen)
                 {
-                   // HelpMePleaseHelpHelp.Visibility = Visibility.Visible;
+                    HelpMePleaseHelpHelp.Visibility = Visibility.Visible;
                 }
                 
 

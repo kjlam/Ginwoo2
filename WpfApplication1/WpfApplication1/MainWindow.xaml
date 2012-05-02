@@ -6,6 +6,7 @@
         Left="0" Top="0">
 
     <Canvas Name="Main" Visibility="Visible" Height="720" Width="1280">
+        <TextBox Canvas.Left="0"  Height="23" Name="textBox1" Width="597" Text="{Binding Path=Gesture}" BindingGroup="{Binding}" Margin="288,657,0,0" Panel.ZIndex="5" />
         <Image Height="680" HorizontalAlignment="Left" Name="Background" Stretch="Fill" VerticalAlignment="Top" Width="1260" Source="/WpfApplication1;component/Images/bg.png" ImageFailed="image1_ImageFailed" Grid.ColumnSpan="3" Panel.ZIndex="-5" />
 
         <my:KinectSkeletonViewer Canvas.Left="136" Canvas.Top="195" Name="kinectSkeletonViewer1" Height="172" Width="209" Visibility ="Collapsed" Kinect="{Binding ElementName=kinectSensorChooser1, Path=Kinect}" Margin="68,261,668,248" Panel.ZIndex="5"/>
@@ -45,7 +46,7 @@
             <Image Height="640" HorizontalAlignment="Left" Margin="24,20,0,0" Name="WC_Directory" Stretch="Fill" VerticalAlignment="Top" Width="605" Source="/WpfApplication1;component/Images/CommitBox.png" ImageFailed="WC_CommitBox_ImageFailed" Panel.ZIndex="-2" />
             <Image Height="212" HorizontalAlignment="Left" Margin="635,442,0,0" Name="WC_CommitBox" Source="/WpfApplication1;component/Images/CommitBox.png" Stretch="Fill" VerticalAlignment="Top" Width="605" Grid.ColumnSpan="3" Panel.ZIndex="-2" />
             <Rectangle Grid.ColumnSpan="3" Height="146" HorizontalAlignment="Left" Margin="638,32,0,0" Name="rectangle4" Stroke="Black" VerticalAlignment="Top" Width="594" Fill="Black" Opacity="0.9" Panel.ZIndex="0" />
-            <Image Height="151" Margin="103,27,0,0" Name="WC_HelpIcon" Stretch="UniformToFill" VerticalAlignment="Top" Source="/WpfApplication1;component/Images/HelpIcon.png" ImageFailed="image5_ImageFailed" Grid.Column="2" Width="84" HorizontalAlignment="Left" MouseEnter="WC_HelpIcon_MouseEnter" MouseLeave="WC_HelpIcon_MouseLeave" Canvas.Left="1022" Canvas.Top="5" MouseLeftButtonDown="HelpIcon_MouseLeftButtonDown" />
+            <Image Height="151" Margin="1125,32,0,0" Name="WC_HelpIcon" Stretch="UniformToFill" VerticalAlignment="Top" Source="/WpfApplication1;component/Images/HelpIcon.png" ImageFailed="image5_ImageFailed" Grid.ColumnSpan="3" Width="84" HorizontalAlignment="Left" MouseEnter="WC_HelpIcon_MouseEnter" MouseLeave="WC_HelpIcon_MouseLeave"  MouseLeftButtonDown="HelpIcon_MouseLeftButtonDown" />
             <Image Height="242" HorizontalAlignment="Left" Margin="719,191,0,0" Name="MenuWorking" Stretch="UniformToFill" VerticalAlignment="Top" Width="506" Source="/WpfApplication1;component/Images/MenuWorking.png" Grid.ColumnSpan="3" ImageFailed="MenuWorking_ImageFailed" MouseLeftButtonDown="MenuWorking_MouseLeftButtonDown" Panel.ZIndex="1" MouseLeave="MenuWorking_MouseLeave_1" MouseEnter="MenuWorking_MouseEnter_1" />
             <Label Content="Files" Height="33" HorizontalAlignment="Left" Margin="34,31,0,0" Name="Files" VerticalAlignment="Top" Width="77" Foreground="White" FontFamily="Calibri" FontSize="20" />
             <Label Content="Current Commit" FontFamily="Calibri" FontSize="20" Foreground="White" Height="33" HorizontalAlignment="Left" Margin="649,446,0,0" Name="Commit" VerticalAlignment="Top" Width="149" />
@@ -54,7 +55,7 @@
             <my:KinectColorViewer Canvas.Left="409" Canvas.Top="236" Width="94" Height="76" Name="kinectColorViewer1" 
                                       Kinect="{Binding ElementName=kinectSensorChooser1, Path=Kinect}" DataContext="{Binding}" Margin="0,605,851,0" />
             <my:KinectSensorChooser Canvas.Left="180" Canvas.Top="266" Name="kinectSensorChooser1" Width="267" Height="168" Visibility="Visible" />
-            <TextBox Canvas.Left="0" Canvas.Top="39" Height="23" Name="textBox1" Width="597" Text="{Binding Path=Gesture}" BindingGroup="{Binding}" Margin="288,657,60,1" />
+          
             
             <Image Grid.Column="2" Height="67" HorizontalAlignment="Left" Margin="70,580,0,0" Name="CommitButton" Stretch="Fill" VerticalAlignment="Top" Width="124" Source="/WpfApplication1;component/Images/CommitButton.png" MouseEnter="CommitButton_MouseEnter" MouseLeave="CommitButton_MouseLeave" Panel.ZIndex="1" MouseLeftButtonDown="CommitButton_MouseLeftButtonDown" Canvas.Left="1039" Canvas.Top="0" />
             <Label Content="Commit" Grid.Column="2" Height="30" HorizontalAlignment="Left" Margin="95,598,0,0" Name="label1" VerticalAlignment="Top" Width="75" Foreground="White" FontFamily="Calibri"  FontSize="20" IsHitTestVisible="False" Panel.ZIndex="2" Canvas.Left="1039" Canvas.Top="0" />

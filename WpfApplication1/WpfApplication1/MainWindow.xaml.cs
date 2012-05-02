@@ -400,6 +400,7 @@ namespace WpfApplication1
                     mouseLeftClick();
                     lassoFilesDragging = false;
                     finishDrag();
+                    drawFileSystem();
                 }
             }
         }
