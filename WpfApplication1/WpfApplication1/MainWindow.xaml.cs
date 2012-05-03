@@ -405,7 +405,6 @@ namespace WpfApplication1
                 }
             }
         }
-
         private void HelpIcon_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
 

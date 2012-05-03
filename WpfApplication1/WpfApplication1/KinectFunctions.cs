@@ -405,8 +405,13 @@ namespace WpfApplication1
         void PullStatusTimer_Root(object sender, EventArgs e)
         {
             PulledText.Visibility = Visibility.Collapsed;
+            PullLoadingScreen.Visibility = Visibility.Collapsed;
+            switchToWorkingCopy();
+            drawFileSystem();
+            Terminal myTerminal = new Terminal();
+            myTerminal.GitPull();
 
-            if(pullStatusTimer.Interval == new TimeSpan(0,0,2)){
+            if(pullStatusTimer.Interval == new TimeSpan(0,0,1)){
                 pullStatusTimer.Stop();
             }
         }
@@ -764,10 +769,7 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
                             textBox.Gesture += "Pull Registered";
                             if (CursorInDirectoryArea() && HelpMePleaseHelpHelp.Visibility != Visibility.Visible && Config.Visibility != Visibility.Visible)
                             {
-                                drawFileSystem();
-                                switchToWorkingCopy();
-                                Terminal myTerminal = new Terminal();
-                                myTerminal.GitPull();
+                                PullLoadingScreen.Visibility = Visibility.Visible;
                                 PulledText.Visibility = Visibility.Visible;
                                 pullStatusTimer.Start();
 

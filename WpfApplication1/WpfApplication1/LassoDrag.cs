@@ -55,7 +55,7 @@ namespace WpfApplication1
             selectTimer.Tick += new EventHandler(SelectTimer_Root);
             selectTimer.Interval = new TimeSpan(0, 0, 5);
             pullStatusTimer.Tick += new EventHandler(PullStatusTimer_Root);
-            pullStatusTimer.Interval = new TimeSpan(0, 0, 2);
+            pullStatusTimer.Interval = new TimeSpan(0, 0, 1);
             dispatcherTimer.Interval = new TimeSpan(0, 0, 2);
             waitTimer.Interval = new TimeSpan(0, 0, 1);
             waitTimer.Tick += new EventHandler(WaitTimer_Root);

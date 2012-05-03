@@ -6,7 +6,7 @@
         Left="0" Top="0">
 
     <Canvas Name="Main" Visibility="Visible" Height="720" Width="1280">
-        <TextBox Canvas.Left="0"  Height="23" Name="textBox1" Width="597" Text="{Binding Path=Gesture}" BindingGroup="{Binding}" Margin="288,657,0,0" Panel.ZIndex="5" />
+        <TextBox Canvas.Left="0"  Height="23" Name="textBox1" Width="597" Text="{Binding Path=Gesture}" BindingGroup="{Binding}" Margin="288,657,0,0" Panel.ZIndex="5" Visibility="Collapsed" />
         <Image Height="680" HorizontalAlignment="Left" Name="Background" Stretch="Fill" VerticalAlignment="Top" Width="1260" Source="/WpfApplication1;component/Images/bg.png" ImageFailed="image1_ImageFailed" Grid.ColumnSpan="3" Panel.ZIndex="-5" />
 
         <my:KinectSkeletonViewer Canvas.Left="136" Canvas.Top="195" Name="kinectSkeletonViewer1" Height="172" Width="209" Visibility ="Collapsed" Kinect="{Binding ElementName=kinectSensorChooser1, Path=Kinect}" Margin="68,261,668,248" Panel.ZIndex="5"/>
@@ -54,7 +54,7 @@
             
             <my:KinectColorViewer Canvas.Left="409" Canvas.Top="236" Width="94" Height="76" Name="kinectColorViewer1" 
                                       Kinect="{Binding ElementName=kinectSensorChooser1, Path=Kinect}" DataContext="{Binding}" Margin="0,605,851,0" />
-            <my:KinectSensorChooser Canvas.Left="180" Canvas.Top="266" Name="kinectSensorChooser1" Width="267" Height="168" Visibility="Visible" />
+            <my:KinectSensorChooser Canvas.Left="180" Canvas.Top="266" Name="kinectSensorChooser1" Width="267" Height="168" Visibility="Hidden" />
           
             
             <Image Grid.Column="2" Height="67" HorizontalAlignment="Left" Margin="70,580,0,0" Name="CommitButton" Stretch="Fill" VerticalAlignment="Top" Width="124" Source="/WpfApplication1;component/Images/CommitButton.png" MouseEnter="CommitButton_MouseEnter" MouseLeave="CommitButton_MouseLeave" Panel.ZIndex="1" MouseLeftButtonDown="CommitButton_MouseLeftButtonDown" Canvas.Left="1039" Canvas.Top="0" />
@@ -120,13 +120,22 @@
             <InkCanvas Name="RR_inkCanvas" Background="Transparent" EditingMode="None" Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="0,0,0,0" Height="720" Width="640" Gesture="inkCanvas_Gesture_1">
             </InkCanvas>
         </Canvas>
+        
+        
         <Canvas Name="LoadingScreen" Visibility="Collapsed" Height="720" Width="1280" Panel.ZIndex="1">
             <Rectangle Height="680" HorizontalAlignment="Left" Name="Loading_Background" Stretch="Fill" VerticalAlignment="Top" Width="1260" Grid.ColumnSpan="3" Panel.ZIndex="-5" Canvas.Left="-8" Canvas.Top="15" Fill="Black" Opacity="0.9" />
                    <TextBlock Canvas.Left="510" Canvas.Top="331" Height="54" Width="300" Foreground="White" FontSize="16">
                 <Bold>Loading Remote Repository...</Bold>
             </TextBlock>
         </Canvas>
-        
+
+        <Canvas Name="PullLoadingScreen" Visibility="Collapsed" Height="720" Width="1280" Panel.ZIndex="1">
+            <Rectangle Height="680" HorizontalAlignment="Left" Name="Pull_Loading_Background" Stretch="Fill" VerticalAlignment="Top" Width="1260" Grid.ColumnSpan="3" Panel.ZIndex="-5" Canvas.Left="-8" Canvas.Top="15" Fill="Black" Opacity="0.9" />
+            <TextBlock Canvas.Left="510" Canvas.Top="331" Height="54" Width="300" Foreground="White" FontSize="16">
+                <Bold>Pulling from remote repository...</Bold>
+            </TextBlock>
+        </Canvas>
+
         <Canvas Name="HelpMePleaseHelpHelp" Visibility="Collapsed" Height="720" Width="1280" Panel.ZIndex="1" MouseRightButtonDown="HelpMePleaseHelpHelp_MouseRightButtonDown">
             <Image Height="680" HorizontalAlignment="Left" Name="Help_Background" Stretch="Fill" VerticalAlignment="Top" Width="1260" Source="/WpfApplication1;component/Images/bg.png" ImageFailed="image1_ImageFailed" Grid.ColumnSpan="3" Panel.ZIndex="-5" Canvas.Left="-8" Canvas.Top="15" />
             <Label Foreground="White" FontWeight="Bold" Canvas.Top="20" Canvas.Left="30" FontSize="35" Content="Help" />
