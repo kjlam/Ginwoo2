@@ -814,6 +814,7 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
                 //selectThreshold: how far the left and right hands can be and still register as a select
                
                // float[] selectThreshold = new float[3]{50,50,50};
+                /*
                 Boolean helpOpen = true;
                 for (int i = numFrames-1; i > 0; i--)
                 {
@@ -836,11 +837,12 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
                     selectTimer.Start();
                 }
 
+                
                 if (helpOpen)
                 {
                     HelpMePleaseHelpHelp.Visibility = Visibility.Visible;
                 }
-                
+                */
 
                 /*
                 for (int i = numFrames-1; i > 0; i--)

@@ -119,8 +119,8 @@ namespace WpfApplication1
         private void WC_HelpIcon_MouseEnter(object sender, MouseEventArgs e)
         {
             WC_HelpIcon.Source = LoadImage("pack://application:,,,/WpfApplication1;component/Images/HelpIconHover.png");
-            //HelpMePleaseHelpHelp.Visibility = Visibility.Visible;
-            //WC_HelpIcon.Source = LoadImage("pack://application:,,,/WpfApplication1;component/Images/HelpIcon.png");
+            HelpMePleaseHelpHelp.Visibility = Visibility.Visible;
+            WC_HelpIcon.Source = LoadImage("pack://application:,,,/WpfApplication1;component/Images/HelpIcon.png");
         }
 
         private void WC_HelpIcon_MouseLeave(object sender, MouseEventArgs e)
@@ -131,6 +131,8 @@ namespace WpfApplication1
         private void LR_HelpIcon_MouseEnter(object sender, MouseEventArgs e)
         {
             LR_HelpIcon.Source = LoadImage("pack://application:,,,/WpfApplication1;component/Images/HelpIconHover.png");
+            HelpMePleaseHelpHelp.Visibility = Visibility.Visible;
+            WC_HelpIcon.Source = LoadImage("pack://application:,,,/WpfApplication1;component/Images/HelpIcon.png");
         }
 
         private void LR_HelpIcon_MouseLeave(object sender, MouseEventArgs e)
@@ -141,6 +143,8 @@ namespace WpfApplication1
         private void RR_HelpIcon_MouseEnter(object sender, MouseEventArgs e)
         {
             RR_HelpIcon.Source = LoadImage("pack://application:,,,/WpfApplication1;component/Images/HelpIconHover.png");
+            HelpMePleaseHelpHelp.Visibility = Visibility.Visible;
+            WC_HelpIcon.Source = LoadImage("pack://application:,,,/WpfApplication1;component/Images/HelpIcon.png");
         }
 
         private void RR_HelpIcon_MouseLeave(object sender, MouseEventArgs e)
