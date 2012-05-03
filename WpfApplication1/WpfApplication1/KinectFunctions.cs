@@ -365,7 +365,10 @@ namespace WpfApplication1
       
                if (!actionWait)
                 {
-                    CheckSwipe(e);
+                    if (!selectActivated)
+                    {
+                        CheckSwipe(e);
+                    }
                     CheckStatic(e);
                 }
                 if (lassoFilesDragging)
@@ -814,16 +817,16 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
                 Boolean helpOpen = true;
                 for (int i = numFrames-1; i > 0; i--)
                 {
-                    float rightXValue = storedSkeletonValues[storedSkeletonValues.Count - i][3];
+                    float rightXValue = storedSkeletonValues[storedSkeletonValues.Count - i][3]/640 * 1280;
                     float rightYValue = storedSkeletonValues[storedSkeletonValues.Count - i][4];
-                    if (Config.Visibility == Visibility.Visible)
+                    if (Config.Visibility == Visibility.Visible || HelpMePleaseHelpHelp.Visibility == Visibility.Visible)
                     {
                         helpOpen = false;
                         break;
                     }
                     if (rightXValue < WC_HelpIcon.Margin.Left || rightXValue > (WC_HelpIcon.Margin.Left + WC_HelpIcon.Width))
                     {
-                        if (rightYValue < WC_HelpIcon.Margin.Top || rightYValue > (WC_HelpIcon.Margin.Top + WC_HelpIcon.Height))
+                        if ( rightYValue < WC_HelpIcon.Margin.Top || rightYValue > (WC_HelpIcon.Margin.Top + WC_HelpIcon.Height))
                         {
                             helpOpen = false;
                             break;
@@ -876,7 +879,7 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
                     //System.Windows.Forms.Cursor.Position = new System.Drawing.Point((int)InkCanvas.GetLeft(draggingImage), (int)InkCanvas.GetTop(draggingImage));
                     //mouseLeftDown();
                     //myimg_MouseDown();
-                    //TODO: Fix Dragging
+                    //TODO: Fix Dragging`
                 }
                 //lasso start
                 //Decrease sensitivity to improve accuracy of lassoing, and move the cursor to the closest image of the mouse to move the set of images

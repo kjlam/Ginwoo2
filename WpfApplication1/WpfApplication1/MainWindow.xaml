@@ -6,7 +6,7 @@
         Left="0" Top="0">
 
     <Canvas Name="Main" Visibility="Visible" Height="720" Width="1280">
-        <TextBox Canvas.Left="0"  Height="23" Name="textBox1" Width="597" Text="{Binding Path=Gesture}" BindingGroup="{Binding}" Margin="288,657,0,0" Panel.ZIndex="5" Visibility="Collapsed" />
+        <TextBox Canvas.Left="0"  Height="23" Name="textBox1" Width="597" Text="{Binding Path=Gesture}" BindingGroup="{Binding}" Margin="288,657,0,0" Panel.ZIndex="5" Visibility="Visible" />
         <Image Height="680" HorizontalAlignment="Left" Name="Background" Stretch="Fill" VerticalAlignment="Top" Width="1260" Source="/WpfApplication1;component/Images/bg.png" ImageFailed="image1_ImageFailed" Grid.ColumnSpan="3" Panel.ZIndex="-5" />
 
         <my:KinectSkeletonViewer Canvas.Left="136" Canvas.Top="195" Name="kinectSkeletonViewer1" Height="172" Width="209" Visibility ="Collapsed" Kinect="{Binding ElementName=kinectSensorChooser1, Path=Kinect}" Margin="68,261,668,248" Panel.ZIndex="5"/>
