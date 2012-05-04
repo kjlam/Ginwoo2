@@ -118,8 +118,8 @@ namespace WpfApplication1
 
         internal CmdReturn GitTagLatestCommit(String tagName)
         {
-            String latestCommitID = GetLatestCommitID();
-            return GitTag(tagName, latestCommitID);
+            //String latestCommitID = GetLatestCommitID();
+            return GitTag(tagName);
         }
 
         /*
@@ -164,9 +164,9 @@ namespace WpfApplication1
          * A 'git commit' must be made before this method.
          * 
          */
-       internal CmdReturn GitTag(String tagName, String commitID)
+       internal CmdReturn GitTag(String tagName)
         {
-            return ExecuteProcess(workingDirectory, "git tag -f " + tagName + " " + commitID, false);
+            return ExecuteProcess(workingDirectory, "git tag -f " + tagName, false);
         }
 
         /*

@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Diagnostics;
+
 using System.IO;
 using System.Drawing;
 using System.Deployment;
@@ -51,7 +52,7 @@ namespace WpfApplication1
         {
             InitializeComponent();
             this.DataContext = textBox;
-            //Mouse.OverrideCursor = Cursors.None;
+            Mouse.OverrideCursor = Cursors.None;
             selectTimer.Tick += new EventHandler(SelectTimer_Root);
             selectTimer.Interval = new TimeSpan(0, 0, 5);
             pullStatusTimer.Tick += new EventHandler(PullStatusTimer_Root);

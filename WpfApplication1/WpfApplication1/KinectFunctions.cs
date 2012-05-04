@@ -764,7 +764,7 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
                     {
                         float LHDepth = storedSkeletonValues[skeletonCount - 1][2];
                         float RHDepth = storedSkeletonValues[skeletonCount -1][5];
-                        if (LHCounter[2] < -LHThreshold[2]/1.5 && LHDepth >= RHDepth)
+                        if (LHCounter[2] < -LHThreshold[2]/1.15 && LHDepth >= RHDepth)
                         {
                             actionWait = true;
                             selectTimer.Start();
@@ -772,9 +772,9 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
                             textBox.Gesture += "Pull Registered";
                             if (CursorInDirectoryArea() && HelpMePleaseHelpHelp.Visibility != Visibility.Visible && Config.Visibility != Visibility.Visible)
                             {
-                                PullLoadingScreen.Visibility = Visibility.Visible;
-                                PulledText.Visibility = Visibility.Visible;
-                                pullStatusTimer.Start();
+                               PullLoadingScreen.Visibility = Visibility.Visible;
+                               PulledText.Visibility = Visibility.Visible;
+                               pullStatusTimer.Start();
 
                             }
                             else

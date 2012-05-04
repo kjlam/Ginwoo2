@@ -280,7 +280,9 @@ namespace WpfApplication1
             AddedFilesText.Visibility = Visibility.Collapsed;
             NoAddedFilesText.Visibility = Visibility.Collapsed;
             PushedText.Visibility = Visibility.Visible;
+            LoadingScreen.Visibility = Visibility.Visible;
             JustPushed = true;
+            waitTimer.Start();
 
         }
 
