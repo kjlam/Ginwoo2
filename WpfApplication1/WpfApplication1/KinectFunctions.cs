@@ -713,7 +713,7 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
                 //arrays: index 0 is x values, index 1 is y values, and index 2 is z values
                 float[] LHCounter = new float[3] { 0, 0, 0 };
                 float[] RHCounter = new float[3] { 0, 0, 0 };
-                float[] LHThreshold = new float[3] { 300, 300, 100 };
+                float[] LHThreshold = new float[3] { 200, 200, 50 };
                 float[] RHThreshold = new float[3] { 200, 200, 300 };
                 int skeletonListCount = storedSkeletonValues.Count;
                 bool posZChange = true;
@@ -764,17 +764,16 @@ Ensure you have the Microsoft Speech SDK installed and configured.",
                     {
                         float LHDepth = storedSkeletonValues[skeletonCount - 1][2];
                         float RHDepth = storedSkeletonValues[skeletonCount -1][5];
-                        if (LHCounter[2] < -LHThreshold[2]/1.15 && LHDepth >= RHDepth)
+                        if (LHCounter[2] < -LHThreshold[2]/1.2 && LHDepth >= RHDepth)
                         {
                             actionWait = true;
                             selectTimer.Start();
-                            //TODO: pull registered
                             textBox.Gesture += "Pull Registered";
                             if (CursorInDirectoryArea() && HelpMePleaseHelpHelp.Visibility != Visibility.Visible && Config.Visibility != Visibility.Visible)
                             {
-                               PullLoadingScreen.Visibility = Visibility.Visible;
-                               PulledText.Visibility = Visibility.Visible;
-                               pullStatusTimer.Start();
+                                PullLoadingScreen.Visibility = Visibility.Visible;
+                                PulledText.Visibility = Visibility.Visible;
+                                pullStatusTimer.Start();
 
                             }
                             else
