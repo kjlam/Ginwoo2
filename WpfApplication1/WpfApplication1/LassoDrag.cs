@@ -426,7 +426,7 @@ namespace WpfApplication1
                 WC_inkCanvas.Children.Add(images[i]);
                 WC_inkCanvas.Children.Add(textBlocks[i]);
             }
-
+            committedFileNames = new List<string>();
         }
 
 
